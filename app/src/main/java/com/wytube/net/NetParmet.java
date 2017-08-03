@@ -37,6 +37,17 @@ public class NetParmet {
     public static final String USR_LOGIN = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/login";
     /*物业费用*/
     public static final String USR_WYFY = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/billInfo";
+    /*物业通知*/
+    public static final String PROP_MSG = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/pushInfo";
+    /*发送通知*/
+    public static final String PROP_WYFS = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/pushInfo/add";
+    /*删除通知*/
+    public static final String PROP_WYDL = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/pushInfo/delete";
+    /*修改通知*/
+    public static final String PROP_WYSC = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/pushInfo/edit";
+    /*家政服务列表*/
+    public static final String QUERY_REPAIR_LIST = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairWork";
+
 
 
     /*业主管理接口*/
@@ -57,8 +68,7 @@ public class NetParmet {
     public static final String USR_NOT_MONEY = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/bill/findTotalMoney";
     /*物业账单列表*/
     public static final String USR_WY_LIST = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/bill/queryBillInfoList";
-    /*物业通知*/
-    public static final String PROP_MSG = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/push/queryPushInfoList";
+
     /*添加访客通行*/
     public static final String VISITOR_ADD = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/pass/add";
     /*获取访客记录*/
@@ -75,8 +85,6 @@ public class NetParmet {
     public static final String ADD_JZPJ_INFO = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/repairWork/comment";
     /*取消报修订单*/
     public static final String ADD_DELETE_INFO = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/repairWork/delete";
-    /*报修记录*/
-    public static final String QUERY_REPAIR_LIST = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/repairWork/queryRepairWorkList";
     /*获取投诉建议类型*/
     public static final String SUIT_TYPE = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/suitWork/querySuitTypeList";
     /*添加投诉建议*/

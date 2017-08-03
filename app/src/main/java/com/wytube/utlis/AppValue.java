@@ -3,6 +3,9 @@ package com.wytube.utlis;
 import android.annotation.SuppressLint;
 
 import com.cqxb.yecall.bean.SipAccountBean;
+import com.wytube.beans.CarsBean;
+import com.wytube.beans.PropMsgBean;
+import com.wytube.beans.RepairBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,8 +78,8 @@ public class AppValue {
 //    public static List<DoorBean.DataBean> netDoors = new ArrayList<>();
 //    /*密码门径涉笔列表*/
 //    public static List<DoorBean.DataBean> passDoors = new ArrayList<>();
-//    /*物业通知列表*/
-//    public static List<PropMsgBean.DataBean> propMsgs;
+    /*物业通知列表*/
+    public static List<PropMsgBean.DataBean> propMsgs;
 //    /*Web界面的标题文字*/
 //    public static String webTitle = "";
 //    /*Web界面加载的Urls*/
@@ -89,16 +92,16 @@ public class AppValue {
 //    public static String locationRoomNum = "";
 //
 
-//    /*报修记录列表*/
-//    public static List<RepairBean.DataBean> repairBeans;
+    /*报修记录列表*/
+    public static List<RepairBean.DataBean> repairBeans;
 ////    /*是否退出并重新登录*/
 ////    public static boolean isRelogin = false;
-//    /*选择对话框的按钮显示的文本*/
-//    public static String selectBut = "";
+    /*选择对话框的按钮显示的文本*/
+    public static String selectBut = "";
 //    /*投诉记录列表*/
 //    public static List<ComRecordBean.DataBean> recordBeans;
-//    /*报修列表的Item*/
-//    public static RepairBean.DataBean repairInfoBean;
+    /*报修列表的Item*/
+    public static RepairBean.DataBean repairInfoBean;
 //    /*投诉列表的Item*/
 //    public static ComRecordBean.DataBean comRecordinfoBean;
 //    /*便民服务的Urls*/
@@ -124,12 +127,12 @@ public class AppValue {
     public static int btl = -1;
     /*判断是哪个地方进入*/
     public static int onec = -1;
-//    /*我的车辆进入添加车牌*/
-//    public static int chel = -1;
+    /*我的车辆进入添加车牌*/
+    public static int chel = -1;
 //    /*默认显示的首页界面*/
 //    public static int doorPages = -1;
-//    /*临时图片路径*/
-//    public static String tempImage = "";
+    /*临时图片路径*/
+    public static String tempImage = "";
 //    /*维修类型数据列表*/
 //    public static List<RepairTypeBean.DataBean> typeBeens;
 //    /*借用物品对象*/
@@ -146,18 +149,20 @@ public class AppValue {
 //    public static String usrJf;
 //    /*用户头像*/
 //    public static String usrJfs;
-//    /*车场订单号*/
-//    public static String orderNum = "";
-//    /*停车场ID*/
-//    public static String parkId = "";
-//    /*车主所属车牌信息*/
-//    public static List<CarsBean.DataBean> carsBeans;
-//    /*车牌号*/
-//    public static String carNum;
-//    /*临时秘钥*/
-//    public static String skey;
-//    /*停车场名称*/
-//    public static String parkName;
+    /*车场订单号*/
+    public static String orderNum = "";
+    /*车场金额*/
+    public static String Money = "";
+    /*停车场ID*/
+    public static String parkId = "";
+    /*车主所属车牌信息*/
+    public static List<CarsBean.DataBean> carsBeans;
+    /*车牌号*/
+    public static String carNum;
+    /*临时秘钥*/
+    public static String skey;
+    /*停车场名称*/
+    public static String parkName;
 //    /*新闻资讯对象*/
 //    public static NewsBean.DataBean.InfosBean infoBean;
 //    /*活动记录*/

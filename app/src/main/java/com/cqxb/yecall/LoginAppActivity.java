@@ -79,6 +79,7 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
         //文本框
         ediphonenum = (EditText) findViewById(R.id.ediphonenum);
         edipwd = (EditText) findViewById(R.id.edipwd);
+        rela_title = (RelativeLayout) findViewById(R.id.rela_title);
         //按钮
         loginButton = (CardView) findViewById(R.id.loginButton);
 //        registUser = (Button) findViewById(R.id.registUser);

@@ -639,5 +639,23 @@
         <activity android:name="com.wytube.activity.PassWordActivity"/>
         /*物业费*/
         <activity android:name="com.wytube.activity.PropertyPayActivity"/>
+        /*消息推送*/
+        <activity android:name="com.wytube.activity.PropertyNoticeActivity"/>
+        /*发送通知*/
+        <activity android:name="com.wytube.activity.ReleaseNoticeActivity"/>
+        /*通知详情*/
+        <activity android:name="com.wytube.activity.DetailsNoticeActivity"/>
+        /*添加车主车牌*/
+        <activity android:name="com.wytube.activity.AddParkActivity"/>
+        /*查询车牌*/
+        <activity android:name="com.wytube.activity.SelectCarsActivity"/>
+        /*查询停车场*/
+        <activity android:name="com.wytube.activity.LocationListActivity"/>
+        /*月卡续费*/
+        <activity android:name="com.wytube.activity.MonthMoneyActivity"/>
+        /*家政管理列表*/
+        <activity android:name="com.wytube.activity.RepairActivity"/>
+        /*家政管理列表图片*/
+        <activity android:name="com.wytube.activity.ImageActivity"/>
     </application>
 </manifest>

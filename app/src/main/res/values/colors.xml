@@ -9,6 +9,7 @@
     <color name="main_def_text_color">#666666</color>
     <color name="white">#ffffff</color>
     <color name="e8e8e8">#E8E8E8</color>
+
     <color name="index_tj_txt_color">#de3102</color>
     <color name="app_def_text_color">#c9c8c8</color>
     <!--<color name="app_main_color_green">#02c599</color>-->
@@ -19,6 +20,7 @@
     <!--半透背景颜色-->
     <color name="translate_bg_color">#4c000000</color>
     <color name="app_color_pass_color">#fd6702</color>
+    <color name="main_def_texthei_color">#5D5D5D</color>
 
     <color name="result_view">#b0000000</color>
     <color name="viewfinder_mask">#60000000</color>

@@ -72,5 +72,7 @@ dependencies {
     compile files('libs/K.jar')
     compile files('libs/okhttp-3.3.0.jar')
     compile files('libs/okio-1.8.0.jar')
+    // Fresco所需依赖
+    compile 'com.facebook.fresco:fresco:0.12.0'
 
 }

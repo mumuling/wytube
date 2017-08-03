@@ -2,6 +2,7 @@ package com.wytube.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.widget.Toast;
@@ -11,11 +12,23 @@ import com.cqxb.yecall.R;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KListener;
+import com.wytube.beans.CarsBean;
+import com.wytube.beans.ParkBean;
+import com.wytube.dialog.SelectDialog;
+import com.wytube.net.Client;
+import com.wytube.net.Json;
+import com.wytube.net.NetParmet;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @KActivity(R.layout.fragment_index)
 public class IndexActivity extends FragmentActivity {
+
+    private List<ParkBean.DataBean.ParksBean> parksBeanList;
+    private CarsBean.DataBean.CarBean carBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +44,7 @@ public class IndexActivity extends FragmentActivity {
             Utils.showLoginDialog(this);
             return;
         }
+        startActivity(new Intent(this, PropertyNoticeActivity.class));
     }
 
     /*停车缴费*/
@@ -40,6 +54,7 @@ public class IndexActivity extends FragmentActivity {
             Utils.showLoginDialog(this);
             return;
         }
+        selectCars();
     }
 
     /*物业费*/
@@ -59,6 +74,7 @@ public class IndexActivity extends FragmentActivity {
             Utils.showLoginDialog(this);
             return;
         }
+        startActivity(new Intent(this, RepairActivity.class));
     }
 
     /*业主管理*/
@@ -144,6 +160,73 @@ public class IndexActivity extends FragmentActivity {
             return;
         }
         startActivity(new Intent(this, MainTabActivity.class));
+    }
+
+
+    /**
+     * 查询所有停车缴费信息
+     */
+    private void selectCars() {
+        Utils.showLoad(this);
+        Client.sendGet(NetParmet.GET_ALL_CARS, "phone=" + AppValue.sipName, new Handler(msg -> {
+            Utils.exitLoad();
+            String json = msg.getData().getString("get");
+            CarsBean bean = Json.toObject(json, CarsBean.class);
+            if (bean == null) {
+                Utils.showNetErrorDialog(this);
+                return false;
+            }
+            if (!bean.isSuccess()) {
+                Utils.showOkDialog(this, bean.getMessage());
+                return false;
+            }
+            if (bean.getData() == null || bean.getData().size() <= 1) {
+                startActivity(new Intent(this, AddParkActivity.class));
+            }
+            else {
+                AppValue.carsBeans = bean.getData();
+                if (bean.getData().get(0).getPark() == null) {
+                    carBean = bean.getData().get(0).getCar();
+                    loadAllPark();
+                } else {
+                    Intent intent = new Intent(this,SelectCarsActivity.class);
+                    intent.putExtra("chepai",bean.getData().get(0).getCar().getNum());
+                    startActivity(intent);
+                }
+            }
+            return false;
+        }));
+    }
+
+
+    /**
+     * 获取所有停车场信息
+     */
+    private void loadAllPark() {
+        Utils.showLoad(this);
+        Client.sendPost(NetParmet.GET_ALL_PARKS, "rows=10000", new Handler(msg -> {
+            Utils.exitLoad();
+            String json = msg.getData().getString("post");
+            ParkBean bean = Json.toObject(json, ParkBean.class);
+            if (bean == null) {
+                Utils.showNetErrorDialog(this);
+                return false;
+            }
+            if (!bean.isSuccess()) {
+                Utils.showOkDialog(this, bean.getMessage());
+                return false;
+            }
+            parksBeanList = bean.getData().getParks();
+            List<String> item = new ArrayList<>();
+            for (ParkBean.DataBean.ParksBean parksBean : bean.getData().getParks()) {
+                item.add(parksBean.getName());
+            }
+            SelectDialog.setCallBack((SelectDialog.SelectCallBack) this);
+            AppValue.items = item;
+            AppValue.selectBut = "绑定";
+            startActivity(new Intent(this, SelectDialog.class));
+            return false;
+        }));
     }
 
     private long exitTime = 0;// 退出程序时间

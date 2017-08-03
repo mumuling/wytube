@@ -20,6 +20,7 @@ import com.cqxb.yecall.t9search.model.Contacts;
 import com.cqxb.yecall.until.PreferenceBase;
 import com.cqxb.yecall.until.PreferenceBean;
 import com.cqxb.yecall.until.SettingInfo;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.pgyersdk.crash.PgyCrashManager;
 import com.umeng.analytics.MobclickAgent;
 import com.uuzuche.lib_zxing.DisplayUtil;
@@ -110,6 +111,8 @@ public class YETApplication extends Application {
         mContext = this.getApplicationContext();
         mNetLoadImage = new NetLoadImage(this);
         myApplication = this;
+        // 初始化Fresco
+        Fresco.initialize(this);
         createFold();
         initFaceMap();
         getAppVersion();
