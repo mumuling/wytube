@@ -1,0 +1,8 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- gang -->
+    <item android:drawable="@drawable/wd_pres" android:state_selected="true"/>
+    <item android:drawable="@drawable/wd_nor"/>
+    <!-- not selected -->
+
+</selector>

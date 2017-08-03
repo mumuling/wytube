@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" android:paddingBottom="20dp">
+
+            <LinearLayout
+                android:id="@+id/updatePwd"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/mima" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:text="修改密码"
+                    android:textColor="#A1A1A1"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dip"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ic_next" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/callSetting"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/boda" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:text="拨打设置"
+                    android:textColor="#A1A1A1"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dip"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ic_next" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/callinSetting"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/shezhi" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:text="呼入设置"
+                    android:textColor="#A1A1A1"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dip"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ic_next" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/checkUpdate"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/checknew" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:text="检查更新"
+                    android:textColor="#A1A1A1"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dip"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ic_next" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/aboutus"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/aboutus" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:text="关于我们"
+                    android:textColor="#A1A1A1"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dip"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ic_next" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/zzfw_zx"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/zzfw_zx" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:text="自助服务中心"
+                    android:textColor="#A1A1A1"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dip"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ic_next" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/exit"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/tuichu" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:text="切换帐号"
+                    android:textColor="#A1A1A1"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dip"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ic_next" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/op_door_set"
+                android:layout_width="fill_parent"
+                android:layout_height="60dip"
+                android:layout_marginTop="6dp"
+                android:background="@color/white"
+                android:clickable="true"
+                android:orientation="horizontal" android:onClick="openDoor">
+
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/km" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:text="自动开门"
+                    android:textColor="#A1A1A1"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="20dip"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ic_next" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

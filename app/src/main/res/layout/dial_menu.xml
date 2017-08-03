@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    <!-- TabHost必须包含一个 TabWidget和一个FrameLayout -->
+    <TabHost
+        android:id="@+id/myTabHost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <!-- FrameLayout的id属性必须为 @android:id/tabcontent -->
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
+
+            <!-- TabWidget的id属性必须为 @android:id/tabs -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="60dp" >
+
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="#232423"
+                    android:divider="@null"
+                    android:gravity="bottom"
+                    android:orientation="horizontal" />
+
+                <include
+                    android:id="@+id/call_img"
+                    android:layout_width="fill_parent"
+                    android:layout_height="56dp"
+                    layout="@layout/call_phone_call"
+                    android:visibility="gone" />
+            </RelativeLayout>
+        </LinearLayout>
+    </TabHost>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/main_img_group"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/main_show_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

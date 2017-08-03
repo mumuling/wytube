@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:id="@+id/fl_not_have_user"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/not_login" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="180dp"
+            android:layout_height="49dp"
+            android:layout_gravity="center|bottom"
+            android:layout_marginBottom="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_bg_blue"
+            android:text="登陆"
+            android:textColor="#ffffff"
+            android:textSize="17sp" >
+        </Button>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="#eeeeee" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="4dp"
+        android:background="@color/white"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/ll_yuancheng_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_yuancheng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="远程开门"
+                    android:textColor="@color/mBlue"
+                    android:textSize="17sp" />
+
+                <View
+                    android:id="@+id/yuancheng_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/mBlue" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_mima_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_mima"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="密码开门"
+                    android:textColor="#A1A1A1"
+                    android:textSize="17sp" />
+
+                <View
+                    android:id="@+id/mima_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_tiyan_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_tiyan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="可视门铃"
+                    android:textColor="#A1A1A1"
+                    android:textSize="17sp" />
+
+                <View
+                    android:id="@+id/tiyan_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/yecall_ll_password_setting"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#eeeeee"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="22dp"
+                android:text="开门密码 : " />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#54ABEE" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#54ABEE" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal" >
+
+                        <EditText
+                            android:cursorVisible="false"
+                            android:id="@+id/ediphonenum"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="13dp"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:hint="请设置密码"
+                            android:inputType="number"
+                            android:textColor="#A1A1A1"
+                            android:textColorHint="#A1A1A1" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#54ABEE" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#54ABEE" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/yecall_confirm_btn"
+                android:layout_width="67dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/button_bg_blue"
+                android:text="确定"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/experience_oppen_door"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/white" >
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_marginLeft="22dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点我体验可视门铃" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/experience_oppen_door1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/white" >
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_marginLeft="22dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点我体验可视门铃2" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ListView
+        android:layout_marginBottom="1dp"
+        android:id="@+id/yecall_listview_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/white" />
+
+    <ImageView
+        android:id="@+id/no_net_retry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scaleType="centerCrop"
+        android:src="@drawable/no_net"
+        android:visibility="gone" />
+    <ImageView
+        android:id="@+id/no_equipment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scaleType="centerCrop"
+        android:src="@drawable/no_equipment"
+        android:visibility="gone" />
+
+
+</LinearLayout>

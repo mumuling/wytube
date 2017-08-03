@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <corners
+        android:radius="10dp"
+        />
+    <!-- 边框里面的图像 -->
+    <gradient
+        android:startColor="#33CC00"
+        android:endColor="#666600"
+        android:angle="45"
+        />
+    <padding
+        android:left="5dp"
+        android:top="5dp"
+        android:right="5dp"
+        android:bottom="5dp"
+        />
+    <!-- 边框 -->
+    <stroke
+        android:width="3dp"
+        android:color="#FF3300"
+        />
+     
+</shape>

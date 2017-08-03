@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="17dp"
+            android:layout_weight="1"
+            android:text="全部通话呼叫转移"
+            android:textColor="#A1A1A1"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/et_callin_allTransfer"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/input_bg_white"
+            android:ems="10"
+            android:hint="请填写手机号码"
+            android:inputType="number"
+            android:paddingBottom="0dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="0dp"
+            android:paddingTop="0dp"
+            android:textColorHint="#A1A1A1"
+            android:visibility="gone" />
+
+        <ToggleButton
+            android:id="@+id/tb_set_callin_allTransfer"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/checkcall"
+            android:checked="false"
+            android:textOff=""
+            android:textOn="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="17dp"
+            android:layout_weight="1"
+            android:text="自定义呼叫转移"
+            android:textColor="#A1A1A1"
+            android:textSize="15sp" />
+
+        <ToggleButton
+            android:id="@+id/tb_set_callin_customTransfer"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/checkcall"
+            android:textOff=""
+            android:textOn="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_callin_custom_contain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tv_gprs"
+                android:layout_width="120dp"
+                android:layout_height="30dip"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="25dip"
+                android:layout_marginRight="25dip"
+                android:gravity="right|center_vertical"
+                android:text="3G/4G网络转移到"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/et_callin_gprsTransfer"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:layout_toRightOf="@id/tv_gprs"
+                android:background="@drawable/input_bg"
+                android:hint="请填写手机号码"
+                android:inputType="number"
+                android:padding="0dp"
+                android:paddingBottom="0dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="0dp"
+                android:paddingTop="0dp"
+                android:textColorHint="#ddd" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_noperson"
+                android:layout_width="120dp"
+                android:layout_height="30dip"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="25dip"
+                android:layout_marginRight="25dip"
+                android:gravity="right|center_vertical"
+                android:text="无人接听转移到"
+                android:textColor="#A1A1A1" />
+
+            <EditText
+                android:id="@+id/et_callin_noPersonTransfer"
+                android:layout_width="160dp"
+                android:layout_height="30dip"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/tv_noperson"
+                android:background="@drawable/input_bg_white"
+                android:inputType="number"
+                android:paddingBottom="0dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="0dp"
+                android:paddingTop="0dp"
+                android:textColor="@color/myGrey"
+                android:textColorHint="@color/myGrey" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_busy"
+                android:layout_width="120dp"
+                android:layout_height="30dip"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="25dip"
+                android:layout_marginRight="25dip"
+                android:gravity="right|center_vertical"
+                android:text="正忙转接到"
+                android:textColor="#A1A1A1" />
+
+            <EditText
+                android:id="@+id/et_callin_busyTransfer"
+                android:layout_width="160dp"
+                android:layout_height="30dip"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/tv_busy"
+                android:background="@drawable/input_bg_white"
+                android:inputType="number"
+                android:paddingBottom="0dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="0dp"
+                android:paddingTop="0dp"
+                android:textColor="@color/myGrey"
+                android:textColorHint="@color/myGrey" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_unconnect"
+                android:layout_width="120dp"
+                android:layout_height="30dip"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="25dip"
+                android:layout_marginRight="25dip"
+                android:gravity="right|center_vertical"
+                android:text="无法接通转接到"
+                android:textColor="#A1A1A1" />
+
+            <EditText
+                android:id="@+id/et_callin_unconnectTransfer"
+                android:layout_width="160dp"
+                android:layout_height="30dip"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/tv_unconnect"
+                android:background="@drawable/input_bg_white"
+                android:inputType="number"
+                android:paddingBottom="0dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="0dp"
+                android:paddingTop="0dp"
+                android:textColor="@color/myGrey"
+                android:textColorHint="@color/myGrey" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

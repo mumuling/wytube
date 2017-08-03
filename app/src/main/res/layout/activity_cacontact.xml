@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dip"
+            android:layout_marginLeft="30dip"
+            android:layout_marginTop="15dip"
+            android:src="@drawable/appgdtx" />
+
+        <TextView
+            android:id="@+id/nickName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dip"
+            android:singleLine="true"
+            android:text="执行官" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:background="@drawable/itembg">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="30dip"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="手机:" />
+
+            <TextView
+                android:id="@+id/sel_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="12345678910" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="15dip"
+            android:gravity="right" >
+
+            <ImageView
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="15dip"
+                android:adjustViewBounds="true"
+                android:src="@drawable/come_dx" />
+
+            <ImageView
+                android:layout_width="40dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dip"
+                android:adjustViewBounds="true"
+                android:src="@drawable/come_jt" 
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/sel_call"
+                android:layout_width="40dip"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right"
+                android:adjustViewBounds="true"
+                android:src="@drawable/come_jt" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

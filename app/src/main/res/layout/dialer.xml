@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical"
+    android:windowSoftInputMode="adjustPan" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/LayoutTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="#54abee"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/textView_title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="100dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="(请登录)"
+                    android:textColor="#FF0000"
+                    android:textSize="22dp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_toLeftOf="@+id/textView_title2"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="拨号"
+                    android:textColor="#fff"
+                    android:textSize="22dp" />
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/cpkrl2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:background="@color/white" >
+
+                <FrameLayout
+                    android:id="@+id/imageViewAd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/viewpager"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" />
+
+                    <LinearLayout
+                        android:id="@+id/viewGroup"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+                    </LinearLayout>
+                </FrameLayout>
+
+                <ListView
+                    android:id="@+id/cpklv1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent" >
+                </ListView>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/cpkrl1"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@color/white" >
+
+            <!-- android:visibility="gone" -->
+
+            <org.linphone.ui.EraseButton
+                android:id="@+id/Erase"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_delete_character" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_toLeftOf="@+id/Erase"
+                android:layout_toRightOf="@+id/hiddenOrShowNumpad"
+                android:focusable="false"
+                android:gravity="center" >
+
+                <org.linphone.ui.AddressText
+                    android:id="@+id/Address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_toLeftOf="@+id/Erase"
+                    android:layout_toRightOf="@+id/hiddenOrShowNumpad"
+                    android:background="@drawable/address_bg_no_tv"
+                    android:focusable="false"
+                    android:gravity="center"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/bohao_icon_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="点击拨打"
+                        android:textColor="@color/white"
+                        android:textSize="10sp" />
+                </LinearLayout>
+            </FrameLayout>
+
+            <!-- android:hint="@string/addressHint" -->
+
+            <CheckBox
+                android:id="@+id/hiddenOrShowNumpad"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_dialer_ups"
+                android:button="@null"
+                android:checked="true"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layoutDialer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:background="#999999"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <org.linphone.ui.Numpad
+                    android:id="@+id/Dialer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:visibility="gone" >
+
+                <org.linphone.ui.CallButton
+                    android:id="@+id/Call"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/call" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/addContact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/content_description_add_contact"
+                android:scaleType="fitXY"
+                android:src="@drawable/add_contact"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.cqxb.yecall.t9search.view.ContactsOperationView
+            android:id="@+id/contacts_operation_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom" />
+
+        <com.cqxb.yecall.t9search.view.T9TelephoneDialpadView
+            android:id="@+id/t9_telephone_dialpad_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:clickable="true" />
+    </FrameLayout>
+
+</LinearLayout>

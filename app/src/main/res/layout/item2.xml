@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/item2catalog"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#E0E0E0"
+        android:textColor="#454545"
+        android:layout_weight="1.0"
+        android:paddingLeft="5dip"
+        android:paddingTop="5dip"
+        android:paddingBottom="5dip"
+        android:text="A"
+        android:visibility="gone"
+        />
+	<RelativeLayout 
+    	android:layout_width="fill_parent"
+        android:layout_height="60dp"
+    >
+	    <LinearLayout 
+	        android:layout_width="fill_parent"
+	        android:layout_height="50dp"
+	        android:orientation="horizontal"
+	        android:layout_centerInParent="true"
+	        >
+	        <ImageView 
+	            android:id="@+id/item2Img"
+	            android:src="@drawable/qqzai"
+	             android:layout_width="50dip"
+       			android:layout_height="50dip" 
+	            />
+	        
+	        <RelativeLayout 
+	            android:layout_width="fill_parent"
+		        android:layout_height="fill_parent"
+	            >
+	            	<ImageView 
+	            	    android:layout_width="30dp"
+		        		android:layout_height="30dp"
+		        		android:adjustViewBounds="true"
+	            	    android:src="@drawable/ic_call"
+	            	    android:layout_alignParentRight="true"
+	            	    android:layout_centerInParent="true"
+	            	    android:layout_marginRight="25dp"
+	            	    android:clickable="true"
+	            	    android:visibility="gone"
+	            	    />
+	            <LinearLayout 
+	                 android:layout_width="fill_parent"
+		       	 	android:layout_height="fill_parent"
+		       	 	android:orientation="horizontal"
+	                >
+	                 <TextView
+				        android:id="@+id/item2title"
+				        android:layout_width="fill_parent"
+				        android:layout_height="fill_parent"
+				        android:gravity="center_vertical"
+				        android:layout_weight="1.0"
+				        android:textColor="#336598"
+				        android:layout_marginLeft="5dip"
+				        android:paddingTop="5dip"
+				        android:text="hhhh"/>
+	                 <TextView 
+				        android:id="@+id/item2niticetitle"
+				        android:layout_width="30dp"
+				    	android:layout_height="18dp"
+				    	android:text="1"
+				    	android:gravity="center"
+				    	android:background="@color/niticeCountColor"
+				    	android:layout_alignParentBottom="true"
+				    	android:visibility="gone"
+				    	android:layout_alignParentRight="true"
+				    	android:layout_marginRight="10dp"
+				    	android:textColor="@color/black"
+					      />
+	            </LinearLayout>
+	       </RelativeLayout>
+	       
+	        
+	    </LinearLayout>
+	</RelativeLayout>
+</LinearLayout>

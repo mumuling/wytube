@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- 组织开始 -->
+
+    <RelativeLayout
+        android:id="@+id/fgrl1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <!--
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="45dp" >
+
+                <EditText
+                    android:id="@+id/fget1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/search_bar_edit_selector"
+                    android:drawableLeft="@drawable/search_bar_icon_normal"
+                    android:hint="姓名、拼音、号码" />
+            </RelativeLayout>-->
+            <!-- 搜索 -->
+
+
+            <!-- 新的好友 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:visibility="gone" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:layout_alignParentLeft="true" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/newfriend" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="新的好友"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </RelativeLayout>
+            <!-- 新的好友 -->
+
+
+            <!-- 群组 -->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="45dp"
+                android:visibility="gone" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/group" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="群组"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- 群组 -->
+
+
+            <!-- 号码组 -->
+
+            <com.cqxb.ui.OrgRefreshableView
+                android:id="@+id/refreshable_view"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="horizontal" >
+
+                    <ListView
+                        android:id="@+id/menu"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="0.5" >
+                    </ListView>
+
+                    <ListView
+                        android:id="@+id/son"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="0.5" >
+                    </ListView>
+                </LinearLayout>
+            </com.cqxb.ui.OrgRefreshableView>
+
+            <!-- 号码组 -->
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- 组织结束 -->
+
+</RelativeLayout>

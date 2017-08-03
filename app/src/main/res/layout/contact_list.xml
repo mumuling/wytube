@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/white">
+    <com.cqxb.yuneasyapp.until.ClearEditText
+        android:id="@+id/cl_cet"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dip"
+        android:background="@drawable/search_bar_edit_selector"
+        android:drawableLeft="@drawable/search_bar_icon_normal"
+        android:hint="姓名、号码"
+        android:singleLine="true"
+        android:textSize="20.0dip" 
+        android:focusable="true"
+        />
+    <ListView 
+        android:id="@+id/cl_cl"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        ></ListView>
+
+</LinearLayout>

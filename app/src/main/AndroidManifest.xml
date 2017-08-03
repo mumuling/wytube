@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.cqxb.yecall">
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="19"/>
+
+    <!-- <meta-data android:value="579b09d6e0f55a4080000220" android:name="UMENG_APPKEY"></meta-data> -->
+    <!-- <meta-data android:value="ceshi" android:name="UMENG_CHANNEL"/> -->
+
+
+    <!-- 浦公英SDK必选 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- 获取网络状态 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- 网络通信 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <!-- 获取设备信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <!-- 读写sdcard，storage等等 -->
+
+
+    <!-- 浦公英SDK可选 -->
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <!-- 获取logcat日志 -->
+
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <!-- SDK2.1新增获取用户位置信息 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
+
+    <!-- 读联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <!-- 写联系人权限 -->
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <!-- 拨号权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <!-- 读短信权限 -->
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <!-- 读取通话记录权限 -->
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <!-- 写通话记录权限 -->
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
+    <!-- 录音权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
+    <!-- Permissions for Push Notification -->
+    <!--<permission-->
+    <!--android:name="com.yuneasy.intertion.permission.C2D_MESSAGE"-->
+    <!--android:protectionLevel="signature"/>-->
+
+    <!--<uses-permission android:name="com.yuneasy.intertion.permission.C2D_MESSAGE"/>-->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS"/>
+    <!-- Needed to allow Linphone to install on tablets, since android.permission.CALL_PHONE implies android.hardware.telephony is required -->
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false"/>
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- Needed to allow Linphone to install on tablets, since android.permission.CAMERA implies android.hardware.camera and android.hardware.camera.autofocus are required -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false"/>
+
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <!-- Needed to use our own Contact editor -->
+    <!-- Needed to route the audio to the bluetooth headset if available -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+
+    <!-- 相册和相机的权限 -->
+    <uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <!-- 震动 -->
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true"/>
+
+    <!-- tb144_144 -->
+    <application
+        android:name=".YETApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/NoTitle"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.CALL"/>
+                <action android:name="android.intent.action.CALL_PRIVILEGED"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:scheme="tel"/>
+                <data android:scheme="sip"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SENDTO"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:scheme="sip"/>
+                <data android:scheme="imto"/>
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="sip"/>
+
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.cqxb.activity.RecommendActivity"/>
+        <activity android:name="com.cqxb.activity.SMSContactActivity"/>
+
+        <!-- 应用吧 -->
+        <activity
+            android:name="com.tencent.open.yyb.AppbarActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.tencent.connect.avatar.ImageActivity"/>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="tencent1104417503"/>
+                <!-- 100380359 100381104 222222 -->
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.linphone.LinphoneActivity"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".LoginAppActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateUnchanged"/>
+        <activity
+            android:name=".MainTabActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".RegistUserActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".MainFragmentActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ChatActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".InformationActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".GroupChatActivity"
+            android:screenOrientation="portrait"/>
+        <!-- 支付宝插件 -->
+        <activity
+            android:name="com.alipay.android.app.sdk.WapPayActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ContactActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".DialingActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="org.linphone.IncomingCallActivity"
+            android:launchMode="singleTop"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+
+        <!-- android:theme="@style/FullScreen" -->
+        <!-- android:launchMode="singleTask" 不管什么都只是用一个    SingleTop  如果钱一个top是你刚才的 那么 会再次调用 否则则新建 -->
+        <activity
+            android:name="org.linphone.InCallActivity"
+            android:launchMode="singleTop"
+            android:noHistory="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.linphone.setup.SetupActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.linphone.tutorials.TutorialLauncherActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.linphone.tutorials.TutorialBuddyStatusActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.linphone.tutorials.TutorialChatRoomActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.linphone.tutorials.TutorialHelloWorldActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.linphone.tutorials.TutorialRegistrationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AddCallActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MoreActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PersonActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CompanyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".OrgContactActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CaContactActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FindActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CallOutSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PageViewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".NewInfoNoticeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".NewsletterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RegistUserVoiceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle"
+            android:windowSoftInputMode="adjustResize|stateUnchanged">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ResetPwdActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DetailDataActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PersonCenterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".BalanceActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ChargeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SystemChargeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AccountSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CallSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CustomZxingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SettingNativeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ZhiFuBaoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FeedBackActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ForgetPwdActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle"
+            android:windowSoftInputMode="adjustResize|stateUnchanged">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ProtocolActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.linphone.setup.RemoteProvisioningLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="org.linphone.setup.RemoteProvisioningActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="linphone-config"/>
+                <!-- Change if needed -->
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CallinSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="org.linphone.LinphoneService"
+            android:label="@string/app_name"
+            android:stopWithTask="false"/>
+
+        <receiver android:name="org.linphone.NetworkManager">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="org.linphone.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="org.linphone.PhoneStateChangedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
+
+        <!-- Needed for push notification -->
+        <receiver
+            android:name="org.linphone.gcm.GCMReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION"/>
+
+                <category android:name="org.linphone"/>
+                <!-- Change package ! -->
+            </intent-filter>
+        </receiver>
+
+        <service android:name="org.linphone.gcm.GCMService"/>
+
+        <activity
+            android:name=".ApplicationActivity"
+            android:label="@string/title_activity_application"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".HistoryDetailActivity"
+            android:label="@string/title_activity_history_detail"
+            android:screenOrientation="portrait"/>
+        <!-- <activity -->
+        <!-- android:name="com.cqxb.yecall.ImageDetailActivity" -->
+        <!-- android:label="@string/title_activity_image_detail" -->
+        <!-- android:screenOrientation="portrait" /> -->
+        <!--
+     ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+
+        <activity
+            android:name="com.uuzuche.lib_zxing.activity.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:name=".WelcomActivity">
+        </activity>
+        <activity android:name=".OpenDoorSettings"/>
+
+        /*主页面*/
+        <activity android:name="com.wytube.activity.OrderActivity"/>
+        /*首页*/
+        <activity android:name="com.wytube.activity.IndexActivity"/>
+        /*物业管理*/
+        <activity android:name="com.wytube.activity.CommunityActivity"/>
+        /*我的*/
+        <activity android:name="com.wytube.activity.MyActivity"/>
+        /*用户尚未登陆弹框*/
+        <activity android:name="com.wytube.dialog.OKDialog"/>
+        /*选择对话框*/
+        <activity android:name="com.wytube.dialog.SelectDialog"/>
+        /*用户未登录提示框*/
+        <activity android:name="com.wytube.dialog.TipsLoginDialog"/>
+        /*访客通行*/
+        <activity android:name="com.wytube.activity.VisitorInfoActivity"/>
+        /*一键开门*/
+        <activity android:name="com.wytube.activity.OneKeyActivity"/>
+        /*密码开门*/
+        <activity android:name="com.wytube.activity.PassWordActivity"/>
+        /*物业费*/
+        <activity android:name="com.wytube.activity.PropertyPayActivity"/>
+    </application>
+</manifest>

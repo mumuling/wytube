@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/topLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/callbg" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true" >
+
+        <LinearLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+
+        <TableLayout
+            android:id="@+id/calls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:paddingTop="40dp" />
+
+        <fragment
+            android:id="@+id/status"
+            android:name="org.linphone.StatusFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@layout/status" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dip"
+        android:background="@drawable/topbg" 
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/topbg"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|left"
+                android:layout_marginLeft="30dip"
+                android:adjustViewBounds="true"
+                android:background="@drawable/people" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="未知"
+                    android:textSize="20dip" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="未知"
+                    android:textSize="20dip" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="12345678910"
+                    android:textSize="20dip" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:gravity="center"
+                android:text="正在呼叫..."
+                android:textColor="@color/white"
+                android:textSize="20dip" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/switchCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="40dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/content_description_switch_camera"
+        android:src="@drawable/photo_cameraed"
+        android:visibility="invisible" />
+
+    <org.linphone.ui.Numpad
+        android:id="@+id/numpad"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@id/switchCamera"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/trans"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <!--  -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="30dip"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/micro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/jy_xml" >
+                </TextView>
+
+                <RelativeLayout
+                    android:layout_width="2dip"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sxt" >
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/addCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/tjth_xml" >
+                </TextView>
+
+                <RelativeLayout
+                    android:layout_width="1dip"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sxt" >
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/contacts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/lxr_xml" >
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dip"
+                    android:background="@drawable/hxt" >
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dip"
+                    android:background="@drawable/hxt" >
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dip"
+                    android:background="@drawable/hxt" >
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/speaker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ysq_xml" >
+                </TextView>
+
+                <TextView
+                    android:id="@+id/routeSpeaker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/ysq_xml"
+                    android:visibility="gone" >
+                </TextView>
+
+                <RelativeLayout
+                    android:layout_width="2dip"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sxt" >
+                </RelativeLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/bhp_xml" />
+
+                <RelativeLayout
+                    android:layout_width="1dip"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/sxt" >
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/kb_xml" >
+                </TextView>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--  -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/routeBluetooth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/route_bluetooth_off"
+                android:gravity="center"
+                android:paddingTop="40dp"
+                android:text="@string/button_bluetooth"
+                android:textColor="@drawable/text_incall_button_color"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/routeReceiver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/route_receiver_off"
+                android:gravity="center"
+                android:paddingTop="40dp"
+                android:text="@string/button_receiver"
+                android:textColor="@drawable/text_incall_button_color"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/transfer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:background="@drawable/options_transfer"
+                android:gravity="center"
+                android:paddingTop="40dp"
+                android:text="@string/button_transfer"
+                android:textColor="@drawable/text_incall_button_color"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="visible" />
+            <!--
+	        <TextView
+				android:id="@+id/routeSpeaker"
+	           	android:visibility="visible"
+	       		android:background="@drawable/route_speaker_off"
+	        	android:text="@string/button_speaker"
+	        	android:gravity="center"
+	        	android:paddingTop="40dp"
+	        	android:textColor="@drawable/text_incall_button_color"
+	           	android:layout_width="match_parent"
+	           	android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
+            
+            <TextView
+				android:id="@+id/addCall"
+	           	android:visibility="visible"
+	       		android:background="@drawable/options_add_call_alt"
+	        	android:text="@string/button_add_call"
+	        	android:gravity="center"
+	        	android:paddingTop="40dp"
+	        	android:textColor="@drawable/text_incall_button_color"
+	           	android:layout_width="match_parent"
+	           	android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
+            -->
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/video"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/video_off"
+                android:gravity="center"
+                android:paddingTop="45dp"
+                android:text="@string/button_video"
+                android:textColor="@drawable/text_incall_button_color"
+                android:visibility="gone" />
+            <!--
+            <TextView
+                android:id="@+id/micro"
+                android:background="@drawable/micro_on"
+	            android:text="@string/button_micro"
+	            android:gravity="center"
+	            android:paddingTop="45dp"
+	            android:textColor="@drawable/text_incall_button_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/speaker"
+                android:background="@drawable/speaker_off"
+	            android:text="@string/button_speaker"
+	            android:gravity="center"
+	            android:paddingTop="45dp"
+	            android:textColor="@drawable/text_incall_button_color"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            -->
+
+            <TextView
+                android:id="@+id/audioRoute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/routes"
+                android:gravity="center"
+                android:paddingTop="45dp"
+                android:text="@string/button_route"
+                android:textColor="@drawable/text_incall_button_color"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/options"
+                android:gravity="center"
+                android:paddingTop="45dp"
+                android:text="@string/button_options"
+                android:textColor="@drawable/text_incall_button_color"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/pause"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_pause"
+                android:scaleType="fitXY"
+                android:src="@drawable/pause_off"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/conference"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_conference"
+                android:scaleType="fitXY"
+                android:src="@drawable/conference"
+                android:visibility="gone" />
+            <!--
+            <ImageView
+                android:id="@+id/hangUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.97"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_hang_up"
+                android:scaleType="fitXY"
+                android:src="@drawable/hangup" />
+-->
+            <ImageView
+                android:id="@+id/dialer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_numpad"
+                android:scaleType="fitXY"
+                android:src="@drawable/dialer_alt" 
+                android:visibility="gone"/>
+            
+
+            <ImageView
+                android:id="@+id/hangUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="5dip"
+                android:layout_marginLeft="40dip"
+                android:layout_marginRight="40dip"
+                android:layout_marginTop="5dip"
+                android:adjustViewBounds="true"
+                android:background="@drawable/gd_xml" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

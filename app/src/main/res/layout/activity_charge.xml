@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/systemCharge"
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@drawable/chongzhika" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="9dp"
+            android:layout_weight="1"
+            android:text="系统卡充值"
+            android:textColor="#A1A1A1"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dip"
+            android:adjustViewBounds="true"
+            android:background="@drawable/ic_next" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/zhifubao"
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:layout_marginTop="6dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:background="@drawable/zhifubao" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="9dp"
+            android:layout_weight="1"
+            android:text="支付宝快捷支付"
+            android:textColor="#A1A1A1"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dip"
+            android:adjustViewBounds="true"
+            android:background="@drawable/ic_next" />
+    </LinearLayout>
+
+</LinearLayout>

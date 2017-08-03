@@ -1,0 +1,8 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- gang -->
+    <item android:drawable="@drawable/tab_selected_congzhi" android:state_selected="true"/>
+    <item android:drawable="@drawable/tab_unselected_congzhi"/>
+    <!-- not selected -->
+
+</selector>

@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+    <RelativeLayout
+        android:id="@+id/LayoutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#54ABEE" >
+
+        <RelativeLayout
+            android:id="@+id/title_custom_left_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" >
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="通话记录"
+            android:textColor="#fff"
+            android:singleLine="true"
+        	android:ellipsize="end" 
+            android:textSize="22dp"
+            android:layout_marginLeft="40dip" 
+            android:layout_marginRight="40dip"/>
+
+        <RelativeLayout
+            android:id="@+id/title_custom_bg"
+            android:layout_width="30dip"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:visibility="visible" >
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" >
+
+                <ImageView
+                    android:id="@+id/title_custom_id"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:adjustViewBounds="true" />
+
+                <ImageView
+                    android:id="@+id/title_custom_left_id"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/recycle_bin"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:adjustViewBounds="true" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+    
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_historydetail_contactName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="未知"
+                android:textColor="#000"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_historydetail_contactNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="13916570000"
+                    android:textColor="#939594" />
+
+                <ImageView
+                    android:id="@+id/iv_historydetail_callType"
+                     android:layout_width="20dp"
+                     android:layout_height="20dp"
+                    android:src="@drawable/callin" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_historydetail_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:src="@drawable/more" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDFDC" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="30dp"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_historydetail_callDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015-4-21"
+                android:textColor="#939594"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_historydetail_callTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="下午　14:25"
+                    android:textColor="#000"
+                    android:visibility="gone"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_historydetail_callDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="呼出4分10秒"
+                    android:textColor="#000"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDFDC" />
+
+    <TextView android:id="@+id/tv_audio_play" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="录音"
+        android:textColor="#3D8AD0"
+        android:textSize="16sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_audio_play"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="#e8ebe9" >
+
+        <ImageButton
+            android:id="@+id/ib_historydetail_controlPlay"
+            android:layout_width="70dip"
+            android:layout_height="70dip"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/playaudio" />
+
+        <RelativeLayout
+            android:id="@+id/rl_historydetail_play"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ib_historydetail_controlPlay"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/tv_historydetail_playTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="00:00"
+                android:textColor="#34404C"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_historydetail_playDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text=""
+                android:textColor="#34404C"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/sp_historydetail_playProgress"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/tv_historydetail_playDuration"
+                android:layout_toRightOf="@id/tv_historydetail_playTime"
+                android:max="100"
+                android:maxHeight="5dip"
+                android:minHeight="5dip"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:progress="0"
+                android:progressDrawable="@drawable/bg_bar"
+                android:thumb="@drawable/thumb_up" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_historydetail_play"
+            android:orientation="horizontal" >
+
+            <SeekBar
+                android:id="@+id/sp_historydetail_volume"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="26dp"
+                android:max="100"
+                android:maxHeight="5dip"
+                android:minHeight="5dip"
+                android:progress="20"
+                android:progressDrawable="@drawable/volume_seekbar"
+                android:thumb="@drawable/player_settings_bright_thumb" />
+
+            <ImageButton
+                android:id="@+id/ib_historydetail_volume"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/sp_historydetail_volume"
+                android:background="@drawable/volume" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView android:id="@+id/tv_historydetail_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="截图"
+        android:textColor="#3D8AD0"
+        android:textSize="16sp" />
+
+    <Gallery
+        android:id="@+id/g_historydetail_gallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:spacing="20dp" />
+
+</LinearLayout>

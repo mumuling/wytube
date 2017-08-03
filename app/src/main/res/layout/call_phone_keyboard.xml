@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white" >
+
+    <RelativeLayout
+        android:id="@+id/cpkrl1"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/black"
+        android:visibility="visible" >
+
+        <ImageButton
+            android:id="@+id/cpkib1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:background="@drawable/tab_contacts1"
+            android:clickable="true"
+            android:onClick="toContacts" />
+
+        <ImageButton
+            android:id="@+id/cpkib2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_delete_character"
+            android:text="" />
+        <!-- android:background="@drawable/input_bg" -->
+
+        <org.linphone.ui.AddressText
+            android:id="@+id/cpket1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@+id/cpkib2"
+            android:layout_toRightOf="@id/cpkib1"
+            android:background="@color/black"
+            android:editable="true"
+            android:ems="10"
+            android:enabled="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:inputType="phone"
+            android:text="sip:liuyiyi@sip.linphone.org"
+            android:textColor="@color/white"
+            android:textSize="24sp" >
+
+            <requestFocus />
+        </org.linphone.ui.AddressText>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/cpkrl2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/cpkrl1" >
+
+        <ListView
+            android:id="@+id/cpklv1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/cpkll1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:background="#999999"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="1px"
+            android:orientation="horizontal"
+            android:padding="0dp" >
+
+            <RelativeLayout
+                android:id="@+id/cpkNum1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/diler_1_1_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cpkNum2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1px"
+                android:layout_marginRight="1px"
+                android:layout_weight="1"
+                android:background="@drawable/diler_2_2_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cpkNum3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/diler_3_3_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="1px"
+            android:orientation="horizontal"
+            android:padding="0dp" >
+
+            <RelativeLayout
+                android:id="@+id/cpkNum4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/diler_4_4_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cpkNum5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1px"
+                android:layout_marginRight="1px"
+                android:layout_weight="1"
+                android:background="@drawable/diler_5_5_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cpkNum6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/diler_6_6_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="1px"
+            android:orientation="horizontal"
+            android:padding="0dp" >
+
+            <RelativeLayout
+                android:id="@+id/cpkNum7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/diler_7_7_xml"
+                android:clickable="true"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:id="@+id/cpkiv7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cpkNum8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1px"
+                android:layout_marginRight="1px"
+                android:layout_weight="1"
+                android:background="@drawable/diler_8_8_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cpkNum9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/diler_9_9_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="1px"
+            android:orientation="horizontal"
+            android:padding="0dp" >
+
+            <RelativeLayout
+                android:id="@+id/cpkNumStar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/diler_x_x_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cpkNum0"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1px"
+                android:layout_marginRight="1px"
+                android:layout_weight="1"
+                android:background="@drawable/diler_0_0_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/cpkNumHusa"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/diler_j_j_xml"
+                android:clickable="true"
+                android:orientation="vertical"
+                android:padding="10dp" >
+
+                <ImageView
+                    android:id="@+id/cpkiv12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/trans" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <org.linphone.ui.CallButton
+        android:id="@+id/callButton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
+        android:src="@drawable/call"
+        android:visibility="gone" />
+
+</RelativeLayout>

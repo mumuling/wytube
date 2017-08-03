@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="scan_corner_color">#0effc2</color>
+
+
+    <color name="cc">#59a9ff</color>
+
+    <color name="bg_color">#ededed</color>
+    <color name="contents_text">#ff000000</color>
+    <color name="encode_view">#ffffffff</color>
+    <color name="help_button_view">#ffcccccc</color>
+    <color name="help_view">#ff404040</color>
+    <color name="result_image_border">#ffffffff</color>
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c000ff00</color>
+    <color name="result_text">#ffffffff</color>
+    <color name="sbc_header_text">#ff808080</color>
+    <color name="sbc_header_view">#ffffffff</color>
+    <color name="sbc_list_item">#fffff0e0</color>
+    <color name="sbc_layout_view">#ffffffff</color>
+    <color name="sbc_page_number_text">#ff000000</color>
+    <color name="sbc_snippet_text">#ff4b4b4b</color>
+    <color name="share_text">#ff000000</color>
+    <color name="share_view">#ffffffff</color>
+    <color name="status_view">#50000000</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="header">#58567D</color>
+    <color name="grgray">#686868</color>
+
+
+    <color name="color_one">#49cbb8</color>
+    <color name="color_two">#ffffff</color>
+    <color name="color_three">#c9c8c8</color>
+    <color name="color_four">#666666</color>
+    <color name="color_five">#ff6701</color>
+    <color name="color_bg">#ebebeb</color>
+
+    <color name="title_bg_color">#ffffff</color>
+    <color name="title_text_color">#666666</color>
+    <color name="view_bg_color">#e5e5e5</color>
+    <color name="tab_view_bg_color">#d5d5d5</color>
+    <color name="login_activity_bg_color">#e5e5e5</color>
+    <color name="item_pressed_bg_color">#eeeeee</color>
+    <color name="item_normal_bg_color">#f5f5f5</color>
+    <color name="translucent_background">#60000000</color>
+    <color name="dial_pressed">#d64646</color>
+    <color name="dial_normal">#c63636</color>
+    <color name="gray">#cccccc</color>
+
+    <color name="thirty_transparent_black">#4d000000</color>
+    <color name="black">#ff000000</color>
+	<color name="sc_gray">#ff777777</color>
+	<color name="mBlue">#ff54abee</color>
+	<color name="mWhite">#ffffffff</color>
+	
+    <color name="dial_item_pressed_bg_color">#DFDCDC</color>
+    <color name="dial_item_normal_bg_color">#EAE8E8</color>
+
+    <color name="setting_item_pressed_bg_color">#f0f0f0</color>
+    <color name="setting_item_normal_bg_color">#f8f8f8</color>
+    
+    
+    <color name="niticeCountColor">#FF6600</color>
+    <color name="niticeCountColorClear">#000000</color>
+
+    
+    
+    
+    
+    <color name="blue">#0066FF</color>
+    <color name="light_blue">#6593cb</color>
+    
+    <color name="callpress">#22B14C</color>
+    <color name="callup">#D7F3D0</color>
+    <color name="custombg">#eeeeee</color>
+    
+    <color name="tab_host_press">#1D88CE</color>
+    <color name="tab_host_normal">#FFFFFF</color>
+	
+	
+	<color name="main_app_color">#ffcf4c29</color>
+    
+    <color name="text_selected">#ffcf4c29</color>
+    <color name="text_over">#ffb9c4cb</color>
+    <color name="text_default">#ff5b656f</color>
+    <color name="text_disabled">#ffa6b3bf</color>
+    <color name="text_header">#ff7e8e9e</color>
+    
+    <color name="text_switch_selected">#ffffff</color>
+    <color name="text_switch">#ff41484f</color>
+    
+    <color name="text_button">#ff41484f</color>
+    <color name="text_button_disabled">#ffa6b3bf</color>
+    <color name="text_button_selected">#ff41484f</color>
+    <color name="text_button_over">#ffcf4c29</color>
+    
+    <color name="numpad_background_bottom">#ffe4edf2</color>
+    <color name="numpad_background_dialer">#ffd8d8d8</color>
+    <color name="numpad_background_top">#ffb1bdc3</color>
+    
+    <color name="missed_calls_background">#ffcf4c29</color>
+    
+    
+    <color name="landscape_background">#CCCCCC</color>
+    
+    <color name="text_contrast">#ff000000</color> <!-- If background is white, set to black, else set to white -->
+    
+    <color name="transparent">#00FFFFFF</color>
+    <color name="transparent_contact">#00FFFFFF</color>
+    <color name="grey11">#FF1C1C1C</color>
+    <color name="deep_sky_blue">#00BFFF</color>
+    <color name="cadet_blue1">#98F5FF</color>
+    <color name="cyan3">#00CDCD</color>
+    <color name="dark_orange">#FF8C00</color>
+    
+	<color name="myGrey">#BFBFBF</color>
+
+    <color name="view_bg_color_1">#2196f3</color>
+    <color name="view_bg_color_2">#35af41</color>
+    <color name="view_bg_color_3">#f89513</color>
+
+
+
+
+</resources>

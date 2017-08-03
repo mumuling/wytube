@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/g3g4"
+        android:layout_width="fill_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="17dp"
+            android:layout_weight="1"
+            android:text="去电显示本机号码"
+            android:textColor="#A1A1A1"
+            android:textSize="15sp" />
+
+        <CheckBox
+            android:id="@+id/g3g4Check"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/checkcall"
+            android:button="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wifi"
+        android:layout_width="fill_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="17dp"
+            android:layout_weight="1"
+            android:text="拨号声音"
+            android:textColor="#A1A1A1"
+            android:textSize="15sp" />
+
+        <CheckBox
+            android:id="@+id/wifiCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/checkcall"
+            android:button="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/outCall"
+        android:layout_width="fill_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="17dp"
+            android:layout_weight="1"
+            android:textColor="#A1A1A1"
+            android:text="录音开关"
+            android:textSize="15sp" />
+
+        <CheckBox
+            android:id="@+id/outCallCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/checkcall"
+            android:button="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/numberSetting"
+        android:layout_width="fill_parent"
+        android:layout_height="60dip"
+        android:layout_marginTop="15dip"
+        android:background="@color/white"
+        android:clickable="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dip"
+            android:layout_weight="1"
+            android:text="开门密码设置"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</LinearLayout>

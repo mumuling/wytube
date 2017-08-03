@@ -1,0 +1,195 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/callbg"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/iv_incall_talkHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/unknown_small" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_incall_talkName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="王小强"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_incall_talkNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="15953946393"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/v_incall_header"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#73645D" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_incall_talkInformation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="通话中..."
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_incall_talkTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="00.01"
+                android:textColor="#fff"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="140dp">
+
+        <LinearLayout
+            android:id="@+id/ll_incall_btContain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:background="#4E7B78" >
+
+            <TextView
+                android:id="@+id/tv_incall_speaker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0.5dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/incall_speaker"
+                android:gravity="center"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_incall_mute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0.5dp"
+                android:layout_marginRight="0.5dp"
+                android:layout_weight="0.9"
+                android:adjustViewBounds="true"
+                android:background="@drawable/incall_mute"
+                android:gravity="center"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_incall_dial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0.5dp"
+                android:layout_marginRight="0.5dp"
+                android:layout_weight="0.9"
+                android:adjustViewBounds="true"
+                android:background="@drawable/incall_dial"
+                android:gravity="center"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_incall_screemshots"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0.5dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/incall_screenshots"
+                android:gravity="center"
+                android:scaleType="centerCrop" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/v_border"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/ll_incall_btContain"
+            android:background="#133235" />
+
+        <LinearLayout
+            android:id="@+id/ll_incall_btdoor_contain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/v_border"
+            android:orientation="horizontal" 
+            android:background="#4E7B78" >
+
+            <TextView
+                android:id="@+id/tv_incall_openDoor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="0.5dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/incall_opendoor"
+                android:gravity="center"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_incall_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0.5dp"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/incall_video"
+                android:gravity="center"
+                android:scaleType="centerCrop" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_incall_finishcall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/incall_finishcall" />
+    </RelativeLayout>
+
+</LinearLayout>

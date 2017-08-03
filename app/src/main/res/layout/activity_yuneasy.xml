@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/fragment_map"
+        android:name="com.behalfdrive.cn.FragmentMaps"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="11" />
+
+    <fragment
+        android:id="@+id/fragment_tation"
+        android:name="com.behalfdrive.cn.FragmentOrder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="11" />
+
+    <fragment
+        android:id="@+id/fragment_friend"
+        android:name="com.behalfdrive.cn.FragmentUser"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="11" />
+
+    <fragment
+        android:id="@+id/fragment_more"
+        android:name="com.behalfdrive.cn.FragmentMore"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="11" />
+
+    <RadioGroup
+        android:id="@+id/ButtomRg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:background="@android:color/black"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rbMap"
+            android:checked="true"
+            style="@style/rg_btn_style"
+            android:drawableTop="@drawable/tab_public"
+            android:text="消息" />
+
+        <RadioButton
+            android:id="@+id/rbTation"
+            style="@style/rg_btn_style"
+            android:drawableTop="@drawable/tab_contacts"
+            android:text="联系人" />
+
+        <RadioButton
+            android:id="@+id/rbFriend"
+            style="@style/rg_btn_style"
+            android:drawableTop="@drawable/tab_dialer_up"
+            android:text="拨号" />
+
+        <RadioButton
+            android:id="@+id/rbMore"
+            style="@style/rg_btn_style"
+            android:drawableTop="@drawable/tab_setting"
+            android:text="应用" />
+    </RadioGroup>
+
+</LinearLayout>

@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eeeeee"
+    tools:context=".login.LoginEnterActivity" >
+  <LinearLayout android:layout_width="fill_parent"
+	android:id="@+id/formRegist_layout" android:background="#FFEFEFEF"
+	android:layout_height="fill_parent" android:gravity="center"
+	android:orientation="vertical" android:visibility="gone">
+	<ProgressBar android:id="@+id/formlogin_pb"
+		android:layout_width="wrap_content" style="@android:style/Widget.ProgressBar.Inverse"
+		android:layout_height="wrap_content" />
+	<TextView android:text="注册中" android:layout_marginTop="10.0dip"
+		android:textColor="#FF000000" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:id="@+id/formlogin_tv_login" />
+</LinearLayout>
+    <LinearLayout
+        android:id="@+id/formRegist_layout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/input_bg"
+            android:hint="请填写账号/手机号"
+            >
+
+            <requestFocus />
+        </EditText>
+	    <EditText
+            android:id="@+id/company_yu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/input_bg"
+            android:hint="请输入域名"
+            android:text="yuneasy.cn"
+            android:textSize="20sp" 
+            android:visibility="gone">
+        </EditText>
+        <EditText
+            android:id="@+id/editTextPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/input_bg"
+            android:hint="请设置登录密码"
+            android:password = "true" 
+            android:textSize="20sp" >
+        </EditText>
+
+        <EditText
+            android:id="@+id/editTextpwd2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/input_bg"
+            android:hint="再输入一次密码"
+            android:password = "true" 
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/buttonOK"
+            android:layout_width="200dip"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="38dp"
+            android:background="@drawable/login_botton"
+            android:layout_gravity="center"
+            android:text="完成注册"
+            android:onClick="regsitOk"
+            android:textColor="@color/white"
+            android:textSize="25dip"
+            />
+    </LinearLayout>
+
+</RelativeLayout>

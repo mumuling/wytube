@@ -1,0 +1,9 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- gang -->
+    <item android:drawable="@drawable/tab_selected_contacts" android:state_focused="true"/>
+    <item android:drawable="@drawable/tab_selected_contacts" android:state_pressed="true"/>
+    <item android:drawable="@drawable/tab_unselected_contacts"/>
+    <!-- not selected -->
+
+</selector>

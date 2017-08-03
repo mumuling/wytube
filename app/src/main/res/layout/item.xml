@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/callphone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_marginLeft="17dp"
+            android:id="@+id/catalog"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:paddingBottom="5dip"
+            android:paddingLeft="5dip"
+            android:text="A"
+            android:textColor="#A1A1A1" 
+            android:background="#eeeeee"/>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:background="@color/white"
+            android:layout_height="60dp" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal" >
+
+                <FrameLayout
+                    android:id="@+id/fl_contact_icon"
+                    android:layout_width="50dip"
+                    android:layout_height="50dip" >
+
+                    <ImageView
+                        android:id="@+id/itemImg"
+                        android:layout_width="40dip"
+                        android:layout_height="40dip"
+                        android:layout_margin="5dip"
+                        android:clickable="true" />
+
+                    <ImageView
+                        android:id="@+id/itemImgStatus"
+                        android:layout_width="13dip"
+                        android:layout_height="13dip"
+                        android:layout_gravity="right|bottom"
+                        android:layout_marginBottom="5dip"
+                        android:layout_marginRight="5dip"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/status_qme" />
+                </FrameLayout>
+
+                <RelativeLayout
+                    android:layout_marginLeft="17dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
+
+                    <ImageView
+                        android:id="@+id/callImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="30dp"
+                        android:adjustViewBounds="true"
+                        android:clickable="true"
+                        android:background="@drawable/ic_call" />
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/title"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_weight="1.0"
+                            android:gravity="top"
+                            android:paddingTop="5dip"
+                            android:text="hhhh"
+                            android:textSize="16sp"
+                            android:textColor="#54ABEE" />
+
+                        <TextView
+                            android:id="@+id/context"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:layout_marginLeft="5dip"
+                            android:layout_weight="1.0"
+                            android:gravity="top"
+                            android:paddingTop="5dip"
+                            android:text="hhhh"
+                            android:textSize="12sp"
+                            android:textColor="#A1A1A1"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+	<LinearLayout
+	    android:id="@+id/callNull"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:visibility="gone"
+	    >
+	    <TextView 
+	        android:id="@+id/phoneNull"
+	        android:layout_width="fill_parent"
+	        android:layout_height="60dip"
+	        android:text="暂无联系人"
+	        android:gravity="center"
+	        />
+	</LinearLayout>
+</LinearLayout>

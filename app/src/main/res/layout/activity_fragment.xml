@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/titlebg"
+        android:focusable="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/titlebg"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/titlebg"
+                android:focusable="true"
+                android:gravity="center" >
+
+                <TextView
+                    android:id="@+id/tv_guid1"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/group_huise"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="showGroup"
+                    android:text="组织"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_guid2"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tv_guid1"
+                    android:background="@drawable/group_list_selector"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:onClick="showList"
+                    android:text="通讯录"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/showPopUp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="10dip"
+            android:adjustViewBounds="true"
+            android:background="@drawable/heiadd"
+            android:clickable="true" />
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="10dip"
+            android:adjustViewBounds="true"
+            android:background="@drawable/search_bar_icon_normal"
+            android:clickable="true"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/cursor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="matrix" />
+    <!-- 此处需要给出全路径 -->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpagerLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:visibility="gone" />
+
+<!--     <fragment -->
+<!-- 	    android:id="@+id/main_friend" -->
+<!-- 	    android:name="com.yuneasy.yuneasyapp.FriendActivity" -->
+<!-- 	    android:layout_width="match_parent" -->
+<!-- 	    android:layout_height="match_parent" -->
+<!-- 	    android:layout_weight="11" /> -->
+
+    <fragment
+        android:id="@+id/main_friend"
+        android:name="com.cqxb.yuneasyapp.CommunityActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="11" />
+
+    <fragment
+        android:id="@+id/main_organize"
+        android:name="com.cqxb.yuneasyapp.OrganizeActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="11" />
+
+</LinearLayout>
