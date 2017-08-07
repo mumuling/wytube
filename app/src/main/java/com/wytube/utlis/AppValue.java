@@ -177,4 +177,7 @@ public class AppValue {
 
 //    /*购物车保存到本地*/
 //    public static final String PERSON = "ONE_PERSON";
+
+
+
 }

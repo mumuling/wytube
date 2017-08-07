@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
+   /* //    解决23以上无法依赖 httpClient
+    useLibrary 'org.apache.http.legacy'*/
     signingConfigs {
         yuneasy {
             keyAlias 'yuneasy'
@@ -19,6 +21,11 @@ android {
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'armeabi','armeabi-v7a'
+        }
+//        dex分包
+        multiDexEnabled true
     }
     task nativeLibsToJar(type: Zip, description: "create a jar archive of the native libs") {
         destinationDir file("$projectDir/libs")
@@ -44,8 +51,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
     compile project(':phone_lib')
     compile files('libs/alipay.jar')
@@ -67,6 +72,7 @@ dependencies {
     compile files('libs/utdid4all-1.0.4.jar')
     compile files('libs/zxing.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:cardview-v7:22.0.0'
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile files('libs/K.jar')
@@ -74,5 +80,7 @@ dependencies {
     compile files('libs/okio-1.8.0.jar')
     // Fresco所需依赖
     compile 'com.facebook.fresco:fresco:0.12.0'
+    //dex分包
+    compile 'com.android.support:multidex:1.0.1'
 
 }

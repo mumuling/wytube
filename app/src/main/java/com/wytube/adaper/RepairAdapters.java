@@ -2,7 +2,6 @@ package com.wytube.adaper;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,7 @@ import android.widget.TextView;
 
 import com.cqxb.yecall.R;
 import com.wytube.activity.ImageActivity;
+import com.wytube.activity.RepairInfoActivity;
 import com.wytube.beans.RepairBean;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
@@ -66,7 +66,6 @@ public class RepairAdapters extends BaseAdapter {
             mholder.conText = (TextView) convertView.findViewById(R.id.content_text);
             mholder.dateTiime = (TextView) convertView.findViewById(R.id.date_time);
             mholder.repairItem = (LinearLayout) convertView.findViewById(R.id.repair_item);
-            mholder.toAssess = (CardView) convertView.findViewById(R.id.to_assess);
             mholder.imgList = (LinearLayout) convertView.findViewById(R.id.image_list);
             // 设置提示
             convertView.setTag(mholder);
@@ -74,21 +73,22 @@ public class RepairAdapters extends BaseAdapter {
             mholder = (viewHolder) convertView.getTag();
         }
         RepairBean.DataBean bean = list.get(position);
+
         switch (bean.getStateId()) {
-            case 2:
-                mholder.stateImg.setVisibility(View.VISIBLE);
-                mholder.repairState.setVisibility(View.GONE);
-                mholder.toAssess.setVisibility(View.VISIBLE);
+            case 0:
+                //待受理
+                mholder.repairState.setTextColor(context.getResources().getColor(R.color.dark_orange));
                 break;
-            case 3:
-                mholder.stateImg.setVisibility(View.VISIBLE);
-                mholder.repairState.setVisibility(View.GONE);
-                mholder.toAssess.setVisibility(View.GONE);
+            case 1:
+                //派单中
+                mholder.repairState.setTextColor(context.getResources().getColor(R.color.colorAccent));
+                break;
+            case 2:
+                //已完成
+                mholder.repairState.setTextColor(context.getResources().getColor(R.color.result_view));
                 break;
             default:
-                mholder.stateImg.setVisibility(View.GONE);
                 mholder.repairState.setVisibility(View.VISIBLE);
-                mholder.toAssess.setVisibility(View.GONE);
                 break;
         }
         mholder.repairState.setText(bean.getStateName());
@@ -97,12 +97,8 @@ public class RepairAdapters extends BaseAdapter {
         mholder.dateTiime.setText(bean.getStarttime());
         mholder.repairItem.setOnClickListener(v -> {
             AppValue.repairInfoBean = bean;
-//            Intent intent = new Intent(context, RepairInfoActivity.class);
-//            context.startActivity(intent);
-        });
-        mholder.toAssess.setOnClickListener(v -> {
-            AppValue.repairInfoBean = bean;
-//            context.startActivity(new Intent(context,AtionJZActivity.class));
+            Intent intent = new Intent(context, RepairInfoActivity.class);
+            context.startActivity(intent);
         });
         mholder.imgList.removeAllViews();
         for (RepairBean.DataBean.ImgListBean imgListBean : bean.getImgList()) {
@@ -115,7 +111,6 @@ public class RepairAdapters extends BaseAdapter {
         private ImageView stateImg;
         private TextView repairType, repairState, conText, dateTiime;
         private LinearLayout repairItem;
-        private CardView toAssess;
         private LinearLayout imgList;
     }
 

@@ -312,19 +312,19 @@ public class MainActivity extends Activity {
             public void run() {
                 if (MainActivity.firstRun(MainActivity.this)) {
                     startActivity(new Intent(MainActivity.this, WelcomActivity.class));
+                    finish();
                 } else {
+                    /*自动登录*/
                     ACache mCache = ACache.get(MainActivity.this);
                     String value = mCache.getAsString("token");
                     if (value!=null){
                         String login_state = Utils.clearString(ShareOption.readerString("LOGIN_STATE", MainActivity.this));
                         if (login_state != null && login_state.length() > 0) {
-                            android.util.Log.i("---------", "不是第一次运行    if");
                             String usr = login_state.split(":")[0];
                             String pwd = login_state.split(":")[1];
                             String keyValue = "account=" + usr + "&password=" + pwd;
                             Client.sendPost(NetParmet.USR_LOGIN, keyValue, new Handler(msg -> {
                                 String json = msg.getData().getString("post");
-                                android.util.Log.i("----MainActivity-----", json);
                                 BaseLogin bean = Json.toObject(json, BaseLogin.class);
                                 if (bean == null) {
                                     startActivity(new Intent().setClass(MainActivity.this, classToStart).setData(getIntent().getData()));
@@ -355,9 +355,9 @@ public class MainActivity extends Activity {
                         SettingInfo.setPassword("");
                         SettingInfo.setParams(PreferenceBean.CHECKLOGIN, "");
                         startActivity(new Intent(MainActivity.this, LoginAppActivity.class));
+                        finish();
                     }
                 }
-                finish();
             }
         }, 1000);
     }
