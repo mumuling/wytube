@@ -41,14 +41,10 @@ public class WelcomActivity extends Activity {
 
         View view3 = inflater.inflate(R.layout.welcom_layout_3, null);
 
-        view3.findViewById(R.id.goto_login_but).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppValue.onec = 1;
-                WelcomActivity.this.startActivity(new Intent(WelcomActivity.this, LoginAppActivity.class));
-
-                WelcomActivity.this.finish();
-            }
+        view3.findViewById(R.id.goto_login_but).setOnClickListener(v -> {
+            AppValue.onec = 1;
+            WelcomActivity.this.startActivity(new Intent(WelcomActivity.this, LoginAppActivity.class));
+            WelcomActivity.this.finish();
         });
 
         views = new ArrayList<>();

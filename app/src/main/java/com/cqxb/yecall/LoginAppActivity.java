@@ -135,7 +135,6 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
                         Intent intent = new Intent(LoginAppActivity.this, OrderActivity.class);
                         startActivity(intent);
                         finish();
-                        AppValue.onec=-1;
                     }else {
                         finish();
                     }

@@ -94,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:id="@+id/relativeLayout3">
+            android:id="@+id/relat_pyqgl">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -130,12 +130,13 @@
 
         <View
             android:id="@+id/zw"
-            android:layout_below="@+id/relativeLayout3"
+            android:layout_below="@+id/relat_pyqgl"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="@color/app_def_text_color" />
 
         <RelativeLayout
+            android:id="@+id/rela_zxgl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -175,36 +176,159 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
+
+        <View
+            android:id="@+id/zw1"
+            android:layout_below="@+id/rela_zxgl"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/app_def_text_color" />
+
+        <RelativeLayout
+            android:id="@+id/relati_sqgl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_below="@+id/zw1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sqgl_hd"
+                android:id="@+id/imageView4" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="社区活动"
+                android:textColor="@color/main_def_text_color"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imageView4"
+                android:layout_toEndOf="@+id/imageView4"
+                android:id="@+id/textView16" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#9A9A9A"
+                android:text="社区活动管理平台"
+                android:layout_alignBottom="@+id/imageView4"
+                android:layout_alignLeft="@+id/textView16"
+                android:layout_alignStart="@+id/textView16" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ty_jt5"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/zw2"
+            android:layout_below="@+id/relati_sqgl"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/app_def_text_color" />
+
+        <RelativeLayout
+            android:id="@+id/relati_shfw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_below="@+id/zw2"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sqgl_sh"
+                android:id="@+id/imageView5" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="生活服务"
+                android:textColor="@color/main_def_text_color"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imageView5"
+                android:layout_toEndOf="@+id/imageView5"
+                android:id="@+id/textView17" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#9A9A9A"
+                android:text="生活服务管理平台"
+                android:layout_alignBottom="@+id/imageView5"
+                android:layout_alignLeft="@+id/textView17"
+                android:layout_alignStart="@+id/textView17" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ty_jt5"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/zw3"
+            android:layout_below="@+id/relati_shfw"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/app_def_text_color" />
+
+        <RelativeLayout
+            android:id="@+id/relat_jyxx"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_below="@+id/zw3"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/sqgl_jy"
+                android:id="@+id/imageView6" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="交易信息"
+                android:textColor="@color/main_def_text_color"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imageView6"
+                android:layout_toEndOf="@+id/imageView6"
+                android:id="@+id/textView18" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#9A9A9A"
+                android:text="交易信息管理平台"
+                android:layout_alignBottom="@+id/imageView6"
+                android:layout_alignLeft="@+id/textView18"
+                android:layout_alignStart="@+id/textView18" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ty_jt5"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="5dp"
         android:background="#E8E8E8"/>
-
-    <RelativeLayout
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp">
-        <View
-            android:layout_width="3dp"
-            android:layout_height="16dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="15dp"
-            android:background="@color/colorAccent"
-            android:id="@+id/view4" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="交易信息"
-            android:textColor="@color/main_def_text_color"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/view4"
-            android:layout_toEndOf="@+id/view4" />
-    </RelativeLayout>
-
 
 
 </LinearLayout>

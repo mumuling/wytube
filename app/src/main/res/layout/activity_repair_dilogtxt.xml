@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rela_djxs">
+    <!--********
+        产品参数
+        ********-->
+    <ScrollView
+        android:id="@+id/scrollView_showMessages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/but_Return"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="请选择维修人员"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/TextColor_quotient"
+                android:layout_above="@+id/view1"
+                android:textSize="14dp" />
+
+            <View
+                android:layout_above="@+id/canshu_list"
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/app_def_text_color" />
+            <ListView
+                android:id="@+id/canshu_list"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scrollbars="none"
+                android:layout_above="@+id/but_Return"
+                android:layout_alignParentStart="true"/>
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/but_Return"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

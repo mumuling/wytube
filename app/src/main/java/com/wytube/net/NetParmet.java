@@ -45,8 +45,18 @@ public class NetParmet {
     public static final String PROP_WYDL = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/pushInfo/delete";
     /*修改通知*/
     public static final String PROP_WYSC = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/pushInfo/edit";
-    /*家政服务列表*/
+    /*家政管理列表*/
     public static final String QUERY_REPAIR_LIST = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairWork";
+    /*家政管理详情*/
+    public static final String ADD_JZXQ_INFO = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairWork/view";
+    /*家政指派人员列表*/
+    public static final String ADD_JZXQ_ZPRYLB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairman";
+    /*家政指派 人员添加*/
+    public static final String ADD_JZXQ_ADDZPRYLB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairman/add";
+    /*家政指派 人员添加*/
+    public static final String ADD_JZXQ_ADDZPRYQD = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairWork/addRun";
+    /*获取朋友圈列表*/
+    public static final String GET_DYNAMIC = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/track";
 
 
 
@@ -77,8 +87,6 @@ public class NetParmet {
     public static final String REPAIR_TYPE_LIST = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/repairWork/queryRepairItemList";
     /*添加报修明细*/
     public static final String ADD_REPAIR_INFO = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/repairWork/add";
-    /*家政服务详情*/
-    public static final String ADD_JZXQ_INFO = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/repairWork/view";
     /*家政星级*/
     public static final String ADD_JZXJ_INFO = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/repairWork/queryRepairSorceList";
     /*家政评价*/
@@ -103,8 +111,7 @@ public class NetParmet {
     public static final String QUERY_WELL_INFO = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/celebration/queryCelebrationInfoList";
     /*借用物品*/
     public static final String BORROW_ADD = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/borrow/add";
-    /*获取朋友圈所有动态*/
-    public static final String GET_DYNAMIC = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/track";
+
     /*发布新动态*/
     public static final String PUBLISH_DYNAMIC = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/track/create";
     /*点赞或取消点赞*/

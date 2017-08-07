@@ -665,5 +665,13 @@
         <activity android:name="com.wytube.activity.AddOwnerActivity"/>
         /*物业考勤*/
         <activity android:name="com.wytube.activity.AttenceActivity"/>
+        /*家政管理详情状态*/
+        <activity android:name="com.wytube.activity.RepairInfoActivity"/>
+        /*家政管理指派人员*/
+        <activity android:name="com.wytube.activity.RepairZPActivity"/>
+        /*家政管理维修完成*/
+        <activity android:name="com.wytube.activity.RepairWCActivity"/>
+        /*朋友圈列表*/
+        <activity android:name="com.wytube.activity.FrendCricleActivity"/>
     </application>
 </manifest>

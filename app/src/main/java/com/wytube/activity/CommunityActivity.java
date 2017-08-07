@@ -10,6 +10,9 @@ import com.cqxb.yecall.R;
 import com.cqxb.yecall.Smack;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
+import com.skyrain.library.k.api.KListener;
+import com.wytube.utlis.AppValue;
+import com.wytube.utlis.Utils;
 
 /**
  * 创 建 人: vr 柠檬 .
@@ -26,6 +29,7 @@ public class CommunityActivity extends FragmentActivity {
     }
 
     private long exitTime = 0;// 退出程序时间
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
@@ -41,5 +45,39 @@ public class CommunityActivity extends FragmentActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    /*朋友圈管理*/
+    @KListener(R.id.relat_pyqgl)
+    private void relat_pyqglOnClick() {
+        if (!AppValue.online) {
+            Utils.showLoginDialog(this);
+            return;
+        }
+        startActivity(new Intent(this, FrendCricleActivity.class));
+    }
+
+    /*资讯管理*/
+    @KListener(R.id.rela_zxgl)
+    private void rela_zxglOnClick() {
+
+    }
+
+    /*社区管理*/
+    @KListener(R.id.relati_sqgl)
+    private void relati_sqglOnClick() {
+
+    }
+
+    /*生活服务*/
+    @KListener(R.id.relati_shfw)
+    private void relati_shfwOnClick() {
+
+    }
+
+    /*交易信息*/
+    @KListener(R.id.relat_jyxx)
+    private void relat_jyxxOnClick() {
+
     }
 }
