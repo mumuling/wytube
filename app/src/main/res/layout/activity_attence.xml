@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rlss"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <ImageView
+            android:id="@+id/back_but"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ty_fh"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="物业考勤"
+            android:textSize="16sp"
+            android:textColor="@color/main_def_text_color"
+            android:layout_alignTop="@+id/back_but"
+            android:layout_toRightOf="@+id/back_but"
+            android:layout_toEndOf="@+id/back_but" />
+    </RelativeLayout>
+    <TextView
+
+        android:layout_marginTop="50px"
+        android:layout_width="73dp"
+        android:gravity="center"
+        android:background="@drawable/empty_corner_bottom"
+        android:text="1"
+        android:textSize="39sp"
+        android:textColor="@color/TextColor_quotient"
+        android:layout_height="72dp"/>
+
+</LinearLayout>

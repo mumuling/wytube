@@ -84,6 +84,7 @@ public class IndexActivity extends FragmentActivity {
             Utils.showLoginDialog(this);
             return;
         }
+        startActivity(new Intent(this, OwnerActivity.class));
     }
 
     /*访客通行*/
@@ -103,6 +104,7 @@ public class IndexActivity extends FragmentActivity {
             Utils.showLoginDialog(this);
             return;
         }
+        startActivity(new Intent(this, AttenceActivity.class));
     }
 
     /*借用管理*/

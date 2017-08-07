@@ -60,7 +60,6 @@ public class LinphoneCoreFactoryImpl extends LinphoneCoreFactory {
 
 		//Main library
 		System.loadLibrary("linphone-" + eabi);
-
 		Version.dumpCapabilities();
 	}
 	

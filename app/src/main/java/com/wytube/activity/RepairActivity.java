@@ -52,7 +52,6 @@ public class RepairActivity extends BaseActivity {
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         selectLayout = mNotProcess;
-
     }
 
     @Override
@@ -143,6 +142,13 @@ public class RepairActivity extends BaseActivity {
             AppValue.repairBeans = bean.getData();
             adapter = new RepairAdapters(this,AppValue.repairBeans);
             mRepairList.setAdapter(this.adapter);
+            for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
+                if (repairBean.getStateId() == 0) {
+                    tempBeans.add(repairBean);
+                }
+            }
+            adapter.setBeans(tempBeans);
+            adapter.notifyDataSetChanged();
             return false;
         }));
     }

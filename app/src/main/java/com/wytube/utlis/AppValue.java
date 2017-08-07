@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import com.cqxb.yecall.bean.SipAccountBean;
 import com.wytube.beans.CarsBean;
+import com.wytube.beans.OwnerBean;
 import com.wytube.beans.PropMsgBean;
 import com.wytube.beans.RepairBean;
 
@@ -102,6 +103,8 @@ public class AppValue {
 //    public static List<ComRecordBean.DataBean> recordBeans;
     /*报修列表的Item*/
     public static RepairBean.DataBean repairInfoBean;
+    public static List<OwnerBean.DataBean> ownerBeans;
+    public static OwnerBean.DataBean ownerInBean;
 //    /*投诉列表的Item*/
 //    public static ComRecordBean.DataBean comRecordinfoBean;
 //    /*便民服务的Urls*/

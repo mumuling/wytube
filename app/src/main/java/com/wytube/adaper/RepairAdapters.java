@@ -74,6 +74,7 @@ public class RepairAdapters extends BaseAdapter {
             mholder = (viewHolder) convertView.getTag();
         }
         RepairBean.DataBean bean = list.get(position);
+
         switch (bean.getStateId()) {
             case 2:
                 mholder.stateImg.setVisibility(View.VISIBLE);

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
+             android:id="@+id/fl_root"
+             android:background="#4c000000"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <LinearLayout
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="226dp"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="41.5dp">
+            <TextView
+                android:paddingTop="15dp"
+                android:paddingLeft="16dp"
+                android:textSize="12sp"
+                android:text="选择业主组"
+                android:textColor="#999"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/tv_sure"
+                android:paddingTop="15dp"
+                android:paddingRight="16dp"
+                android:paddingLeft="15dp"
+                android:layout_gravity="right|center_vertical"
+                android:text="确定"
+                android:textSize="18sp"
+                android:textColor="@color/app_main_color_green"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"/>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_ydyyzz"
+            android:layout_width="match_parent"
+            android:layout_height="54.5dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:text="一单元业主组"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:id="@+id/iv_blue"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="31dp"
+                android:layout_marginRight="31dp"
+                android:background="@drawable/yz_xql"
+                android:layout_alignTop="@+id/tv_contact"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e0e0e0"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_er"
+            android:layout_width="match_parent"
+            android:layout_height="54.5dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_contact_er"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:text="二单元业主组"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:id="@+id/iv_blue2"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignBottom="@+id/tv_contact_er"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/yz_xqh"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e0e0e0"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_sdyyzz"
+            android:layout_width="match_parent"
+            android:layout_height="54.5dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/tv_contact_san"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:text="三单元业主组"
+                android:textSize="16sp"/>
+
+            <ImageView
+                android:id="@+id/iv_blue3"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_alignBottom="@+id/tv_contact_san"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/yz_xqh"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e0e0e0"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>

@@ -223,4 +223,10 @@ public class NetParmet {
     /*月卡续费金额查询*/
     public static final String MONTH_MONEY_SELECT = HTTP + PARK_IP + ":" + PARK_PROT + "/Service1.svc/OrderMonthCardDefer";
 
+/*-----------------------------------------业主管理接口-------------------------------------------------*/
+    /*获取业主列表*/
+    public static final String OWNER = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/owner";
+    /*添加业主*/
+    public static final String OWNER_CREATE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/create";
+
 }
