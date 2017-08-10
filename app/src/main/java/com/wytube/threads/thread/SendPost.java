@@ -21,8 +21,8 @@ public class SendPost extends Thread {
     /**
      * 构造方法
      *
-     * @param url     请求地址
-     * @param value   请求参数
+     * @param url     请求地址beng
+     *aram value   请求参数
      * @param handler 请求回调
      */
     public SendPost(String url, String value, Handler handler) {

@@ -64,8 +64,12 @@ public class OwnerAdapter extends BaseAdapter {
         holder.tv_yename.setText(bean.getOwnerName());
         if (bean.getOwnerType()==0) {
             holder.tv_yztype.setText("业主");
-        }else {
+        }else if (bean.getOwnerType()==1){
             holder.tv_yztype.setText("租客");
+        }else if ((bean.getOwnerType()==2)){
+            holder.tv_yztype.setText("亲属");
+        }else {
+            holder.tv_yztype.setText("其他");
         }
 
         holder.tv_yedz.setText(bean.getBuildingName()+bean.getUnitName()+bean.getRoomNum());
@@ -74,6 +78,13 @@ public class OwnerAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Intent intent = new Intent(context,OwnerItemActivity.class);
                 intent.putExtra("databean",bean);
+                intent.putExtra("ownerId",bean.getOwnerId());
+                intent.putExtra("ownerPhone",bean.getOwnerPhone());
+                intent.putExtra("ownerName",bean.getOwnerName());
+                intent.putExtra("roomNum",bean.getRoomNum());
+                intent.putExtra("roomId",bean.getRoomId());
+                intent.putExtra("unitId",bean.getUnitId());
+                intent.putExtra("buildingId",bean.getBuildingId());
                 context.startActivity(intent);
             }
         });

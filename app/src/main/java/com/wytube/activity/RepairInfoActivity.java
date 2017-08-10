@@ -194,7 +194,6 @@ public class RepairInfoActivity extends BaseActivity {
             startActivity(intent);
             finish();
         }
-
     }
 
     /**

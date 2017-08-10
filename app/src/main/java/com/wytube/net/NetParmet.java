@@ -235,5 +235,11 @@ public class NetParmet {
     public static final String OWNER = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/owner";
     /*添加业主*/
     public static final String OWNER_CREATE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/create";
+    /*选择楼宇*/
+    public static final String OWNER_BUILD = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/building/buildings";
+    /*选择单元*/
+    public static final String OWNER_UTIN = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/unit/units";
+    /*删除业主*/
+    public static final String OWNER_DELETE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/delete";
 
 }

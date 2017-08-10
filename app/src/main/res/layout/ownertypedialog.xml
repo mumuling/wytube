@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/rlrelatype">
+    <!--********
+        产品参数
+        ********-->
+    <ScrollView
+        android:id="@+id/sv_blocok"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/but_Return"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            android:padding="20dp">
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="请选择住户类型"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/TextColor_quotient"
+                android:layout_above="@+id/view1"
+                android:textSize="14dp" />
+
+            <View
+                android:layout_above="@+id/lv_typelist"
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/app_def_text_color" />
+
+         <!--   <ListView
+                android:id="@+id/lv_typelist"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_above="@+id/but_Return"
+                android:layout_alignParentStart="true"
+                android:scrollbars="none"/>-->
+            <TextView
+                android:id="@+id/tv_ownerye"
+                android:text="业主"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <View
+                android:layout_above="@+id/lv_typelist"
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/app_def_text_color" />
+            <TextView
+                android:id="@+id/tv_qinshu"
+                android:text="亲属"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <View
+                android:layout_above="@+id/lv_typelist"
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/app_def_text_color" />
+            <TextView
+                android:id="@+id/tv_zuke"
+                android:gravity="center_vertical"
+                android:text="租客"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <View
+                android:layout_above="@+id/lv_typelist"
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/app_def_text_color" />
+            <TextView
+                android:id="@+id/tv_other"
+                android:gravity="center_vertical"
+                android:text="其他"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/but_Return"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>
