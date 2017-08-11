@@ -438,11 +438,9 @@ public class YETApplication extends Application {
         }
         return info.versionName;
     }
-
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        //dex分包
-        MultiDex.install(base);
+        MultiDex.install(this);
     }
 }

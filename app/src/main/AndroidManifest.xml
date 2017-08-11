@@ -657,6 +657,14 @@
         <activity android:name="com.wytube.activity.RepairActivity"/>
         /*家政管理列表图片*/
         <activity android:name="com.wytube.activity.ImageActivity"/>
+        /*业主管理*/
+        <activity android:name="com.wytube.activity.OwnerActivity"/>
+        /*业主信息*/
+        <activity android:name="com.wytube.activity.OwnerItemActivity"/>
+        /*添加业主*/
+        <activity android:name="com.wytube.activity.AddOwnerActivity"/>
+        /*物业考勤*/
+        <activity android:name="com.wytube.activity.AttenceActivity"/>
         /*家政管理详情状态*/
         <activity android:name="com.wytube.activity.RepairInfoActivity"/>
         /*家政管理指派人员*/

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/rela_djxs">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relarl">
     <!--********
         产品参数
         ********-->
     <ScrollView
-        android:id="@+id/scrollView_showMessages"
+        android:id="@+id/sv_blocok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/but_Return"
@@ -19,11 +19,11 @@
             android:orientation="vertical"
             android:padding="20dp">
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/tv_blocok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="请选择维修人员"
+                android:text="请选择楼宇"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:textColor="@color/TextColor_quotient"
@@ -31,21 +31,19 @@
                 android:textSize="14dp" />
 
             <View
-                android:layout_above="@+id/canshu_list"
+                android:layout_above="@+id/lv_blocolist"
                 android:id="@+id/view1"
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/app_def_text_color" />
+
             <ListView
-                android:id="@+id/canshu_list"
+                android:id="@+id/lv_blocolist"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:scrollbars="none"
                 android:layout_above="@+id/but_Return"
-                android:layout_alignParentStart="true"/>
-
-
-
+                android:layout_alignParentStart="true"
+                android:scrollbars="none"/>
         </LinearLayout>
     </ScrollView>
     <TextView

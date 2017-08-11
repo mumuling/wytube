@@ -25,7 +25,6 @@ import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.wytube.adaper.YeCallListAdapters;
-import com.wytube.beans.BaseMmkm;
 import com.wytube.beans.BeasOpen;
 import com.wytube.beans.YeCallBeans;
 import com.wytube.net.Client;
@@ -72,8 +71,6 @@ public class OneKeyActivity extends Activity {
         yyyOpenDoor();//摇一摇开门
         initYeCall();//一键开门
     }
-
-
     /**
      * 摇一摇开门
      */
@@ -112,7 +109,6 @@ public class OneKeyActivity extends Activity {
             return false;
         }));
     }
-
 
     /**
      * 初始化门禁相关

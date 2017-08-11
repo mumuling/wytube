@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/shape_img_bg"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/all_data"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/tv_yename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="张雨佳"
+                android:textColor="@color/app_color_light_biack"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/no_process"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/tv_yedz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="一栋5单元1206"
+                android:textColor="@color/app_color_light_biack"
+                android:textSize="16sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/well_ok"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="6dp">
+
+            <TextView
+                android:id="@+id/tv_yztype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="业主"
+                android:textColor="@color/app_main_color_green"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
