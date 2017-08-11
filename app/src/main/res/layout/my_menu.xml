@@ -140,7 +140,8 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_below="@+id/zw"
-            android:id="@+id/relative_mj">
+            android:id="@+id/relative_mj"
+            android:visibility="gone">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"

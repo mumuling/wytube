@@ -60,24 +60,40 @@ public class CommunityActivity extends FragmentActivity {
     /*资讯管理*/
     @KListener(R.id.rela_zxgl)
     private void rela_zxglOnClick() {
-
+        if (!AppValue.online) {
+            Utils.showLoginDialog(this);
+            return;
+        }
+        startActivity(new Intent(this, NewsActivity.class));
     }
 
     /*社区管理*/
     @KListener(R.id.relati_sqgl)
     private void relati_sqglOnClick() {
-
+        if (!AppValue.online) {
+            Utils.showLoginDialog(this);
+            return;
+        }
+        startActivity(new Intent(this, ActiveActivity.class));
     }
 
     /*生活服务*/
     @KListener(R.id.relati_shfw)
     private void relati_shfwOnClick() {
-
+        if (!AppValue.online) {
+            Utils.showLoginDialog(this);
+            return;
+        }
+        startActivity(new Intent(this, LifeServiceActivity.class));
     }
 
     /*交易信息*/
     @KListener(R.id.relat_jyxx)
     private void relat_jyxxOnClick() {
-
+        if (!AppValue.online) {
+            Utils.showLoginDialog(this);
+            return;
+        }
+        startActivity(new Intent(this, TradeActivity.class));
     }
 }

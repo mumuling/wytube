@@ -3,7 +3,10 @@ package com.wytube.utlis;
 import android.annotation.SuppressLint;
 
 import com.cqxb.yecall.bean.SipAccountBean;
+import com.wytube.beans.BaseJylb;
+import com.wytube.beans.BeseHd;
 import com.wytube.beans.CarsBean;
+import com.wytube.beans.NewsNrBean;
 import com.wytube.beans.PropMsgBean;
 import com.wytube.beans.RepairBean;
 
@@ -129,6 +132,8 @@ public class AppValue {
     public static int onec = -1;
     /*我的车辆进入添加车牌*/
     public static int chel = -1;
+    /*是否会话过期*/
+    public static int HhGq = -1;
 //    /*默认显示的首页界面*/
 //    public static int doorPages = -1;
     /*临时图片路径*/
@@ -141,8 +146,8 @@ public class AppValue {
 //    public static List<String> dynamicTypeList;
 //    /*交易买卖类型*/
 //    public static List<String> tradeTypes;
-//    /*交易买卖详情*/
-//    public static TradeBean.DataBean.TradingsBean tradingsBean;
+    /*交易买卖详情*/
+    public static BaseJylb.DataBean tradingsBean;
 //    /*交易记录详情*/
 //    public static BaseJYJL.DataBean.TradingsBean tradingsJLBean;
 //    /*用户积分*/
@@ -163,10 +168,10 @@ public class AppValue {
     public static String skey;
     /*停车场名称*/
     public static String parkName;
-//    /*新闻资讯对象*/
-//    public static NewsBean.DataBean.InfosBean infoBean;
-//    /*活动记录*/
-//    public static BeseHd.DataBean listBeseHd;
+    /*新闻资讯对象*/
+    public static NewsNrBean.DataBean infoBean;
+    /*活动记录*/
+    public static BeseHd.DataBean listBeseHd;
 //    /*星级*/
 //    public static String skexj;
 //    /*车牌信息*/
@@ -177,7 +182,14 @@ public class AppValue {
 
 //    /*购物车保存到本地*/
 //    public static final String PERSON = "ONE_PERSON";
-
-
-
+    /*朋友圈id*/
+    public static String TrackId="";
+    /*生活服务id*/
+    public static String LifeId="";
+    /*交易信息id*/
+    public static String JYxxId="";
+    /*资讯管理详情进入发布*/
+    public static int NewSxg=-1;
+    /*社区活动详情进入发布*/
+    public static int ActivSxg=-1;
 }

@@ -88,11 +88,12 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/linear_sc_qx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -101,7 +102,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linear_delete"
+                android:id="@+id/linear_qx"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -116,6 +117,7 @@
                     android:src="@drawable/pyq_wx" />
 
                 <TextView
+                    android:id="@+id/text_qx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/imageView23"

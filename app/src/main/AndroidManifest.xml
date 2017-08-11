@@ -665,5 +665,34 @@
         <activity android:name="com.wytube.activity.RepairWCActivity"/>
         /*朋友圈列表*/
         <activity android:name="com.wytube.activity.FrendCricleActivity"/>
+        /*新闻资讯*/
+        <activity android:name="com.wytube.activity.NewsActivity"/>
+        /*新闻资讯内容*/
+        <activity android:name="com.wytube.activity.NewsNRActivity"/>
+        /*资讯详情*/
+        <activity android:name="com.wytube.activity.NewsInfoActivity"/>
+        /*发布资讯*/
+        <activity android:name="com.wytube.activity.NewFBzxActivity"/>
+        /*社区活动管理*/
+        <activity android:name="com.wytube.activity.ActiveActivity"/>
+        /*社区详情*/
+        <activity android:name="com.wytube.activity.CmunityxqActivity"/>
+        /*发布社区内容*/
+        <activity android:name="com.wytube.activity.ActiveFbActivity"/>
+        /*生活服务管理*/
+        <activity android:name="com.wytube.activity.LifeServiceActivity"/>
+        /*生活服务管理详情*/
+        <activity android:name="com.wytube.activity.LifexqActivity"/>
+        /*发布生活资讯*/
+        <activity android:name="com.wytube.activity.LifeFbActivity"/>
+        /*选择时间*/
+        <activity android:name="com.wytube.dialog.DateSelectActivity"/>
+        /*交易买卖*/
+        <activity android:name="com.wytube.activity.TradeActivity"/>
+        /*交易买卖详情*/
+        <activity android:name="com.wytube.activity.TradingInfoActivity"/>
+        /*发布交易买卖*/
+        <activity android:name="com.wytube.activity.PYTradeActivity"/>
+
     </application>
 </manifest>

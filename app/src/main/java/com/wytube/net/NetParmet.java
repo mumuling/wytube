@@ -57,6 +57,42 @@ public class NetParmet {
     public static final String ADD_JZXQ_ADDZPRYQD = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairWork/addRun";
     /*获取朋友圈列表*/
     public static final String GET_DYNAMIC = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/track";
+    /*获取朋友圈列表屏蔽*/
+    public static final String GET_DYNAPB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/track/shielding";
+    /*获取所有咨询分类*/
+    public static final String GET_ALL_INFOS = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/infotype";
+    /*获取咨询列表*/
+    public static final String GET_ALL_INFO_TYPES = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/information";
+    /*删除咨询列表*/
+    public static final String GET_ALL_DELETE = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/information/delete";
+    /*发布资讯信息*/
+    public static final String TRADING_CREATE = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/information/add";
+    /*修改资讯信息*/
+    public static final String TRADING_CREATEXG = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/information/edit";
+    /*生活服务  获取商铺类型*/
+    public static final String USR_SHFW = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/shoptype";
+    /*生活服务  获取商品信息*/
+    public static final String USR_SHFWXQ = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/shop";
+    /*生活服务  删除*/
+    public static final String USR_SHFWXQ_DL = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/shop/delete";
+    /*生活服务  删除*/
+    public static final String USR_SHFWXQ_FB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/shop/add";
+    /*获取活动列表*/
+    public static final String USR_SQHD = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/activity";
+    /*发布社区活动*/
+    public static final String USR_ADD_FB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/activity/add";
+    /*修改社区活动*/
+    public static final String USR_ADD_XGHD = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/activity/edit";
+    /*删除社区活动*/
+    public static final String USR_ADD_DELE = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/activity/delete";
+    /*交易买卖*/
+    public static final String USR_JY_LB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/trading";
+    /*发布交易买卖*/
+    public static final String USR_JY_FB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/trading/create";
+    /*交易买卖删除*/
+    public static final String USR_JY_DELET = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/trading/delete";
+    /*访客通行列表*/
+    public static final String USR_FK_LB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/passInfo";
 
 
 
@@ -127,12 +163,8 @@ public class NetParmet {
 
     /*获取所有咨询信息*/
     public static final String GET_ALL_INFO = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/info";
-    /*获取所有咨询分类*/
-    public static final String GET_ALL_INFO_TYPES = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/info/types";
     /*首页推荐商品*/
     public static final String FIR_PAGE_RECD = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/shop/queryCommodityList";
-    /*发布新的交易信息*/
-    public static final String TRADING_CREATE = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/trading/create";
     /*修改交易信息*/
     public static final String TRADING_UPJY = HTTP + APP_SERVER + DIR_NAME + SOFT_VERSION + "/trading/update";
     /*删除交易信息*/
@@ -155,8 +187,6 @@ public class NetParmet {
     public static final String USR_OPEN = HTTP + APP_SERVER + DOOR_DIR + SOFT_VERSION + "/open";
     /*扫码开门*/
     public static final String USR_CODE = HTTP + APP_SERVER + DOOR_DIR + SOFT_VERSION + "/code";
-    /*获取活动列表*/
-    public static final String USR_SQHD = HTTP + APP_SERVER  + SOFT_VERSION + "/activity/queryActivityList";
     /*获取我参与的活动*/
     public static final String USR_WCY = HTTP + APP_SERVER  + SOFT_VERSION + "/activity/queryMyActivityList";
     /*查看活动详情*/
@@ -169,10 +199,6 @@ public class NetParmet {
     public static final String USR_DZ = HTTP + APP_SERVER  + SOFT_VERSION + "/activity/addHeart";
     /*点赞*/
     public static final String USR_QX = HTTP + APP_SERVER  + SOFT_VERSION + "/activity/removeHeart";
-    /*生活服务  获取商铺类型*/
-    public static final String USR_SHFW = HTTP + APP_SERVER  + SOFT_VERSION + "/shop/shopTypes";
-    /*生活服务  获取商品信息*/
-    public static final String USR_SHFWXQ = HTTP + APP_SERVER  + SOFT_VERSION + "/shop";
     /*评论投诉建议*/
     public static final String USR_PLTSJY = HTTP + APP_SERVER  + SOFT_VERSION + "/suitWork/comment";
     /*获取评论时星级列表*/
