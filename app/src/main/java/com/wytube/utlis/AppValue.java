@@ -3,7 +3,10 @@ package com.wytube.utlis;
 import android.annotation.SuppressLint;
 
 import com.cqxb.yecall.bean.SipAccountBean;
+import com.wytube.beans.BaseJylb;
+import com.wytube.beans.BeseHd;
 import com.wytube.beans.CarsBean;
+import com.wytube.beans.NewsNrBean;
 import com.wytube.beans.OwnerBean;
 import com.wytube.beans.PropMsgBean;
 import com.wytube.beans.RepairBean;
@@ -185,7 +188,17 @@ public class AppValue {
     public static String LYid="";
     /*单元id*/
     public static String DYid="";
+    public static List<OwnerBean.DataBean> ownerBeans;
 
-
+    /*朋友圈id*/
+    public static String TrackId="";
+    /*生活服务id*/
+    public static String LifeId="";
+    /*交易信息id*/
+    public static String JYxxId="";
+    /*资讯管理详情进入发布*/
+    public static int NewSxg=-1;
+    /*社区活动详情进入发布*/
+    public static int ActivSxg=-1;
 
 }

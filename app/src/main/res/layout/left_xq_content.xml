@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+
+    <LinearLayout
+        android:id="@+id/Linearz"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_v"
+                android:layout_width="match_parent"
+                android:layout_height="350px"
+                android:layout_margin="10dp"
+                android:scaleType="fitXY" />
+            <CheckBox
+                android:id="@+id/checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:button="@drawable/checkbox_style"
+                android:layout_alignTop="@+id/img_v"
+                android:layout_alignRight="@+id/img_v"
+                android:layout_alignEnd="@+id/img_v"
+                android:visibility="gone"/>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="17dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginRight="17dp">
+            <WebView
+                android:id="@+id/content_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="22dp"
+                android:text="电话: "
+                android:textColor="#C9C8C8"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/text_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/phone"
+                android:layout_alignBottom="@+id/phone"
+                android:layout_toEndOf="@+id/phone"
+                android:layout_toRightOf="@+id/phone"
+                android:text="18696633478"
+                android:textColor="@color/main_def_text_color"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginTop="10dp"
+                android:text="地址: "
+                android:textColor="#C9C8C8"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/text_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="重庆国际小区"
+                android:textColor="@color/main_def_text_color"
+                android:textSize="14sp"
+                android:layout_alignTop="@+id/textView1"
+                android:layout_toRightOf="@+id/textView1"
+                android:layout_toEndOf="@+id/textView1" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

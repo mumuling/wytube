@@ -131,13 +131,19 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
             switch (msg.what) {
                 case 0:
                     //compalete完成后获取得到的组织架构和配置自己的im以及sip
-                    if (AppValue.onec==1){
+                    if (AppValue.onec==1 ){
                         Intent intent = new Intent(LoginAppActivity.this, OrderActivity.class);
                         startActivity(intent);
                         finish();
+                    }else if (AppValue.HhGq==1){
+                        Intent intent = new Intent(LoginAppActivity.this, OrderActivity.class);
+                        startActivity(intent);
+                        finish();
+                        AppValue.HhGq=-1;
                     }else {
                         finish();
                     }
+
                     //formlogin_layout1.setVisibility(View.GONE);
                     break;
                 case 1:
@@ -255,16 +261,12 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
 //            dataBean = bean.getData();
             if (bean.getCode()==200) {
                 SettingInfo.setParams(PreferenceBean.LOGINFLAG, "true");
-//                //sip 登录信息
-//                SettingInfo.setParams(PreferenceBean.USERLINPHONEIP, dataBean.getIpaddr());
-//                SettingInfo.setParams(PreferenceBean.USERLINPHONEPORT, dataBean.getPort());
-//                SettingInfo.setLinphoneAccount(dataBean.getSipaccount());
-//                SettingInfo.setLinphonePassword(dataBean.getSippassword());
+                //sip 登录信息
                 SettingInfo.setParams(PreferenceBean.USERLINPHONEIP, "pro1.123667.com");
                 SettingInfo.setParams(PreferenceBean.USERLINPHONEPORT, "5070");
-                SettingInfo.setParams(PreferenceBean.USERNAME,"18680808185");
-                SettingInfo.setLinphoneAccount("18680808185");
-                SettingInfo.setLinphonePassword("123456");
+                SettingInfo.setParams(PreferenceBean.USERNAME,bean.getData().getSip());
+                SettingInfo.setLinphoneAccount(bean.getData().getSip());
+                SettingInfo.setLinphonePassword(bean.getData().getSipPass());
                 getCallLogs();
                 handler.sendEmptyMessage(0);
             }else {

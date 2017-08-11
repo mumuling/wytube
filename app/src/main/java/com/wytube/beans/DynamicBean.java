@@ -278,6 +278,8 @@ public class DynamicBean {
             private boolean alreadyGood;
             private List<TrackReplysBean> trackReplys;
             private List<TrackPicsBean> trackPics;
+            public boolean isCheck;
+
 
             public String getCreateDate() {
                 return createDate;
@@ -405,6 +407,14 @@ public class DynamicBean {
 
             public void setOwnerId(Object ownerId) {
                 this.ownerId = ownerId;
+            }
+
+            public boolean isisCheck() {
+                return isCheck;
+            }
+
+            public void setisCheck(boolean isCheck) {
+                this.isCheck = isCheck;
             }
 
             public boolean isAlreadyGood() {

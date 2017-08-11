@@ -58,6 +58,8 @@ public class RepairInfoActivity extends BaseActivity {
     private TextView mcontent_text;
     @KBind(R.id.text_an)
     private TextView mtext_an;
+    @KBind(R.id.text_pj_content)
+    private TextView mtext_pj_content;
     @KBind(R.id.text_district)
     private TextView mtext_district;
     @KBind(R.id.text_money)
@@ -141,7 +143,6 @@ public class RepairInfoActivity extends BaseActivity {
         mTextWxName.setText(bean.getRegUserName()+"("+bean.getMobileNo()+")");
         mtext_district.setText(bean.getCellName()+bean.getBuildingName()+bean.getUnitName()+bean.getNumberName());
         mtext_money.setText(bean.getCost()+"元");
-
 //        mRepairTypeText.setText(bean.getTypeName());
 //        mRepairMoney.setText(bean.getCost() + "元");
 //        mStateText.setText(bean.getStateName());
@@ -244,10 +245,11 @@ public class RepairInfoActivity extends BaseActivity {
             if (beans.getRepairWork().getRepairmanName()!=null && !beans.getRepairWork().getRepairmanName().equals("")){
                 mTextBxName.setText(beans.getRepairWork().getRepairmanName()+"("+beans.getRepairWork().getRepairmanPhone()+")");
             }else if(beans.getRepairWork().getCost()!=null && !beans.getRepairWork().getCost().equals("")){
-                mtext_money.setText(beans.getRepairWork().getCost()+"元");
+                mtext_pj_content.setText(beans.getRepairWork().getCost()+"元");
+            }else if(beans.getRepairWork().getUserRecontent()!=null && !beans.getRepairWork().getUserRecontent().equals("")){
+                mtext_pj_content.setText(beans.getRepairWork().getUserRecontent().toString());
             }
             return false;
         }));
     }
-
 }

@@ -7,12 +7,13 @@ package com.wytube.beans;
  */
 
 public class BaseLogin {
+
     /**
      * success : true
      * message : 登录成功
      * code : 200
-     * data : {"cellInfoDTO":{"createDate":null,"modifyDate":null,"createUser":null,"status":null,"sorted":null,"remark":"123","cellId":"1147424848043600","cellName":"长航小区","accessId":"10000001","shopId":null,"advType":null,"cityId":null,"cellAddress":"重庆","longitude":"116.304233","latitude":"40.000991","areaLand":"21.00","areaConstruction":"516.00","committeeId":"1147424838893100","logo":null,"term":null,"ip":null,"port":null,"appPrivateKey":"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB","appPublicKey":"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAOJtlnppeIy1gULmr0RdDNjIyPAdjIG4+QWi1EBbx9Q39y8JVfhTtkSQPQuJZg4vxJ6NfxgXKwxS335hvMVpxd58Xy1Kxt+UUSHBaEF0v6Ext3yaajuV2JGUzMIzOOTv1cJ/Ua+I8mN3ReshSUtlvz554deMc6I3k3anvhkO/ZolAgMBAAECgYEAiwnGFEb9qlGuHRmwWCdXQysQEDnk1Kdz6p0Q/rAdJdhz5aMy8jjdPH7hrVrimyWD8+RpPa7EVV3yNRXpJ8QKpqr0lg4uuC2HjxPNqvf30Fs9oBBMm/CdqCS36JsR7TsQWbzxMcquowZKzqv5iKIefMFUkLD4/owQeRNzH+fWUMUCQQD8Byr7i7u/xKXmVdgcJB/P0p1Cnf/u/5esNs6pgXt8PWCntfpER4/T1QRDH5rEitYY3o6dz8PF5P7dc9awNUSTAkEA5f8ibE9pS3ATlaBq4ArFER4faJzozM7u42aiLSYkYUiXzcFCxwCa5ud9jPV3Oh/jBUrzp6Fb90hV4nmD+AHRZwJABgO1xuMCzATJYMHTsng6Oh9wmVJj9TQsTnPQYsMwSzq7v8TcAB0lFY0T2PY8H0yg518IUEPRDDv2yRommXXr+QJBAN6zVr+NfSVAlpYRSKs7gmn6wurm1DxMOuAR5wLUpfFU+ziN430RxuvCRr2QiSvM6GOdmaQ9B/G/JvouM2yXRg0CQDcOE5FOhYqOEKUjPuvG2LdnNzzWyy2YZPd26uGuj0DUHj9suSeOWgtmlG4vm7KhIpyynXIMqDxW8/eGCPVHy2s=","appId":"2015052600090779","appName":"asdf","userName":null,"userPhone":null,"account":null,"roleId":null,"userType":null},"userDTO":{"createDate":"2017-02-15 12:03:15","modifyDate":"2017-03-16 11:41:02","createUser":null,"status":1,"sorted":null,"remark":"测试","userId":"02175E93F53E4127AEA2EB3F78306005","account":"qiubin","passWord":"e10adc3949ba59abbe56e057f20f883e","userPhone":"18523570974","userName":"邱冰海","userEmail":null,"userType":1,"lastLogin":"2017-07-31 16:09:27","loginCount":228,"shopId":"","cellId":null,"roleId":null,"roleName":null},"token":"4937864BE43C42628F5D25E6D1282EED"}
-     * date : 2017-07-31 16:22:16
+     * data : {"sipPass":"123456","code":"code","cellInfoDTO":{"createDate":null,"modifyDate":null,"createUser":null,"status":null,"sorted":null,"remark":"","cellId":"cell_test","cellName":"重庆国际小区","accessId":null,"shopId":null,"advType":null,"cityId":null,"cellAddress":"","longitude":"","latitude":"","areaLand":"","areaConstruction":"","committeeId":null,"logo":"http://123667.oss-cn-qingdao.aliyuncs.com/0608/D1B8F0EC5F304F3B9842061817F04FD1_default.jpg","term":"2025-05-23 11:55:19","ip":"","port":"","appPrivateKey":"65156165165","appPublicKey":"1561651651","appId":"15156","appName":"dwqd","userName":null,"userPhone":null,"account":null,"roleId":null,"userType":null,"code":"code","sip":"18680808185","sipPass":"123456","concat":"10086"},"concat":"10086","sip":"18680808185","userDTO":{"createDate":"2017-02-15 10:40:37","modifyDate":"2017-04-28 09:45:01","createUser":null,"status":1,"sorted":null,"remark":"测试数据","userId":"EDB06FE47EB34FD688F117DD6D312EE9","account":"kevinblandy","passWord":"e10adc3949ba59abbe56e057f20f883e","userPhone":"18523570974","userName":"余文朋","userEmail":null,"userType":1,"lastLogin":"2017-08-09 01:47:16","loginCount":1356,"shopId":"1e5e8f2a192f4daab954229219832b91","cellId":null,"roleId":null,"roleName":null},"token":"25CAC7DDF9114A9EB6D9E844078ABB50"}
+     * date : 2017-08-09 08:51:55
      */
 
     private boolean success;
@@ -63,14 +64,38 @@ public class BaseLogin {
 
     public static class DataBean {
         /**
-         * cellInfoDTO : {"createDate":null,"modifyDate":null,"createUser":null,"status":null,"sorted":null,"remark":"123","cellId":"1147424848043600","cellName":"长航小区","accessId":"10000001","shopId":null,"advType":null,"cityId":null,"cellAddress":"重庆","longitude":"116.304233","latitude":"40.000991","areaLand":"21.00","areaConstruction":"516.00","committeeId":"1147424838893100","logo":null,"term":null,"ip":null,"port":null,"appPrivateKey":"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB","appPublicKey":"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAOJtlnppeIy1gULmr0RdDNjIyPAdjIG4+QWi1EBbx9Q39y8JVfhTtkSQPQuJZg4vxJ6NfxgXKwxS335hvMVpxd58Xy1Kxt+UUSHBaEF0v6Ext3yaajuV2JGUzMIzOOTv1cJ/Ua+I8mN3ReshSUtlvz554deMc6I3k3anvhkO/ZolAgMBAAECgYEAiwnGFEb9qlGuHRmwWCdXQysQEDnk1Kdz6p0Q/rAdJdhz5aMy8jjdPH7hrVrimyWD8+RpPa7EVV3yNRXpJ8QKpqr0lg4uuC2HjxPNqvf30Fs9oBBMm/CdqCS36JsR7TsQWbzxMcquowZKzqv5iKIefMFUkLD4/owQeRNzH+fWUMUCQQD8Byr7i7u/xKXmVdgcJB/P0p1Cnf/u/5esNs6pgXt8PWCntfpER4/T1QRDH5rEitYY3o6dz8PF5P7dc9awNUSTAkEA5f8ibE9pS3ATlaBq4ArFER4faJzozM7u42aiLSYkYUiXzcFCxwCa5ud9jPV3Oh/jBUrzp6Fb90hV4nmD+AHRZwJABgO1xuMCzATJYMHTsng6Oh9wmVJj9TQsTnPQYsMwSzq7v8TcAB0lFY0T2PY8H0yg518IUEPRDDv2yRommXXr+QJBAN6zVr+NfSVAlpYRSKs7gmn6wurm1DxMOuAR5wLUpfFU+ziN430RxuvCRr2QiSvM6GOdmaQ9B/G/JvouM2yXRg0CQDcOE5FOhYqOEKUjPuvG2LdnNzzWyy2YZPd26uGuj0DUHj9suSeOWgtmlG4vm7KhIpyynXIMqDxW8/eGCPVHy2s=","appId":"2015052600090779","appName":"asdf","userName":null,"userPhone":null,"account":null,"roleId":null,"userType":null}
-         * userDTO : {"createDate":"2017-02-15 12:03:15","modifyDate":"2017-03-16 11:41:02","createUser":null,"status":1,"sorted":null,"remark":"测试","userId":"02175E93F53E4127AEA2EB3F78306005","account":"qiubin","passWord":"e10adc3949ba59abbe56e057f20f883e","userPhone":"18523570974","userName":"邱冰海","userEmail":null,"userType":1,"lastLogin":"2017-07-31 16:09:27","loginCount":228,"shopId":"","cellId":null,"roleId":null,"roleName":null}
-         * token : 4937864BE43C42628F5D25E6D1282EED
+         * sipPass : 123456
+         * code : code
+         * cellInfoDTO : {"createDate":null,"modifyDate":null,"createUser":null,"status":null,"sorted":null,"remark":"","cellId":"cell_test","cellName":"重庆国际小区","accessId":null,"shopId":null,"advType":null,"cityId":null,"cellAddress":"","longitude":"","latitude":"","areaLand":"","areaConstruction":"","committeeId":null,"logo":"http://123667.oss-cn-qingdao.aliyuncs.com/0608/D1B8F0EC5F304F3B9842061817F04FD1_default.jpg","term":"2025-05-23 11:55:19","ip":"","port":"","appPrivateKey":"65156165165","appPublicKey":"1561651651","appId":"15156","appName":"dwqd","userName":null,"userPhone":null,"account":null,"roleId":null,"userType":null,"code":"code","sip":"18680808185","sipPass":"123456","concat":"10086"}
+         * concat : 10086
+         * sip : 18680808185
+         * userDTO : {"createDate":"2017-02-15 10:40:37","modifyDate":"2017-04-28 09:45:01","createUser":null,"status":1,"sorted":null,"remark":"测试数据","userId":"EDB06FE47EB34FD688F117DD6D312EE9","account":"kevinblandy","passWord":"e10adc3949ba59abbe56e057f20f883e","userPhone":"18523570974","userName":"余文朋","userEmail":null,"userType":1,"lastLogin":"2017-08-09 01:47:16","loginCount":1356,"shopId":"1e5e8f2a192f4daab954229219832b91","cellId":null,"roleId":null,"roleName":null}
+         * token : 25CAC7DDF9114A9EB6D9E844078ABB50
          */
 
+        private String sipPass;
+        private String code;
         private CellInfoDTOBean cellInfoDTO;
+        private String concat;
+        private String sip;
         private UserDTOBean userDTO;
         private String token;
+
+        public String getSipPass() {
+            return sipPass;
+        }
+
+        public void setSipPass(String sipPass) {
+            this.sipPass = sipPass;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public void setCode(String code) {
+            this.code = code;
+        }
 
         public CellInfoDTOBean getCellInfoDTO() {
             return cellInfoDTO;
@@ -78,6 +103,22 @@ public class BaseLogin {
 
         public void setCellInfoDTO(CellInfoDTOBean cellInfoDTO) {
             this.cellInfoDTO = cellInfoDTO;
+        }
+
+        public String getConcat() {
+            return concat;
+        }
+
+        public void setConcat(String concat) {
+            this.concat = concat;
+        }
+
+        public String getSip() {
+            return sip;
+        }
+
+        public void setSip(String sip) {
+            this.sip = sip;
         }
 
         public UserDTOBean getUserDTO() {
@@ -103,32 +144,36 @@ public class BaseLogin {
              * createUser : null
              * status : null
              * sorted : null
-             * remark : 123
-             * cellId : 1147424848043600
-             * cellName : 长航小区
-             * accessId : 10000001
+             * remark :
+             * cellId : cell_test
+             * cellName : 重庆国际小区
+             * accessId : null
              * shopId : null
              * advType : null
              * cityId : null
-             * cellAddress : 重庆
-             * longitude : 116.304233
-             * latitude : 40.000991
-             * areaLand : 21.00
-             * areaConstruction : 516.00
-             * committeeId : 1147424838893100
-             * logo : null
-             * term : null
-             * ip : null
-             * port : null
-             * appPrivateKey : MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB
-             * appPublicKey : MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAOJtlnppeIy1gULmr0RdDNjIyPAdjIG4+QWi1EBbx9Q39y8JVfhTtkSQPQuJZg4vxJ6NfxgXKwxS335hvMVpxd58Xy1Kxt+UUSHBaEF0v6Ext3yaajuV2JGUzMIzOOTv1cJ/Ua+I8mN3ReshSUtlvz554deMc6I3k3anvhkO/ZolAgMBAAECgYEAiwnGFEb9qlGuHRmwWCdXQysQEDnk1Kdz6p0Q/rAdJdhz5aMy8jjdPH7hrVrimyWD8+RpPa7EVV3yNRXpJ8QKpqr0lg4uuC2HjxPNqvf30Fs9oBBMm/CdqCS36JsR7TsQWbzxMcquowZKzqv5iKIefMFUkLD4/owQeRNzH+fWUMUCQQD8Byr7i7u/xKXmVdgcJB/P0p1Cnf/u/5esNs6pgXt8PWCntfpER4/T1QRDH5rEitYY3o6dz8PF5P7dc9awNUSTAkEA5f8ibE9pS3ATlaBq4ArFER4faJzozM7u42aiLSYkYUiXzcFCxwCa5ud9jPV3Oh/jBUrzp6Fb90hV4nmD+AHRZwJABgO1xuMCzATJYMHTsng6Oh9wmVJj9TQsTnPQYsMwSzq7v8TcAB0lFY0T2PY8H0yg518IUEPRDDv2yRommXXr+QJBAN6zVr+NfSVAlpYRSKs7gmn6wurm1DxMOuAR5wLUpfFU+ziN430RxuvCRr2QiSvM6GOdmaQ9B/G/JvouM2yXRg0CQDcOE5FOhYqOEKUjPuvG2LdnNzzWyy2YZPd26uGuj0DUHj9suSeOWgtmlG4vm7KhIpyynXIMqDxW8/eGCPVHy2s=
-             * appId : 2015052600090779
-             * appName : asdf
+             * cellAddress :
+             * longitude :
+             * latitude :
+             * areaLand :
+             * areaConstruction :
+             * committeeId : null
+             * logo : http://123667.oss-cn-qingdao.aliyuncs.com/0608/D1B8F0EC5F304F3B9842061817F04FD1_default.jpg
+             * term : 2025-05-23 11:55:19
+             * ip :
+             * port :
+             * appPrivateKey : 65156165165
+             * appPublicKey : 1561651651
+             * appId : 15156
+             * appName : dwqd
              * userName : null
              * userPhone : null
              * account : null
              * roleId : null
              * userType : null
+             * code : code
+             * sip : 18680808185
+             * sipPass : 123456
+             * concat : 10086
              */
 
             private Object createDate;
@@ -139,7 +184,7 @@ public class BaseLogin {
             private String remark;
             private String cellId;
             private String cellName;
-            private String accessId;
+            private Object accessId;
             private Object shopId;
             private Object advType;
             private Object cityId;
@@ -148,11 +193,11 @@ public class BaseLogin {
             private String latitude;
             private String areaLand;
             private String areaConstruction;
-            private String committeeId;
-            private Object logo;
-            private Object term;
-            private Object ip;
-            private Object port;
+            private Object committeeId;
+            private String logo;
+            private String term;
+            private String ip;
+            private String port;
             private String appPrivateKey;
             private String appPublicKey;
             private String appId;
@@ -162,6 +207,10 @@ public class BaseLogin {
             private Object account;
             private Object roleId;
             private Object userType;
+            private String code;
+            private String sip;
+            private String sipPass;
+            private String concat;
 
             public Object getCreateDate() {
                 return createDate;
@@ -227,11 +276,11 @@ public class BaseLogin {
                 this.cellName = cellName;
             }
 
-            public String getAccessId() {
+            public Object getAccessId() {
                 return accessId;
             }
 
-            public void setAccessId(String accessId) {
+            public void setAccessId(Object accessId) {
                 this.accessId = accessId;
             }
 
@@ -299,43 +348,43 @@ public class BaseLogin {
                 this.areaConstruction = areaConstruction;
             }
 
-            public String getCommitteeId() {
+            public Object getCommitteeId() {
                 return committeeId;
             }
 
-            public void setCommitteeId(String committeeId) {
+            public void setCommitteeId(Object committeeId) {
                 this.committeeId = committeeId;
             }
 
-            public Object getLogo() {
+            public String getLogo() {
                 return logo;
             }
 
-            public void setLogo(Object logo) {
+            public void setLogo(String logo) {
                 this.logo = logo;
             }
 
-            public Object getTerm() {
+            public String getTerm() {
                 return term;
             }
 
-            public void setTerm(Object term) {
+            public void setTerm(String term) {
                 this.term = term;
             }
 
-            public Object getIp() {
+            public String getIp() {
                 return ip;
             }
 
-            public void setIp(Object ip) {
+            public void setIp(String ip) {
                 this.ip = ip;
             }
 
-            public Object getPort() {
+            public String getPort() {
                 return port;
             }
 
-            public void setPort(Object port) {
+            public void setPort(String port) {
                 this.port = port;
             }
 
@@ -410,26 +459,58 @@ public class BaseLogin {
             public void setUserType(Object userType) {
                 this.userType = userType;
             }
+
+            public String getCode() {
+                return code;
+            }
+
+            public void setCode(String code) {
+                this.code = code;
+            }
+
+            public String getSip() {
+                return sip;
+            }
+
+            public void setSip(String sip) {
+                this.sip = sip;
+            }
+
+            public String getSipPass() {
+                return sipPass;
+            }
+
+            public void setSipPass(String sipPass) {
+                this.sipPass = sipPass;
+            }
+
+            public String getConcat() {
+                return concat;
+            }
+
+            public void setConcat(String concat) {
+                this.concat = concat;
+            }
         }
 
         public static class UserDTOBean {
             /**
-             * createDate : 2017-02-15 12:03:15
-             * modifyDate : 2017-03-16 11:41:02
+             * createDate : 2017-02-15 10:40:37
+             * modifyDate : 2017-04-28 09:45:01
              * createUser : null
              * status : 1
              * sorted : null
-             * remark : 测试
-             * userId : 02175E93F53E4127AEA2EB3F78306005
-             * account : qiubin
+             * remark : 测试数据
+             * userId : EDB06FE47EB34FD688F117DD6D312EE9
+             * account : kevinblandy
              * passWord : e10adc3949ba59abbe56e057f20f883e
              * userPhone : 18523570974
-             * userName : 邱冰海
+             * userName : 余文朋
              * userEmail : null
              * userType : 1
-             * lastLogin : 2017-07-31 16:09:27
-             * loginCount : 228
-             * shopId :
+             * lastLogin : 2017-08-09 01:47:16
+             * loginCount : 1356
+             * shopId : 1e5e8f2a192f4daab954229219832b91
              * cellId : null
              * roleId : null
              * roleName : null

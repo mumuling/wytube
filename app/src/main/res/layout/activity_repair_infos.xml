@@ -59,7 +59,6 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="8dp"
                     app:cardElevation="0dp"
                     app:cardMaxElevation="0dp">
 
@@ -449,11 +448,12 @@
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/je">
                                         <TextView
+                                            android:id="@+id/text_pj_content"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="10dp"
                                             android:textColor="@color/main_def_text_color"
-                                            android:text="庆祝中国人民解放军建军90周年大会在北京人民大会堂隆重举行。中共中央总书记、国家主席、中央军委主席习近平在大会上发表重要讲话!!"
+                                            android:text="无评价!"
                                             android:textSize="16sp" />
                                     </RelativeLayout>
                                 </RelativeLayout>

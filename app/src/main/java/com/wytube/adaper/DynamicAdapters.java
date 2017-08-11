@@ -19,8 +19,9 @@ import com.wytube.beans.DynamicBean;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 
 /**
@@ -35,10 +36,14 @@ public class DynamicAdapters extends BaseAdapter{
     private int mPosition;
     int mCurrentPos;
     private List<DynamicBean.DataBean.TracksBean> list;
+    public boolean flage = false;/*选择还是取消*/
+    public boolean flages = true;/*全选还是不全选*/
+    public Map<Integer, String> selected;
 
     public DynamicAdapters(Context mContext, List<DynamicBean.DataBean.TracksBean> list) {
         this.mContext = mContext;
         this.list = list;
+        selected = new HashMap<>();
     }
 
 
@@ -86,11 +91,37 @@ public class DynamicAdapters extends BaseAdapter{
         mholder.userName.setText(list.get(position).getOwnerName());
         mholder.userTime.setText(list.get(position).getCreateDate());
         mholder.userContext.setText(list.get(position).getContent());
-
         mholder.imageList.removeAllViews();
         for (DynamicBean.DataBean.TracksBean.TrackPicsBean trackPicsBean : list.get(position).getTrackPics()) {
             createAndAddImage(mholder.imageList, trackPicsBean.getUrl());
         }
+
+        // 根据isSelected来设置checkbox的显示状况
+        if (flage) {
+            mholder.checkbox.setVisibility(View.VISIBLE);
+        } else {
+            mholder.checkbox.setVisibility(View.GONE);
+        }
+
+        if (selected.containsKey(position))
+            mholder.checkbox.setChecked(true);
+        else
+            mholder.checkbox.setChecked(false);
+        mholder.checkbox.setChecked(list.get(position).isCheck);
+        /*注意这里设置的不是onCheckedChangListener*/
+        mholder.checkbox.setOnClickListener(v -> {
+            if (list.get(position).isCheck) {
+                list.get(position).isCheck = false;
+            } else {
+                if (AppValue.TrackId != null && !AppValue.TrackId.equals(""))
+                {
+                    AppValue.TrackId += ",";
+                }
+                AppValue.TrackId += list.get(position).getTrackId();
+//                Toast.makeText(mContext, AppValue.TrackId+"", Toast.LENGTH_SHORT).show();
+                list.get(position).isCheck = true;
+            }
+        });
         return convertView;
     }
 
