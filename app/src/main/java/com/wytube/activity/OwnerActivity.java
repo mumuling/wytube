@@ -3,7 +3,6 @@ package com.wytube.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -21,7 +20,7 @@ import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
 /**
- * Created by LIN on 2017/8/2.
+ * 业主管理
  */
 @KActivity(R.layout.activity_owner)
 public class OwnerActivity extends BaseActivity {
@@ -37,12 +36,8 @@ public class OwnerActivity extends BaseActivity {
         loadData();
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
-        findViewById(R.id.tv_edit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(OwnerActivity.this,AddOwnerActivity.class));
-            }
-        });
+        findViewById(R.id.tv_edit).setOnClickListener(view -> startActivity(
+                new Intent(OwnerActivity.this,AddOwnerActivity.class)));
     }
     @Override
     protected void onResume() {

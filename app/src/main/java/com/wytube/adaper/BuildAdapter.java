@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.cqxb.yecall.R;
 import com.wytube.beans.BuildBean;
-import com.wytube.utlis.AppValue;
 
 import java.util.List;
 
@@ -58,9 +57,6 @@ public class BuildAdapter extends BaseAdapter {
         }
         BuildBean.DataBean bean = list.get(position);
         mholder.tv_text_name.setText(bean.getBuildingName());
-        mholder.rl_foot_.setOnClickListener(view -> {
-            AppValue.LYid = list.get(position).getBuildingId();
-        });
         return convertView;
     }
     public class viewHolder {

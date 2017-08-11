@@ -181,10 +181,6 @@ public class AppValue {
 //    public static boolean ISok=true;
     //    /*购物车保存到本地*/
 //    public static final String PERSON = "ONE_PERSON";
-    /*楼宇id*/
-    public static String LYid="";
-    /*单元id*/
-    public static String DYid="";
     public static List<OwnerBean.DataBean> ownerBeans;
 
     /*朋友圈id*/

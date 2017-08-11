@@ -3,7 +3,8 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:orientation="vertical"
+    android:background="@color/white">
 
     <RelativeLayout
         android:id="@+id/yzgl"
@@ -11,8 +12,7 @@
         android:layout_height="48dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/white">
+        android:layout_alignParentTop="true">
 
         <ImageView
             android:id="@+id/back_but"
@@ -33,7 +33,7 @@
             android:paddingLeft="10dp"
             android:text="添加业主"
             android:textColor="@color/main_def_text_color"
-            android:textSize="20sp"/>
+            android:textSize="16sp"/>
     </RelativeLayout>
     android:background="#e0e0e0"/>
 

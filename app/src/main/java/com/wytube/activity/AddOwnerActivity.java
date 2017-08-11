@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cqxb.yecall.BaseActivity;
 import com.cqxb.yecall.R;
@@ -24,7 +24,9 @@ import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.BuildAdapter;
+import com.wytube.adaper.JYDialogAdapters;
 import com.wytube.adaper.UnitAdapter;
+import com.wytube.beans.BaseOK;
 import com.wytube.beans.BuildBean;
 import com.wytube.beans.RoomBean;
 import com.wytube.beans.UnitBean;
@@ -34,7 +36,10 @@ import com.wytube.net.NetParmet;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,7 +48,7 @@ import java.util.regex.Pattern;
  * Created by LIN on 2017/8/6.
  */
 @KActivity(R.layout.add_owner)
-public class AddOwnerActivity extends BaseActivity implements View.OnClickListener {
+public class AddOwnerActivity extends BaseActivity {
 
     private static String TAG = AddOwnerActivity.class.getSimpleName();
     @KBind(R.id.tv_yezhuxm)
@@ -68,60 +73,77 @@ public class AddOwnerActivity extends BaseActivity implements View.OnClickListen
     private TextView tv_blcokcontact;
     @KBind(R.id.ownercontact)
     private TextView ownercontact;
+    @KBind(R.id.lv_blocolist)
+    private ListView lv_blocolist;
+    @KBind(R.id.lv_unitlist)
+    private ListView lv_unitlist;
+    @KBind(R.id.lv_roomlist)
+    private ListView lv_roomlist;
+
     private LayoutInflater inflater;
     private Dialog dialog1;
     private Dialog dialog2;
     private Dialog dialog3;
-    @KBind(R.id.lv_blocolist)
-    private ListView lv_blocolist;
     private List<BuildBean.DataBean> list;
     private BuildBean bean;
-    @KBind(R.id.lv_unitlist)
-    private ListView lv_unitlist;
     private List<UnitBean.DataBean> mlist;
     private UnitBean unitbean;
-    @KBind(R.id.lv_roomlist)
-    private ListView lv_roomlist;
     private RoomBean roombean;
+    private String buildingId,unitId;
+    int tradeType;
 
-
-    private TextView tv_ownerye, tv_qinshu, tv_zuke, tv_other;
+    String[] dialogtitle = {"业主","亲属","租客","其他"};
+    int [] types = {0,1,2,3};
+    public List<Map<String, Object>> getData(){
+        List<Map<String, Object>> list= new ArrayList<>();
+        for (int i = 0; i < dialogtitle.length; i++) {
+            Map<String, Object> map= new HashMap<>();
+            map.put("title", dialogtitle[i]);
+            map.put("type", types[i]);
+            list.add(map);
+        }
+        return list;
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
-        findViewById(R.id.back_but).setOnClickListener(v -> {
-            finish();
-        });
-        findViewById(R.id.title_text).setOnClickListener(v -> {
-            finish();
-        });
+        findViewById(R.id.back_but).setOnClickListener(v -> finish());
+        findViewById(R.id.title_text).setOnClickListener(v -> finish());
         //选择楼宇
         selectblockLine.setOnClickListener(view -> dialogBuild());
         //选择单元
         selectunitLine.setOnClickListener(view -> dialogUnit());
         //选择类型
         selectownertypeLine.setOnClickListener(view -> {
-            loadroom();
-            dialogType();
+            if (!tv_yzroom.getText().toString().equals("")){
+                loadroom();
+                dialogType();
+            }else {
+                Toast.makeText(this, "请先输入房间号!", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
     //选择类型
+    List<Map<String, Object>> zflist;
     private void dialogType() {
         dialog3 = blocoList();
-        View view = inflater.inflate(R.layout.ownertypedialog, null);
-        tv_ownerye = (TextView) view.findViewById(R.id.tv_ownerye);
-        tv_qinshu = (TextView) view.findViewById(R.id.tv_qinshu);
-        tv_zuke = (TextView) view.findViewById(R.id.tv_zuke);
-        tv_other = (TextView) view.findViewById(R.id.tv_other);
-        tv_ownerye.setOnClickListener(this);
-        tv_qinshu.setOnClickListener(this);
-        tv_zuke.setOnClickListener(this);
-        tv_other.setOnClickListener(this);
+        View view = inflater.inflate(R.layout.activity_news_dilogtxts, null);
+        ListView canshu_list = (ListView) view.findViewById(R.id.canshu_list);
+        RelativeLayout rela_djxs = (RelativeLayout) view.findViewById(R.id.rela_djxs);
         dialog3.getWindow().setContentView(view);
+        rela_djxs.setOnClickListener(v -> dialog3.dismiss());
+        zflist=getData();
+        JYDialogAdapters adapter = new JYDialogAdapters(this, zflist);
+        canshu_list.setAdapter(adapter);
+        canshu_list.setOnItemClickListener((parent, view1, position, id) -> {
+            ownercontact.setText(zflist.get(position).get("title").toString());
+            tradeType = (int) zflist.get(position).get("type");
+            dialog3.dismiss();
+        });
     }
 
     private void loadroom() {
@@ -141,8 +163,6 @@ public class AddOwnerActivity extends BaseActivity implements View.OnClickListen
     }
 
 
-    //单元
-    String unitId;
     private void dialogUnit() {
         dialog2 = blocoList();
         View view = inflater.inflate(R.layout.ownerunitdialog, null);
@@ -169,9 +189,6 @@ public class AddOwnerActivity extends BaseActivity implements View.OnClickListen
             return false;
         }));
     }
-
-    /* 楼宇*/
-    String buildingId;
 
     //dialog对话框
     public void dialogBuild() {
@@ -231,42 +248,55 @@ public class AddOwnerActivity extends BaseActivity implements View.OnClickListen
      */
     @KListener(R.id.cv_agreebtn)
     private void cv_agreebtnOnClick() {
-        Utils.showLoad(this);
         String roomNum = tv_yzroom.getText().toString();
-        String type = ownercontact.getText().toString();
         String name = tv_yzxm.getText().toString();
         String phone = tv_yzphone.getText().toString();
-        String keyValue = "buildingId=" + AppValue.LYid+ "&unitId=" +AppValue.LYid + "&roomId=" +
-                roombean.getData().getRoomId()+ "&roomNum=" + roomNum + "&ownerType=" + type + "&name=" + name + "&phone=" + phone;
+        if (tv_blcokcontact.getText().equals("选择楼宇")){
+            Utils.showOkDialog(this, "请选择楼宇!");
+            return;
+        }
+        if (tv_xzdy.getText().equals("选择单元")){
+            Utils.showOkDialog(this, "请选择单元!");
+            return;
+        }
+        if (ownercontact.getText().equals("选择住户类型")){
+            Utils.showOkDialog(this, "请选择住户类型!");
+            return;
+        }
+        if (name.length() <= 0) {
+            Utils.showOkDialog(this, "请输入业主姓名!");
+            return;
+        }
+        if (phone.length() <= 0) {
+            Utils.showOkDialog(this, "请输入业主电话!");
+            return;
+        }
+        if (roomNum.length() <= 0) {
+            Utils.showOkDialog(this, "请输入房间号!");
+            return;
+        }
+        Utils.showLoad(this);
+        String keyValue = "buildingId=" + buildingId+ "&unitId=" + unitId + "&roomId=" +
+                roombean.getData().getRoomId()+ "&roomNum=" + roomNum + "&ownerType=" + tradeType + "&name=" + name + "&phone=" + phone;
         Client.sendPost(NetParmet.OWNER_CREATE, keyValue, new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
-            Log.v(TAG, keyValue);
-            Log.i("-----添加-----", json);
+            BaseOK bean = Json.toObject(json, BaseOK.class);
+            if (bean == null) {
+                Utils.showNetErrorDialog(this);
+                return false;
+            }
+            if (!bean.isSuccess()) {
+                Utils.showOkDialog(this, bean.getMessage());
+                return false;
+            }else {
+                AppValue.fish=1;
+                Toast.makeText(this, "添加业主成功!", Toast.LENGTH_SHORT).show();
+                this.finish();
+            }
             return false;
-
         }));
     }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tv_ownerye:
-                ownercontact.setText(tv_ownerye.getText().toString());
-            case R.id.tv_qinshu:
-                ownercontact.setText(tv_qinshu.getText().toString());
-                break;
-            case R.id.tv_zuke:
-                ownercontact.setText(tv_zuke.getText().toString());
-                break;
-            case R.id.tv_other:
-                ownercontact.setText(tv_other.getText().toString());
-                break;
-        }
-        dialog3.dismiss();
-
-    }
-
 
     /**
      * 验证是否是手机号码

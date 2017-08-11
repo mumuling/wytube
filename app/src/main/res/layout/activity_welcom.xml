@@ -8,6 +8,9 @@
     tools:context="com.cqxb.yecall.WelcomActivity">
 
     <view android:layout_width="wrap_content" android:layout_height="wrap_content"
-          class="android.support.v4.view.ViewPager" android:layout_centerVertical="true"
-          android:layout_centerHorizontal="true" android:id="@+id/welcom_view"/>
+          class="android.support.v4.view.ViewPager"
+        android:id="@+id/welcom_view"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
