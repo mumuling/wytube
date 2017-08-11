@@ -26,11 +26,12 @@ import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.BuildAdapter;
 import com.wytube.adaper.UnitAdapter;
 import com.wytube.beans.BuildBean;
+import com.wytube.beans.RoomBean;
 import com.wytube.beans.UnitBean;
-import com.wytube.beans.UserTypeBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
 import java.util.List;
@@ -55,12 +56,14 @@ public class AddOwnerActivity extends BaseActivity implements View.OnClickListen
     private EditText tv_yzphone;
     @KBind(R.id.tv_unit)
     private TextView tv_xzdy;
-    @KBind(R.id.tv_yzroom)
-    private EditText tv_yzroom;
     @KBind(R.id.selectownertypeLine)
     private RelativeLayout selectownertypeLine;
+    /*@KBind(R.id.selectowneroomLine)
+    private RelativeLayout selectowneroomLine;*/
     @KBind(R.id.cv_agreebtn)
     private CardView cv_agreebtn;
+    @KBind(R.id.tv_yzroom)
+    private EditText tv_yzroom;
     @KBind(R.id.tv_blcokcontact)
     private TextView tv_blcokcontact;
     @KBind(R.id.ownercontact)
@@ -77,10 +80,10 @@ public class AddOwnerActivity extends BaseActivity implements View.OnClickListen
     private ListView lv_unitlist;
     private List<UnitBean.DataBean> mlist;
     private UnitBean unitbean;
-    @KBind(R.id.lv_typelist)
-    private ListView lv_typelist;
-    private List<UserTypeBean.DataBean> lists;
-    private UserTypeBean typebean;
+    @KBind(R.id.lv_roomlist)
+    private ListView lv_roomlist;
+    private RoomBean roombean;
+
 
     private TextView tv_ownerye, tv_qinshu, tv_zuke, tv_other;
 
@@ -95,43 +98,21 @@ public class AddOwnerActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.title_text).setOnClickListener(v -> {
             finish();
         });
-
-
         //选择楼宇
-        selectblockLine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogBuild();
-            }
-        });
+        selectblockLine.setOnClickListener(view -> dialogBuild());
         //选择单元
-        selectunitLine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogUnit();
-            }
-
-        });
+        selectunitLine.setOnClickListener(view -> dialogUnit());
         //选择类型
-        selectownertypeLine.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialogType();
-            }
+        selectownertypeLine.setOnClickListener(view -> {
+            loadroom();
+            dialogType();
         });
     }
 
     //选择类型
-    String unitTypeId;
-
     private void dialogType() {
         dialog3 = blocoList();
         View view = inflater.inflate(R.layout.ownertypedialog, null);
-        lv_typelist = (ListView) view.findViewById(R.id.lv_typelist);
-        RelativeLayout rlrelatype = (RelativeLayout) view.findViewById(R.id.rlrelatype);
-
-
-        // 在这里获取对应的控件，并注册监听事件
         tv_ownerye = (TextView) view.findViewById(R.id.tv_ownerye);
         tv_qinshu = (TextView) view.findViewById(R.id.tv_qinshu);
         tv_zuke = (TextView) view.findViewById(R.id.tv_zuke);
@@ -141,31 +122,24 @@ public class AddOwnerActivity extends BaseActivity implements View.OnClickListen
         tv_zuke.setOnClickListener(this);
         tv_other.setOnClickListener(this);
         dialog3.getWindow().setContentView(view);
-       /* rlrelatype.setOnClickListener(v -> dialog3.dismiss());
-        loadtype(buildingId);
-        lv_typelist.setOnItemClickListener((parent, view1, position, id) -> {
-            ownercontact.setText(typebean.getData().get(position).getUnitTypeName());
-            unitTypeId = typebean.getData().get(position).getUnitTypeId();
-            dialog3.dismiss();
-        });*/
     }
 
-    /*private void loadtype(String buildingId) {
-        Log.i(TAG, buildingId);
-        if (TextUtils.isEmpty(buildingId)) {
-            return;
-        }
-        Client.sendPost(NetParmet.OWNER_YTPE, "unitId=" + unitId, new Handler(msg -> {
+    private void loadroom() {
+        Client.sendPost(NetParmet.OWNER_ROOM, "unitId=" + unitId +"&roomNum="+tv_yzroom.getText(), new Handler(msg -> {
             String json = msg.getData().getString("post");
-            typebean = Json.toObject(json, UserTypeBean.class);
-            lists = typebean.getData();
-            TypeAdapter adapter = new TypeAdapter(this, lists);
-            lv_typelist.setAdapter(adapter);
-
+            roombean = Json.toObject(json, RoomBean.class);
+            if (roombean == null) {
+                Utils.showNetErrorDialog(this);
+                return false;
+            }
+            if (!roombean.isSuccess()) {
+                Utils.showOkDialog(this, roombean.getMessage());
+                return false;
+            }
             return false;
         }));
     }
-*/
+
 
     //单元
     String unitId;
@@ -188,6 +162,7 @@ public class AddOwnerActivity extends BaseActivity implements View.OnClickListen
         Client.sendPost(NetParmet.OWNER_UTIN, "buildingId=" + buildingId, new Handler(msg -> {
             String json = msg.getData().getString("post");
             unitbean = Json.toObject(json, UnitBean.class);
+
             mlist = unitbean.getData();
             UnitAdapter adapter = new UnitAdapter(this, mlist);
             lv_unitlist.setAdapter(adapter);
@@ -257,20 +232,17 @@ public class AddOwnerActivity extends BaseActivity implements View.OnClickListen
     @KListener(R.id.cv_agreebtn)
     private void cv_agreebtnOnClick() {
         Utils.showLoad(this);
-        String build = tv_blcokcontact.getText().toString();
-        String unit = tv_xzdy.getText().toString();
-        String roomNumb = tv_yzroom.getText().toString();
+        String roomNum = tv_yzroom.getText().toString();
         String type = ownercontact.getText().toString();
         String name = tv_yzxm.getText().toString();
         String phone = tv_yzphone.getText().toString();
-        String keyValue = "buildingId=" + build + "&unitId=" + unit + "&roomId=" +
-                "" + "&roomNum=" + roomNumb + "&ownerType=" + type + "&name=" + name + "&phone=" + phone;
+        String keyValue = "buildingId=" + AppValue.LYid+ "&unitId=" +AppValue.LYid + "&roomId=" +
+                roombean.getData().getRoomId()+ "&roomNum=" + roomNum + "&ownerType=" + type + "&name=" + name + "&phone=" + phone;
         Client.sendPost(NetParmet.OWNER_CREATE, keyValue, new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             Log.v(TAG, keyValue);
             Log.i("-----添加-----", json);
-            Log.i("----------", keyValue);
             return false;
 
         }));

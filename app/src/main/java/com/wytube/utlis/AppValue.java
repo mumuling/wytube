@@ -103,6 +103,7 @@ public class AppValue {
 //    public static List<ComRecordBean.DataBean> recordBeans;
     /*报修列表的Item*/
     public static RepairBean.DataBean repairInfoBean;
+
     public static List<OwnerBean.DataBean> ownerBeans;
     public static OwnerBean.DataBean ownerInBean;
 //    /*投诉列表的Item*/
@@ -180,6 +181,10 @@ public class AppValue {
 
 //    /*购物车保存到本地*/
 //    public static final String PERSON = "ONE_PERSON";
+    /*楼宇id*/
+    public static String LYid="";
+    /*单元id*/
+    public static String DYid="";
 
 
 

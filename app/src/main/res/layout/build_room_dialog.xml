@@ -5,13 +5,13 @@
     android:background="@color/white">
 
     <RelativeLayout
-        android:id="@+id/rl_foot_"
+        android:id="@+id/rl_foot_room"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp">
         <TextView
-            android:id="@+id/tv_type_name"
+            android:id="@+id/tv_room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="张三"

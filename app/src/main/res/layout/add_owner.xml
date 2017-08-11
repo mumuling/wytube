@@ -258,9 +258,32 @@
             android:layout_marginStart="11dp"
             android:layout_toEndOf="@+id/tv_room"
             android:layout_toRightOf="@+id/tv_room"
-            android:hint="请输入房间号"/>
+            android:hint="请输入房间号"
+            android:layout_alignTop="@+id/tv_room"/>
 
+        <!--<TextView-->
+            <!--android:id="@+id/tv_room"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginLeft="14dp"-->
+            <!--android:layout_marginStart="14dp"-->
+            <!--android:text="选择房间号"-->
+            <!--android:textSize="16sp"/>-->
 
+        <!--<ImageView-->
+            <!--android:layout_width="18dp"-->
+            <!--android:layout_height="18dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginEnd="30dp"-->
+            <!--android:layout_marginRight="30dp"-->
+            <!--android:src="@drawable/arrow"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"/>-->
     </RelativeLayout>
 
     <View
