@@ -21,7 +21,7 @@ import java.util.List;
 public class AppValue {
     /*可视云登录modle*/
     public static SipAccountBean bean;
-//    /*录音文件储存位置*/
+    //    /*录音文件储存位置*/
 //    @SuppressLint("SdCardPath")
 //    public final static String audioPath = "/sdcard/tedi/WH/file/recordAudio/";
 //    /*截图文件保存位置*/
@@ -54,7 +54,7 @@ public class AppValue {
     public static String notifyUrl = "";
     /*用户名称*/
     public static String TextName = "";
-//    /*通话参数记录*/
+    //    /*通话参数记录*/
 //    public static String callOut = "";
 //    public static String callOutNum = "";
 //    public static String callIn = "";
@@ -66,7 +66,7 @@ public class AppValue {
 //    public static String pictures = "";
     /*用户在线状态*/
     public static boolean online = false;
-//    /*联系人列表信息*/
+    //    /*联系人列表信息*/
 //    public static List<UserBean> contacts;
 //    /*通话记录对象*/
 //    public static UserBean callLogBean;
@@ -78,7 +78,7 @@ public class AppValue {
 //    public static List<Integer> saveIndax = new ArrayList<>();
     /*选择列表*/
     public static List<String> items = new ArrayList<>();
-//    /*远程开门设备列表*/
+    //    /*远程开门设备列表*/
 //    public static List<DoorBean.DataBean> netDoors = new ArrayList<>();
 //    /*密码门径涉笔列表*/
 //    public static List<DoorBean.DataBean> passDoors = new ArrayList<>();
@@ -98,18 +98,15 @@ public class AppValue {
 
     /*报修记录列表*/
     public static List<RepairBean.DataBean> repairBeans;
-////    /*是否退出并重新登录*/
+    ////    /*是否退出并重新登录*/
 ////    public static boolean isRelogin = false;
     /*选择对话框的按钮显示的文本*/
     public static String selectBut = "";
-//    /*投诉记录列表*/
+    //    /*投诉记录列表*/
 //    public static List<ComRecordBean.DataBean> recordBeans;
     /*报修列表的Item*/
     public static RepairBean.DataBean repairInfoBean;
-
-    public static List<OwnerBean.DataBean> ownerBeans;
-    public static OwnerBean.DataBean ownerInBean;
-//    /*投诉列表的Item*/
+    //    /*投诉列表的Item*/
 //    public static ComRecordBean.DataBean comRecordinfoBean;
 //    /*便民服务的Urls*/
 //    public static List<ServiceUrlBean.DataBean.LifeTypesBean> serviceBeans;
@@ -136,11 +133,13 @@ public class AppValue {
     public static int onec = -1;
     /*我的车辆进入添加车牌*/
     public static int chel = -1;
-//    /*默认显示的首页界面*/
+    /*是否会话过期*/
+    public static int HhGq = -1;
+    //    /*默认显示的首页界面*/
 //    public static int doorPages = -1;
     /*临时图片路径*/
     public static String tempImage = "";
-//    /*维修类型数据列表*/
+    //    /*维修类型数据列表*/
 //    public static List<RepairTypeBean.DataBean> typeBeens;
 //    /*借用物品对象*/
 //    public static BorrowBean.DataBean borrwInfoBean;
@@ -148,9 +147,9 @@ public class AppValue {
 //    public static List<String> dynamicTypeList;
 //    /*交易买卖类型*/
 //    public static List<String> tradeTypes;
-//    /*交易买卖详情*/
-//    public static TradeBean.DataBean.TradingsBean tradingsBean;
-//    /*交易记录详情*/
+    /*交易买卖详情*/
+    public static BaseJylb.DataBean tradingsBean;
+    //    /*交易记录详情*/
 //    public static BaseJYJL.DataBean.TradingsBean tradingsJLBean;
 //    /*用户积分*/
 //    public static String usrJf;
@@ -170,19 +169,17 @@ public class AppValue {
     public static String skey;
     /*停车场名称*/
     public static String parkName;
-//    /*新闻资讯对象*/
-//    public static NewsBean.DataBean.InfosBean infoBean;
-//    /*活动记录*/
-//    public static BeseHd.DataBean listBeseHd;
-//    /*星级*/
+    /*新闻资讯对象*/
+    public static NewsNrBean.DataBean infoBean;
+    /*活动记录*/
+    public static BeseHd.DataBean listBeseHd;
+    //    /*星级*/
 //    public static String skexj;
 //    /*车牌信息*/
 //    public static CarsBean.DataBean Carsx;
-
 //    /*点赞*/
 //    public static boolean ISok=true;
-
-//    /*购物车保存到本地*/
+    //    /*购物车保存到本地*/
 //    public static final String PERSON = "ONE_PERSON";
     /*楼宇id*/
     public static String LYid="";
