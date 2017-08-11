@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import com.cqxb.yecall.bean.SipAccountBean;
 import com.wytube.beans.BaseJylb;
+import com.wytube.beans.BaseWPjy;
 import com.wytube.beans.BeseHd;
 import com.wytube.beans.CarsBean;
 import com.wytube.beans.NewsNrBean;
@@ -30,6 +31,10 @@ public class AppValue {
     /*用户头像保存路径*/
     @SuppressLint("SdCardPath")
     public final static String userHeadPath = "/sdcard/tedi/WH/file/user/head/photo.png";
+    /*物品借用保存路径*/
+    @SuppressLint("SdCardPath")
+    public final static String userJIEPath = "/sdcard/tedi/WH/file/user/head/jieyong.png";
+
     /*用户选择的图片经过压缩后存放的路劲*/
     @SuppressLint("SdCardPath")
     public final static String userTempPath = "/sdcard/tedi/WH/file/user/temp/";
@@ -149,6 +154,8 @@ public class AppValue {
 //    public static List<String> tradeTypes;
     /*交易买卖详情*/
     public static BaseJylb.DataBean tradingsBean;
+    /*交易买卖详情*/
+    public static BaseWPjy.DataBean WPjyBean;
     //    /*交易记录详情*/
 //    public static BaseJYJL.DataBean.TradingsBean tradingsJLBean;
 //    /*用户积分*/
@@ -189,6 +196,8 @@ public class AppValue {
     public static String LifeId="";
     /*交易信息id*/
     public static String JYxxId="";
+    /*物品借用信息id*/
+    public static String WPJYxxId="";
     /*资讯管理详情进入发布*/
     public static int NewSxg=-1;
     /*社区活动详情进入发布*/

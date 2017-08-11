@@ -114,6 +114,7 @@ public class IndexActivity extends FragmentActivity {
             Utils.showLoginDialog(this);
             return;
         }
+        startActivity(new Intent(this, BorroActivity.class));
     }
 
     /*投诉报修管理*/

@@ -93,7 +93,8 @@ public class NetParmet {
     public static final String USR_JY_DELET = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/trading/delete";
     /*访客通行列表*/
     public static final String USR_FK_LB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/passInfo";
-
+    /*物品借用*/
+    public static final String USR_WPJY_LB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/borrow";
 
 
     /*业主管理接口*/

@@ -701,6 +701,10 @@
         <activity android:name="com.wytube.activity.TradingInfoActivity"/>
         /*发布交易买卖*/
         <activity android:name="com.wytube.activity.PYTradeActivity"/>
+        /*物品借用*/
+        <activity android:name="com.wytube.activity.BorroActivity"/>
+        /*物品借用详情*/
+        <activity android:name="com.wytube.activity.TraWPxqInfoActivity"/>
 
     </application>
 </manifest>
