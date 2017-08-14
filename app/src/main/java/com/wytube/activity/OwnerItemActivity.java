@@ -18,11 +18,13 @@ import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.OwnerAdapter;
+import com.wytube.beans.BaseWyOK;
 import com.wytube.beans.OwnerBean;
 import com.wytube.beans.OwnerDel;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
 /**
@@ -102,7 +104,7 @@ public class OwnerItemActivity extends BaseActivity{
      * ownerPhone	是	String	电话
      * ownerId	    是	String	业主ID
      */
-/*
+
     @KListener(R.id.tv_edit)
     private void tv_editOnClick() {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
@@ -115,7 +117,7 @@ public class OwnerItemActivity extends BaseActivity{
 
     private void initup() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.OWNER_UPDATE, "pushId="+intent.getStringExtra("pushId")+"&title="+medit_title.getText() + "&content="+mcontent_text.getText(), new Handler(msg -> {
+        Client.sendPost(NetParmet.OWNER_UPDATE,"", new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             BaseWyOK bean = Json.toObject(json, BaseWyOK.class);
@@ -123,15 +125,14 @@ public class OwnerItemActivity extends BaseActivity{
                 Utils.showNetErrorDialog(this);
                 return false;
             }
-            if (bean.isSuccess()){*//*true成功*//*
+            if (bean.isSuccess()){//*true成功*//*
                 Toast.makeText(this, "修改成功", Toast.LENGTH_SHORT).show();
                 AppValue.fish=1;
                 this.finish();
             }
             return false;
         }));
-    }*/
-
+    }
 
     /**
      * 删除业主
@@ -165,9 +166,9 @@ public class OwnerItemActivity extends BaseActivity{
             }
             if (bean.isSuccess()){
                 Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
-                return false;
-            }else {
-
+                AppValue.fish=1;
+                this.finish();
+                adapter.notifyDataSetChanged();
             }
 
 

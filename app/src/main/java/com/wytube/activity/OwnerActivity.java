@@ -45,14 +45,6 @@ public class OwnerActivity extends BaseActivity {
                 OwnerBean.DataBean bean =(OwnerBean.DataBean )yzgl_list.getItemAtPosition(i);
                 Intent intent = new Intent(OwnerActivity.this,OwnerItemActivity.class);
                 intent.putExtra("databean",bean);
-               /* intent.putExtra("ownerId",bean.getOwnerId());
-                intent.putExtra("ownerPhone",bean.getOwnerPhone());
-                intent.putExtra("ownerName",bean.getOwnerName());
-                intent.putExtra("roomNum",bean.getRoomNum());
-                intent.putExtra("roomId",bean.getRoomId());
-                intent.putExtra("unitId",bean.getUnitId());
-                intent.putExtra("buildingId",bean.getBuildingId());
-                context.startActivity(intent);*/
                startActivity(intent);
             }
         });

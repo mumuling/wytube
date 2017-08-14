@@ -1,12 +1,13 @@
 package com.wytube.beans;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by LIN on 2017/8/12.
  */
 
-public class HappyBean {
+public class HappyBean implements Serializable{
 
     /**
      * success : true
@@ -63,7 +64,7 @@ public class HappyBean {
         this.date = date;
     }
 
-    public static class DataBean  {
+    public static class DataBean  implements Serializable {
         /**
          * createDate : null
          * modifyDate : null

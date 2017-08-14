@@ -1,5 +1,7 @@
 package com.wytube.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -38,12 +40,13 @@ public class HappyActivity extends BaseActivity{
     private HappyAdapter apapter;
     List<HappyBean.DataBean> passData = new ArrayList<>();
     List<HappyBean.DataBean> unPassData = new ArrayList<>();
-
+    private Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         BindClass.bind(this);
         loadData();
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
@@ -53,7 +56,7 @@ public class HappyActivity extends BaseActivity{
 
     private void loadData() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.HAPPY, "rows=15", new Handler(msg -> {
+        Client.sendPost(NetParmet.HAPPY, "", new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             HappyBean bean = Json.toObject(json, HappyBean.class);
@@ -74,6 +77,14 @@ public class HappyActivity extends BaseActivity{
                 }
             }
             apapter=new HappyAdapter(this,unPassData);
+            apapter.setOnIteOnItemClickListener(new HappyAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(HappyBean.DataBean bean) {
+                    Intent intent = new Intent(HappyActivity.this, ApplyDetailActivity.class);
+                    intent.putExtra("data", bean);
+                    context.startActivity(intent);//传递参数判断是审阅还是通过
+                }
+            });
             happy_list.setAdapter(apapter);
             apapter.notifyDataSetChanged();
             return false;

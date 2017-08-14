@@ -206,6 +206,6 @@ public class AppValue {
     public static int NewSxg=-1;
     /*社区活动详情进入发布*/
     public static int ActivSxg=-1;
-    public static String ownerId="";
-
+     /*喜事列表*/
+     public static String XSID="";
 }

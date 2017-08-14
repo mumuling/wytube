@@ -25,7 +25,7 @@ public class HappyAdapter extends BaseAdapter {
     Context context;
     viewHolder mholder;
     private List<HappyBean.DataBean> list;
-
+    private OnItemClickListener onItemClickListener;
     public HappyAdapter(Context mContext, List<HappyBean.DataBean> list) {
         this.context = mContext;
         this.list = list;
@@ -70,7 +70,11 @@ public class HappyAdapter extends BaseAdapter {
             mholder = (viewHolder) convertView.getTag();
         }
         HappyBean.DataBean bean = list.get(position);
-
+        convertView.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(bean);
+            }
+        });
         switch (bean.getStateId()) {
             case 0:
                 //待受理
@@ -115,5 +119,13 @@ public class HappyAdapter extends BaseAdapter {
 
     public void setBeans(List<HappyBean.DataBean> beans) {
         this.list = beans;
+    }
+    public void setOnIteOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+
+        void onItemClick(HappyBean.DataBean bean);
     }
 }
