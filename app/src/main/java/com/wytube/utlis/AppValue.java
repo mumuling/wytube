@@ -7,6 +7,7 @@ import com.wytube.beans.BaseJylb;
 import com.wytube.beans.BaseWPjy;
 import com.wytube.beans.BeseHd;
 import com.wytube.beans.CarsBean;
+import com.wytube.beans.HappyBean;
 import com.wytube.beans.NewsNrBean;
 import com.wytube.beans.OwnerBean;
 import com.wytube.beans.PropMsgBean;
@@ -111,6 +112,7 @@ public class AppValue {
 //    public static List<ComRecordBean.DataBean> recordBeans;
     /*报修列表的Item*/
     public static RepairBean.DataBean repairInfoBean;
+
     //    /*投诉列表的Item*/
 //    public static ComRecordBean.DataBean comRecordinfoBean;
 //    /*便民服务的Urls*/
@@ -180,6 +182,7 @@ public class AppValue {
     public static NewsNrBean.DataBean infoBean;
     /*活动记录*/
     public static BeseHd.DataBean listBeseHd;
+    public static HappyBean.DataBean happBeans;
     //    /*星级*/
 //    public static String skexj;
 //    /*车牌信息*/
@@ -189,6 +192,7 @@ public class AppValue {
     //    /*购物车保存到本地*/
 //    public static final String PERSON = "ONE_PERSON";
     public static List<OwnerBean.DataBean> ownerBeans;
+    public static List<HappyBean.DataBean> happyBeans;
 
     /*朋友圈id*/
     public static String TrackId="";
@@ -202,5 +206,6 @@ public class AppValue {
     public static int NewSxg=-1;
     /*社区活动详情进入发布*/
     public static int ActivSxg=-1;
+    public static String ownerId="";
 
 }

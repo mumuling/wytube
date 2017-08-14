@@ -34,7 +34,7 @@
             android:paddingLeft="10dp"
             android:text="业主信息"
             android:textColor="@color/main_def_text_color"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_alignBottom="@+id/back_but"/>
 
         <TextView
@@ -112,7 +112,7 @@
                         android:paddingLeft="15dp"
                         android:text="18752584136"
                         android:textColor="@color/main_def_text_color"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -157,7 +157,7 @@
                         android:paddingLeft="15dp"
                         android:text="名江花园5单元1206号"
                         android:textColor="@color/main_def_text_color"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -182,7 +182,7 @@
                         android:paddingLeft="15dp"
                         android:text="18752584136"
                         android:textColor="@color/main_def_text_color"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
 

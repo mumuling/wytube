@@ -133,6 +133,7 @@ public class IndexActivity extends FragmentActivity {
             Utils.showLoginDialog(this);
             return;
         }
+        startActivity(new Intent(this, HappyActivity.class));
     }
 
     /*一键开门*/

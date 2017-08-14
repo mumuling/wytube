@@ -269,10 +269,11 @@ public class NetParmet {
     /*选择房间号*/
     public static final String OWNER_ROOM = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/room/load";
     /*删除业主*/
-    public static final String OWNER_DELETE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/delete";
-    /*删除业主*/
+    public static final String OWNER_DELETE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/owner/delete";
+    /*修改业主*/
     public static final String OWNER_UPDATE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/owner/update";
 
-
-
+    /*-----------------------------------------喜事管理接口-------------------------------------------------*/
+    /*获取喜事列表*/
+    public static final String HAPPY = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/celebration";
 }

@@ -182,7 +182,6 @@ public class AddOwnerActivity extends BaseActivity {
         Client.sendPost(NetParmet.OWNER_UTIN, "buildingId=" + buildingId, new Handler(msg -> {
             String json = msg.getData().getString("post");
             unitbean = Json.toObject(json, UnitBean.class);
-
             mlist = unitbean.getData();
             UnitAdapter adapter = new UnitAdapter(this, mlist);
             lv_unitlist.setAdapter(adapter);

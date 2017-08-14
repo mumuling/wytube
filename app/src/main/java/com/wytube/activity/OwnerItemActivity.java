@@ -47,6 +47,9 @@ public class OwnerItemActivity extends BaseActivity{
     @KBind(R.id.iv_delete)
     private ImageView iv_delete;
     Intent intent;
+    private OwnerBean.DataBean mDatabean;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,20 +66,20 @@ public class OwnerItemActivity extends BaseActivity{
     }
 
     private void Ownershow() {
-        OwnerBean.DataBean databean = (OwnerBean.DataBean) getIntent().getSerializableExtra("databean");
-        owneradress.setText(databean.getBuildingName()+databean.getUnitName()+databean.getRoomNum());
-        ownerName.setText(databean.getOwnerName());
-        ownerPhone.setText(databean.getOwnerPhone());
-        if (databean.getOwnerType()==0) {
+        mDatabean = (OwnerBean.DataBean) getIntent().getSerializableExtra("databean");
+        owneradress.setText(mDatabean.getBuildingName()+ mDatabean.getUnitName()+ mDatabean.getRoomNum());
+        ownerName.setText(mDatabean.getOwnerName());
+        ownerPhone.setText(mDatabean.getOwnerPhone());
+        if (mDatabean.getOwnerType()==0) {
             ownerType.setText("业主");
-        }else if (databean.getOwnerType()==1){
+        }else if (mDatabean.getOwnerType()==1){
             ownerType.setText("租客");
-        }else if ((databean.getOwnerType()==2)){
+        }else if ((mDatabean.getOwnerType()==2)){
             ownerType.setText("亲属");
         }else {
             ownerType.setText("其他");
         }
-        tv_date_time.setText(databean.getCreateDate());
+        tv_date_time.setText(mDatabean.getCreateDate());
         ll_tellowner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,14 +146,15 @@ public class OwnerItemActivity extends BaseActivity{
         builder.setNegativeButton("取消", (dialog, which) -> {});
         builder.create().show();
     }
+
+
     /**
-     * 删除通知
+     * 删除业主
      *
      */
     private void initDelete() {
         Utils.showLoad(this);
-        intent  = getIntent();
-        Client.sendPost(NetParmet.OWNER_DELETE, "ownerId="+getIntent().getStringExtra("ownerId"), new Handler(msg -> {
+        Client.sendPost(NetParmet.OWNER_DELETE, "ids="+mDatabean.getOwnerId(), new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             OwnerDel bean = Json.toObject(json, OwnerDel.class);

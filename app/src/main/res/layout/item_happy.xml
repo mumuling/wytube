@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:id="@+id/repair_item"
-              android:background="#E8E8E8"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/happy_item"
+    android:background="#E8E8E8"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -21,16 +21,6 @@
             android:background="@color/white"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/state_img"
-                android:layout_width="72dp"
-                android:layout_height="57dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_margin="5dp"
-                android:visibility="gone"
-                android:src="@drawable/ywc_whome" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,29 +32,23 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/type_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="服务类型 : "
-                        android:textColor="@color/app_def_text_color" />
 
                     <TextView
-                        android:id="@+id/repair_type"
+                        android:id="@+id/happy_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="灯泡/灯管"
+                        android:text="1栋3单元3215号"
                         android:textColor="@color/app_call_option_text_color"
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/repair_state"
+                        android:id="@+id/happy_state"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="待受理"
-                        android:textColor="@color/app_main_color_green"
-                        android:textSize="18sp" />
+                        android:text="待审阅"
+                        android:textColor="@color/app_color_pass_color"
+                        android:textSize="18sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -75,7 +59,7 @@
                     android:paddingTop="10dp">
 
                     <TextView
-                        android:id="@+id/content_text"
+                        android:id="@+id/happy_text"
                         android:layout_width="wrap_content"
                         android:layout_height="55dp"
                         android:layout_weight="1"
@@ -103,7 +87,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/date_time"
+                        android:id="@+id/happy_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

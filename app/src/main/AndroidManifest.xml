@@ -705,6 +705,7 @@
         <activity android:name="com.wytube.activity.BorroActivity"/>
         /*物品借用详情*/
         <activity android:name="com.wytube.activity.TraWPxqInfoActivity"/>
-
+        /*喜事管理*/
+        <activity android:name="com.wytube.activity.HappyActivity"/>
     </application>
 </manifest>
