@@ -17,12 +17,12 @@ import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
+import com.wytube.adaper.OwnerAdapter;
 import com.wytube.beans.OwnerBean;
 import com.wytube.beans.OwnerDel;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
-import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
 /**
@@ -48,6 +48,7 @@ public class OwnerItemActivity extends BaseActivity{
     private ImageView iv_delete;
     Intent intent;
     private OwnerBean.DataBean mDatabean;
+    private OwnerAdapter adapter;
 
 
 
@@ -164,9 +165,12 @@ public class OwnerItemActivity extends BaseActivity{
             }
             if (bean.isSuccess()){
                 Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
-                AppValue.fish=1;
-                this.finish();
+                return false;
+            }else {
+
             }
+
+
             return false;
         }));
     }

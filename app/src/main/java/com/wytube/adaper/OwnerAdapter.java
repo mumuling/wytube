@@ -19,7 +19,7 @@ import static com.cqxb.yecall.R.id.tv_yztype;
  */
 
 public class OwnerAdapter extends BaseAdapter {
-
+    public boolean flage = true;
     Context context;
     viewHolder holder;
     private List<OwnerBean.DataBean> list;
@@ -70,6 +70,7 @@ public class OwnerAdapter extends BaseAdapter {
         }
 
         holder.tv_yedz.setText(bean.getBuildingName()+bean.getUnitName()+bean.getRoomNum());
+
         return convertView;
     }
     public class viewHolder{
