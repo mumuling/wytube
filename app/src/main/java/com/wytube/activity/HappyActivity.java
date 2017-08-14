@@ -53,7 +53,7 @@ public class HappyActivity extends BaseActivity{
 
     private void loadData() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.HAPPY, "rows=20", new Handler(msg -> {
+        Client.sendPost(NetParmet.HAPPY, "rows=15", new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             HappyBean bean = Json.toObject(json, HappyBean.class);

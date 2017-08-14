@@ -82,6 +82,10 @@ public class HappyAdapter extends BaseAdapter {
                 mholder.happyState.setTextColor(context.getResources().getColor(R.color.colorAccent));
                 mholder.happyState.setText("已通过");
                 break;
+            case 2:
+                //驳回
+                mholder.happyState.setTextColor(context.getResources().getColor(R.color.grey11));
+                mholder.happyState.setText("已驳回");
             default:
                 mholder.happyState.setVisibility(View.VISIBLE);
                 break;
