@@ -192,7 +192,7 @@ public class AppValue {
     //    /*购物车保存到本地*/
 //    public static final String PERSON = "ONE_PERSON";
     public static List<OwnerBean.DataBean> ownerBeans;
-    public static List<HappyBean.DataBean> happyBeans;
+    public static List<HappyBean.DataBean> happybean;
 
     /*朋友圈id*/
     public static String TrackId="";

@@ -52,7 +52,10 @@ public class OwnerActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        loadData();
+        if (AppValue.fish==1){
+            loadData();
+            AppValue.fish=-1;
+        }
     }
 
     /**
@@ -60,7 +63,7 @@ public class OwnerActivity extends BaseActivity {
      */
     private void loadData() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.OWNER,"20",new Handler(msg -> {
+        Client.sendPost(NetParmet.OWNER,"",new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             OwnerBean bean = Json.toObject(json, OwnerBean.class);

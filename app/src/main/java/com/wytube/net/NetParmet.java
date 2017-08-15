@@ -276,4 +276,6 @@ public class NetParmet {
     /*-----------------------------------------喜事管理接口-------------------------------------------------*/
     /*获取喜事列表*/
     public static final String HAPPY = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/celebration";
+    /*删除喜事列表*/
+    public static final String HAPPY_DELETE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/celebration/delete";
 }
