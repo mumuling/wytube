@@ -37,6 +37,8 @@ public class HappyActivity extends BaseActivity{
     private LinearLayout ll_oked;
     @KBind(R.id.happy_list)
     private ListView happy_list;
+    @KBind(R.id.tv_nodata)
+    private TextView tv_nodata;
     private HappyAdapter apapter;
     List<HappyBean.DataBean> passData = new ArrayList<>();
     List<HappyBean.DataBean> unPassData = new ArrayList<>();
@@ -51,12 +53,13 @@ public class HappyActivity extends BaseActivity{
         loadData();
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
+        happy_list.setEmptyView(tv_nodata);
         selectLayout = ll_reviewed;
     }
 
     private void loadData() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.HAPPY, "", new Handler(msg -> {
+        Client.sendPost(NetParmet.HAPPY, "stateId", new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             HappyBean bean = Json.toObject(json, HappyBean.class);

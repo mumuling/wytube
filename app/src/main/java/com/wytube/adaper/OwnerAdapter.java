@@ -19,7 +19,6 @@ import static com.cqxb.yecall.R.id.tv_yztype;
  */
 
 public class OwnerAdapter extends BaseAdapter {
-    public boolean flage = true;
     Context context;
     viewHolder holder;
     private List<OwnerBean.DataBean> list;

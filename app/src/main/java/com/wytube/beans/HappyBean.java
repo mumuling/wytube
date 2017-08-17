@@ -1,5 +1,7 @@
 package com.wytube.beans;
 
+import android.view.LayoutInflater;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,6 +23,34 @@ public class HappyBean implements Serializable{
     public String message;
     public int code;
     public String date;
+
+    public LayoutInflater getInflater() {
+        return inflater;
+    }
+
+    public void setInflater(LayoutInflater inflater) {
+        this.inflater = inflater;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public boolean isShow() {
+        return isShow;
+    }
+
+    public void setShow(boolean show) {
+        isShow = show;
+    }
+
+    private LayoutInflater inflater;
+    private boolean isChecked;
+    private boolean isShow;
 
     public List<DataBean> getData() {
         return data;

@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -32,12 +35,13 @@ import com.wytube.utlis.Utils;
  */
 @KActivity(R.layout.item_owner_info)
 public class OwnerItemActivity extends BaseActivity {
+
     @KBind(R.id.owneradress)
-    private TextView owneradress;
+    private EditText owneradress;
     @KBind(R.id.ownerName)
-    private TextView ownerName;
+    private EditText ownerName;
     @KBind(R.id.ownerPhone)
-    private TextView ownerPhone;
+    private EditText ownerPhone;
     @KBind(R.id.ownerType)
     private TextView ownerType;
     @KBind(R.id.ll_tellowner)
@@ -51,6 +55,7 @@ public class OwnerItemActivity extends BaseActivity {
     Intent intent;
     private OwnerBean.DataBean mDatabean;
     private OwnerAdapter adapter;
+    private TextWatcher watcher;
 
 
     @Override
@@ -63,8 +68,30 @@ public class OwnerItemActivity extends BaseActivity {
         findViewById(R.id.title_text).setOnClickListener(v -> {
             finish();
         });
+
         Ownershow();
 
+        //监听文字变化
+        watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                tv_edit.setVisibility(View.VISIBLE);
+            }
+        };
+        ownerName.addTextChangedListener(watcher);
+        owneradress.addTextChangedListener(watcher);
+        ownerType.addTextChangedListener(watcher);
+        ownerPhone.addTextChangedListener(watcher);
     }
 
     private void Ownershow() {
@@ -92,6 +119,7 @@ public class OwnerItemActivity extends BaseActivity {
         });
     }
 
+
     /**
      * 修改业主
      * buildingId	是	String	楼宇ID
@@ -103,23 +131,20 @@ public class OwnerItemActivity extends BaseActivity {
      * ownerPhone	是	String	电话
      * ownerId	    是	String	业主ID
      */
-
     @KListener(R.id.tv_edit)
     private void tv_editOnClick() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("确定修改?");
-        builder.setTitle("提示");
-        builder.setPositiveButton("确定", (dialog, which) -> {
-            initup();
-        });
-        builder.setNegativeButton("取消", (dialog, which) -> {
-        });
-        builder.create().show();
-    }
-
-    private void initup() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.OWNER_UPDATE, "", new Handler(msg -> {
+        String name = ownerName.getText().toString();
+        String phone = ownerPhone.getText().toString();
+        String keyValue = "buildingId=" + mDatabean.getBuildingId() +
+                "&unitId=" + mDatabean.getUnitId() +
+                "&roomNum=" + mDatabean.getRoomNum() +
+                "&roomId=" + mDatabean.getRoomId() +
+                "&ownerType=" + mDatabean.getOwnerType() +
+                "&ownerName=" + name +
+                "&ownerPhone=" + phone +
+                "&ownerId=" + mDatabean.getOwnerId();
+        Client.sendPost(NetParmet.OWNER_UPDATE, keyValue, new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             BaseWyOK bean = Json.toObject(json, BaseWyOK.class);
@@ -135,6 +160,7 @@ public class OwnerItemActivity extends BaseActivity {
             return false;
         }));
     }
+
 
     /**
      * 删除业主
@@ -154,13 +180,12 @@ public class OwnerItemActivity extends BaseActivity {
         builder.create().show();
     }
 
-
     /**
      * 删除业主
      */
     private void initDelete() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.OWNER_DELETE, "ids=" + mDatabean.getOwnerId(), new Handler(msg -> {
+        Client.sendPost(NetParmet.OWNER_DELETE,"ids=" +mDatabean.getOwnerId() , new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             OwnerDel bean = Json.toObject(json, OwnerDel.class);
@@ -173,9 +198,8 @@ public class OwnerItemActivity extends BaseActivity {
                 AppValue.fish = 1;
                 this.finish();
             }
-
-
             return false;
         }));
     }
+
 }

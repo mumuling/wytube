@@ -278,4 +278,6 @@ public class NetParmet {
     public static final String HAPPY = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/celebration";
     /*删除喜事列表*/
     public static final String HAPPY_DELETE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/celebration/delete";
+    /*通过驳回喜事列表*/
+    public static final String HAPPY_EDIT = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/celebration/edit";
 }

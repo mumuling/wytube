@@ -98,14 +98,14 @@ public class HappyAdapter extends BaseAdapter {
         mholder.happyType.setText(bean.getBuildingName() + bean.getUnitName() + bean.getNumberName());
         mholder.happyconText.setText(bean.getContent());
         mholder.happyTiime.setText(bean.getStarttime());
-        //mholder.happyList.removeAllViews();
+  //      mholder.happyList.removeAllViews();
         return convertView;
     }
 
     public class viewHolder {
-        private TextView happyType, happyState, happyconText, happyTiime;
-        private LinearLayout happyItem;
-        private LinearLayout happyList;
+        TextView happyType, happyState, happyconText, happyTiime;
+        LinearLayout happyItem;
+        LinearLayout happyList;
     }
 
 
@@ -120,6 +120,7 @@ public class HappyAdapter extends BaseAdapter {
     public void setBeans(List<HappyBean.DataBean> beans) {
         this.list = beans;
     }
+
     public void setOnIteOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
@@ -128,4 +129,5 @@ public class HappyAdapter extends BaseAdapter {
 
         void onItemClick(HappyBean.DataBean bean);
     }
+
 }
