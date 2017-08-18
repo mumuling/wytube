@@ -1,31 +1,30 @@
 package com.wytube.activity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cqxb.until.AsyncHttpClientManager;
 import com.cqxb.yecall.BaseActivity;
 import com.cqxb.yecall.R;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
-import com.wytube.beans.BaseTCOK;
-import com.wytube.beans.MonthBean;
-import com.wytube.net.Client;
-import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
 import com.wytube.utlis.AppValue;
-import com.wytube.utlis.MD5;
 import com.wytube.utlis.Utils;
 
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static com.wytube.utlis.AppValue.orderNum;
-import static com.wytube.utlis.AppValue.parkId;
 
 
 @KActivity(R.layout.activity_month_money)
@@ -43,41 +42,54 @@ public class MonthMoneyActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setBackCallBack(this);
-//        setTitleText("月卡续费");
         BindClass.bind(this);
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
     }
 
     /**
-     * 加载数据
+     * 月卡延期
+     * carNum			//车牌号码
+     * months			//延期月数
+     * parkId			//车场ID
      */
-    @SuppressLint("SetTextI18n")
     private void loadData() {
         Utils.showLoad(this);
-        String time = Utils.toDate(System.currentTimeMillis()).replace(" ", "");
-        String keyValue = "trans_date=" + time +
-                "&car_no=" + AppValue.carNum +
-                "&months=" + mMonthNum.getText().toString() +
-                "&jftype=1" +
-                "&skey=" + AppValue.skey +
-                "&dvalidate=" + MD5.getParamMD5(time, AppValue.carNum, mMonthNum.getText().toString(), "1", AppValue.skey);
-        Client.sendPost(NetParmet.MONTH_MONEY_SELECT, keyValue, new Handler(msg -> {
-            Utils.exitLoad();
-            String json = msg.getData().getString("post");
-            MonthBean bean = Json.toObject(json, MonthBean.class);
-            if (bean == null) {
-                Utils.showNetErrorDialog(this);
-                return false;
+        RequestParams params = new RequestParams();
+        params.put("carNum", AppValue.parkphone);
+        params.put("months", mMonthNum.getText().toString());
+        params.put("parkId", AppValue.parkId);
+        AsyncHttpClientManager.post(NetParmet.PAY_YKYQ, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                if (statusCode == 200) {
+                    try {
+                        AppValue.orderNum = response.getString("order");
+                        AppValue.Money = Integer.parseInt(response.getString("fee"))+"";
+                        mMoneyText.setText(AppValue.Money);
+//                        mMoneyText.setText("0.01");
+                        mTempStop.setVisibility(View.VISIBLE);
+                    } catch (JSONException e){
+                        try {
+                            Utils.showOkDialog(MonthMoneyActivity.this, response.getString("message"));
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }e.printStackTrace();
+                    }
+                }
             }
-            orderNum = bean.getOrderFormNo();
-            AppValue.Money = bean.getSfmoney() / 100 + "";
-//            mMoneyText.setText("0.01");
-            mMoneyText.setText(bean.getSfmoney() / 100 + "");
-            mTempStop.setVisibility(View.VISIBLE);
-            return false;
-        }));
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(MonthMoneyActivity.this, "请检查您的网络！", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFinish() {
+                Utils.exitLoad();
+                super.onFinish();
+            }
+        });
     }
 
     /**
@@ -100,30 +112,48 @@ public class MonthMoneyActivity extends BaseActivity {
 
 
     /**
-     * 回调支付成功
+     * strorderno		//IIS服务器订单号
+     * sfmoney			//缴费金额
+     * paytype			//支付类型			0=现金1=微信 2=支付宝 3=银联 4=余额
+     * order			//park服务器订单     (现金支付时,非必须)
+     * parkId			//车场ID
      */
     private void callBack() {
-        String time = Utils.toDate(System.currentTimeMillis()).replace(" ", "");
-        String keyValue = "trans_date=" + time +
-                "&strorderno=" + orderNum +
-                "&sfmoney=" + mMoneyText.getText().toString() +
-                "&skey=" + AppValue.skey +
-                "&parkno=" + parkId +
-                "&dvalidate=" + MD5.getParamMD5(time, orderNum, mMoneyText.getText().toString(), AppValue.skey, parkId);
-        Client.sendPost(NetParmet.PAY_CALL_BACK, keyValue, new Handler(msg -> {
-            String json = msg.getData().getString("post");
-            BaseTCOK bean = Json.toObject(json, BaseTCOK.class);
-            if (bean == null) {
-                Utils.showNetErrorDialog(this);
-                return false;
+        Utils.showLoad(this);
+        RequestParams params = new RequestParams();
+        params.put("strorderno", orderNum);
+        params.put("sfmoney", AppValue.Money);
+        params.put("paytype", "2");
+        params.put("order", orderNums);
+        params.put("parkId",AppValue.parkId);
+        AsyncHttpClientManager.post(NetParmet.PAY_SFHD, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                if (statusCode == 200) {
+                    mTempStop.setVisibility(View.GONE);
+                    try {
+                        Utils.showOkDialog(MonthMoneyActivity.this, response.getString("message"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        Utils.showOkDialog(MonthMoneyActivity.this, response.getString("tipmsg"));
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                }
             }
-            if (bean.getTipmsg().equals("收费成功")) {
-                AppValue.fish = 1;
-                Toast.makeText(this, "续费成功", Toast.LENGTH_SHORT).show();
-                this.finish();
-                return false;
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(MonthMoneyActivity.this, "请检查您的网络！", Toast.LENGTH_SHORT).show();
             }
-            return false;
-        }));
+            @Override
+            public void onFinish() {
+                Utils.exitLoad();
+                super.onFinish();
+            }
+        });
     }
 }

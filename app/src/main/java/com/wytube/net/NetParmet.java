@@ -123,6 +123,14 @@ public class NetParmet {
     public static final String HAPPY_DELETE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/celebration/delete";
     /*通过驳回喜事列表*/
     public static final String HAPPY_EDIT = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/celebration/edit";
+    /*计算停车费用*/
+    public static final String PAY_JSFY = HTTP + APP_SER + PARK +"/api/v1/accountmoney";
+    /*月卡延期*/
+    public static final String PAY_YKYQ = HTTP + APP_SER + PARK +"/api/v1/orderMonthCardDefer";
+    /*收费回调*/
+    public static final String PAY_SFHD = HTTP + APP_SER + PARK +"/api/v1/tradePayformoney";
+
+
 
 
 

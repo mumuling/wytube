@@ -1,31 +1,34 @@
 package com.wytube.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.v7.widget.CardView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.cqxb.until.AsyncHttpClientManager;
 import com.cqxb.yecall.BaseActivity;
 import com.cqxb.yecall.R;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
-import com.wytube.beans.BaseTCOK;
 import com.wytube.beans.InitBean;
-import com.wytube.beans.SelectBean;
-import com.wytube.net.Client;
-import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
 import com.wytube.utlis.AppValue;
-import com.wytube.utlis.MD5;
 import com.wytube.utlis.Utils;
 
-import static com.wytube.net.Json.toObject;
+import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static com.wytube.utlis.AppValue.orderNum;
 import static com.wytube.utlis.AppValue.parkId;
 
@@ -52,7 +55,10 @@ public class SelectCarsActivity extends BaseActivity {
     private TextView mMothDay;
     @KBind(R.id.month_stop)
     private LinearLayout mMonthStop;
-
+    @KBind(R.id.select_but)
+    private CardView mselect_but;
+    @KBind(R.id.to_pay)
+    private CardView mto_pay;
 
     private InitBean initBean;
     private String carNum;
@@ -77,21 +83,43 @@ public class SelectCarsActivity extends BaseActivity {
         if (AppValue.parkName != null && AppValue.parkName.length() > 0) {
             mLocationText.setText(AppValue.parkName);
         }
-        /*从月卡续期成功返回刷新*/
-        if (AppValue.fish == 1){
-            selectData(AppValue.carNum);
-            AppValue.fish = -1;
-        }
+//        /*从月卡续期成功返回刷新*/
+//        if (AppValue.fish == 1){
+//            selectData(AppValue.carNum);
+//            AppValue.fish = -1;
+//        }
     }
+
 
     /**
      * 初始化视图数据
      */
     private void initView() {
+        mCarNum.addTextChangedListener(textWatcher);
         mLocationText.setText("选择停车场");
         Intent intent = getIntent();
-        mCarNum.setText(intent.getStringExtra("chepai"));
+//        mCarNum.setText(intent.getStringExtra("chepai"));
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,int after) {
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before,int count) {
+            if (!mCarNum.getText().toString().equals("")){
+                mselect_but.setCardBackgroundColor(getResources().getColor(R.color.app_main_color_green));
+                mto_pay.setCardBackgroundColor(getResources().getColor(R.color.app_main_color_green));
+            }else {
+                mselect_but.setCardBackgroundColor(getResources().getColor(R.color.e8e8e8));
+                mto_pay.setCardBackgroundColor(getResources().getColor(R.color.e8e8e8));
+            }
+        }
+    };
 
     @KListener(R.id.select_but)
     private void select_butOnClick() {
@@ -111,77 +139,53 @@ public class SelectCarsActivity extends BaseActivity {
             return;
         }
         AppValue.carNum = carNum;
-        initLink(this.carNum);
+        initTCfy();
     }
 
-    /**
-     * 初始化连接
-     */
-    private void initLink(String carNum) {
-        Utils.showLoad(this);
-        Client.sendPost(NetParmet.INIT_LOGIN, "", new Handler(msg -> {
-            Utils.exitLoad();
-            String json = msg.getData().getString("post");
-            InitBean bean = toObject(json, InitBean.class);
-            if (bean == null) {
-                Utils.showNetErrorDialog(this);
-                return false;
-            }
-            if (bean.getStatetype() != 1) {
-                Utils.showOkDialog(this, bean.getTipmsg());
-                return false;
-            }
-            initBean = bean;
-            selectData(carNum);
-            AppValue.skey = bean.getUserLoginInfo().getTemp_key();
-            return false;
-        }));
-    }
 
     /**
-     * 查询数据
-     *
-     * @param carNum 车牌号
+     * 计算停车费用
+     * carNum			//车牌号码
+     * parkId			//车场ID
      */
-    @SuppressLint("SetTextI18n")
-    private void selectData(String carNum) {
+    private void initTCfy() {
         Utils.showLoad(this);
-        String time = Utils.toDate(System.currentTimeMillis()).replace(" ", "");
-        String keyValue = "trans_date=" + time +
-                "&car_no=" + carNum +
-                "&skey=" + initBean.getUserLoginInfo().getTemp_key() +
-                "&jftype=1" +
-                "&parkno=" + parkId +
-                "&dvalidate=" + MD5.getParamMD5(time, carNum, "1", initBean.getUserLoginInfo().getTemp_key(), parkId);
-        Client.sendPost(NetParmet.SELECT_STOP_MONEY, keyValue, new Handler(msg -> {
-            Utils.exitLoad();
-            String json = msg.getData().getString("post");
-            SelectBean bean = toObject(json, SelectBean.class);
-            if (bean == null) {
-                Utils.showNetErrorDialog(this);
-                return false;
-            }
-            orderNum = bean.getOrderFormNo();
-            AppValue.Money = bean.getUserTransInfo().getSfmoney() / 100 + "";
-            String str = bean.getUserTransInfo().getU_cardtype();
-
-            if (str!=null && !str.equals("")){
-                str = str.substring(0,2); // or  str=str.Remove(i,str.Length-i);
-                if (str.equals("临时")) {
-                    mMoneyText.setText(bean.getUserTransInfo().getSfmoney() / 100 + "");
-//                    mMoneyText.setText("0.01");
-                    mGoStopTime.setText(bean.getUserTransInfo().getCometime());
-                    mStopAllTime.setText(bean.getUserTransInfo().getStoptimes() + "分钟");
-                    mTempStop.setVisibility(View.VISIBLE);
-                } else if(str.equals("月卡")){
-                    mMothDay.setText(bean.getUserTransInfo().getStoptimes());
-                    mMonthStop.setVisibility(View.VISIBLE);
+        RequestParams params = new RequestParams();
+        params.put("carNum", AppValue.carNum);
+        params.put("parkId", AppValue.parkId);
+        AsyncHttpClientManager.post(NetParmet.PAY_JSFY, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                if (statusCode == 200) {
+                    try {
+                        AppValue.orderNum = response.getString("order");
+                        AppValue.Money = Integer.parseInt(response.getString("money")) / 100 + "";
+                        mMoneyText.setText(AppValue.Money);
+//                        mMoneyText.setText("0.01");
+                        mGoStopTime.setText(response.getString("startTime"));
+                        mStopAllTime.setText(response.getString("stopTime") + "分钟");
+                        mTempStop.setVisibility(View.VISIBLE);
+                    } catch (JSONException e){
+                        try {
+                            Utils.showOkDialog(SelectCarsActivity.this, response.getString("message"));
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }e.printStackTrace();
+                    }
                 }
-            }else {
-                Utils.showOkDialog(this, bean.getTipmsg());
             }
-            return false;
-        }));
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(SelectCarsActivity.this, "请检查您的网络！", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFinish() {
+                Utils.exitLoad();
+                super.onFinish();
+            }
+        });
     }
 
     /*已完成收费*/
@@ -193,6 +197,16 @@ public class SelectCarsActivity extends BaseActivity {
     /*月卡延期*/
     @KListener(R.id.to_pay)
     private void to_payOnClick() {
+        if (parkId.length() <= 0) {
+            Utils.showOkDialog(this, "请选择停车场!");
+            return;
+        }
+        this.carNum = mCarNum.getText().toString();
+        if (this.carNum.length() <= 0) {
+            Utils.showOkDialog(this, "请输入续费的车牌号!");
+            return;
+        }
+        AppValue.parkphone= mCarNum.getText().toString();
         startActivity(new Intent(this, MonthMoneyActivity.class));
     }
 
@@ -202,159 +216,49 @@ public class SelectCarsActivity extends BaseActivity {
         startActivity(new Intent(this, LocationListActivity.class));
     }
 
-
-
-//    /**
-//     * 获取订单号
-//     * carNum	//车牌号
-//     * parkId	//车场号
-//     */
-//    private void getOrderNum() {
-//        String keyValue = "carNum=" + AppValue.carNum +"&parkId=" + parkId +"&payType="+"ALIPAY" +"&isno="+ AppValue.orderNum;
-//        Client.sendPost(NetParmet.CREATE_ORDER_NUM, keyValue, new Handler(msg -> {
-//            Utils.exitLoad();
-//            String json = msg.getData().getString("post");
-//            OrderBean bean = Json.toObject(json, OrderBean.class);
-//            if (bean == null) {
-//                Utils.showNetErrorDialog(this);
-//                return false;
-//            }
-//            if (!bean.isSuccess()) {
-//                Utils.showOkDialog(this, bean.getMessage());
-//                return false;
-//            }
-//            this.orderNums = bean.getData();
-//            getalipay();
-//            return false;
-//        }));
-//    }
-
-
-
-//    /**
-//     * 验签
-//     * orderNum     ,系统生成的订单号
-//     * total_fee    ,支付金额
-//     * isno         ,IIS服务器订单号
-//     * subject      ,标题
-//     */
-//    private void getalipay() {
-//        Client.sendPost(NetParmet.CREATE_ORDER_ALIPAY, "orderNum="+orderNums  +"&total_fee="+AppValue.Money
-//                        +"&isno="+ orderNum  +"&subject="+"停车缴费", new Handler(msg -> {
-//            Utils.exitLoad();
-//            String json = msg.getData().getString("post");
-//            OrderBean bean = Json.toObject(json, OrderBean.class);
-//            if (bean == null) {
-//                Utils.showNetErrorDialog(this);
-//                return false;
-//            }
-//            if (!bean.isSuccess()) {
-//                Utils.showOkDialog(this, bean.getMessage());
-//                return false;
-//            }
-//            pay(bean.getData());
-//            return false;
-//        }));
-//    }
-//
-//    /**
-//     * 支付方法
-//     */
-//    private void pay(String orderNum) {
-//        Runnable payRunnable = () -> {
-//            PayTask alipay = new PayTask(SelectCarsActivity.this);
-//            Map<String, String> result = alipay.payV2(orderNum, true);
-//            Message msg = new Message();
-//            msg.what =SDK_PAY_FLAG;
-//            msg.obj = result;
-//            mHandler.sendMessage(msg);
-//        };
-//        Thread payThread = new Thread(payRunnable);
-//        payThread.start();
-//    }
-//
-//
-//    private static final int SDK_PAY_FLAG = 1;
-//    @SuppressLint("HandlerLeak")
-//    private Handler mHandler = new Handler() {
-//        @SuppressWarnings("unused")
-//        public void handleMessage(Message msg) {
-//            switch (msg.what) {
-//                case SDK_PAY_FLAG: {
-//                    @SuppressWarnings("unchecked")
-//                    PayResult payResult = new PayResult((Map<String, String>) msg.obj);
-//                    /**
-//                     对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
-//                     */
-//                    String resultInfo = payResult.getResult();// 同步返回需要验证的信息
-//                    String resultStatus = payResult.getResultStatus();
-//                    // 判断resultStatus 为9000则代表支付成功
-//                    if (TextUtils.equals(resultStatus, "9000")) {
-//                        // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-//                        sure(orderNums);
-//                        callBack();
-////                        Toast.makeText(SelectCarsActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-//                        Toast.makeText(SelectCarsActivity.this, "支付失败", Toast.LENGTH_SHORT).show();
-//                    }
-//                    break;
-//                }
-//                default:
-//                    break;
-//            }
-//        };
-//    };
-//
-//    /**
-//     * 验证是否支付成功
-//     * order     订单号
-//     */
-//    private void sure(String orderNum) {
-//        Client.sendGet(NetParmet.PAY_SURE, "order=" + orderNum, new Handler(msg -> {
-//            String json = msg.getData().getString("get");
-//            SureBean bean = Json.toObject(json, SureBean.class);
-//            if (bean == null) {
-//                Utils.showNetErrorDialog(this);
-//                return false;
-//            }
-//            if (!bean.isSuccess()) {
-//                Utils.showOkDialog(this, bean.getMessage());
-//                return false;
-//            }
-//            if (bean.getMessage().equals("OK")) {
-//                isSure = true;
-//                mTempStop.setVisibility(View.GONE);
-//                Utils.showOkDialog(SelectCarsActivity.this, "缴费成功!");
-//            }
-//            return false;
-//        }));
-//    }
-//
     /**
-     * 回调支付成功
+     * strorderno		//IIS服务器订单号
+     * sfmoney			//缴费金额
+     * paytype			//支付类型			0=现金1=微信 2=支付宝 3=银联 4=余额
+     * order			//park服务器订单     (现金支付时,非必须)
+     * parkId			//车场ID
      */
     private void callBack() {
-        String time = Utils.toDate(System.currentTimeMillis()).replace(" ", "");
-        String keyValue = "trans_date=" + time +
-                "&strorderno=" + orderNum +
-                "&sfmoney=" + mMoneyText.getText().toString() +
-                "&skey=" + AppValue.skey +
-                "&parkno=" + parkId +
-                "&dvalidate=" + MD5.getParamMD5(time, orderNum, mMoneyText.getText().toString(), AppValue.skey, parkId);
-        Client.sendPost(NetParmet.PAY_CALL_BACK, keyValue, new Handler(msg -> {
-            String json = msg.getData().getString("post");
-            BaseTCOK bean = Json.toObject(json, BaseTCOK.class);
-            if (bean == null) {
-                Utils.showNetErrorDialog(this);
-                return false;
+        Utils.showLoad(this);
+        RequestParams params = new RequestParams();
+        params.put("strorderno", orderNum);
+        params.put("sfmoney", AppValue.Money);
+        params.put("paytype", "2");
+        params.put("order", orderNums);
+        params.put("parkId",AppValue.parkId);
+        AsyncHttpClientManager.post(NetParmet.PAY_SFHD, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+                if (statusCode == 200) {
+                    mTempStop.setVisibility(View.GONE);
+                    try {
+                        Utils.showOkDialog(SelectCarsActivity.this, response.getString("message"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        Utils.showOkDialog(SelectCarsActivity.this, response.getString("tipmsg"));
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                }
             }
-            if (bean.getTipmsg().equals("收费成功")) {
-                selectData(AppValue.carNum);
-                Utils.showOkDialog(SelectCarsActivity.this, "缴费成功!");
-                return false;
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                super.onFailure(statusCode, headers, responseString, throwable);
+                Toast.makeText(SelectCarsActivity.this, "请检查您的网络！", Toast.LENGTH_SHORT).show();
             }
-            return false;
-        }));
+            @Override
+            public void onFinish() {
+                Utils.exitLoad();
+                super.onFinish();
+            }
+        });
     }
 }

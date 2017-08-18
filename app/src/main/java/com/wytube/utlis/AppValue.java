@@ -217,5 +217,6 @@ public class AppValue {
     public static BiilBeaan.DataBean wyfBeans;
     /*喜事列表*/
     public static String XSID="";
-
+    /*跳转车牌号*/
+    public static String parkphone="";
 }

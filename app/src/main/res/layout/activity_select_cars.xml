@@ -108,13 +108,46 @@
                         android:textSize="18sp" />
                 </android.support.v7.widget.CardView>
             </android.support.v7.widget.CardView>
-
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:background="@color/white">
             <android.support.v7.widget.CardView
                 android:id="@+id/select_but"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
                 android:layout_marginLeft="15dp"
-                app:cardBackgroundColor="@color/app_main_color_green"
+                app:cardBackgroundColor="@color/e8e8e8"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:cardMaxElevation="0dp">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp"
+                    android:paddingTop="10dp"
+                    android:text="临时缴费"
+                    android:textSize="16sp"
+                    android:textColor="@color/white" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/to_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                app:cardBackgroundColor="@color/e8e8e8"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:cardMaxElevation="0dp">
@@ -127,11 +160,11 @@
                     android:paddingLeft="25dp"
                     android:paddingRight="25dp"
                     android:paddingTop="10dp"
-                    android:text="查询"
+                    android:text="月卡延期"
+                    android:textSize="16sp"
                     android:textColor="@color/white" />
             </android.support.v7.widget.CardView>
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/linear_jfcg"
             android:layout_width="match_parent"
@@ -279,7 +312,6 @@
                     android:textSize="36sp" />
 
                 <android.support.v7.widget.CardView
-                    android:id="@+id/to_pay"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="15dp"
