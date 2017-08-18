@@ -254,6 +254,7 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
             } else {
                 AppValue.TextName = bean.getData().getUserDTO().getUserName();
                 ACache mCache = ACache.get(LoginAppActivity.this);
+                mCache.put("password", edipwd.getText().toString(), 60*60*24*6);
                 mCache.put("token", AppValue.token, 60*60*24*6);
                 ShareOption.writerString("LOGIN_STATE", usr + ":" + pwd, LoginAppActivity.this);
             }

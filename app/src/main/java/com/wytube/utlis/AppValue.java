@@ -8,6 +8,7 @@ import com.wytube.beans.BaseLbrepair;
 import com.wytube.beans.BaseWPjy;
 import com.wytube.beans.BeseHd;
 import com.wytube.beans.CarsBean;
+import com.wytube.beans.HappyBean;
 import com.wytube.beans.NewsNrBean;
 import com.wytube.beans.OwnerBean;
 import com.wytube.beans.PropMsgBean;
@@ -118,6 +119,8 @@ public class AppValue {
     public static BaseLbrepair.DataBean lbBeansitem;
     /*选择对话框的按钮显示的文本*/
     public static String selectBut = "";
+    /*喜事记录列表*/
+    public static List<HappyBean.DataBean> xsBeans;
 
 
     //    /*投诉列表的Item*/

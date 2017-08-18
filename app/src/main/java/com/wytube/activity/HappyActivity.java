@@ -20,13 +20,14 @@ import com.wytube.beans.HappyBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by LIN on 2017/8/12.
+ * 喜事列表
  */
 @KActivity(R.layout.activity_happy)
 public class HappyActivity extends BaseActivity {
@@ -41,27 +42,36 @@ public class HappyActivity extends BaseActivity {
     private TextView tv_nodata;
     private HappyAdapter apapter;
     List<HappyBean.DataBean> passData = new ArrayList<>();
-    List<HappyBean.DataBean> unPassData = new ArrayList<>();
     private Context context;
+    int type = 0;
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (AppValue.fish==1){
+            passData.clear();
+            loadData();
+            AppValue.fish=-1;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        BindClass.bind(this);
         context = this;
         loadData();
-        BindClass.bind(this);
-        findViewById(R.id.back_but).setOnClickListener(v -> {
-            finish();
-        });
-        findViewById(R.id.title_text).setOnClickListener(v -> {
-            finish();
-        });
+        findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
+        findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         happy_list.setEmptyView(tv_nodata);
         selectLayout = ll_reviewed;
     }
 
 
+    /*
+    * 喜事列表数据
+    * */
     private void loadData() {
         Utils.showLoad(this);
         Client.sendPost(NetParmet.HAPPY, "stateId", new Handler(msg -> {
@@ -76,24 +86,22 @@ public class HappyActivity extends BaseActivity {
                 Utils.showOkDialog(this, bean.getMessage());
                 return false;
             }
-            List<HappyBean.DataBean> data = bean.getData();
-            for (HappyBean.DataBean dataBean : data) {
-                if (dataBean.getStateId() == 0) {
-                    unPassData.add(dataBean);
-                } else {
-                    passData.add(dataBean);
+            AppValue.xsBeans = bean.getData();
+            apapter = new HappyAdapter(this, passData);
+            happy_list.setAdapter(apapter);
+
+            apapter.setOnIteOnItemClickListener(bean1 -> {
+                Intent intent = new Intent(HappyActivity.this, ApplyDetailActivity.class);
+                intent.putExtra("data", bean1);
+                context.startActivity(intent);//传递参数判断是审阅还是通过
+            });
+
+            for (HappyBean.DataBean repairBean : AppValue.xsBeans) {
+                if (repairBean.getStateId() == type) {
+                    passData.add(repairBean);
                 }
             }
-            apapter = new HappyAdapter(this, unPassData);
-            apapter.setOnIteOnItemClickListener(new HappyAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(HappyBean.DataBean bean) {
-                    Intent intent = new Intent(HappyActivity.this, ApplyDetailActivity.class);
-                    intent.putExtra("data", bean);
-                    context.startActivity(intent);//传递参数判断是审阅还是通过
-                }
-            });
-            happy_list.setAdapter(apapter);
+            apapter.setBeans(passData);
             apapter.notifyDataSetChanged();
             return false;
         }));
@@ -115,16 +123,30 @@ public class HappyActivity extends BaseActivity {
         selectLayout = ll_reviewed;
         ((TextView) ll_reviewed.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         ll_reviewed.getChildAt(1).setVisibility(View.VISIBLE);
-        apapter.setData(unPassData);
+        type = 0;
+        passData.clear();
+        for (HappyBean.DataBean happyBean : AppValue.xsBeans) {
+            if (happyBean.getStateId() == 0) {
+                passData.add(happyBean);
+            }
+        }
+        apapter.setData(passData);
         apapter.notifyDataSetChanged();
     }
 
     @KListener(R.id.ll_oked)
     private void ll_okedOnClick() {
         clearStyle(selectLayout);
+        type = 1;
         selectLayout = ll_oked;
         ((TextView) ll_oked.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         ll_oked.getChildAt(1).setVisibility(View.VISIBLE);
+        passData.clear();
+        for (HappyBean.DataBean happyBean : AppValue.xsBeans) {
+            if (happyBean.getStateId() == 1) {
+                passData.add(happyBean);
+            }
+        }
         apapter.setData(passData);
         apapter.notifyDataSetChanged();
 
