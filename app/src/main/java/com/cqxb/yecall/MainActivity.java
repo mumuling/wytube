@@ -317,13 +317,20 @@ public class MainActivity extends Activity {
                     /*自动登录*/
                     ACache mCache = ACache.get(MainActivity.this);
                     String value = mCache.getAsString("token");
+                    String password = mCache.getAsString("password");
                     if (value!=null){
                         String login_state = Utils.clearString(ShareOption.readerString("LOGIN_STATE", MainActivity.this));
                         if (login_state != null && login_state.length() > 0) {
                             String usr = login_state.split(":")[0];
                             String pwd = login_state.split(":")[1];
-                            String keyValue = "account=" + usr + "&password=" + pwd;
-                            AppValue.YhPass = pwd;
+                            String keyValue;
+                            if (password!=null){
+                                keyValue = "account=" + usr + "&password=" + password;
+                                AppValue.YhPass = password;
+                            }else {
+                                keyValue = "account=" + usr + "&password=" + pwd;
+                                AppValue.YhPass = pwd;
+                            }
                             Client.sendPost(NetParmet.USR_LOGIN, keyValue, new Handler(msg -> {
                                 String json = msg.getData().getString("post");
                                 BaseLogin bean = Json.toObject(json, BaseLogin.class);

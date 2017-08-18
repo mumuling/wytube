@@ -717,5 +717,9 @@
         <activity android:name="com.wytube.activity.BxReplyActivity"/>
         /*修改密码*/
         <activity android:name="com.wytube.activity.PassActivity"/>
+        /*喜事管理*/
+        <activity android:name="com.wytube.activity.HappyActivity"/>
+        /*喜事详情*/
+        <activity android:name="com.wytube.activity.ApplyDetailActivity"/>
     </application>
 </manifest>

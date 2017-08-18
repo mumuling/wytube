@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import com.cqxb.yecall.bean.SipAccountBean;
 import com.wytube.beans.BaseJylb;
+import com.wytube.beans.BaseLbrepair;
 import com.wytube.beans.BaseWPjy;
 import com.wytube.beans.BeseHd;
 import com.wytube.beans.CarsBean;
@@ -11,6 +12,7 @@ import com.wytube.beans.NewsNrBean;
 import com.wytube.beans.OwnerBean;
 import com.wytube.beans.PropMsgBean;
 import com.wytube.beans.RepairBean;
+import com.wytube.shared.Ftime.BiilBeaan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,9 @@ public class AppValue {
     /*物品借用保存路径*/
     @SuppressLint("SdCardPath")
     public final static String userJIEPath = "/sdcard/tedi/WH/file/user/head/jieyong.png";
+    /*物品借用保存路径*/
+    @SuppressLint("SdCardPath")
+    public final static String userJIEPaths = "/sdcard/tedi/WH/file/user/head/jieyongs.png";
 
     /*用户选择的图片经过压缩后存放的路劲*/
     @SuppressLint("SdCardPath")
@@ -45,6 +50,8 @@ public class AppValue {
     public static String sipProt = "";
     public static String sipName = "";
     public static String sipPass = "";
+    public static String YhPass = "";
+
     /*用户的token值*/
 //    public static String token = PreferenceBean.CHECKLOGIN;
     public static String token = "";
@@ -101,16 +108,18 @@ public class AppValue {
 //    public static String locationRoomNum = "";
 //
 
-    /*报修记录列表*/
+    /*家政记录列表*/
     public static List<RepairBean.DataBean> repairBeans;
-    ////    /*是否退出并重新登录*/
-////    public static boolean isRelogin = false;
+    /*家政列表的Item*/
+    public static RepairBean.DataBean repairInfoBean;
+    /*投诉记录列表*/
+    public static List<BaseLbrepair.DataBean> lbBeans;
+    /*投诉列表的Item*/
+    public static BaseLbrepair.DataBean lbBeansitem;
     /*选择对话框的按钮显示的文本*/
     public static String selectBut = "";
-    //    /*投诉记录列表*/
-//    public static List<ComRecordBean.DataBean> recordBeans;
-    /*报修列表的Item*/
-    public static RepairBean.DataBean repairInfoBean;
+
+
     //    /*投诉列表的Item*/
 //    public static ComRecordBean.DataBean comRecordinfoBean;
 //    /*便民服务的Urls*/
@@ -196,11 +205,17 @@ public class AppValue {
     public static String LifeId="";
     /*交易信息id*/
     public static String JYxxId="";
+    /*物业缴费id*/
+    public static String WYjfId="";
     /*物品借用信息id*/
     public static String WPJYxxId="";
     /*资讯管理详情进入发布*/
     public static int NewSxg=-1;
     /*社区活动详情进入发布*/
     public static int ActivSxg=-1;
+    /*物业费信息*/
+    public static BiilBeaan.DataBean wyfBeans;
+    /*喜事列表*/
+    public static String XSID="";
 
 }

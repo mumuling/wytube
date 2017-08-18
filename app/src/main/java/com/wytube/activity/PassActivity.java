@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.EditText;
 
+import com.cqxb.until.ACache;
 import com.cqxb.yecall.R;
 import com.cqxb.yecall.until.T;
 import com.skyrain.library.k.BindClass;
@@ -74,6 +75,8 @@ public class PassActivity extends Activity{
                 return false;
             }else {
                 AppValue.YhPass = password;
+                ACache mCache = ACache.get(PassActivity.this);
+                mCache.put("password", AppValue.YhPass, 60*60*24*6);
                 ToastUtils.showToast(this,"修改成功!");
                 finish();
             }
