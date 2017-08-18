@@ -27,13 +27,11 @@ public class SelectDialogs {
 //    private static SelectCallBack callBack;
 
 
-    public SelectDialogs(Context context)
-    {
+    public SelectDialogs(Context context) {
         mContext = context;
     }
 
-    public Dialog loadDialog()
-    {
+    public Dialog loadDialog() {
         mDialog = new Dialog(mContext, R.style.dialog1);
         LayoutInflater in = LayoutInflater.from(mContext);
         viewDialog = in.inflate(R.layout.activity_selects, null);
@@ -43,7 +41,9 @@ public class SelectDialogs {
 //        } else {
 //            ((TextView) viewDialog.findViewById(R.id.select_text)).setText("绑定小区");
 //        }
-        viewDialog.findViewById(R.id.select_text).setOnClickListener(v -> {mDialog.dismiss();});
+        viewDialog.findViewById(R.id.select_text).setOnClickListener(v -> {
+            mDialog.dismiss();
+        });
         init();
         viewDialog.setBackgroundColor(0x7f000000);
         mDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -53,8 +53,7 @@ public class SelectDialogs {
         return mDialog;
     }
 
-    public void removeDialog()
-    {
+    public void removeDialog() {
         mDialog.dismiss();
     }
 

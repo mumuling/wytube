@@ -29,7 +29,7 @@ import java.util.List;
  * Created by LIN on 2017/8/12.
  */
 @KActivity(R.layout.activity_happy)
-public class HappyActivity extends BaseActivity{
+public class HappyActivity extends BaseActivity {
     private LinearLayout selectLayout;
     @KBind(R.id.ll_reviewed)
     private LinearLayout ll_reviewed;
@@ -49,13 +49,18 @@ public class HappyActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
-        BindClass.bind(this);
         loadData();
-        findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
-        findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
+        BindClass.bind(this);
+        findViewById(R.id.back_but).setOnClickListener(v -> {
+            finish();
+        });
+        findViewById(R.id.title_text).setOnClickListener(v -> {
+            finish();
+        });
         happy_list.setEmptyView(tv_nodata);
         selectLayout = ll_reviewed;
     }
+
 
     private void loadData() {
         Utils.showLoad(this);
@@ -73,13 +78,13 @@ public class HappyActivity extends BaseActivity{
             }
             List<HappyBean.DataBean> data = bean.getData();
             for (HappyBean.DataBean dataBean : data) {
-                if (dataBean.getStateId() == 0){
+                if (dataBean.getStateId() == 0) {
                     unPassData.add(dataBean);
-                }else {
+                } else {
                     passData.add(dataBean);
                 }
             }
-            apapter=new HappyAdapter(this,unPassData);
+            apapter = new HappyAdapter(this, unPassData);
             apapter.setOnIteOnItemClickListener(new HappyAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(HappyBean.DataBean bean) {

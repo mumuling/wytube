@@ -71,10 +71,8 @@ public class ApplyDetailActivity extends BaseActivity {
         findViewById(R.id.title_text).setOnClickListener(v -> {
             finish();
         });
-
         loadData();
     }
-
 
     private void loadData() {
         dataBean = (HappyBean.DataBean) getIntent().getSerializableExtra("data");
@@ -126,7 +124,6 @@ public class ApplyDetailActivity extends BaseActivity {
                 AppValue.fish = 1;
                 this.finish();
             }
-            adapter.notifyDataSetChanged();
             return false;
         }));
     }
@@ -149,7 +146,6 @@ public class ApplyDetailActivity extends BaseActivity {
                 AppValue.fish = 1;
                 this.finish();
             }
-
             return false;
         }));
     }
