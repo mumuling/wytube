@@ -3,6 +3,8 @@ package com.wytube.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -33,19 +35,28 @@ public class OwnerActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
-        loadData();
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         findViewById(R.id.tv_edit).setOnClickListener(view -> startActivity(
                 new Intent(OwnerActivity.this,AddOwnerActivity.class)));
+        yzgl_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                OwnerBean.DataBean bean =(OwnerBean.DataBean )yzgl_list.getItemAtPosition(i);
+                Intent intent = new Intent(OwnerActivity.this,OwnerItemActivity.class);
+                intent.putExtra("databean",bean);
+               startActivity(intent);
+            }
+        });
     }
     @Override
     protected void onResume() {
         super.onResume();
-        if (AppValue.fish == 1) {
+        loadData();
+       /* if (AppValue.fish==1){
             loadData();
-            AppValue.fish = -1;
-        }
+            AppValue.fish=-1;
+        }*/
     }
 
     /**
@@ -53,7 +64,7 @@ public class OwnerActivity extends BaseActivity {
      */
     private void loadData() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.OWNER,"",new Handler(msg -> {
+        Client.sendPost(NetParmet.OWNER,"20",new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             OwnerBean bean = Json.toObject(json, OwnerBean.class);

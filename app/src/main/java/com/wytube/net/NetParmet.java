@@ -35,12 +35,8 @@ public class NetParmet {
     /*-----------------------------------------POST请求类型接口------------------------------------------------*/
     /*用户登录*/
     public static final String USR_LOGIN = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/login";
-    /*物业缴费列表*/
+    /*物业费用*/
     public static final String USR_WYFY = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/billInfo";
-    /*物业缴费删除*/
-    public static final String USR_WYFY_DELE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/billInfo/delete";
-    /*物业缴费*/
-    public static final String USR_WYFY_JF = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION + "/billInfo/edit";
     /*物业通知*/
     public static final String PROP_MSG = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/pushInfo";
     /*发送通知*/
@@ -57,10 +53,8 @@ public class NetParmet {
     public static final String ADD_JZXQ_ZPRYLB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairman";
     /*家政指派 人员添加*/
     public static final String ADD_JZXQ_ADDZPRYLB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairman/add";
-    /*家政指派人员*/
+    /*家政指派 人员添加*/
     public static final String ADD_JZXQ_ADDZPRYQD = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairWork/addRun";
-    /*家政删除*/
-    public static final String ADD_JZXQ_DELETE = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/repairWork/delete";
     /*获取朋友圈列表*/
     public static final String GET_DYNAMIC = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/track";
     /*获取朋友圈列表屏蔽*/
@@ -101,23 +95,6 @@ public class NetParmet {
     public static final String USR_FK_LB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/passInfo";
     /*物品借用*/
     public static final String USR_WPJY_LB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/borrow";
-    /*物品借用修改*/
-    public static final String USR_WPJY_XG = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/borrow/edit";
-    /*物品借用删除*/
-    public static final String USR_WPJY_DLETE = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/borrow/delete";
-    /*物品借用添加*/
-    public static final String USR_WPJY_TJ = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/borrow/add";
-    /*报修投诉管理列表*/
-    public static final String USR_BXTS_LB = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/suitWork";
-    /*报修投诉管理详情*/
-    public static final String USR_BXTS_LBXQ = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/suitWork/view";
-    /*报修投诉管理回复*/
-    public static final String USR_BXTS_HF = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/suitWork/edit";
-    /*报修投诉管理删除*/
-    public static final String USR_BXTS_DE = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/suitWork/delete";
-    /*重置密码*/
-    public static final String USR_BXTS_CZ = HTTP + APP_SERVER + DIR_NAME + SOFT_WYSION + "/resetpass";
-
 
 
     /*业主管理接口*/
@@ -292,7 +269,7 @@ public class NetParmet {
     /*选择房间号*/
     public static final String OWNER_ROOM = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/room/load";
     /*删除业主*/
-    public static final String OWNER_DELETE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/owner/delete";
+    public static final String OWNER_DELETE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/delete";
     /*删除业主*/
     public static final String OWNER_UPDATE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/owner/update";
 

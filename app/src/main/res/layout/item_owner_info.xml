@@ -34,7 +34,7 @@
             android:paddingLeft="10dp"
             android:text="业主信息"
             android:textColor="@color/main_def_text_color"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:layout_alignBottom="@+id/back_but"/>
 
         <TextView
@@ -47,10 +47,11 @@
             android:layout_alignTop="@+id/back_but"
             android:layout_marginEnd="15dp"
             android:layout_marginRight="15dp"
+            android:visibility="gone"
             android:gravity="right"
-            android:text="编辑"
+            android:text="保存"
             android:textColor="@color/app_main_color_green"
-            android:textSize="20sp"/>
+            android:textSize="18sp"/>
         <ImageView
             android:id="@+id/iv_delete"
             android:layout_width="wrap_content"
@@ -105,20 +106,23 @@
                         android:textColor="@color/TextColor_quotient"
                         android:textSize="16sp"/>
 
-                    <TextView
+                    <EditText
+
+                        android:background="@null"
                         android:id="@+id/ownerName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="15dp"
                         android:text="18752584136"
                         android:textColor="@color/main_def_text_color"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp"/>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
+                        <EditText
+                            android:background="@null"
                             android:id="@+id/ownerType"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -150,14 +154,16 @@
                         android:textColor="@color/TextColor_quotient"
                         android:textSize="16sp"/>
 
-                    <TextView
+                    <EditText
+
+                        android:background="@null"
                         android:id="@+id/owneradress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="15dp"
                         android:text="名江花园5单元1206号"
                         android:textColor="@color/main_def_text_color"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -175,14 +181,16 @@
                         android:textColor="@color/TextColor_quotient"
                         android:textSize="16sp"/>
 
-                    <TextView
+                    <EditText
+
                         android:id="@+id/ownerPhone"
+                        android:background="@null"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="15dp"
                         android:text="18752584136"
                         android:textColor="@color/main_def_text_color"
-                        android:textSize="18sp"/>
+                        android:textSize="16sp"/>
                 </LinearLayout>
 
 
@@ -194,6 +202,15 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
+        <TextView
+            android:text="添加时间 :"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="11dp"
+            android:layout_marginEnd="11dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_date_time"
+            android:layout_toStartOf="@+id/tv_date_time"/>
 
         <TextView
             android:id="@+id/tv_date_time"
@@ -206,7 +223,7 @@
             android:layout_marginRight="18dp"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="添加时间 ：2017年4月29日"
+            android:text=" 2017年4月29日"
             android:textColor="@color/TextColor_quotient"
             android:textSize="14sp"/>
     </RelativeLayout>

@@ -1,8 +1,6 @@
 package com.wytube.adaper;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.cqxb.yecall.R;
-import com.wytube.activity.OwnerItemActivity;
 import com.wytube.beans.OwnerBean;
 
 import java.util.List;
@@ -22,7 +19,6 @@ import static com.cqxb.yecall.R.id.tv_yztype;
  */
 
 public class OwnerAdapter extends BaseAdapter {
-    private Activity mActivity;
     Context context;
     viewHolder holder;
     private List<OwnerBean.DataBean> list;
@@ -73,21 +69,7 @@ public class OwnerAdapter extends BaseAdapter {
         }
 
         holder.tv_yedz.setText(bean.getBuildingName()+bean.getUnitName()+bean.getRoomNum());
-        convertView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context,OwnerItemActivity.class);
-                intent.putExtra("databean",bean);
-                intent.putExtra("ownerId",bean.getOwnerId());
-                intent.putExtra("ownerPhone",bean.getOwnerPhone());
-                intent.putExtra("ownerName",bean.getOwnerName());
-                intent.putExtra("roomNum",bean.getRoomNum());
-                intent.putExtra("roomId",bean.getRoomId());
-                intent.putExtra("unitId",bean.getUnitId());
-                intent.putExtra("buildingId",bean.getBuildingId());
-                context.startActivity(intent);
-            }
-        });
+
         return convertView;
     }
     public class viewHolder{
