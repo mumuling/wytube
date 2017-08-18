@@ -37,24 +37,23 @@ public class HappyAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
+
         return list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
+
         return list.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
+
         return position;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
         if (convertView == null) {
             mholder = new viewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.item_happy, parent, false);
@@ -98,7 +97,6 @@ public class HappyAdapter extends BaseAdapter {
         mholder.happyType.setText(bean.getBuildingName() + bean.getUnitName() + bean.getNumberName());
         mholder.happyconText.setText(bean.getContent());
         mholder.happyTiime.setText(bean.getStarttime());
-  //      mholder.happyList.removeAllViews();
         return convertView;
     }
 

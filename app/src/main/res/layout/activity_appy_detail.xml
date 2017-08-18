@@ -5,6 +5,11 @@
               android:background="@color/e8e8e8"
               android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#11666666"/>
+
     <RelativeLayout
         android:id="@+id/rlss"
         android:layout_width="match_parent"
@@ -35,11 +40,6 @@
             android:textColor="@color/main_def_text_color"
             android:textSize="16sp"/>
     </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#11666666"/>
 
     <include layout="@layout/layout_apply_detail_header"/>
 
@@ -112,7 +112,7 @@
                 android:layout_centerVertical="true"
                 android:drawablePadding="10dp"
                 android:gravity="center"
-                android:text="驳回"
+                android:text="驳 回"
                 android:textColor="@color/white"
                 android:textSize="16sp"/>
 
