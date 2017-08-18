@@ -26,6 +26,7 @@ import com.wytube.adaper.OwnerAdapter;
 import com.wytube.beans.BaseWyOK;
 import com.wytube.beans.OwnerBean;
 import com.wytube.beans.OwnerDel;
+import com.wytube.dialog.TellDialog;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
@@ -119,9 +120,13 @@ public class OwnerItemActivity extends BaseActivity {
         ll_tellowner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                TellDialog tellDialog = new TellDialog(OwnerItemActivity.this,ownerPhone.getText().toString());
+
+                tellDialog.show();
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ownerPhone.getText().toString()));
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+
             }
         });
     }

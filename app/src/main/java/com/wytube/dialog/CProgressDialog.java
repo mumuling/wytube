@@ -21,13 +21,11 @@ public class CProgressDialog {
     private Dialog mDialog;
     public static CProgressDialog Progress;
 
-    public CProgressDialog(Context context)
-    {
+    public CProgressDialog(Context context) {
         mContext = context;
     }
 
-    public Dialog loadDialog()
-    {
+    public Dialog loadDialog() {
         mDialog = new Dialog(mContext, R.style.dialog);
         LayoutInflater in = LayoutInflater.from(mContext);
         View viewDialog = in.inflate(R.layout.progress_dialog, null);
@@ -40,8 +38,7 @@ public class CProgressDialog {
         return mDialog;
     }
 
-    public  void removeDialog()
-    {
+    public void removeDialog() {
         mDialog.dismiss();
     }
 }
