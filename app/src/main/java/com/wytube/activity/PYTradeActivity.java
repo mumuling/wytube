@@ -87,22 +87,21 @@ public class PYTradeActivity extends Activity{
         return list;
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
         initView();
-        findViewById(R.id.back_but).setOnClickListener(v -> finish());
-        findViewById(R.id.title_text).setOnClickListener(v -> finish());
     }
 
     /**
      * 初始化视图
      */
     private void initView() {
-
+        findViewById(R.id.title_text).setOnClickListener(v -> {
+          finish();});
+        findViewById(R.id.back_but).setOnClickListener(v -> {
+          finish();});
     }
 
     @Override

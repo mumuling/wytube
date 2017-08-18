@@ -639,6 +639,8 @@
         <activity android:name="com.wytube.activity.PassWordActivity"/>
         /*物业费*/
         <activity android:name="com.wytube.activity.PropertyPayActivity"/>
+        /*物业缴费详情*/
+        <activity android:name="com.wytube.activity.PropertyXQActivity"/>
         /*消息推送*/
         <activity android:name="com.wytube.activity.PropertyNoticeActivity"/>
         /*发送通知*/
@@ -705,6 +707,15 @@
         <activity android:name="com.wytube.activity.BorroActivity"/>
         /*物品借用详情*/
         <activity android:name="com.wytube.activity.TraWPxqInfoActivity"/>
-
+        /*物品借用发布*/
+        <activity android:name="com.wytube.activity.TraWPfbInfoActivity"/>
+        /*投诉报修管理*/
+        <activity android:name="com.wytube.activity.ComplaintActivity"/>
+        /*投诉报修管理详情*/
+        <activity android:name="com.wytube.activity.TSRepairInfoActivity"/>
+        /*投诉报修回复*/
+        <activity android:name="com.wytube.activity.BxReplyActivity"/>
+        /*修改密码*/
+        <activity android:name="com.wytube.activity.PassActivity"/>
     </application>
 </manifest>

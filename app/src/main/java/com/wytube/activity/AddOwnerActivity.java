@@ -110,8 +110,8 @@ public class AddOwnerActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
-        findViewById(R.id.back_but).setOnClickListener(v -> finish());
-        findViewById(R.id.title_text).setOnClickListener(v -> finish());
+        findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
+        findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         //选择楼宇
         selectblockLine.setOnClickListener(view -> dialogBuild());
         //选择单元

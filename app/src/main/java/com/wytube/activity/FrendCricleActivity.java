@@ -54,6 +54,7 @@ public class FrendCricleActivity extends Activity  {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
         loadData();
+        AppValue.TrackId="";
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         findViewById(R.id.menu_text).setOnClickListener(v -> {
@@ -67,7 +68,6 @@ public class FrendCricleActivity extends Activity  {
             }
             adapter.notifyDataSetChanged();
         });
-
     }
 
 
@@ -78,11 +78,6 @@ public class FrendCricleActivity extends Activity  {
      * @param beans 数据对象集合
      */
     private void initList(List<DynamicBean.DataBean.TracksBean> beans) {
-//        if (this.adapter != null) {
-//            adapter.setBeans(beans);
-//            adapter.notifyDataSetChanged();
-//            return;
-//        }
         this.adapter = new DynamicAdapters(this,beans);
         mDynamicList.setAdapter(this.adapter);
         list = beans;
@@ -103,12 +98,19 @@ public class FrendCricleActivity extends Activity  {
     private void linear_qxOnClick() {
         if (adapter.flages) {
             for (int i = 0; i < list.size(); i++) {
+                /*全选*/
+                if (AppValue.TrackId != null && !AppValue.TrackId.equals(""))
+                {
+                    AppValue.TrackId += ",";
+                }
+                AppValue.TrackId += list.get(i).getTrackId();
                 list.get(i).isCheck = true;
             }
             adapter.flages=!adapter.flages;
             mtext_qx.setText("全不选");
             adapter.notifyDataSetChanged();
-        }else {
+        } else {
+            AppValue.TrackId="";
             for (int i = 0; i < list.size(); i++) {
                 list.get(i).isCheck = false;
             }
@@ -118,11 +120,10 @@ public class FrendCricleActivity extends Activity  {
         }
     }
 
-
     /*删除*/
     @KListener(R.id.linear_modify)
     private void linear_modifyOnClick() {
-//        loadDataPB();
+        loadDataPB();
     }
 
 
@@ -168,20 +169,9 @@ public class FrendCricleActivity extends Activity  {
                 }
                 idsVal += "ids=" + idsArray[i]+"&type="+ list.get(i).getType()+"&status="+list.get(i).getStatus();
             }
-
             Client.sendPost(NetParmet.GET_DYNAPB, idsVal, new Handler(msg -> {
                 Utils.exitLoad();
                 String json = msg.getData().getString("post");
-//                DynamicBean bean = Json.toObject(json, DynamicBean.class);
-//                if (bean == null) {
-//                    Utils.showNetErrorDialog(this);
-//                    return false;
-//                }
-//                if (!bean.isSuccess()) {
-//                    Utils.showOkDialog(this, bean.getMessage());
-//                    return false;
-//                }
-//                initList(bean.getData().getTracks());
                 return false;
             }));
         }

@@ -20,6 +20,7 @@ import com.wytube.beans.BaseOK;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -81,17 +82,19 @@ public class TradeActivity extends Activity {
     private void linear_qxOnClick() {
         if (lifeAdapater.flages) {
             for (int i = 0; i < list.size(); i++) {
-                if (i==0){
-                    /*第一条数据不显示勾选框*/
-                    list.get(i).isCheck = false;
-                }else {
-                    list.get(i).isCheck = true;
+                 /*全选*/
+                if (AppValue.JYxxId != null && !AppValue.JYxxId.equals(""))
+                {
+                    AppValue.JYxxId += ",";
                 }
+                AppValue.JYxxId += list.get(i).getTradingId();
+                list.get(i).isCheck = true;
             }
             lifeAdapater.flages=!lifeAdapater.flages;
             mtext_qx.setText("全不选");
             lifeAdapater.notifyDataSetChanged();
         }else {
+            AppValue.JYxxId="";
             for (int i = 0; i < list.size(); i++) {
                 list.get(i).isCheck = false;
             }
@@ -135,6 +138,7 @@ public class TradeActivity extends Activity {
                     mlinear_sc_qx.setVisibility(View.GONE);
                 }
                 lifeAdapater.notifyDataSetChanged();
+                AppValue.JYxxId="";
                 loadDate();
             }
             return false;

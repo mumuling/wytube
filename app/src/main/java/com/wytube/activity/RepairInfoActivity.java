@@ -19,6 +19,7 @@ import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.beans.BaseJzxq;
+import com.wytube.beans.ParkBean;
 import com.wytube.beans.RepairBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
@@ -174,7 +175,18 @@ public class RepairInfoActivity extends BaseActivity {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setMessage("确定删除?");
         builder.setTitle("提示");
-        builder.setPositiveButton("确定", (dialog, which) -> {});
+        builder.setPositiveButton("确定", (dialog, which) -> {loadDelete();});
+        builder.setNegativeButton("取消", (dialog, which) -> {});
+        builder.create().show();
+    }
+
+    /*删除*/
+    @KListener(R.id.repair_now)
+    private void mrepair_nowOnClick() {
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setMessage("确定删除?");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确定", (dialog, which) -> {loadDelete();});
         builder.setNegativeButton("取消", (dialog, which) -> {});
         builder.create().show();
     }
@@ -196,6 +208,31 @@ public class RepairInfoActivity extends BaseActivity {
             finish();
         }
     }
+
+    /**
+     * 删除
+     */
+    private void loadDelete() {
+        Utils.showLoad(this);
+        Client.sendPost(NetParmet.ADD_JZXQ_DELETE, "repairWorkId="+AppValue.repairInfoBean.getRepairWorkId(), new Handler(msg -> {
+            Utils.exitLoad();
+            String json = msg.getData().getString("post");
+            ParkBean bean = Json.toObject(json, ParkBean.class);
+            if (bean == null) {
+                Utils.showNetErrorDialog(this);
+                return false;
+            }
+            if (!bean.isSuccess()) {
+                Utils.showOkDialog(this, bean.getMessage());
+                return false;
+            }else {
+                AppValue.fish=1;
+                this.finish();
+            }
+            return false;
+        }));
+    }
+
 
     /**
      * 添加图片
@@ -242,6 +279,10 @@ public class RepairInfoActivity extends BaseActivity {
         Client.sendPost(NetParmet.ADD_JZXQ_INFO, keyValue, new Handler(msg -> {
             String json = msg.getData().getString("post");
             beans = Json.toObject(json, BaseJzxq.class);
+            if (beans == null) {
+                Utils.showNetErrorDialog(this);
+                return false;
+            }
             if (beans.getRepairWork().getRepairmanName()!=null && !beans.getRepairWork().getRepairmanName().equals("")){
                 mTextBxName.setText(beans.getRepairWork().getRepairmanName()+"("+beans.getRepairWork().getRepairmanPhone()+")");
             }else if(beans.getRepairWork().getCost()!=null && !beans.getRepairWork().getCost().equals("")){

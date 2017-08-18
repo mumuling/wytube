@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.cqxb.yecall.R;
 import com.wytube.activity.ImageActivity;
 import com.wytube.beans.DynamicBean;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -112,14 +113,26 @@ public class DynamicAdapters extends BaseAdapter{
         mholder.checkbox.setOnClickListener(v -> {
             if (list.get(position).isCheck) {
                 list.get(position).isCheck = false;
+                String[] trackIds = AppValue.TrackId.split(",");
+                AppValue.TrackId = "";
+                for (int i = 0; i < trackIds.length; i++) {
+                    if(!trackIds[i].equals(list.get(position).getTrackId()))
+                    {
+                        if (AppValue.TrackId != null && !AppValue.TrackId.equals(""))
+                        {
+                            AppValue.TrackId += ",";
+                        }
+                        AppValue.TrackId += trackIds[i];
+                    }
+                }
             } else {
                 if (AppValue.TrackId != null && !AppValue.TrackId.equals(""))
                 {
                     AppValue.TrackId += ",";
                 }
                 AppValue.TrackId += list.get(position).getTrackId();
-//                Toast.makeText(mContext, AppValue.TrackId+"", Toast.LENGTH_SHORT).show();
                 list.get(position).isCheck = true;
+                ToastUtils.showToast(mContext,AppValue.TrackId+"");
             }
         });
         return convertView;

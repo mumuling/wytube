@@ -252,7 +252,6 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
             if (!bean.isSuccess()) {
                 Utils.showOkDialog(this, bean.getMessage());
             } else {
-                saveData(bean);
                 AppValue.TextName = bean.getData().getUserDTO().getUserName();
                 ACache mCache = ACache.get(LoginAppActivity.this);
                 mCache.put("token", AppValue.token, 60*60*24*6);//保存10秒，如果超过10秒去获取这个key，将为null
@@ -260,6 +259,7 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
             }
 //            dataBean = bean.getData();
             if (bean.getCode()==200) {
+                saveData(bean);
                 SettingInfo.setParams(PreferenceBean.LOGINFLAG, "true");
                 //sip 登录信息
                 SettingInfo.setParams(PreferenceBean.USERLINPHONEIP, "pro1.123667.com");
@@ -288,10 +288,11 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
 //            AppValue.sipPass = bean.getData().getSippassword();
 //            AppValue.sipAddr = bean.getData().getIpaddr();
 //            AppValue.sipProt = bean.getData().getPort();
-            AppValue.sipName = "18680808185";
-            AppValue.sipPass = "123456";
+            AppValue.sipName = bean.getData().getSip();
+            AppValue.sipPass = bean.getData().getSipPass();
             AppValue.sipAddr = "pro1.123667.com";
             AppValue.sipProt = "5070";
+            AppValue.YhPass = edipwd.getText().toString();
         }
     }
 

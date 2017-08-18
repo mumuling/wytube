@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqxb.yecall.R;
+import com.wytube.activity.TraWPfbInfoActivity;
 import com.wytube.activity.TraWPxqInfoActivity;
 import com.wytube.beans.BaseWPjy;
 import com.wytube.utlis.AppValue;
@@ -46,7 +47,7 @@ public class TradeWPAdapters extends BaseAdapter{
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return list.size();
+        return list.size()+1;
     }
 
     @Override
@@ -78,6 +79,11 @@ public class TradeWPAdapters extends BaseAdapter{
         } else {
             mholder = (viewHolder) convertView.getTag();
         }
+
+        if (selected.containsKey(position-1))
+            mholder.checkbox.setChecked(true);
+        else
+            mholder.checkbox.setChecked(false);
         if (position==0){
             mholder.rela_xx.setVisibility(View.GONE);
             mholder.textView22.setVisibility(View.VISIBLE);
@@ -94,20 +100,19 @@ public class TradeWPAdapters extends BaseAdapter{
             }
             mholder.text_name.setText(list.get(position-1).getGoodsName());
             mholder.text_money.setText("剩余"+list.get(position-1).getGoodsNum()+"件");
+            mholder.checkbox.setChecked(list.get(position-1).isCheck);
         }
 
         mholder.rel_but.setOnClickListener(v -> {
             if (position==0){
                 /*跳转发布*/
-//                mContext.startActivity(new Intent(mContext,PYTradeActivity.class));
+                mContext.startActivity(new Intent(mContext,TraWPfbInfoActivity.class));
             }else {
                 /*跳转详情*/
                 AppValue.WPjyBean = list.get(position-1);
                 mContext.startActivity(new Intent(mContext, TraWPxqInfoActivity.class));
             }
         });
-
-
         // 根据isSelected来设置checkbox的显示状况
         if (flage) {
             mholder.checkbox.setVisibility(View.GONE);
@@ -119,17 +124,29 @@ public class TradeWPAdapters extends BaseAdapter{
             }
         }
 
-        if (selected.containsKey(position-1))
-            mholder.checkbox.setChecked(true);
-        else
-            mholder.checkbox.setChecked(false);
-        mholder.checkbox.setChecked(list.get(position).isCheck);
         /*注意这里设置的不是onCheckedChangListener*/
         mholder.checkbox.setOnClickListener(v -> {
             if (list.get(position-1).isCheck) {
                 list.get(position-1).isCheck = false;
+                String[] wPJYxxId = AppValue.WPJYxxId.split(",");
+                AppValue.WPJYxxId = "";
+                for (int i = 0; i < wPJYxxId.length; i++) {
+                    if(!wPJYxxId[i].equals(list.get(position).getGoodsId()))
+                    {
+                        if (AppValue.WPJYxxId != null && !AppValue.WPJYxxId.equals(""))
+                        {
+                            AppValue.WPJYxxId += ",";
+                        }
+                        AppValue.WPJYxxId += wPJYxxId[i];
+                    }
+                }
             } else {
-                AppValue.WPJYxxId = list.get(position-1).getGoodsId();
+                if (AppValue.WPJYxxId != null && !AppValue.WPJYxxId.equals(""))
+                {
+                    AppValue.WPJYxxId += ",";
+                }
+                AppValue.WPJYxxId += list.get(position-1).getGoodsId();
+                list.get(position-1).isCheck = true;
             }
         });
 

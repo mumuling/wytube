@@ -19,6 +19,7 @@ import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.beans.BaseWPjy;
+import com.wytube.net.NetParmet;
 import com.wytube.shared.NetUtil;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
@@ -49,7 +50,6 @@ public class TraWPxqInfoActivity extends Activity {
     private TextView mShopName;
     @KBind(R.id.text_number)
     private TextView mtext_number;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,12 +85,21 @@ public class TraWPxqInfoActivity extends Activity {
     }
 
     /*确定*/
+    private boolean IsOk = false;
     @KListener(R.id.borrow_but)
     private void borrow_butOnClick() {
-        AppValue.fish=1;
-        this.finish();
+        if (IsOk){
+            new Thread(uploadImageRunnable).start();
+            new Handler().postDelayed(new Runnable(){
+                public void run() {
+                    AppValue.fish=1;
+                    finish();
+                }
+            }, 1000);
+        }else {
+            this.finish();
+        }
     }
-
 
 
     @Override
@@ -100,13 +109,12 @@ public class TraWPxqInfoActivity extends Activity {
             startPhotoZoom(data.getData());
         }
         if (requestCode == 2) {
+            IsOk = true;
             Bundle extras = data.getExtras();
             if (extras != null) {
                 Bitmap photo = extras.getParcelable("data");
                 saveBitmap(photo);
                 mShopImg.setImageBitmap(photo);
-                new Thread(uploadImageRunnable).start();
-//                ISok = 1;
             }
         }
     }
@@ -117,12 +125,11 @@ public class TraWPxqInfoActivity extends Activity {
      * 上传平时很少使用，比较麻烦
      * 原理是： 分析文件上传的数据格式，然后根据格式构造相应的发送给服务器的字符串。
      */
-    private String imgUrl = "http://app.123667.com/community/managerApi/borrow/edit";
     private String resultStr = "";	// 服务端返回结果集
     Runnable uploadImageRunnable = new Runnable() {
         @Override
         public void run() {
-            if(TextUtils.isEmpty(imgUrl)){
+            if(TextUtils.isEmpty(NetParmet.USR_WPJY_XG)){
                 Toast.makeText(TraWPxqInfoActivity.this, "还没有设置上传服务器的路径！", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -130,11 +137,11 @@ public class TraWPxqInfoActivity extends Activity {
             Map<String, File> fileparams = new HashMap<String, File>();
             try {
                 // 创建一个URL对象
-                URL url = new URL(imgUrl);
+                URL url = new URL(NetParmet.USR_WPJY_XG);
                 textParams = new HashMap<String, String>();
                 fileparams = new HashMap<String, File>();
                 // 要上传的图片文件
-                File file = new File(AppValue.userJIEPath);
+                File file = new File(AppValue.userJIEPaths);
                 /*
                  * goodsId	    是	String	物品Id
                  * goodsName	是	String	借用物品名称
@@ -214,7 +221,7 @@ public class TraWPxqInfoActivity extends Activity {
      * @param bitmap
      */
     public void saveBitmap(Bitmap bitmap) {
-        File f = new File(AppValue.userJIEPath);
+        File f = new File(AppValue.userJIEPaths);
         if (f.exists()) {
             f.delete();
         } else {

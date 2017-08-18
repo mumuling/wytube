@@ -171,7 +171,7 @@
                         android:layout_height="50dp"
                         android:background="@null"
                         android:ems="10"
-                        android:hint="QQ选填"
+                        android:hint="请输入QQ"
                         android:inputType="textPersonName"
                         android:padding="10dp"
                         android:textColor="@color/app_call_option_text_color"

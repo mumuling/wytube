@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/linear_wyxq"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -13,18 +14,31 @@
         android:paddingTop="20dp"
         android:paddingLeft="10dp"
         android:paddingBottom="20dp"
-        android:paddingEnd="10dp">
+        android:paddingRight="10dp">
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/checkbox_style"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/text_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="物业费" />
 
         <TextView
             android:id="@+id/item_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="25dp"
-            android:textSize="16sp"
-            android:text="物业费" />
-
-
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="16sp"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,20 +49,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
-
                 <TextView
                     android:id="@+id/text_xqname"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
-                    android:text="费用合计" />
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:id="@+id/push_money"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:gravity="center|right"
                     android:text="150"
                     android:textColor="@color/app_color_pass_color"
                     android:textSize="16sp" />

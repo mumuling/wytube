@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cqxb.yecall.R;
 import com.skyrain.library.k.BindClass;
@@ -20,6 +19,7 @@ import com.wytube.beans.BaseWPjy;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -81,17 +81,19 @@ public class BorroActivity extends Activity {
     private void linear_qxOnClick() {
         if (lifeAdapater.flages) {
             for (int i = 0; i < list.size(); i++) {
-                if (i==0){
-                    /*第一条数据不显示勾选框*/
-                    list.get(i).isCheck = false;
-                }else {
-                    list.get(i).isCheck = true;
+                /*全选*/
+                if (AppValue.WPJYxxId != null && !AppValue.WPJYxxId.equals(""))
+                {
+                    AppValue.WPJYxxId += ",";
                 }
+                AppValue.WPJYxxId += list.get(i).getGoodsId();
+                list.get(i).isCheck = true;
             }
             lifeAdapater.flages=!lifeAdapater.flages;
             mtext_qx.setText("全不选");
             lifeAdapater.notifyDataSetChanged();
         }else {
+            AppValue.WPJYxxId="";
             for (int i = 0; i < list.size(); i++) {
                 list.get(i).isCheck = false;
             }
@@ -104,17 +106,24 @@ public class BorroActivity extends Activity {
     /*删除*/
     @KListener(R.id.linear_modify)
     private void linear_modifyOnClick() {
-        loadsDle(AppValue.JYxxId);
+        String[] wPJYxxId = AppValue.WPJYxxId.split(",");
+        for (int i = 0; i < wPJYxxId.length; i++) {
+            if (AppValue.WPJYxxId != null && !AppValue.WPJYxxId.equals(""))
+            {
+                AppValue.WPJYxxId="";
+                AppValue.WPJYxxId += "";
+            }
+            AppValue.WPJYxxId += list.get(i).getGoodsId();
+            loadsDle(AppValue.WPJYxxId);
+        }
     }
 
 
     /**
-     * 删除生活服务
+     * 删除物品借用
      */
-    private void loadsDle(String tradingId) {
-        Utils.showLoad(this);
-        Client.sendPost(NetParmet.USR_JY_DELET, "ids=" + tradingId, new Handler(msg -> {
-            Utils.exitLoad();
+    private void loadsDle(String goodsId) {
+        Client.sendPost(NetParmet.USR_WPJY_DLETE, "goodsId=" + goodsId, new Handler(msg -> {
             String json = msg.getData().getString("post");
             BaseOK bean = Json.toObject(json, BaseOK.class);
             if (bean == null) {
@@ -124,8 +133,8 @@ public class BorroActivity extends Activity {
             if (!bean.isSuccess()) {
                 Utils.showOkDialog(this, bean.getMessage());
                 return false;
-            }else {
-                Toast.makeText(this, "删除成功!", Toast.LENGTH_SHORT).show();
+            } else {
+                ToastUtils.showToast(this,"删除成功!");
                 lifeAdapater.flage = !lifeAdapater.flage;
                 if (!lifeAdapater.flage) {
                     rmenu_text.setText("取消");
@@ -135,6 +144,7 @@ public class BorroActivity extends Activity {
                     mlinear_sc_qx.setVisibility(View.GONE);
                 }
                 lifeAdapater.notifyDataSetChanged();
+                AppValue.WPJYxxId = "";
                 loadDate();
             }
             return false;

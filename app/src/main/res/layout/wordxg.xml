@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/e8e8e8">
+
+    <RelativeLayout
+        android:id="@+id/rlss"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+        <ImageView
+            android:id="@+id/back_but"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ty_fh"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp" />
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="修改密码"
+            android:textSize="16sp"
+            android:textColor="@color/main_def_text_color"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/back_but"
+            android:layout_toEndOf="@+id/back_but" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/app_def_text_color" />
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:id="@+id/relative_mj">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重置密码"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/main_def_text_color"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            android:id="@+id/textView19" />
+
+        <EditText
+            android:id="@+id/edi_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_marginLeft="10dp"
+            android:ems="15"
+            android:hint="请输入重置密码"
+            android:textSize="16sp"
+            android:inputType="number"
+            android:textColor="@color/app_call_option_text_color"
+            android:textColorHint="@color/app_def_text_color"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView19"
+            android:layout_toEndOf="@+id/textView19"
+            android:layout_marginStart="15dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/app_def_text_color" />
+
+    <RelativeLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确认密码"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/main_def_text_color"
+            android:layout_centerVertical="true"
+            android:textSize="18sp"
+            android:id="@+id/textView10" />
+
+        <EditText
+            android:id="@+id/edi_password_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_marginLeft="10dp"
+            android:ems="15"
+            android:hint="再次确认密码"
+            android:textSize="16sp"
+            android:inputType="number"
+            android:textColor="@color/app_call_option_text_color"
+            android:textColorHint="@color/app_def_text_color"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/textView10"
+            android:layout_toEndOf="@+id/textView10"
+            android:layout_marginStart="15dp" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/select_but"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:cardBackgroundColor="@color/app_main_color_green"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:paddingTop="10dp"
+            android:textSize="18sp"
+            android:text="重置密码"
+            android:textColor="@color/white" />
+    </android.support.v7.widget.CardView>
+</LinearLayout>

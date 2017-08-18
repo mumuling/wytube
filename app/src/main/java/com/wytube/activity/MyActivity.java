@@ -59,13 +59,13 @@ public class MyActivity extends FragmentActivity {
     /*修改密码*/
     @KListener(R.id.relative_xg)
     private void relative_xgOnClick() {
-
+        startActivity(new Intent(this, PassActivity.class));
     }
 
     /*门禁账号*/
     @KListener(R.id.relative_mj)
     private void relative_mjOnClick() {
-
+        startActivity(new Intent(this, LoginAppActivity.class));
     }
 
     /*切换账号*/

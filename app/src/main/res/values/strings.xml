@@ -10,6 +10,21 @@
     <string name="xlistview_header_last_time">上次更新时间：</string>
     <string name="xlistview_footer_hint_normal">查看更多</string>
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <!-- 下拉刷新,上拉加载 -->
+    <string name="refresh_footer_more">查看更多</string>
+    <string name="refresh_header_pull">下拉刷新</string>
+    <string name="refresh_header_date">上次更新时间：</string>
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_succeed">刷新成功</string>
+    <string name="refresh_fail">刷新失败</string>
+    <string name="pullup_to_load">上拉加载更多</string>
+    <string name="release_to_load">释放立即加载</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_succeed">加载成功</string>
+    <string name="load_fail">加载失败</string>
+
     <string name="status_available">在线</string>
     <string name="status_away">离开</string>
     <string name="status_chat">Q我吧</string>
@@ -18,17 +33,11 @@
     <string name="status_offline">离线</string>
     <string name="status_busy">忙碌</string>
     <string name="status_online">在线</string>
-    <string name="release_to_refresh">释放立即刷新</string>
-    <string name="refreshing">正在刷新…</string>
     <string name="not_updated_yet">暂未更新过</string>
     <string name="updated_at">上次更新于%1$s前</string>
     <string name="updated_just_now">刚刚更新</string>
     <string name="time_error">时间有问题</string>
-    <string name="pull_to_refresh">下拉刷新</string>
-    <string name="refresh_succeed">刷新成功</string>
-    <string name="refresh_fail">刷新失败</string>
     <string name="more">更多</string>
-    <string name="loading">正在加载...</string>
     <string name="initial_config_error">&lt;P ALIGN=CENTER&gt;No SIP account has been configured
         yet, do you want to go to the settings page ?&lt;br/&gt;&lt;br/&gt; Need help ?&lt;br/&gt;
         &quot;http://www.linphone.org/m/help&quot;&lt;/p&gt;</string>

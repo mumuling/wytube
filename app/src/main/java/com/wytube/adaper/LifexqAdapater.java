@@ -107,8 +107,25 @@ public class LifexqAdapater extends BaseAdapter {
         mholder.checkbox.setOnClickListener(v -> {
             if (list.get(position).isCheck) {
                 list.get(position).isCheck = false;
+                String[] LifeIds = AppValue.LifeId.split(",");
+                AppValue.LifeId = "";
+                for (int i = 0; i < LifeIds.length; i++) {
+                    if(!LifeIds[i].equals(list.get(position).getShopId()))
+                    {
+                        if (AppValue.LifeId != null && !AppValue.LifeId.equals(""))
+                        {
+                            AppValue.LifeId += ",";
+                        }
+                        AppValue.LifeId += LifeIds[i];
+                    }
+                }
             } else {
-                AppValue.LifeId = list.get(position).getShopId();
+                if (AppValue.LifeId != null && !AppValue.LifeId.equals(""))
+                {
+                    AppValue.LifeId += ",";
+                }
+                AppValue.LifeId += list.get(position).getShopId();
+                list.get(position).isCheck = true;
             }
         });
 

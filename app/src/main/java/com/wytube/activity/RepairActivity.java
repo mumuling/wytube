@@ -30,8 +30,6 @@ import java.util.List;
 @KActivity(R.layout.activity_repair)
 public class RepairActivity extends BaseActivity {
 
-//    @KBind(R.id.all_data)
-//    private LinearLayout mAllData;
     @KBind(R.id.not_process)
     private LinearLayout mNotProcess;
     @KBind(R.id.process_ing)
@@ -43,21 +41,23 @@ public class RepairActivity extends BaseActivity {
     private LinearLayout selectLayout;
     private List<RepairBean.DataBean> tempBeans = new ArrayList<>();
     private RepairAdapters adapter;
+    private int statetype = 0; /*每次点击改变值 默认为0*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
-        loadData();
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
-        selectLayout = mNotProcess;
+        loadData();
+        selectLayout = mNotProcess;/*标头栏*/
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if (AppValue.fish == 1) {
+            tempBeans.clear();/*清空之前的数据*/
             loadData();
             AppValue.fish = -1;
         }
@@ -70,6 +70,7 @@ public class RepairActivity extends BaseActivity {
         selectLayout = mNotProcess;
         ((TextView) mNotProcess.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         mNotProcess.getChildAt(1).setVisibility(View.VISIBLE);
+        statetype = 0;
         tempBeans.clear();
         for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
             if (repairBean.getStateId() == 0) {
@@ -86,6 +87,7 @@ public class RepairActivity extends BaseActivity {
         selectLayout = mProcessIng;
         ((TextView) mProcessIng.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         mProcessIng.getChildAt(1).setVisibility(View.VISIBLE);
+        statetype = 1;
         tempBeans.clear();
         for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
             if (repairBean.getStateId() == 1) {
@@ -102,6 +104,7 @@ public class RepairActivity extends BaseActivity {
         selectLayout = mProcessed;
         ((TextView) mProcessed.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         mProcessed.getChildAt(1).setVisibility(View.VISIBLE);
+        statetype = 2;
         tempBeans.clear();
         for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
             if (repairBean.getStateId() == 2) {
@@ -110,16 +113,6 @@ public class RepairActivity extends BaseActivity {
         }
         adapter.setBeans(tempBeans);
         adapter.notifyDataSetChanged();
-    }
-
-    /**
-     * 清除点击样式
-     *
-     * @param layout 布局视图
-     */
-    private void clearStyle(LinearLayout layout) {
-        ((TextView) layout.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_def_text_color));
-        layout.getChildAt(1).setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -142,8 +135,10 @@ public class RepairActivity extends BaseActivity {
             AppValue.repairBeans = bean.getData();
             adapter = new RepairAdapters(this,AppValue.repairBeans);
             mRepairList.setAdapter(this.adapter);
+
+
             for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
-                if (repairBean.getStateId() == 0) {
+                if (repairBean.getStateId() == statetype) {
                     tempBeans.add(repairBean);
                 }
             }
@@ -151,6 +146,17 @@ public class RepairActivity extends BaseActivity {
             adapter.notifyDataSetChanged();
             return false;
         }));
+    }
+
+
+    /**
+     * 清除点击样式
+     *
+     * @param layout 布局视图
+     */
+    private void clearStyle(LinearLayout layout) {
+        ((TextView) layout.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_def_text_color));
+        layout.getChildAt(1).setVisibility(View.INVISIBLE);
     }
 
 

@@ -53,6 +53,8 @@ public class TradingInfoActivity extends Activity {
         mShopName.setText(bean.getTitle());
         if (bean.getImgList() != null && bean.getImgList().size() > 0) {
             Utils.loadImage(mShopImg, bean.getImgList().get(0).getImgUrl());
+        }else {
+            mShopImg.setImageResource(R.drawable.jygl_tz);
         }
         mShopMoney.setText(bean.getPrice());
         mPhoneNum.setText(bean.getPhone());

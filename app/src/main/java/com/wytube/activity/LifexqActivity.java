@@ -19,10 +19,11 @@ import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.LifexqAdapater;
 import com.wytube.beans.BaseLeftxq;
-import com.wytube.beans.BaseOK;
+import com.wytube.beans.BasesOK;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -84,12 +85,19 @@ public class LifexqActivity extends Activity {
     private void linear_qxOnClick() {
         if (lifexqAdapater.flages) {
             for (int i = 0; i < list.size(); i++) {
+                 /*全选*/
+                if (AppValue.LifeId != null && !AppValue.LifeId.equals(""))
+                {
+                    AppValue.LifeId += ",";
+                }
+                AppValue.LifeId += list.get(i).getShopId();
                 list.get(i).isCheck = true;
             }
             lifexqAdapater.flages=!lifexqAdapater.flages;
             mtext_qx.setText("全不选");
             lifexqAdapater.notifyDataSetChanged();
         }else {
+            AppValue.LifeId="";
             for (int i = 0; i < list.size(); i++) {
                 list.get(i).isCheck = false;
             }
@@ -111,32 +119,33 @@ public class LifexqActivity extends Activity {
      */
     private void loadsDle(String shopId) {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.USR_SHFWXQ_DL, "ids=" + shopId, new Handler(msg -> {
-            Utils.exitLoad();
-            String json = msg.getData().getString("post");
-            BaseOK bean = Json.toObject(json, BaseOK.class);
-            if (bean == null) {
-                Utils.showNetErrorDialog(this);
-                return false;
-            }
-            if (!bean.isSuccess()) {
-                Utils.showOkDialog(this, bean.getMessage());
-                return false;
-            }else {
-                Toast.makeText(this, "删除成功!", Toast.LENGTH_SHORT).show();
-                lifexqAdapater.flage = !lifexqAdapater.flage;
-                if (!lifexqAdapater.flage) {
-                    rmenu_text.setText("取消");
-                    mlinear_sc_qx.setVisibility(View.VISIBLE);
-                } else {
-                    rmenu_text.setText("选择");
-                    mlinear_sc_qx.setVisibility(View.GONE);
+            Client.sendPost(NetParmet.USR_SHFWXQ_DL, "ids="+ shopId, new Handler(msg -> {
+                Utils.exitLoad();
+                String json = msg.getData().getString("post");
+                BasesOK bean = Json.toObject(json, BasesOK.class);
+                if (bean == null) {
+                    Utils.showNetErrorDialog(this);
+                    return false;
                 }
-                lifexqAdapater.notifyDataSetChanged();
-                loads(ShopId);
-            }
-            return false;
-        }));
+                if (!bean.isSuccess()) {
+                    Utils.showOkDialog(this, bean.getMsg());
+                    return false;
+                } else {
+                    Toast.makeText(this, "删除成功!", Toast.LENGTH_SHORT).show();
+                    lifexqAdapater.flage = !lifexqAdapater.flage;
+                    if (!lifexqAdapater.flage) {
+                        rmenu_text.setText("取消");
+                        mlinear_sc_qx.setVisibility(View.VISIBLE);
+                    } else {
+                        rmenu_text.setText("选择");
+                        mlinear_sc_qx.setVisibility(View.GONE);
+                    }
+                    lifexqAdapater.notifyDataSetChanged();
+                    AppValue.LifeId="";
+                    loads(ShopId);
+                }
+                return false;
+            }));
     }
 
     /**

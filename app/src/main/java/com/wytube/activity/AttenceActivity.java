@@ -14,28 +14,23 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * Created by LIN on 2017/8/4.
- */
+/*
+ * 物业考勤
+ * */
 @KActivity(R.layout.activity_attence)
 public class AttenceActivity extends BaseActivity {
     @KBind(R.id.tv)
     private TextView mTv;
     @KBind(R.id.tv_time)
     private TextView tv_time;
-   @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        BindClass.bind(this);
-
-        findViewById(R.id.back_but).setOnClickListener(v -> {
-            finish();
-        });
-        findViewById(R.id.title_text).setOnClickListener(v -> {
-            finish();});
+       super.onCreate(savedInstanceState);
+       BindClass.bind(this);
+       findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
+       findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
        mTv.setText(getTime());
-
-       SimpleDateFormat formatter = new SimpleDateFormat ("HH  :  mm ");
+       SimpleDateFormat formatter = new SimpleDateFormat ("HH:mm");
        Date curDate = new Date(System.currentTimeMillis());
        String str = formatter.format(curDate);
        tv_time.setText(str);

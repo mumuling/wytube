@@ -124,6 +124,7 @@ public class IndexActivity extends FragmentActivity {
             Utils.showLoginDialog(this);
             return;
         }
+        startActivity(new Intent(this, ComplaintActivity.class));
     }
 
     /*喜事管理*/

@@ -24,6 +24,7 @@ import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.beans.BaseOK;
+import com.wytube.beans.BasesOK;
 import com.wytube.dialog.DateSelectActivity;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
@@ -160,6 +161,10 @@ public class ActiveFbActivity extends Activity implements DateSelectActivity.Dat
             Utils.showOkDialog(this, "请填资讯标题!");
             return;
         }
+        if (qq.length() <= 0) {
+            Utils.showOkDialog(this, "请填资讯标题!");
+            return;
+        }
         if (mstart_time.getText().equals("")&&mstart_time.getText()==null) {
             Utils.showOkDialog(this, "请选择开始时间!");
             return;
@@ -218,13 +223,13 @@ public class ActiveFbActivity extends Activity implements DateSelectActivity.Dat
         Client.sendFile(NetParmet.USR_ADD_XGHD, keyValue, imgsPath, new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("file");
-            BaseOK bean = Json.toObject(json, BaseOK.class);
+            BasesOK bean = Json.toObject(json, BasesOK.class);
             if (bean == null) {
                 Utils.showNetErrorDialog(this);
                 return false;
             }
             if (!bean.isSuccess()) {
-                Utils.showOkDialog(this, bean.getMessage());
+                Utils.showOkDialog(this, bean.getMsg());
                 return false;
             }else {
                 imgsPath.clear();

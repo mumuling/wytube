@@ -153,7 +153,7 @@ public class YeCallListPasswordAdapters extends BaseAdapter {
     // 初始化密码
     private void initPassword(final int position, final TextView password, final YeCallListPasswordAdapters.viewHolder vh) {
 
-        String user = SettingInfo.getParams(PreferenceBean.USERACCOUNT, "");
+        String user = SettingInfo.getParams(PreferenceBean.USERNAME, "");
         String equipmentId = list.get(position).getDoorId();
 
         Client.sendPost(NetParam.USR_DOOR_INFO, "phone="+user +"&door="+equipmentId, new Handler(msg -> {

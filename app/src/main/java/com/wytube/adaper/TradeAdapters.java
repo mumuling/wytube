@@ -15,6 +15,7 @@ import com.cqxb.yecall.R;
 import com.wytube.activity.PYTradeActivity;
 import com.wytube.activity.TradingInfoActivity;
 import com.wytube.beans.BaseJylb;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -47,7 +48,7 @@ public class TradeAdapters extends BaseAdapter{
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return list.size();
+        return list.size()+1;
     }
 
     @Override
@@ -79,6 +80,11 @@ public class TradeAdapters extends BaseAdapter{
         } else {
             mholder = (viewHolder) convertView.getTag();
         }
+        if (selected.containsKey(position-1))
+            mholder.checkbox.setChecked(true);
+        else
+            mholder.checkbox.setChecked(false);
+
         if (position==0){
             mholder.rela_xx.setVisibility(View.GONE);
             mholder.textView22.setVisibility(View.VISIBLE);
@@ -95,6 +101,7 @@ public class TradeAdapters extends BaseAdapter{
             }
             mholder.text_name.setText(list.get(position-1).getTitle());
             mholder.text_money.setText(list.get(position-1).getPrice());
+            mholder.checkbox.setChecked(list.get(position-1).isCheck);
         }
 
         mholder.rel_but.setOnClickListener(v -> {
@@ -120,17 +127,29 @@ public class TradeAdapters extends BaseAdapter{
             }
         }
 
-        if (selected.containsKey(position-1))
-            mholder.checkbox.setChecked(true);
-        else
-            mholder.checkbox.setChecked(false);
-        mholder.checkbox.setChecked(list.get(position).isCheck);
         /*注意这里设置的不是onCheckedChangListener*/
         mholder.checkbox.setOnClickListener(v -> {
             if (list.get(position-1).isCheck) {
                 list.get(position-1).isCheck = false;
+                String[] jyxxIds = AppValue.JYxxId.split(",");
+                AppValue.JYxxId = "";
+                for (int i = 0; i < jyxxIds.length; i++) {
+                    if(!jyxxIds[i].equals(list.get(position-1).getTradingId()))
+                    {
+                        if (AppValue.JYxxId != null && !AppValue.JYxxId.equals(""))
+                        {
+                            AppValue.JYxxId += ",";
+                        }
+                        AppValue.JYxxId += jyxxIds[i];
+                    }
+                }
             } else {
-                AppValue.JYxxId = list.get(position-1).getTradingId();
+                if (AppValue.JYxxId != null && !AppValue.JYxxId.equals(""))
+                {
+                    AppValue.JYxxId += ",";
+                }
+                AppValue.JYxxId += list.get(position-1).getTradingId();
+                list.get(position-1).isCheck = true;
             }
         });
 
