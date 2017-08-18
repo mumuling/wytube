@@ -19,6 +19,7 @@ import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.HappyAdapter;
 import com.wytube.beans.BaseOK;
+import com.wytube.beans.BasesOK;
 import com.wytube.beans.HappyBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
@@ -109,15 +110,13 @@ public class ApplyDetailActivity extends BaseActivity {
     /*
     * 喜事删除
     * */
-    int typeId;
-
     @KListener(R.id.rl_del)
     private void rl_delOnclick() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.HAPPY_DELETE, "typeId=" + typeId, new Handler(msg -> {
+        Client.sendPost(NetParmet.HAPPY_DELETE, "celebrationId=" + dataBean.getCelebrationId(), new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
-            BaseOK bean = Json.toObject(json, BaseOK.class);
+            BasesOK bean = Json.toObject(json, BasesOK.class);
             if (bean == null) {
                 Utils.showNetErrorDialog(this);
                 return false;
@@ -134,11 +133,10 @@ public class ApplyDetailActivity extends BaseActivity {
 
 
     //删除喜事列表
-
     @KListener(R.id.tv_delete)
     private void deleteOnClick() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.HAPPY_DELETE, "typeId=" + dataBean.getCelebrationId(), new Handler(msg -> {
+        Client.sendPost(NetParmet.HAPPY_DELETE, "celebrationId=" + dataBean.getCelebrationId(), new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             BaseOK bean = Json.toObject(json, BaseOK.class);
