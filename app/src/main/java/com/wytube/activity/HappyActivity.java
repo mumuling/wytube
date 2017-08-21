@@ -138,12 +138,12 @@ public class HappyActivity extends BaseActivity {
     private void ll_okedOnClick() {
         clearStyle(selectLayout);
         type = 1;
+        passData.clear();
         selectLayout = ll_oked;
         ((TextView) ll_oked.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         ll_oked.getChildAt(1).setVisibility(View.VISIBLE);
-        passData.clear();
         for (HappyBean.DataBean happyBean : AppValue.xsBeans) {
-            if (happyBean.getStateId() == 1) {
+            if (happyBean.getStateId() == 1|| happyBean.getStateId() == 2) {
                 passData.add(happyBean);
             }
         }
