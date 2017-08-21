@@ -129,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="已缴费"
+                    android:text="未缴费"
                     android:textColor="@color/app_main_color_green"
                     android:textSize="18sp" />
 
@@ -153,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="未缴费"
+                    android:text="已缴费"
                     android:textColor="@color/app_def_text_color"
                     android:textSize="18sp" />
 
@@ -166,17 +166,27 @@
             </LinearLayout>
 
         </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.wytube.shared.Ftime.PinnedSectionRefreshListView
+            <com.wytube.shared.ListViewForScrollView
                 android:id="@+id/zd_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linear_sc_qx"

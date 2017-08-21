@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.cqxb.yecall.R;
 import com.wytube.activity.ImageActivity;
 import com.wytube.beans.DynamicBean;
-import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -132,7 +131,6 @@ public class DynamicAdapters extends BaseAdapter{
                 }
                 AppValue.TrackId += list.get(position).getTrackId();
                 list.get(position).isCheck = true;
-                ToastUtils.showToast(mContext,AppValue.TrackId+"");
             }
         });
         return convertView;

@@ -86,7 +86,7 @@ public class TraWPfbInfoActivity extends Activity {
                     finish();
                     AppValue.fish=1;
                 }
-            }, 200);
+            }, 1000);
         }else {
             Utils.showOkDialog(this, "请选择图片!");
         }

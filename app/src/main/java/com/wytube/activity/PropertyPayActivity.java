@@ -5,8 +5,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cqxb.yecall.BaseActivity;
 import com.cqxb.yecall.R;
@@ -15,12 +15,12 @@ import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.beans.BaseOK;
-import com.wytube.beans.BiilAdapters;
+import com.wytube.beans.BiilAdapter;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
 import com.wytube.shared.Ftime.BiilBeaan;
-import com.wytube.shared.Ftime.PinnedSectionRefreshListView;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -32,19 +32,17 @@ import java.util.List;
  * 物业缴费
  * */
 @KActivity(R.layout.activity_wyjfs)
-public class PropertyPayActivity extends BaseActivity implements PinnedSectionRefreshListView.IXListViewListener {
+public class PropertyPayActivity extends BaseActivity {
 //    private ArrayList<PinnedSectionBean> real_data;
-    private List<BiilBeaan.DataBean> real_data;
-    private List<BiilBeaan.DataBean> notBean;
-    private List<BiilBeaan.DataBean> allBean;
-    public static boolean isReload = false;
+    List<BiilBeaan.DataBean> real_data = new ArrayList<>();
+    private LinearLayout selectLayout;
 
     @KBind(R.id.all_zd)
     private LinearLayout mAllZd;
     @KBind(R.id.wj_zd)
     private LinearLayout mWjZd;
     @KBind(R.id.zd_list)
-    private PinnedSectionRefreshListView mListView;
+    private ListView mListView;
     @KBind(R.id.key_words)
     private EditText mKeyWords;
     @KBind(R.id.sreatch_layout)
@@ -55,7 +53,8 @@ public class PropertyPayActivity extends BaseActivity implements PinnedSectionRe
     private LinearLayout mlinear_sc_qx;
     @KBind(R.id.text_qx)
     private TextView mtext_qx;
-    private BiilAdapters mAdapter;
+    private BiilAdapter mAdapter;
+    int type = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,16 +74,15 @@ public class PropertyPayActivity extends BaseActivity implements PinnedSectionRe
             mAdapter.notifyDataSetChanged();
         });
         loadList();
-        mListView.setPullLoadEnable(true);
-        mListView.setXListViewListener(this);
+        selectLayout = mAllZd;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         if (AppValue.fish==1){
+            real_data.clear();
             loadList();
-            AppValue.fish=-1;
         }
     }
 
@@ -93,12 +91,19 @@ public class PropertyPayActivity extends BaseActivity implements PinnedSectionRe
     private void linear_qxOnClick() {
         if (mAdapter.flages) {
             for (int i = 0; i < real_data.size(); i++) {
+                /*全选*/
+                if (AppValue.WYjfId != null && !AppValue.WYjfId.equals(""))
+                {
+                    AppValue.WYjfId += ",";
+                }
+                AppValue.WYjfId += real_data.get(i).getBillId();
                 real_data.get(i).isCheck = true;
             }
             mAdapter.flages=!mAdapter.flages;
             mtext_qx.setText("全不选");
             mAdapter.notifyDataSetChanged();
         }else {
+            AppValue.WYjfId="";
             for (int i = 0; i < real_data.size(); i++) {
                 real_data.get(i).isCheck = false;
             }
@@ -112,22 +117,16 @@ public class PropertyPayActivity extends BaseActivity implements PinnedSectionRe
     /*删除*/
     @KListener(R.id.linear_modify)
     private void linear_modifyOnClick() {
-        loaddelete();
-    }
-
-
-    @Override
-    public void onRefresh() {
-        mListView.stopRefresh();
-        mListView.stopLoadMore();
-        // 这里也可以用系统时间
-        mListView.setRefreshTime("刚刚");
-    }
-
-
-    @Override
-    public void onLoadMore() {
-        mListView.setLoadHide();
+        String[] wWYjfId = AppValue.WYjfId.split(",");
+        for (int i = 0; i < wWYjfId.length; i++) {
+            if (AppValue.WYjfId != null && !AppValue.WYjfId.equals(""))
+            {
+                AppValue.WYjfId="";
+                AppValue.WYjfId += "";
+            }
+            AppValue.WYjfId += real_data.get(i).getBillId();
+            loaddelete(AppValue.WYjfId);
+        }
     }
 
 
@@ -135,11 +134,10 @@ public class PropertyPayActivity extends BaseActivity implements PinnedSectionRe
      * billId	是	String	物业费Id
      * stateId
      */
-    private void loaddelete() {
-        Utils.showLoad(this);
-        String Kvs = "billId="+AppValue.WYjfId;
+    boolean ISok = false;
+    private void loaddelete(String billId) {
+        String Kvs = "billId="+billId;
         Client.sendPost(NetParmet.USR_WYFY_DELE, Kvs, new Handler(msg -> {
-            Utils.exitLoad();
             String json = msg.getData().getString("post");
             BaseOK bean = Json.toObject(json, BaseOK.class);
             if (bean == null) {
@@ -150,7 +148,7 @@ public class PropertyPayActivity extends BaseActivity implements PinnedSectionRe
                 Utils.showOkDialog(this, bean.getMessage());
                 return false;
             } else {
-                Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
+                ToastUtils.showToast(this,"删除成功");
                 mAdapter.flage = !mAdapter.flage;
                 if (!mAdapter.flage) {
                     rmenu_text.setText("取消");
@@ -160,7 +158,13 @@ public class PropertyPayActivity extends BaseActivity implements PinnedSectionRe
                     mlinear_sc_qx.setVisibility(View.GONE);
                 }
                 mAdapter.notifyDataSetChanged();
-                loadList();
+                AppValue.WYjfId="";
+                real_data.clear();
+                if (!ISok){
+                    loadList();
+                    mAdapter.flage = false;
+                    ISok=true;
+                }
             }
             return false;
         }));
@@ -172,9 +176,7 @@ public class PropertyPayActivity extends BaseActivity implements PinnedSectionRe
      */
     BiilBeaan bean;
     private void loadList() {
-        Utils.showLoad(this);
         Client.sendPost(NetParmet.USR_WYFY, "", new Handler(msg -> {
-            Utils.exitLoad();
             String json = msg.getData().getString("post");
             bean = Json.toObject(json, BiilBeaan.class);
             if (bean == null) {
@@ -185,52 +187,70 @@ public class PropertyPayActivity extends BaseActivity implements PinnedSectionRe
                 Utils.showOkDialog(PropertyPayActivity.this, bean.getMessage());
                 return false;
             }
-            allBean = bean.getData();
-            real_data = bean.getData();
-            splitData(bean.getData());
-            mAdapter = new BiilAdapters(real_data, this);
+            if (AppValue.fish==1){
+                /*删除时先清除上一次数据*/
+                AppValue.wyreal.clear();
+                AppValue.fish=-1;
+            }
+            AppValue.wyreal = bean.getData();
+            mAdapter = new BiilAdapter(real_data, this);
             mListView.setAdapter(mAdapter);
+            for (BiilBeaan.DataBean repairBean : AppValue.wyreal) {
+                if (repairBean.getStateId() == type) {
+                    real_data.add(repairBean);
+                }
+            }
+            mAdapter.setData(real_data);
+            mAdapter.notifyDataSetChanged();
             return false;
         }));
     }
 
     /**
-     * 分离数据
+     * 清除点击样式
+     *
+     * @param layout 布局视图
      */
-    private void splitData(List<BiilBeaan.DataBean> been) {
-        List<BiilBeaan.DataBean> beans = new ArrayList<>();
-        for (BiilBeaan.DataBean bean : been) {
-            if (bean.getStateId().equals("0")) {
-                beans.add(bean);
-            }
-        }
-        notBean = beans;
-    }
-
-    /*已缴费*/
-    @KListener(R.id.all_zd)
-    private void all_zdOnClick() {
-        ((TextView) mAllZd.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
-        mAllZd.getChildAt(1).setVisibility(View.VISIBLE);
-        ((TextView) mWjZd.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_def_text_color));
-        mWjZd.getChildAt(1).setVisibility(View.INVISIBLE);
-        if (allBean != null) {
-            mAdapter.setBeen(allBean);
-            mAdapter.notifyDataSetChanged();
-        }
+    private void clearStyle(LinearLayout layout) {
+        ((TextView) layout.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_def_text_color));
+        layout.getChildAt(1).setVisibility(View.INVISIBLE);
     }
 
     /*未缴费*/
+    @KListener(R.id.all_zd)
+    private void all_zdOnClick() {
+        clearStyle(selectLayout);
+        selectLayout = mAllZd;
+        ((TextView) mAllZd.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
+        mAllZd.getChildAt(1).setVisibility(View.VISIBLE);
+        type = 0;
+        real_data.clear();
+        for (BiilBeaan.DataBean  BiilBean : AppValue.wyreal) {
+            if (BiilBean.getStateId() == 0) {
+                real_data.add(BiilBean);
+            }
+        }
+        mAdapter.setData(real_data);
+        mAdapter.notifyDataSetChanged();
+    }
+
+
+    /*已缴费*/
     @KListener(R.id.wj_zd)
     private void wj_zdOnClick() {
-        ((TextView) mAllZd.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_def_text_color));
-        mAllZd.getChildAt(1).setVisibility(View.INVISIBLE);
+        clearStyle(selectLayout);
+        selectLayout = mWjZd;
+        type = 1;
         ((TextView) mWjZd.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         mWjZd.getChildAt(1).setVisibility(View.VISIBLE);
-        if (notBean != null) {
-            mAdapter.setBeen(notBean);
-            mAdapter.notifyDataSetChanged();
+        real_data.clear();
+        for (BiilBeaan.DataBean  BiilBean : AppValue.wyreal) {
+            if (BiilBean.getStateId() == 1) {
+                real_data.add(BiilBean);
+            }
         }
+        mAdapter.setData(real_data);
+        mAdapter.notifyDataSetChanged();
     }
 
     @KListener(R.id.sreatch_layout)

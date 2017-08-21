@@ -121,6 +121,8 @@ public class AppValue {
     public static String selectBut = "";
     /*喜事记录列表*/
     public static List<HappyBean.DataBean> xsBeans;
+    /*物业列表*/
+    public static List<BiilBeaan.DataBean> wyreal;
 
 
     //    /*投诉列表的Item*/

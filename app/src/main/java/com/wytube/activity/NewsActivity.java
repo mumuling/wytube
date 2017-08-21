@@ -54,8 +54,8 @@ public class NewsActivity extends BaseActivity {
     private List<NewsTypeBean.DataBean> typeBeans;
     private List<Map<String, Object>> titleList = new ArrayList<Map<String,Object>>();
     private Map<String, Object> map = new HashMap<String, Object>();
-    Map<String, Object> maps;
-    Bundle savedInst;
+    private Bundle savedInst;
+    private int radioButtonId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,11 +103,12 @@ public class NewsActivity extends BaseActivity {
                 mViews.clear();
                 typeBeans = bean.getData();
                 getTitleInfo();
-//                initGroup();
                 iniListener();
                 iniVariable();
+                /*截取最后一位数*/
+                String name=String.valueOf(radioButtonId);
+                mViewPager.setCurrentItem(Integer.parseInt(name.substring(name.length()-1,name.length())));
                 AppValue.fish=-1;
-                mViewPager.setCurrentItem(0);
             }else {
                 typeBeans = bean.getData();
                 getTitleInfo();
@@ -129,9 +130,8 @@ public class NewsActivity extends BaseActivity {
             titleList.add(map);
         }
     }
-
+    RadioButton radio;
     private void initGroup(){
-
         titleLayout = (LinearLayout) findViewById(R.id.title_lay);
         layout = (LinearLayout) findViewById(R.id.lay);
         //mImageView = new ImageView(this);
@@ -143,8 +143,8 @@ public class NewsActivity extends BaseActivity {
         myRadioGroup.setOrientation(LinearLayout.HORIZONTAL);
         layout.addView(myRadioGroup);
         for (int i = 0; i <titleList.size(); i++) {
-            maps = titleList.get(i);
-            RadioButton radio = new RadioButton(this);
+            Map<String, Object> maps = titleList.get(i);
+            radio = new RadioButton(this);
             radio.setBackgroundResource(R.drawable.radiobtn_selector);
             radio.setButtonDrawable(android.R.color.transparent);
             LinearLayout.LayoutParams l = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, Gravity.CENTER);
@@ -166,26 +166,21 @@ public class NewsActivity extends BaseActivity {
         }
         myRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             //Map<String, Object> map = (Map<String, Object>) group.getChildAt(checkedId).getTag();
-            int radioButtonId = group.getCheckedRadioButtonId();
+            radioButtonId = group.getCheckedRadioButtonId();
             //根据ID获取RadioButton的实例
             RadioButton rb = (RadioButton)findViewById(radioButtonId);
             Map<String, Object> selectMap = (Map<String, Object>) rb.getTag();
-
             AnimationSet animationSet = new AnimationSet(true);
-            TranslateAnimation translateAnimation;
-            translateAnimation = new TranslateAnimation(mCurrentCheckedRadioLeft, rb.getLeft(), 0f, 0f);
+            TranslateAnimation translateAnimation = new TranslateAnimation(mCurrentCheckedRadioLeft, rb.getLeft(), 0f, 0f);
             animationSet.addAnimation(translateAnimation);
             animationSet.setFillBefore(true);
             animationSet.setFillAfter(true);
             animationSet.setDuration(300);
-
             mImageView.startAnimation(animationSet);//开始上面蓝色横条图片的动画切换
             mViewPager.setCurrentItem(radioButtonId-_id);//让下方ViewPager跟随上面的HorizontalScrollView切换
             mCurrentCheckedRadioLeft = rb.getLeft();//更新当前蓝色横条距离左边的距离
             mHorizontalScrollView.smoothScrollTo((int)mCurrentCheckedRadioLeft-(int)getResources().getDimension(R.dimen.rdo2), 0);
-
             mImageView.setLayoutParams(new  LinearLayout.LayoutParams(rb.getRight()-rb.getLeft(),4));
-
         });
 
     }

@@ -146,6 +146,7 @@ public class BorroActivity extends Activity {
                 lifeAdapater.notifyDataSetChanged();
                 AppValue.WPJYxxId = "";
                 loadDate();
+                lifeAdapater.flage = false;
             }
             return false;
         }));
@@ -157,9 +158,7 @@ public class BorroActivity extends Activity {
      * 物品借用列表
      */
     private void loadDate() {
-        Utils.showLoad(this);
         Client.sendPost(NetParmet.USR_WPJY_LB, "", new Handler(msg -> {
-            Utils.exitLoad();
             String json = msg.getData().getString("post");
             BaseWPjy bean = Json.toObject(json, BaseWPjy.class);
             if (bean == null) {

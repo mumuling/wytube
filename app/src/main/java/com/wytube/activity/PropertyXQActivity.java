@@ -105,7 +105,7 @@ public class PropertyXQActivity extends Activity {
         }
         mtext_timer.setText(bean.getMonth());
         mtext_xqname.setText(bean.getBillName());
-        if (bean.getStateId().equals("0")){
+        if (bean.getStateId()==0){
             mtext_zt.setText("未缴");
             mjf_time.setVisibility(View.GONE);
         }else {

@@ -108,7 +108,28 @@ public class BiilAdapters extends BaseAdapter implements
             mholder.checkbox.setChecked(false);
         mholder.checkbox.setChecked(list.get(position).isCheck);
         mholder.checkbox.setOnClickListener(v -> {
-            AppValue.WYjfId = list.get(position).getBillId();
+            if (list.get(position).isCheck) {
+                list.get(position).isCheck = false;
+                String[] WYjfIds = AppValue.WYjfId.split(",");
+                AppValue.WYjfId = "";
+                for (int i = 0; i < WYjfIds.length; i++) {
+                    if(!WYjfIds[i].equals(list.get(position).getBillId()))
+                    {
+                        if (AppValue.WYjfId != null && !AppValue.WYjfId.equals(""))
+                        {
+                            AppValue.WYjfId += ",";
+                        }
+                        AppValue.WYjfId += WYjfIds[i];
+                    }
+                }
+            } else {
+                if (AppValue.WYjfId != null && !AppValue.WYjfId.equals(""))
+                {
+                    AppValue.WYjfId += ",";
+                }
+                AppValue.WYjfId += list.get(position).getBillId();
+                list.get(position).isCheck = true;
+            }
         });
         return convertView;
     }

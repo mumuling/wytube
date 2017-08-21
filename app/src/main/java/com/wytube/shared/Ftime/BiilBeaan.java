@@ -160,7 +160,7 @@ public class BiilBeaan {
         private String price;
         private String num;
         private String totalMoney;
-        private String stateId;
+        private int stateId;
         private Object fromType;
         private Object starttime;
         private Object externalTradeNo;
@@ -298,11 +298,11 @@ public class BiilBeaan {
             this.totalMoney = totalMoney;
         }
 
-        public String getStateId() {
+        public int getStateId() {
             return stateId;
         }
 
-        public void setStateId(String stateId) {
+        public void setStateId(int stateId) {
             this.stateId = stateId;
         }
 
