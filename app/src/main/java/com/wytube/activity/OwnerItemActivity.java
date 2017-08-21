@@ -2,7 +2,6 @@ package com.wytube.activity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -16,8 +15,6 @@ import android.widget.Toast;
 
 import com.cqxb.yecall.BaseActivity;
 import com.cqxb.yecall.R;
-import com.cqxb.yecall.until.PreferenceBean;
-import com.cqxb.yecall.until.SettingInfo;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
@@ -33,14 +30,7 @@ import com.wytube.net.NetParmet;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
-import org.linphone.DialerFragment;
-import org.linphone.InCallActivity;
-import org.linphone.LinphoneManager;
-import org.linphone.ui.AddressText;
 
-/**
- * Created by LIN on 2017/8/6.
- */
 @KActivity(R.layout.item_owner_info)
 public class OwnerItemActivity extends BaseActivity {
 
@@ -64,7 +54,7 @@ public class OwnerItemActivity extends BaseActivity {
     private OwnerBean.DataBean mDatabean;
     private OwnerAdapter adapter;
     private TextWatcher watcher;
-    private String number = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,48 +111,11 @@ public class OwnerItemActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 TellDialog tellDialog = new TellDialog(OwnerItemActivity.this,ownerPhone.getText().toString());
-
                 tellDialog.show();
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + ownerPhone.getText().toString()));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-
             }
         });
     }
-    /**
-     * 调用免费拨打
-     * @param name 电话号码
-     */
-    public void mCalling(String name) {
-        if (SettingInfo.getParams(PreferenceBean.LOGINFLAG, "").equals("")) {
-            DialerFragment.instance().justLogin(this);
-        } else {
-            SettingInfo.setParams(PreferenceBean.CALLSTATUS, "拨号");
-            // LinphoneActivity.instance().startIncallActivity(null);
-            SettingInfo.setParams(PreferenceBean.CALLNAME, name);
-            SettingInfo.setParams(PreferenceBean.CALLPHONE, number);
-            if (number.length() <= 11) {
-                SettingInfo.setParams(PreferenceBean.CALLPOSITION, "私人号码");
-            } else {
-                SettingInfo.setParams(PreferenceBean.CALLPOSITION, "企业号");
-            }
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(OwnerItemActivity.this,
-                            InCallActivity.class);
-                    intent.putExtra("VideoEnabled", false);
-                    startActivity(intent);
-                }
-            }).start();
 
-            LinphoneManager.AddressType address = new AddressText(this, null);
-            address.setDisplayedName(name);
-            address.setText(number);
-            LinphoneManager.getInstance().newOutgoingCall(address);
-        }
-    }
     /**
      * 修改业主
      * buildingId	是	String	楼宇ID
