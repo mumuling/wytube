@@ -18,7 +18,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -222,14 +221,12 @@ public class OwnerItemActivity extends BaseActivity {
         ll_mjtell= (LinearLayout) view.findViewById(R.id.ll_mjtell);
         tv_diss= (TextView) view.findViewById(R.id.tv_diss);
         tv_diss.setOnClickListener(v -> dialog1.dismiss());
-        RelativeLayout rela = (RelativeLayout) view.findViewById(R.id.rlrelatype);
+
         dialog1.getWindow().setContentView(view);
         ll_dhtell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+ownerPhone.getText().toString()));
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+ownerPhone.getText().toString())));
             }
         });
         ll_mjtell.setOnClickListener(new View.OnClickListener() {
