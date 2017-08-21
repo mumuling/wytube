@@ -3,8 +3,8 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical"
-    android:background="@color/white">
+              android:background="@color/white"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/yzgl"
@@ -35,7 +35,10 @@
             android:textColor="@color/main_def_text_color"
             android:textSize="16sp"/>
     </RelativeLayout>
-    android:background="#e0e0e0"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/e8e8e8" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -59,13 +62,13 @@
             android:id="@+id/tv_yezhuxm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_contact"
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
-            android:background="@null"
-            android:hint="请输入业主姓名"
-            android:layout_alignBottom="@+id/tv_contact"
+            android:layout_toEndOf="@+id/tv_contact"
             android:layout_toRightOf="@+id/tv_contact"
-            android:layout_toEndOf="@+id/tv_contact"/>
+            android:background="@null"
+            android:hint="请输入业主姓名"/>
 
 
     </RelativeLayout>
@@ -95,7 +98,6 @@
             android:textSize="16sp"/>
 
         <EditText
-            android:background="@null"
             android:id="@+id/tv_yzphone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,6 +106,7 @@
             android:layout_marginStart="12dp"
             android:layout_toEndOf="@+id/tv_phone"
             android:layout_toRightOf="@+id/tv_phone"
+            android:background="@null"
             android:hint="请输入手机号码"/>
 
 
@@ -153,11 +156,11 @@
         android:background="#e0e0e0"/>
 -->
     <RelativeLayout
-        android:clickable="true"
         android:id="@+id/selectblockLine"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:clickable="true">
 
         <TextView
             android:id="@+id/tv_blcokcontact"
@@ -191,11 +194,11 @@
         android:background="#e0e0e0"/>
 
     <RelativeLayout
-        android:clickable="true"
         android:id="@+id/selectunitLine"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:clickable="true">
 
         <TextView
             android:id="@+id/tv_unit"
@@ -248,41 +251,41 @@
             android:textSize="16sp"/>
 
         <EditText
-            android:background="@null"
             android:id="@+id/tv_yzroom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tv_room"
+            android:layout_alignTop="@+id/tv_room"
             android:layout_marginLeft="11dp"
             android:layout_marginStart="11dp"
             android:layout_toEndOf="@+id/tv_room"
             android:layout_toRightOf="@+id/tv_room"
-            android:hint="请输入房间号"
-            android:layout_alignTop="@+id/tv_room"/>
+            android:background="@null"
+            android:hint="请输入房间号"/>
 
         <!--<TextView-->
-            <!--android:id="@+id/tv_room"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginLeft="14dp"-->
-            <!--android:layout_marginStart="14dp"-->
-            <!--android:text="选择房间号"-->
-            <!--android:textSize="16sp"/>-->
+        <!--android:id="@+id/tv_room"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginLeft="14dp"-->
+        <!--android:layout_marginStart="14dp"-->
+        <!--android:text="选择房间号"-->
+        <!--android:textSize="16sp"/>-->
 
         <!--<ImageView-->
-            <!--android:layout_width="18dp"-->
-            <!--android:layout_height="18dp"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:layout_marginEnd="30dp"-->
-            <!--android:layout_marginRight="30dp"-->
-            <!--android:src="@drawable/arrow"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentEnd="true"/>-->
+        <!--android:layout_width="18dp"-->
+        <!--android:layout_height="18dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_marginEnd="30dp"-->
+        <!--android:layout_marginRight="30dp"-->
+        <!--android:src="@drawable/arrow"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentEnd="true"/>-->
     </RelativeLayout>
 
     <View

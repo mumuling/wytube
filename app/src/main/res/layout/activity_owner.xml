@@ -46,6 +46,10 @@
             android:src="@drawable/yzgl_tj2"/>
 
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/e8e8e8" />
 
     <ListView
             android:id="@+id/yzgl_list"

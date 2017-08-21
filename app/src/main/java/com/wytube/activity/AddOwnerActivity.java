@@ -44,9 +44,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-/**
- * Created by LIN on 2017/8/6.
- */
 @KActivity(R.layout.add_owner)
 public class AddOwnerActivity extends BaseActivity {
 
