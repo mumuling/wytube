@@ -1,4 +1,4 @@
-package com.wytube.beans;
+package com.wytube.adaper;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.cqxb.yecall.R;
 import com.wytube.activity.PropertyXQActivity;
 import com.wytube.shared.Ftime.BiilBeaan;
-import com.wytube.shared.Ftime.PinnedSectionRefreshListView;
 import com.wytube.utlis.AppValue;
 
 import java.util.HashMap;
@@ -26,8 +25,7 @@ import java.util.Map;
  * 类 描 述: 物业缴费适配器
  */
 
-public class BiilAdapters extends BaseAdapter implements
-        PinnedSectionRefreshListView.PinnedSectionListAdapter {
+public class BiilAdapter extends BaseAdapter {
     Context mContext;
     viewHolder mholder;
     private List<BiilBeaan.DataBean> list;
@@ -35,18 +33,12 @@ public class BiilAdapters extends BaseAdapter implements
     public boolean flages = true;/*全选还是不全选*/
     public Map<Integer, String> selected;
 
-    public List<BiilBeaan.DataBean> getList() {
-        return list;
+    public void setData(List<BiilBeaan.DataBean> list) {
+        this.list = list;
     }
-
-    public void setList(List<BiilBeaan.DataBean> list) {
-        if (list != null) {
-            this.list = list;
-        }
-    }
-    public BiilAdapters(List<BiilBeaan.DataBean> list, Context mContext) {
+    public BiilAdapter(List<BiilBeaan.DataBean> list, Context mContext) {
         super();
-        this.setList(list);
+        this.list = list;
         this.mContext = mContext;
         selected = new HashMap<>();
     }
@@ -140,25 +132,5 @@ public class BiilAdapters extends BaseAdapter implements
         private CheckBox checkbox;
     }
 
-    public void setBeen(List<BiilBeaan.DataBean> list) {
-        this.list = list;
-    }
 
-
-    //判断是否是属于标题悬浮的
-    @Override
-    public boolean isItemViewTypePinned(int viewType) {
-        return viewType == BiilBeaan.SECTION;
-    }
-
-    //arraylist的数据里面有2种类型,标题和内容
-    @Override
-    public int getViewTypeCount() {
-        return 2;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return 0;
-    }
 }

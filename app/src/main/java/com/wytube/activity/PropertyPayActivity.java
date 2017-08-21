@@ -15,7 +15,7 @@ import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.beans.BaseOK;
-import com.wytube.beans.BiilAdapter;
+import com.wytube.adaper.BiilAdapter;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
