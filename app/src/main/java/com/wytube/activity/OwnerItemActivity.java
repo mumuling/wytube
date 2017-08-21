@@ -232,6 +232,7 @@ public class OwnerItemActivity extends BaseActivity {
         ll_mjtell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                AppValue.MJphone = mDatabean.getOwnerPhone();
                 startActivity(new Intent(OwnerItemActivity.this, MainTabActivity.class));
             }
         });

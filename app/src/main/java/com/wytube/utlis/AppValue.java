@@ -224,4 +224,6 @@ public class AppValue {
     public static String XSID="";
     /*跳转车牌号*/
     public static String parkphone="";
+    /*门禁电话*/
+    public static String MJphone="";
 }
