@@ -721,7 +721,5 @@
         <activity android:name="com.wytube.activity.HappyActivity"/>
         /*喜事详情*/
         <activity android:name="com.wytube.activity.ApplyDetailActivity"/>
-        /*打电话*/
-        <activity android:name="com.wytube.dialog.TellDialog"/>
     </application>
 </manifest>

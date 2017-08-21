@@ -124,9 +124,9 @@ public class CmunityxqActivity extends BaseActivity {
         mTextTieleContent.setText(AppValue.listBeseHd.getAddress() + " : " + AppValue.listBeseHd.getActivityName());
         mTextView.setText(AppValue.listBeseHd.getJoinCount());
         if (AppValue.listBeseHd.getJoinCount()==null){
-            mTextView.setText("0人");
+            mTextView.setText("0");
         }else {
-            mTextView.setText(AppValue.listBeseHd.getJoinCount()+"人");
+            mTextView.setText(AppValue.listBeseHd.getJoinCount());
         }
         mTextHdtime.setText(AppValue.listBeseHd.getStarttime() + " 至 " + AppValue.listBeseHd.getEndtime());
         mTextPhone.setText(AppValue.listBeseHd.getPhone());

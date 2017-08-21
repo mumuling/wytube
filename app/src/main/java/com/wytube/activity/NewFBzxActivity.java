@@ -69,11 +69,12 @@ public class NewFBzxActivity extends Activity{
     private ImageView mimag_vs;
     @KBind(R.id.text_xgtp)
     private TextView mtext_xgtp;
+    @KBind(R.id.publish_type)
+    private TextView mPublishType;
+
 
     private List<String> imgsPath = new ArrayList<>();
     private String title, text;
-    @KBind(R.id.publish_type)
-    private TextView mPublishType;
     private String tradeType;
     private Dialog dialog1;
     private LayoutInflater inflater;
@@ -204,7 +205,7 @@ public class NewFBzxActivity extends Activity{
             Utils.showOkDialog(this, "请填写正文!");
             return;
         }
-        if (tradeType.length()<=0) {
+        if (mPublishType.getText().equals("请选择")) {
             Utils.showOkDialog(this, "请选择类型!");
             return;
         }

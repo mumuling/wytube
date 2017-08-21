@@ -162,7 +162,7 @@ public class ActiveFbActivity extends Activity implements DateSelectActivity.Dat
             return;
         }
         if (qq.length() <= 0) {
-            Utils.showOkDialog(this, "请填资讯标题!");
+            Utils.showOkDialog(this, "请填QQ!");
             return;
         }
         if (mstart_time.getText().equals("")&&mstart_time.getText()==null) {

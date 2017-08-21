@@ -183,7 +183,7 @@ public class LifeFbActivity extends Activity {
             return;
         }
         if (title.length() <= 0) {
-            Utils.showOkDialog(this, "请填服务标题!");
+            Utils.showOkDialog(this, "请填店铺标题!");
             return;
         }
         if (phone.length() <= 0) {
@@ -194,7 +194,7 @@ public class LifeFbActivity extends Activity {
             Utils.showOkDialog(this, "请填写地址!");
             return;
         }
-        if (tradeType.length()<=0) {
+        if (mPublishType.getText().equals("请选择")) {
             Utils.showOkDialog(this, "请选择类型!");
             return;
         }
