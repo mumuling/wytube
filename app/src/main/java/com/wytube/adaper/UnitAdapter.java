@@ -13,9 +13,6 @@ import com.wytube.beans.UnitBean;
 
 import java.util.List;
 
-/**
- * Created by LIN on 2017/8/8.
- */
 
 public class UnitAdapter extends BaseAdapter{
     Context mContext;

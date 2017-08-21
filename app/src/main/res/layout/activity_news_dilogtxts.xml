@@ -24,10 +24,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/view1"
-                android:gravity="center"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
-                android:text="请选发布类型"
+                android:text="请选住户类型"
                 android:textColor="@color/TextColor_quotient"
                 android:textSize="14dp" />
 

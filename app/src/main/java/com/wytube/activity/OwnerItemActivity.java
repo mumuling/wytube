@@ -1,19 +1,29 @@
 package com.wytube.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cqxb.yecall.BaseActivity;
+import com.cqxb.yecall.MainTabActivity;
 import com.cqxb.yecall.R;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
@@ -23,7 +33,6 @@ import com.wytube.adaper.OwnerAdapter;
 import com.wytube.beans.BaseWyOK;
 import com.wytube.beans.OwnerBean;
 import com.wytube.beans.OwnerDel;
-import com.wytube.dialog.TellDialog;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
@@ -50,10 +59,18 @@ public class OwnerItemActivity extends BaseActivity {
     private TextView tv_edit;
     @KBind(R.id.iv_delete)
     private ImageView iv_delete;
+    @KBind(R.id.ll_mjtell)
+    private LinearLayout ll_mjtell;
+    @KBind(R.id.ll_dhtell)
+    private LinearLayout ll_dhtell;
+    @KBind(R.id.tv_diss)
+    private TextView tv_diss;
     Intent intent;
     private OwnerBean.DataBean mDatabean;
     private OwnerAdapter adapter;
     private TextWatcher watcher;
+    private LayoutInflater inflater;
+    private Dialog dialog1;
 
 
     @Override
@@ -110,8 +127,7 @@ public class OwnerItemActivity extends BaseActivity {
         ll_tellowner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TellDialog tellDialog = new TellDialog(OwnerItemActivity.this,ownerPhone.getText().toString());
-                tellDialog.show();
+                tellDialog();
             }
         });
     }
@@ -198,4 +214,47 @@ public class OwnerItemActivity extends BaseActivity {
         }));
     }
 
+    //电话对话框
+    public void tellDialog() {
+        dialog1 = tldialog();
+        View view = inflater.inflate(R.layout.telldialog, null);
+        ll_dhtell= (LinearLayout) view.findViewById(R.id.ll_dhtell);
+        ll_mjtell= (LinearLayout) view.findViewById(R.id.ll_mjtell);
+        tv_diss= (TextView) view.findViewById(R.id.tv_diss);
+        tv_diss.setOnClickListener(v -> dialog1.dismiss());
+        RelativeLayout rela = (RelativeLayout) view.findViewById(R.id.rlrelatype);
+        dialog1.getWindow().setContentView(view);
+        ll_dhtell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+ownerPhone.getText().toString()));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+        ll_mjtell.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OwnerItemActivity.this, MainTabActivity.class));
+            }
+        });
+
+    }
+    private Dialog tldialog() {
+        Rect bloco = new Rect();
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(bloco);
+        inflater = LayoutInflater.from(OwnerItemActivity.this);
+        Dialog dialog = new Dialog(OwnerItemActivity.this);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();
+        dialog.getWindow().setDimAmount(0.3f);
+        DisplayMetrics dm2 = OwnerItemActivity.this.getResources().getDisplayMetrics();
+        WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
+        lp.width = bloco.width(); //(int) (dm2.widthPixels); // 设置宽度
+        lp.height = bloco.height(); //(int) (dm2.heightPixels-titleBarHeight); // 设置高度
+        dialog.getWindow().setAttributes(lp);
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(bloco);
+        return dialog;
+    }
 }
