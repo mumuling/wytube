@@ -15,13 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cqxb.yecall.R;
-import com.cqxb.yecall.until.PreferenceBean;
-import com.cqxb.yecall.until.SettingInfo;
-import com.wytube.activity.OwnerItemActivity;
-
-import org.linphone.DialerFragment;
-import org.linphone.LinphoneManager;
-import org.linphone.ui.AddressText;
 
 
 public class TellDialog extends Dialog {
@@ -69,7 +62,7 @@ public class TellDialog extends Dialog {
 
         //门禁
         ll_mjtell.setOnClickListener(v -> {
-           // mCalling(number);
+
         });
         //电话
         ll_dhtell.setOnClickListener(v -> {
@@ -79,34 +72,5 @@ public class TellDialog extends Dialog {
         });
     }
 
-    private void mCalling(String name) {
-        if (SettingInfo.getParams(PreferenceBean.LOGINFLAG, "").equals("")) {
-            DialerFragment.instance().justLogin(mActivity);
-        } else {
-            SettingInfo.setParams(PreferenceBean.CALLSTATUS, "拨号");
-            // LinphoneActivity.instance().startIncallActivity(null);
-            SettingInfo.setParams(PreferenceBean.CALLNAME, name);
-            SettingInfo.setParams(PreferenceBean.CALLPHONE, number);
-            if (number.length() <= 11) {
-                SettingInfo.setParams(PreferenceBean.CALLPOSITION, "私人号码");
-            } else {
-                SettingInfo.setParams(PreferenceBean.CALLPOSITION, "企业号");
-            }
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    Intent intent = new Intent(mActivity,
-                            OwnerItemActivity.class);
-                    intent.putExtra("VideoEnabled", false);
-                    mActivity.startActivity(intent);
-                }
-            }).start();
-
-            LinphoneManager.AddressType address = new AddressText(mActivity, null);
-            address.setDisplayedName(name);
-            address.setText(number);
-            LinphoneManager.getInstance().newOutgoingCall(address);
-        }
-    }
 
 }

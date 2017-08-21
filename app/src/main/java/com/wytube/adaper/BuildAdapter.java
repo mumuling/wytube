@@ -13,9 +13,7 @@ import com.wytube.beans.BuildBean;
 
 import java.util.List;
 
-/**
- * Created by LIN on 2017/8/8.
- */
+
 
 public class BuildAdapter extends BaseAdapter {
     Context mContext;
