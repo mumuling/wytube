@@ -163,7 +163,6 @@ public class TSRepairInfoActivity extends BaseActivity {
     /*拨打报修电话*/
     @KListener(R.id.call_but_bx)
     private void call_but_bxOnClick() {
-
         TellDialog.showTell(TSRepairInfoActivity.this,bean.getMobileNo());
     }
 
