@@ -113,7 +113,7 @@
 
                         android:background="@null"
                         android:id="@+id/ownerName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
                         android:paddingLeft="15dp"
                         android:text="18752584136"
@@ -161,7 +161,7 @@
 
                         android:background="@null"
                         android:id="@+id/owneradress"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="15dp"
                         android:text="名江花园5单元1206号"
@@ -188,7 +188,7 @@
 
                         android:id="@+id/ownerPhone"
                         android:background="@null"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingLeft="15dp"
                         android:text="18752584136"
