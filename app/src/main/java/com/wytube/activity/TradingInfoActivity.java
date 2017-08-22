@@ -1,8 +1,6 @@
 package com.wytube.activity;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -15,6 +13,7 @@ import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.beans.BaseJylb;
+import com.wytube.dialog.TellDialog;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -68,9 +67,7 @@ public class TradingInfoActivity extends Activity {
         if (phone.length() <= 0) {
             return;
         }
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + phone));
-        startActivity(intent);
+        TellDialog.showTell(TradingInfoActivity.this,phone);
+
     }
 }

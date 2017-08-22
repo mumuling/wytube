@@ -3,7 +3,6 @@ package com.wytube.activity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -21,6 +20,7 @@ import com.skyrain.library.k.api.KListener;
 import com.wytube.beans.BaseJzxq;
 import com.wytube.beans.ParkBean;
 import com.wytube.beans.RepairBean;
+import com.wytube.dialog.TellDialog;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
@@ -154,19 +154,13 @@ public class RepairInfoActivity extends BaseActivity {
     /*拨打报修电话*/
     @KListener(R.id.call_but_bx)
     private void call_but_bxOnClick() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + bean.getMobileNo()));
-        startActivity(intent);
+        TellDialog.showTell(RepairInfoActivity.this,bean.getMobileNo());
     }
 
     /*拨打维修电话*/
     @KListener(R.id.call_but_wx)
     private void call_but_wxOnClick() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + beans.getRepairWork().getRepairmanPhone()));
-        startActivity(intent);
+        TellDialog.showTell(RepairInfoActivity.this,beans.getRepairWork().getRepairmanPhone());
     }
 
     /*删除*/

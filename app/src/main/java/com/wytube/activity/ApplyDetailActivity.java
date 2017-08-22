@@ -1,7 +1,5 @@
 package com.wytube.activity;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -21,6 +19,7 @@ import com.wytube.adaper.HappyAdapter;
 import com.wytube.beans.BaseOK;
 import com.wytube.beans.BasesOK;
 import com.wytube.beans.HappyBean;
+import com.wytube.dialog.TellDialog;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
@@ -99,10 +98,7 @@ public class ApplyDetailActivity extends BaseActivity {
 
     @KListener(R.id.iv_telPhone)
     private void iv_telPhoneOnClick() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + dataBean.getRegUserPhone()));
-        startActivity(intent);
+        TellDialog.showTell(ApplyDetailActivity.this,dataBean.getRegUserPhone());
     }
 
     /*
