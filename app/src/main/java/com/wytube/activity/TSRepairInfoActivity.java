@@ -3,7 +3,6 @@ package com.wytube.activity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -22,6 +21,7 @@ import com.wytube.adaper.StarAdapter;
 import com.wytube.beans.BaseBxxq;
 import com.wytube.beans.BaseLbrepair;
 import com.wytube.beans.BaseOK;
+import com.wytube.dialog.TellDialog;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
@@ -163,10 +163,8 @@ public class TSRepairInfoActivity extends BaseActivity {
     /*拨打报修电话*/
     @KListener(R.id.call_but_bx)
     private void call_but_bxOnClick() {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_CALL);
-        intent.setData(Uri.parse("tel:" + bean.getMobileNo()));
-        startActivity(intent);
+
+        TellDialog.showTell(TSRepairInfoActivity.this,bean.getMobileNo());
     }
 
 
