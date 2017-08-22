@@ -66,7 +66,7 @@ public class MonthMoneyActivity extends BaseActivity {
                 if (statusCode == 200) {
                     try {
                         AppValue.orderNum = response.getString("order");
-                        AppValue.Money = Integer.parseInt(response.getString("fee"))+"";
+                        AppValue.Money = Integer.parseInt(response.getString("fee")) / 100 +"";
                         mMoneyText.setText(AppValue.Money);
 //                        mMoneyText.setText("0.01");
                         mTempStop.setVisibility(View.VISIBLE);

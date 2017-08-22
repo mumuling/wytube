@@ -29,6 +29,11 @@
             android:layout_toRightOf="@+id/back_but"
             android:layout_toEndOf="@+id/back_but" />
     </RelativeLayout>
+    <com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout
+        android:id="@+id/swipe_container"
+        android:layout_below="@+id/rlss"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ListView
         android:layout_margin="10dp"
         android:id="@+id/msg_list"
@@ -37,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/repair_now" />
+    </com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout>
 
 
     <LinearLayout

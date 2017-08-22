@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.cqxb.yecall.R;
 import com.wytube.activity.DetailsNoticeActivity;
 import com.wytube.beans.PropMsgBean;
+import com.wytube.utlis.AppValue;
 
 import java.util.List;
 
@@ -75,10 +76,10 @@ public class PropListAdapters extends BaseAdapter {
         mholder.date.setText(bean.getStarttime());
         mholder.readDonet.setVisibility(View.INVISIBLE);
         mholder.card_view.setOnClickListener(v -> {
-                Intent intent = new Intent(mContext,DetailsNoticeActivity.class);
-                intent.putExtra("title", bean.getTitle());
-                intent.putExtra("content",bean.getContent());
-                intent.putExtra("pushId",bean.getPushId());
+            Intent intent = new Intent(mContext,DetailsNoticeActivity.class);
+            intent.putExtra("title", bean.getTitle());
+            intent.putExtra("content",bean.getContent());
+            intent.putExtra("pushId",bean.getPushId());
             mContext.startActivity(intent);
         });
         return convertView;

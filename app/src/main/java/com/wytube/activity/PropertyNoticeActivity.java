@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.cqxb.yecall.R;
@@ -16,8 +19,12 @@ import com.wytube.beans.PropMsgBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
+
+import java.util.List;
 
 /**
  * 创 建 人: vr 柠檬 .
@@ -25,36 +32,53 @@ import com.wytube.utlis.Utils;
  * 类 描 述: 物业通知
  */
 @KActivity(R.layout.activity_property_notice)
-public class PropertyNoticeActivity extends Activity {
+public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener,
+        SwipeRefreshAndMoreLoadLayout.OnLoadMoreListener{
 
     @KBind(R.id.msg_list)
     private ListView mMsgList;
+    @KBind(R.id.repair_now)
+    private LinearLayout mRepair_now;
+    @KBind(R.id.swipe_container)
+    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
+    private List<PropMsgBean.DataBean> list;
+    PropListAdapters adapter;
+    int page=1,ISok=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
-        initData();
+        iniview();
+    }
+
+    private void iniview() {
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
+        mSwipe_container.setOnRefreshListener(this);
+        mSwipe_container.setOnLoadMoreListener(this);
+        mSwipe_container.setColorSchemeResources(android.R.color.holo_purple,
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        initData(page,5);
     }
 
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (AppValue.fish==1){
-            initData();
-            AppValue.fish=1;
-        }
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        if (AppValue.fish==1){
+//            initData(page,4);
+//            AppValue.fish=1;
+//        }
+//    }
 
     /**
      * 请求数据
      */
-    private void initData() {
-        Utils.showLoad(this);
-        Client.sendPost(NetParmet.PROP_MSG, "", new Handler(msg -> {
-            Utils.exitLoad();
+    private void initData(int page,int rows) {
+        Client.sendPost(NetParmet.PROP_MSG, "page="+ page +"&rows="+rows, new Handler(msg -> {
             String json = msg.getData().getString("post");
             PropMsgBean bean = Json.toObject(json, PropMsgBean.class);
             if (bean == null) {
@@ -66,8 +90,20 @@ public class PropertyNoticeActivity extends Activity {
                 return false;
             }
             AppValue.propMsgs = bean.getData();
-            PropListAdapters adapter = new PropListAdapters(this, AppValue.propMsgs);
-            mMsgList.setAdapter(adapter);
+            if (ISok == 0) {
+                /*第一次加载的数据*/
+                list = bean.getData();
+                adapter = new PropListAdapters(this, list);
+                mMsgList.setAdapter(adapter);
+            } else {
+                if (page == 1) {
+                    list.clear();
+                }
+                list.addAll(bean.getData());
+                adapter.notifyDataSetChanged();
+                mSwipe_container.setLoading(false);/*结束更多加载*/
+            }
+            ISok++;
             return false;
         }));
     }
@@ -77,4 +113,38 @@ public class PropertyNoticeActivity extends Activity {
     private void repair_nowOnClick() {
         startActivity(new Intent(this, ReleaseNoticeActivity.class));
     }
+
+    /*下拉刷新*/
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                page = 1;
+                initData(page,5);
+                mSwipe_container.setRefreshing(false);
+            }
+        }, 3000);
+    }
+
+    /*上拉更多*/
+    @Override
+    public void onLoadMore() {
+        if (AppValue.propMsgs.size()==0){
+            mRepair_now.setVisibility(View.VISIBLE);
+            ToastUtils.showToast(this,"没有更多数据");
+        }else {
+            mRepair_now.setVisibility(View.GONE);
+            mSwipe_container.setLoadingContext("正在加载");
+            new Handler().postDelayed(() -> {
+                page++;
+                initData(page,5);
+                mRepair_now.setVisibility(View.VISIBLE);
+            }, 2000);
+        }
+    }
+
+
+
+
 }

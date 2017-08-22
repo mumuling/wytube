@@ -13,6 +13,7 @@ import com.wytube.beans.NewsNrBean;
 import com.wytube.beans.OwnerBean;
 import com.wytube.beans.PropMsgBean;
 import com.wytube.beans.RepairBean;
+import com.wytube.beans.VisitorListBean;
 import com.wytube.shared.Ftime.BiilBeaan;
 
 import java.util.ArrayList;
@@ -97,6 +98,8 @@ public class AppValue {
 //    public static List<DoorBean.DataBean> passDoors = new ArrayList<>();
     /*物业通知列表*/
     public static List<PropMsgBean.DataBean> propMsgs;
+    /*访客通行列表*/
+    public static List<VisitorListBean.DataBean> VisitorMsgs;
 //    /*Web界面的标题文字*/
 //    public static String webTitle = "";
 //    /*Web界面加载的Urls*/
