@@ -1,8 +1,11 @@
 package com.wytube.utlis;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
+import com.wytube.shared.ToastUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -12,6 +15,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import static com.cqxb.yecall.YETApplication.getContext;
+
 /**
  * 项目名称: WisdomHome.
  * 创建时间: 2017/3/15.
@@ -20,6 +25,8 @@ import java.net.URL;
  */
 
 public class DownloadPicture {
+
+    Context mContnet;
 
     /*图片缓存路径*/
     @SuppressLint("SdCardPath")
@@ -35,7 +42,11 @@ public class DownloadPicture {
     public static Bitmap downloadImage(String http) throws IOException {
         String filePath = checkUrl(http);
         if (filePath != null) {
-            return BitmapFactory.decodeFile(filePath);
+            try {
+                return BitmapFactory.decodeFile(filePath);
+            }catch (Exception e){
+                ToastUtils.showToast(getContext(),"图片加载异常");
+            }
         }
         URL url = new URL(http);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
