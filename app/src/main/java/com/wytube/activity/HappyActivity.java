@@ -97,8 +97,14 @@ public class HappyActivity extends BaseActivity {
             });
 
             for (HappyBean.DataBean repairBean : AppValue.xsBeans) {
-                if (repairBean.getStateId() == type) {
-                    passData.add(repairBean);
+                if(type==0){
+                    if (repairBean.getStateId() == 0) {
+                        passData.add(repairBean);
+                    }
+                }else {
+                    if(repairBean.getStateId()==1||repairBean.getStateId()==2){
+                        passData.add(repairBean);
+                    }
                 }
             }
             apapter.setBeans(passData);
