@@ -97,8 +97,14 @@ public class HappyActivity extends BaseActivity {
             });
 
             for (HappyBean.DataBean repairBean : AppValue.xsBeans) {
-                if (repairBean.getStateId() == type) {
-                    passData.add(repairBean);
+                if(type==0){
+                    if (repairBean.getStateId() == 0) {
+                        passData.add(repairBean);
+                    }
+                }else {
+                    if(repairBean.getStateId()==1||repairBean.getStateId()==2){
+                        passData.add(repairBean);
+                    }
                 }
             }
             apapter.setBeans(passData);
@@ -138,12 +144,12 @@ public class HappyActivity extends BaseActivity {
     private void ll_okedOnClick() {
         clearStyle(selectLayout);
         type = 1;
+        passData.clear();
         selectLayout = ll_oked;
         ((TextView) ll_oked.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         ll_oked.getChildAt(1).setVisibility(View.VISIBLE);
-        passData.clear();
         for (HappyBean.DataBean happyBean : AppValue.xsBeans) {
-            if (happyBean.getStateId() == 1) {
+            if (happyBean.getStateId() == 1|| happyBean.getStateId() == 2) {
                 passData.add(happyBean);
             }
         }

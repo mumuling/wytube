@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -219,9 +220,10 @@ public class OwnerItemActivity extends BaseActivity {
         View view = inflater.inflate(R.layout.telldialog, null);
         ll_dhtell= (LinearLayout) view.findViewById(R.id.ll_dhtell);
         ll_mjtell= (LinearLayout) view.findViewById(R.id.ll_mjtell);
+        RelativeLayout rlrelatype= (RelativeLayout) view.findViewById(R.id.rlrelatype);
         tv_diss= (TextView) view.findViewById(R.id.tv_diss);
         tv_diss.setOnClickListener(v -> dialog1.dismiss());
-
+        rlrelatype.setOnClickListener(v -> dialog1.dismiss());
         dialog1.getWindow().setContentView(view);
         ll_dhtell.setOnClickListener(new View.OnClickListener() {
             @Override
