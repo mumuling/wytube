@@ -65,14 +65,14 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
     }
 
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        if (AppValue.fish==1){
-//            initData(page,4);
-//            AppValue.fish=1;
-//        }
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (AppValue.fish==1){
+            initData(page,5);
+            AppValue.fish=1;
+        }
+    }
 
     /**
      * 请求数据
