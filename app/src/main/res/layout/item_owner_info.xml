@@ -40,17 +40,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:paddingRight="35dp"
+            android:paddingRight="20dp"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/back_but"
-            android:layout_marginEnd="15dp"
-            android:layout_marginRight="15dp"
             android:visibility="gone"
             android:gravity="right"
             android:text="保存"
             android:textColor="@color/app_main_color_green"
-            android:textSize="18sp"/>
-        <ImageView
+            android:textSize="16sp"/>
+        <!--<ImageView
             android:id="@+id/iv_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +60,7 @@
             android:gravity="right"
             android:src="@drawable/tcjf_sc"
             android:textColor="@color/app_main_color_green"
-            android:textSize="20sp"/>
+            android:textSize="20sp"/>-->
 
 
 
@@ -100,6 +98,8 @@
                     android:paddingTop="10dp">
 
                     <TextView
+                        android:cursorVisible="false"
+                        android:ellipsize="end"
                         android:id="@+id/repair_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -108,7 +108,8 @@
                         android:textSize="16sp"/>
 
                     <EditText
-
+                        android:cursorVisible="false"
+                        android:ellipsize="end"
                         android:background="@null"
                         android:id="@+id/ownerName"
                         android:layout_width="252dp"
@@ -134,7 +135,7 @@
                             android:gravity="right"
                             android:text="业主"
                             android:textColor="@color/app_main_color_green"
-                            android:textSize="20sp"/>
+                            android:textSize="18sp"/>
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -157,7 +158,8 @@
                         android:textSize="16sp"/>
 
                     <EditText
-
+                        android:cursorVisible="false"
+                        android:ellipsize="end"
                         android:background="@null"
                         android:id="@+id/owneradress"
                         android:layout_width="match_parent"
@@ -184,7 +186,9 @@
                         android:textSize="16sp"/>
 
                     <EditText
-
+                        android:cursorVisible="false"
+                        android:inputType="number"
+                        android:ellipsize="end"
                         android:id="@+id/ownerPhone"
                         android:background="@null"
                         android:layout_width="match_parent"
@@ -244,7 +248,7 @@
             android:layout_toLeftOf="@+id/agreeBu"
             android:layout_toStartOf="@+id/agreeBu"
             android:text="呼叫转此业主"
-            android:textSize="18sp"/>
+            android:textSize="16sp"/>
 
         <ImageView
             android:id="@+id/agreeBu"
@@ -261,7 +265,7 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/cv_agreebtn"
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
@@ -289,7 +293,7 @@
                 android:layout_height="wrap_content"
                 android:text="联系业主"
                 android:textColor="@color/white"
-                android:textSize="20sp"/>
+                android:textSize="16sp"/>
         </LinearLayout>
 
     </android.support.v7.widget.CardView>

@@ -25,6 +25,7 @@ import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.BuildAdapter;
 import com.wytube.adaper.JYDialogAdapters;
+import com.wytube.adaper.OwnerAdapter;
 import com.wytube.adaper.UnitAdapter;
 import com.wytube.beans.BaseOK;
 import com.wytube.beans.BuildBean;
@@ -40,8 +41,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 @KActivity(R.layout.add_owner)
@@ -86,15 +85,17 @@ public class AddOwnerActivity extends BaseActivity {
     private List<UnitBean.DataBean> mlist;
     private UnitBean unitbean;
     private RoomBean roombean;
-    private String buildingId,unitId;
+    private String buildingId, unitId;
+    private OwnerAdapter adapter;
     int tradeType;
 
-    String[] dialogtitle = {"业主","亲属","租客","其他"};
-    int [] types = {0,1,2,3};
-    public List<Map<String, Object>> getData(){
-        List<Map<String, Object>> list= new ArrayList<>();
+    String[] dialogtitle = {"业主", "亲属", "租客", "其他"};
+    int[] types = {0, 1, 2, 3};
+
+    public List<Map<String, Object>> getData() {
+        List<Map<String, Object>> list = new ArrayList<>();
         for (int i = 0; i < dialogtitle.length; i++) {
-            Map<String, Object> map= new HashMap<>();
+            Map<String, Object> map = new HashMap<>();
             map.put("title", dialogtitle[i]);
             map.put("type", types[i]);
             list.add(map);
@@ -107,18 +108,22 @@ public class AddOwnerActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
-        findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
-        findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
+        findViewById(R.id.title_text).setOnClickListener(v -> {
+            finish();
+        });
+        findViewById(R.id.back_but).setOnClickListener(v -> {
+            finish();
+        });
         //选择楼宇
         selectblockLine.setOnClickListener(view -> dialogBuild());
         //选择单元
         selectunitLine.setOnClickListener(view -> dialogUnit());
         //选择类型
         selectownertypeLine.setOnClickListener(view -> {
-            if (!tv_yzroom.getText().toString().equals("")){
+            if (!tv_yzroom.getText().toString().equals("")) {
                 loadroom();
                 dialogType();
-            }else {
+            } else {
                 Toast.makeText(this, "请先输入房间号!", Toast.LENGTH_SHORT).show();
             }
         });
@@ -126,6 +131,7 @@ public class AddOwnerActivity extends BaseActivity {
 
     //选择类型
     List<Map<String, Object>> zflist;
+
     private void dialogType() {
         dialog3 = blocoList();
         View view = inflater.inflate(R.layout.activity_news_dilogtxts, null);
@@ -133,7 +139,7 @@ public class AddOwnerActivity extends BaseActivity {
         RelativeLayout rela_djxs = (RelativeLayout) view.findViewById(R.id.rela_djxs);
         dialog3.getWindow().setContentView(view);
         rela_djxs.setOnClickListener(v -> dialog3.dismiss());
-        zflist=getData();
+        zflist = getData();
         JYDialogAdapters adapter = new JYDialogAdapters(this, zflist);
         canshu_list.setAdapter(adapter);
         canshu_list.setOnItemClickListener((parent, view1, position, id) -> {
@@ -144,7 +150,7 @@ public class AddOwnerActivity extends BaseActivity {
     }
 
     private void loadroom() {
-        Client.sendPost(NetParmet.OWNER_ROOM, "unitId=" + unitId +"&roomNum="+tv_yzroom.getText(), new Handler(msg -> {
+        Client.sendPost(NetParmet.OWNER_ROOM, "unitId=" + unitId + "&roomNum=" + tv_yzroom.getText(), new Handler(msg -> {
             String json = msg.getData().getString("post");
             roombean = Json.toObject(json, RoomBean.class);
             if (roombean == null) {
@@ -247,15 +253,15 @@ public class AddOwnerActivity extends BaseActivity {
         String roomNum = tv_yzroom.getText().toString();
         String name = tv_yzxm.getText().toString();
         String phone = tv_yzphone.getText().toString();
-        if (tv_blcokcontact.getText().equals("选择楼宇")){
+        if (tv_blcokcontact.getText().equals("选择楼宇")) {
             Utils.showOkDialog(this, "请选择楼宇!");
             return;
         }
-        if (tv_xzdy.getText().equals("选择单元")){
+        if (tv_xzdy.getText().equals("选择单元")) {
             Utils.showOkDialog(this, "请选择单元!");
             return;
         }
-        if (ownercontact.getText().equals("选择住户类型")){
+        if (ownercontact.getText().equals("选择住户类型")) {
             Utils.showOkDialog(this, "请选择住户类型!");
             return;
         }
@@ -263,8 +269,8 @@ public class AddOwnerActivity extends BaseActivity {
             Utils.showOkDialog(this, "请输入业主姓名!");
             return;
         }
-        if (phone.length() <= 0) {
-            Utils.showOkDialog(this, "请输入业主电话!");
+        if (!isMobile(phone)) {
+            Utils.showOkDialog(this, "请输入正确的电话");
             return;
         }
         if (roomNum.length() <= 0) {
@@ -272,8 +278,8 @@ public class AddOwnerActivity extends BaseActivity {
             return;
         }
         Utils.showLoad(this);
-        String keyValue = "buildingId=" + buildingId+ "&unitId=" + unitId + "&roomId=" +
-                roombean.getData().getRoomId()+ "&roomNum=" + roomNum + "&ownerType=" + tradeType + "&name=" + name + "&phone=" + phone;
+        String keyValue = "buildingId=" + buildingId + "&unitId=" + unitId + "&roomId=" +
+                roombean.getData().getRoomId() + "&roomNum=" + roomNum + "&ownerType=" + tradeType + "&name=" + name + "&phone=" + phone;
         Client.sendPost(NetParmet.OWNER_CREATE, keyValue, new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
@@ -285,8 +291,8 @@ public class AddOwnerActivity extends BaseActivity {
             if (!bean.isSuccess()) {
                 Utils.showOkDialog(this, bean.getMessage());
                 return false;
-            }else {
-                AppValue.fish=1;
+            } else {
+                AppValue.fish = 1;
                 Toast.makeText(this, "添加业主成功!", Toast.LENGTH_SHORT).show();
                 this.finish();
             }
@@ -297,16 +303,21 @@ public class AddOwnerActivity extends BaseActivity {
     /**
      * 验证是否是手机号码
      *
-     * @param str
+     * @param phone
      * @return
      */
-    public static boolean isMobile(String str) {
-        Pattern pattern = Pattern.compile("1[0-9]{10}");
-        Matcher matcher = pattern.matcher(str);
-        if (matcher.matches()) {
+    //返回true 号码合法  返回false 不合法
+    public boolean isMobile(String phone) {
+        final String PHONE_REGEX = "^1[3|4|5|7|8][0-9]\\d{8}$";
+        phone = phone.trim();
+        if (phone.length() != 11) {
+            return false;
+        }
+        if (phone.matches(PHONE_REGEX)) {
             return true;
         } else {
             return false;
         }
     }
+
 }

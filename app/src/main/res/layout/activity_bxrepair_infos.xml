@@ -40,12 +40,11 @@
         android:background="@color/app_def_text_color" />
 
     <ScrollView
+        android:layout_below="@+id/view_zw"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
-        android:layout_below="@+id/view_zw"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_above="@+id/linearLayout3">
 
         <LinearLayout
             android:layout_width="match_parent"

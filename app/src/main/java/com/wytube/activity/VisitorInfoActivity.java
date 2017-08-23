@@ -56,7 +56,7 @@ public class VisitorInfoActivity extends BaseActivity implements SwipeRefreshLay
     }
 
     private void loadData(int page,int rows) {
-        Client.sendPost(NetParmet.USR_FK_LB, "page="+ page +"&rows="+rows , new Handler(msg -> {
+        Client.sendPost(NetParmet.USR_FK_LB, "page="+ page +"&rows="+rows+"&order = createDate" , new Handler(msg -> {
             String json = msg.getData().getString("post");
             VisitorListBean bean = Json.toObject(json, VisitorListBean.class);
             if (bean == null) {

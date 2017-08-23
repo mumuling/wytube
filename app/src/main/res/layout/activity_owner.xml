@@ -51,9 +51,15 @@
         android:layout_height="1px"
         android:background="@color/e8e8e8" />
 
+    <com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout
+        android:id="@+id/swipe_container"
+        android:layout_below="@+id/rlss"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ListView
             android:id="@+id/yzgl_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+    </com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout>
 
 </LinearLayout>

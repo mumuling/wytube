@@ -307,7 +307,7 @@ public class NetParmet {
     public static final String OWNER_ROOM = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/room/load";
     /*删除业主*/
     public static final String OWNER_DELETE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/owner/delete";
-    /*删除业主*/
+    /*修改业主*/
     public static final String OWNER_UPDATE = HTTP + APP_SERVER + DIR_NAME +SOFT_WYSION +"/owner/update";
 
 

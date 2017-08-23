@@ -38,10 +38,8 @@ public class ApplyDetailActivity extends BaseActivity {
     private TextView tv_cross;
     @KBind(R.id.tv_reason)
     private TextView tv_reason;
-    @KBind(R.id.tv_name_number)
+    @KBind(R.id.text_wx_name)
     private TextView tv_name_number;
-    @KBind(R.id.iv_telPhone)
-    private ImageView iv_telPhone;
     @KBind(R.id.tv_address)
     private TextView tv_address;
     @KBind(R.id.tv_delete)
@@ -96,8 +94,8 @@ public class ApplyDetailActivity extends BaseActivity {
         tv_address.setText(dataBean.getCellName() + dataBean.getBuildingName() + dataBean.getUnitName() + dataBean.getNumberName());
     }
 
-    @KListener(R.id.iv_telPhone)
-    private void iv_telPhoneOnClick() {
+    @KListener(R.id.call_but_bx)
+    private void call_but_bxOnClick() {
         TellDialog.showTell(ApplyDetailActivity.this,dataBean.getRegUserPhone());
     }
 

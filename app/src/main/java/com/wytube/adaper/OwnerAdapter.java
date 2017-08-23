@@ -49,6 +49,7 @@ public class OwnerAdapter extends BaseAdapter {
         if(convertView==null)  {
             holder = new viewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.item_owner,null);
+
             holder.tv_yename = (TextView) convertView.findViewById(R.id.tv_yename);
             holder.tv_yedz = (TextView) convertView.findViewById(R.id.tv_yedz);
             holder.tv_yztype = (TextView) convertView.findViewById(tv_yztype);

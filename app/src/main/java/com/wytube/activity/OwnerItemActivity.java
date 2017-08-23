@@ -1,6 +1,5 @@
 package com.wytube.activity;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,7 +7,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +20,6 @@ import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.OwnerAdapter;
 import com.wytube.beans.BaseWyOK;
 import com.wytube.beans.OwnerBean;
-import com.wytube.beans.OwnerDel;
 import com.wytube.dialog.TellDialog;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
@@ -48,8 +45,6 @@ public class OwnerItemActivity extends BaseActivity {
     private TextView tv_date_time;
     @KBind(R.id.tv_edit)
     private TextView tv_edit;
-    @KBind(R.id.iv_delete)
-    private ImageView iv_delete;
     Intent intent;
     private OwnerBean.DataBean mDatabean;
     private OwnerAdapter adapter;
@@ -60,6 +55,10 @@ public class OwnerItemActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
+        owneradress.setOnClickListener(view -> owneradress.setCursorVisible(true));
+        ownerName.setOnClickListener(view -> ownerName.setCursorVisible(true));
+        ownerPhone.setOnClickListener(view -> ownerPhone.setCursorVisible(true));
+        ownerType.setOnClickListener(view -> ownerType.setCursorVisible(true));
         findViewById(R.id.back_but).setOnClickListener(v -> {
             finish();
         });
@@ -147,7 +146,7 @@ public class OwnerItemActivity extends BaseActivity {
                 Utils.showNetErrorDialog(this);
                 return false;
             }
-            if (bean.isSuccess()) {//*true成功*//*
+            if (bean.isSuccess()) {
                 Toast.makeText(this, "修改成功", Toast.LENGTH_SHORT).show();
                 AppValue.fish = 1;
                 this.finish();
@@ -157,11 +156,11 @@ public class OwnerItemActivity extends BaseActivity {
     }
 
 
-    /**
+   /* *//**
      * 删除业主
      * ownerId	是	String	业主ID
-     */
-     /*删除*/
+     *//*
+     *//*删除*//*
     @KListener(R.id.iv_delete)
     private void iv_deleteOnClick() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -175,9 +174,9 @@ public class OwnerItemActivity extends BaseActivity {
         builder.create().show();
     }
 
-    /**
+    *//**
      * 删除业主
-     */
+     *//*
     private void initDelete() {
         Utils.showLoad(this);
         Client.sendPost(NetParmet.OWNER_DELETE,"ids=" +mDatabean.getOwnerId() , new Handler(msg -> {
@@ -195,5 +194,6 @@ public class OwnerItemActivity extends BaseActivity {
             }
             return false;
         }));
-    }
+    }*/
+
 }

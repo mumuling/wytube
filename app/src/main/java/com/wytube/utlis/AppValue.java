@@ -100,6 +100,7 @@ public class AppValue {
     public static List<PropMsgBean.DataBean> propMsgs;
     /*访客通行列表*/
     public static List<VisitorListBean.DataBean> VisitorMsgs;
+
 //    /*Web界面的标题文字*/
 //    public static String webTitle = "";
 //    /*Web界面加载的Urls*/
@@ -126,6 +127,8 @@ public class AppValue {
     public static List<HappyBean.DataBean> xsBeans;
     /*物业列表*/
     public static List<BiilBeaan.DataBean> wyreal;
+    /*业主列表*/
+    public static List<OwnerBean.DataBean> ownerBeans;
 
 
     //    /*投诉列表的Item*/
@@ -205,7 +208,7 @@ public class AppValue {
 //    public static boolean ISok=true;
     //    /*购物车保存到本地*/
 //    public static final String PERSON = "ONE_PERSON";
-    public static List<OwnerBean.DataBean> ownerBeans;
+
 
     /*朋友圈id*/
     public static String TrackId="";

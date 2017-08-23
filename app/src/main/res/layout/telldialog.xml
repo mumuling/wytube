@@ -117,6 +117,7 @@
                 android:background="@color/app_def_text_color" />
 
             <TextView
+                android:paddingTop="10dp"
                 android:id="@+id/tv_diss"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
