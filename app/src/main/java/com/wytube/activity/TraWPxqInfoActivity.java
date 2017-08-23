@@ -88,6 +88,7 @@ public class TraWPxqInfoActivity extends Activity {
     private boolean IsOk = false;
     @KListener(R.id.borrow_but)
     private void borrow_butOnClick() {
+        Utils.showLoad(this);
         if (IsOk){
             new Thread(uploadImageRunnable).start();
             new Handler().postDelayed(new Runnable(){
@@ -95,7 +96,7 @@ public class TraWPxqInfoActivity extends Activity {
                     AppValue.fish=1;
                     finish();
                 }
-            }, 1000);
+            }, 1500);
         }else {
             this.finish();
         }
@@ -185,6 +186,7 @@ public class TraWPxqInfoActivity extends Activity {
                 } else {
                     Toast.makeText(TraWPxqInfoActivity.this, "请求URL失败！", Toast.LENGTH_SHORT).show();
                 }
+                Utils.exitLoad();
             } catch (Exception e) {
                 e.printStackTrace();
             }

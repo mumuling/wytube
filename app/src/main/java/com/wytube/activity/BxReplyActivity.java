@@ -41,6 +41,10 @@ public class BxReplyActivity extends Activity {
     /*回复*/
     @KListener(R.id.tx_but)
     private void tx_butOnClick() {
+        if (medi_content.getText().toString().length() <= 0) {
+            Utils.showOkDialog(this, "请填写回复!");
+            return;
+        }
         loadhf();
     }
 
