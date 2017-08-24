@@ -136,6 +136,8 @@ public class ApplyDetailActivity extends BaseActivity {
                 return false;
             }
             if (!bean.isSuccess()) {
+                Utils.showOkDialog(this, bean.getMessage());
+            }else {
                 Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
                 AppValue.fish = 1;
                 this.finish();

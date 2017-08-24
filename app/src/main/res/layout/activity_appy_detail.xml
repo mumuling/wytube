@@ -144,13 +144,6 @@
             android:textSize="16sp"/>
     </RelativeLayout>
 
- <!--   <RelativeLayout
-        android:id="@+id/rl_del"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/blue"
-        android:gravity="center"
-        android:visibility="visible">-->
         <com.wytube.dialog.ElasticCheckButton
             android:visibility="visible"
             android:id="@+id/rl_del"
