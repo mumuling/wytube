@@ -15,6 +15,7 @@ import com.wytube.beans.BaseWyOK;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -31,6 +32,8 @@ public class ReleaseNoticeActivity extends Activity {
     private EditText medit_title;
     @KBind(R.id.content_text)
     private EditText mcontent_text;
+
+    String titte,contents;
 
 
     @Override
@@ -71,6 +74,17 @@ public class ReleaseNoticeActivity extends Activity {
     /*发布*/
     @KListener(R.id.borrow_but)
     private void borrow_butOnClick() {
+        titte =  medit_title.getText().toString();
+        contents = mcontent_text.getText().toString();
+        if (titte.length() <= 0) {
+            ToastUtils.showToast(this,"请填写发布标题");
+            return;
+        }
+        if (contents.length() <= 0) {
+            ToastUtils.showToast(this,"请填写发布内容");
+            return;
+        }
+
         initData();
     }
 }

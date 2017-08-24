@@ -227,14 +227,14 @@ public class NewFBzxActivity extends Activity{
      * title	是	String	标题
      * file	    是	String	图片二进制文件
      * type	    是	String	咨询类别id
-     * detail	是	String	咨询内容
+     * content	是	String	咨询内容
      */
     private void postDataXg() {
         Utils.showLoad(this);
         String keyValue = "infoId="+AppValue.infoBean.getInfoId()+
                 "&title=" + title +
                 "&type=" + tradeType +
-                "&detail=" + text;
+                "&content=" + text;
         Client.sendFile(NetParmet.TRADING_CREATEXG, keyValue, imgsPath, new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("file");

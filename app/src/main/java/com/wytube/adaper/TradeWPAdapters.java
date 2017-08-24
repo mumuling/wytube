@@ -15,6 +15,7 @@ import com.cqxb.yecall.R;
 import com.wytube.activity.TraWPfbInfoActivity;
 import com.wytube.activity.TraWPxqInfoActivity;
 import com.wytube.beans.BaseWPjy;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -131,7 +132,7 @@ public class TradeWPAdapters extends BaseAdapter{
                 String[] wPJYxxId = AppValue.WPJYxxId.split(",");
                 AppValue.WPJYxxId = "";
                 for (int i = 0; i < wPJYxxId.length; i++) {
-                    if(!wPJYxxId[i].equals(list.get(position).getGoodsId()))
+                    if(!wPJYxxId[i].equals(list.get(position-1).getGoodsId()))
                     {
                         if (AppValue.WPJYxxId != null && !AppValue.WPJYxxId.equals(""))
                         {

@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.cqxb.yecall.R;
 import com.wytube.activity.DetailsNoticeActivity;
 import com.wytube.beans.PropMsgBean;
-import com.wytube.utlis.AppValue;
 
 import java.util.List;
 
@@ -63,6 +62,8 @@ public class PropListAdapters extends BaseAdapter {
             mholder.readDonet = (ImageView) convertView.findViewById(R.id.red_donet);
             mholder.contentView = (WebView) convertView.findViewById(R.id.content_view);
             mholder.card_view = (CardView) convertView.findViewById(R.id.card_view);
+            mholder.call_but = (CardView) convertView.findViewById(R.id.call_but);
+
             // 设置提示
             convertView.setTag(mholder);
         } else {
@@ -82,6 +83,9 @@ public class PropListAdapters extends BaseAdapter {
             intent.putExtra("pushId",bean.getPushId());
             mContext.startActivity(intent);
         });
+        mholder.call_but.setOnClickListener(v -> {
+            /*推送*/
+        });
         return convertView;
     }
 
@@ -89,7 +93,7 @@ public class PropListAdapters extends BaseAdapter {
         private TextView title, content, date;
         private ImageView readDonet;
         private WebView contentView;
-        private CardView card_view;
+        private CardView card_view,call_but;
     }
 
 

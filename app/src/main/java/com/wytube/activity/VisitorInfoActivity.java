@@ -48,10 +48,8 @@ public class VisitorInfoActivity extends BaseActivity implements SwipeRefreshLay
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         mSwipe_container.setOnRefreshListener(this);
         mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(android.R.color.holo_purple,
-                android.R.color.holo_blue_bright,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
+                R.color.app_color_pass_color,R.color.red);
         loadData(page,10);
     }
 

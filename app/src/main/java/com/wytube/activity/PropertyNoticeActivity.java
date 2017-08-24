@@ -57,10 +57,8 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         mSwipe_container.setOnRefreshListener(this);
         mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(android.R.color.holo_purple,
-                android.R.color.holo_blue_bright,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
+                R.color.app_color_pass_color,R.color.red);
         initData(page,5);
     }
 
@@ -69,6 +67,7 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
     protected void onResume() {
         super.onResume();
         if (AppValue.fish==1){
+            page=1;
             initData(page,5);
             AppValue.fish=1;
         }

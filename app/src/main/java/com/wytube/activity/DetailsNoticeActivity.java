@@ -17,6 +17,8 @@ import com.wytube.beans.BaseWyOK;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.HTMLSpirit;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -33,6 +35,7 @@ public class DetailsNoticeActivity extends Activity {
     @KBind(R.id.content_text)
     private EditText mcontent_text;
     Intent intent;
+    String titte,contents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +45,10 @@ public class DetailsNoticeActivity extends Activity {
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         intent = getIntent();
         medit_title.setText(intent.getStringExtra("title"));
-        mcontent_text.setText(intent.getStringExtra("content"));
+        mcontent_text.setText(HTMLSpirit.delHtmlTag(intent.getStringExtra("content")));
+        /*将光标移至文字末尾*/
+        medit_title.setSelection(medit_title.getText().length());
     }
-
 
     /**
      * 删除通知
@@ -111,7 +115,18 @@ public class DetailsNoticeActivity extends Activity {
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
         builder.setMessage("确定修改?");
         builder.setTitle("提示");
-        builder.setPositiveButton("确定", (dialog, which) -> {initup();});
+        builder.setPositiveButton("确定", (dialog, which) -> {
+            titte =  medit_title.getText().toString();
+            contents = mcontent_text.getText().toString();
+            if (titte.length() <= 0) {
+                ToastUtils.showToast(this,"请填写修改标题");
+                return;
+            }
+            if (contents.length() <= 0) {
+                ToastUtils.showToast(this,"请填写修改内容");
+                return;
+            }
+            initup();});
         builder.setNegativeButton("取消", (dialog, which) -> {});
         builder.create().show();
     }
