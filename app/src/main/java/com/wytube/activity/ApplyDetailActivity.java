@@ -130,13 +130,13 @@ public class ApplyDetailActivity extends BaseActivity {
         Client.sendPost(NetParmet.HAPPY_DELETE, "celebrationId=" + dataBean.getCelebrationId(), new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
-            BaseOK bean = Json.toObject(json, BaseOK.class);
+            BasesOK bean = Json.toObject(json, BasesOK.class);
             if (bean == null) {
                 Utils.showNetErrorDialog(this);
                 return false;
             }
             if (!bean.isSuccess()) {
-                Utils.showOkDialog(this, bean.getMessage());
+                Utils.showOkDialog(this, bean.getMsg());
             }else {
                 Toast.makeText(this, "删除成功", Toast.LENGTH_SHORT).show();
                 AppValue.fish = 1;
