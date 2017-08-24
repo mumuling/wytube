@@ -5,7 +5,6 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,19 +43,18 @@ public class ApplyDetailActivity extends BaseActivity {
     private TextView tv_address;
     @KBind(R.id.tv_delete)
     private TextView tv_delete;
-    @KBind(R.id.rlayout_agree)
-    private RelativeLayout rlayout_agree;
+    @KBind(R.id.tv_agree)
+    private TextView tv_agree;
     private HappyBean.DataBean dataBean;
     @KBind(R.id.iv_dsl)
     private ImageView mIvDsl;
     @KBind(R.id.iv_ytg)
     private ImageView mIvYtg;
     @KBind(R.id.rl_del)
-    private RelativeLayout rl_del;
+    private TextView rl_del;
     @KBind(R.id.tv_nook)
     private TextView tv_nook;
     private HappyAdapter adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +66,7 @@ public class ApplyDetailActivity extends BaseActivity {
         findViewById(R.id.title_text).setOnClickListener(v -> {
             finish();
         });
-        loadData();
+       loadData();
     }
 
     private void loadData() {
@@ -152,8 +150,8 @@ public class ApplyDetailActivity extends BaseActivity {
     * */
     int stateId = 1;
 
-    @KListener(R.id.rlayout_agree)
-    private void agreeOnClick() {
+    @KListener(R.id.tv_agree)
+    private void tv_agreeOnClick() {
         Utils.showLoad(this);
         Client.sendPost(NetParmet.HAPPY_EDIT, "celebrationId=" + dataBean.getCelebrationId() + "&stateId=" + stateId, new Handler(msg -> {
             Utils.exitLoad();

@@ -299,5 +299,22 @@
         <attr name="contourColor" format="color" />
         <attr name="contourSize" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="ElasticCheckButton">
+        <attr name="checkbutton_round" format="integer"/>
+        <attr name="checkbutton_scale" format="float"/>
+        <attr name="checkbutton_backgroundColor" format="color"/>
+        <attr name="checkbutton_duration" format="integer"/>
+
+        <attr name="checkbutton_labelText" format="string"/>
+        <attr name="checkbutton_labelColor" format="color"/>
+        <attr name="checkbutton_labelSize" format="integer"/>
+        <attr name="checkbutton_labelStyle" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="bold" value="1"/>
+            <enum name="italic" value="2"/>
+        </attr>
+        <attr name="checkbutton_alpha" format="float"/>
+        <attr name="checkbutton_ischecked" format="boolean"/>
+    </declare-styleable>
 
 </resources>

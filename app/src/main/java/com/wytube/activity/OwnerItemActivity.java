@@ -20,6 +20,7 @@ import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.OwnerAdapter;
 import com.wytube.beans.BaseWyOK;
 import com.wytube.beans.OwnerBean;
+import com.wytube.dialog.ElasticAction;
 import com.wytube.dialog.TellDialog;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
@@ -45,6 +46,7 @@ public class OwnerItemActivity extends BaseActivity {
     private TextView tv_date_time;
     @KBind(R.id.tv_edit)
     private TextView tv_edit;
+
     Intent intent;
     private OwnerBean.DataBean mDatabean;
     private OwnerAdapter adapter;
@@ -109,7 +111,7 @@ public class OwnerItemActivity extends BaseActivity {
         ll_tellowner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TellDialog.showTell(OwnerItemActivity.this,ownerPhone.getText().toString());
+                TellDialog.showTell(OwnerItemActivity.this, ownerPhone.getText().toString());
             }
         });
     }
@@ -153,6 +155,11 @@ public class OwnerItemActivity extends BaseActivity {
             }
             return false;
         }));
+    }
+
+    @KListener(R.id.example2_view1)
+    private void example2_view1OnClick(View v) {
+        ElasticAction.doAction(v, 0, 0.75f, 0.75f);
     }
 
 
