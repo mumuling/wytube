@@ -140,7 +140,7 @@ public class NewFBzxActivity extends Activity{
         /*不考虑透明的采用此方案*/
         options.inPreferredConfig = Bitmap.Config.RGB_565;
         /*图片缩放倍数*/
-        options.inSampleSize = 2;
+        options.inSampleSize = 4;
         Bitmap bitmap = BitmapFactory.decodeFile(path, options);
         saveBitmap(bitmap);
         view.setImageBitmap(bitmap);

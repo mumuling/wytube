@@ -172,7 +172,7 @@
                         android:background="@null"
                         android:ems="10"
                         android:hint="请输入QQ"
-                        android:inputType="textPersonName"
+                        android:inputType="number"
                         android:padding="10dp"
                         android:textColor="@color/app_call_option_text_color"
                         android:textColorHint="@color/app_def_text_color" />

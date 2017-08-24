@@ -160,8 +160,8 @@ public class SelectCarsActivity extends BaseActivity {
                 if (statusCode == 200) {
                     try {
                         AppValue.orderNum = response.getString("order");
-                        AppValue.Money = Integer.parseInt(response.getString("money")) / 100 + "";
-                        mMoneyText.setText(AppValue.Money);
+                        AppValue.Money = Integer.parseInt(response.getString("money")) + "";
+                        mMoneyText.setText(Integer.parseInt(response.getString("money")) / 100+"");
 //                        mMoneyText.setText("0.01");
                         mGoStopTime.setText(response.getString("startTime"));
                         mStopAllTime.setText(response.getString("stopTime") + "分钟");
