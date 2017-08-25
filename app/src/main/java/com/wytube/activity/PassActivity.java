@@ -37,6 +37,8 @@ public class PassActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
+        findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
+        findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
     }
 
     /*重置密码*/

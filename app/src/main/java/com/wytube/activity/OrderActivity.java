@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -36,6 +37,13 @@ import com.cqxb.yecall.YETApplication;
 import com.cqxb.yecall.until.PreferenceBean;
 import com.cqxb.yecall.until.SettingInfo;
 import com.umeng.analytics.MobclickAgent;
+import com.wytube.beans.VersionBean;
+import com.wytube.dialog.VersionActivity;
+import com.wytube.net.Client;
+import com.wytube.net.Json;
+import com.wytube.net.NetParmet;
+import com.wytube.utlis.AppValue;
+import com.wytube.utlis.Utils;
 
 import org.linphone.InCallActivity;
 import org.linphone.LinphoneManager;
@@ -96,7 +104,7 @@ public class OrderActivity extends ActivityGroup {
 						.setBackgroundColor(Color.parseColor("#dddddd"));
 			}
 		registerReceiver(broadcastReceiver, new IntentFilter(Smack.action));
-
+		checkVersion();
 
 		mPref = PreferenceManager.getDefaultSharedPreferences(this);
 		String checkLogin = SettingInfo.getParams(PreferenceBean.CHECKLOGIN, "");
@@ -475,4 +483,44 @@ public class OrderActivity extends ActivityGroup {
 			}
 		});
 	}
+
+	/**
+	 * 检查版本更新
+	 */
+	private void checkVersion() {
+		Utils.showLoad(this);
+		Client.sendPost(NetParmet.CHECK_VERSION, "type=cqtd", new Handler(msg -> {
+			Utils.exitLoad();
+			String json = msg.getData().getString("post");
+			VersionBean bean = Json.toObject(json, VersionBean.class);
+			if (bean == null) {
+				return false;
+			}
+			if (!bean.isSuccess()) {
+				return false;
+			}
+			if (bean.getData() != null) {
+				versionEquse(bean.getData());
+			} else {
+				Utils.showOkDialog(this, "当前已是最新版本!");
+			}
+			return false;
+		}));
+	}
+
+
+	/**
+	 * 版本对比
+	 * @param bean
+	 */
+	private void versionEquse(VersionBean.DataBean bean) {
+		AppValue.localVersion = Integer.parseInt(Utils.clearString(AppValue.appVersion.replace("V","").replace(".","")));
+		AppValue.serverVersion = Integer.parseInt(Utils.clearString(bean.getVersion().replace("V","").replace(".","")));
+		if (AppValue.serverVersion > AppValue.localVersion) {
+			AppValue.versionUrl = bean.getPath();
+			VersionActivity.Version = new VersionActivity(this);
+			VersionActivity.Version.loadDialog();
+		}
+	}
+
 }

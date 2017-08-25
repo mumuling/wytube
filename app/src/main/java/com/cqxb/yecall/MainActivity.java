@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -29,7 +31,6 @@ import com.wytube.beans.BaseLogin;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
-import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.ShareOption;
 import com.wytube.utlis.Utils;
@@ -105,8 +106,25 @@ public class MainActivity extends Activity {
                 }
             }
         }, 1000);
-
+        AppValue.appVersion = (getString(R.string.app_welcome_text_version) + getVersionName());
         new GPSThread(this).start();
+    }
+
+    /**
+     * 获取当前APP的版本号
+     *
+     * @return
+     */
+    private String getVersionName() {
+        String version = "";
+        try {
+            PackageManager packageManager = getPackageManager();
+            PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(), 0);
+            version = packInfo.versionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return version;
     }
 
     /**

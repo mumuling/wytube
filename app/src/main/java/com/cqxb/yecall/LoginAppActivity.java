@@ -50,7 +50,7 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
     private LinearLayout formlogin_layout1, loginPage;
     private EditText ediphonenum, edipwd;
     private String TAG = "LoginActivity";
-    //    private Button registUser;
+    private TextView registUser;
     private CardView loginButton;
     private TextView forgetPwd;
     private ProgressDialog dialog;
@@ -82,7 +82,7 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
         rela_title = (RelativeLayout) findViewById(R.id.rela_title);
         //按钮
         loginButton = (CardView) findViewById(R.id.loginButton);
-//        registUser = (Button) findViewById(R.id.registUser);
+        registUser = (TextView) findViewById(R.id.registUser);
         //忘记密码
         forgetPwd = (TextView) findViewById(R.id.forgetPwd);
         if (AppValue.btl == 1){
@@ -93,7 +93,7 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         //设置点击事件
         loginButton.setOnClickListener(this);
-//        registUser.setOnClickListener(this);
+        registUser.setOnClickListener(this);
         forgetPwd.setOnClickListener(this);
         psdStatus.setOnClickListener(this);
         //赋值
@@ -217,15 +217,15 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
                 /**智慧之家登录*/
                 userLogin(ediphonenum.getText().toString(), edipwd.getText().toString());
             }
-//            else if (v.getId() == R.id.registUser) {
-//                //跳转到激活页面
+            else if (v.getId() == R.id.registUser) {
+                //跳转到激活页面
 //                Intent intent = new Intent(this, RegistUserVoiceActivity.class);
 //                startActivity(intent);
-//            }
+            }
             else if (v.getId() == R.id.forgetPwd) {
                 //跳转到修改密码页面
-                Intent forget = new Intent(this, ForgetPwdActivity.class);
-                startActivity(forget);
+//                Intent forget = new Intent(this, ForgetPwdActivity.class);
+//                startActivity(forget);
             } else if (v.getId() == R.id.login_psd_status) {
                 //密码明文显示与暗文显示切换
                 passwordStatus();

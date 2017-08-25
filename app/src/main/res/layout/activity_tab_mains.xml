@@ -41,10 +41,15 @@
             android:layout_alignParentEnd="true"/>
     </RelativeLayout>
     <!-- TabHost必须包含一个 TabWidget和一个FrameLayout -->
-
+    <View
+        android:id="@+id/view"
+        android:layout_below="@+id/rlss"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/app_def_text_color" />
     <RelativeLayout
         android:id="@+id/ad_layout"
-        android:layout_below="@+id/rlss"
+        android:layout_below="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">

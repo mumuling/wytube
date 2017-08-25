@@ -100,13 +100,12 @@ public class AppValue {
     public static List<PropMsgBean.DataBean> propMsgs;
     /*访客通行列表*/
     public static List<VisitorListBean.DataBean> VisitorMsgs;
-
+    /*版本连接*/
+    public static String versionUrl = "";
 //    /*Web界面的标题文字*/
 //    public static String webTitle = "";
 //    /*Web界面加载的Urls*/
 //    public static String webUrl = "";
-//    /*版本连接*/
-//    public static String versionUrl = "";
 //    /*用户的小区信息*/
 //    public static String locationText = "";
 //    public static String locationUnitNum = "";

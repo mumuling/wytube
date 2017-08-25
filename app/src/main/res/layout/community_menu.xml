@@ -41,7 +41,8 @@
             android:layout_marginRight="5dp"
             android:layout_alignBottom="@+id/textView12"
             android:layout_toLeftOf="@+id/textView12"
-            android:layout_toStartOf="@+id/textView12" />
+            android:layout_toStartOf="@+id/textView12"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/textView12"
@@ -52,6 +53,7 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:text="华宇名都小区"
+            android:visibility="gone"
             android:textColor="@color/main_def_text_color" />
     </RelativeLayout>
 

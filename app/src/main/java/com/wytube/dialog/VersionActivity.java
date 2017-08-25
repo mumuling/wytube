@@ -48,16 +48,16 @@ public class VersionActivity {
                 mDialog.dismiss();
             }else {
             /*大版本*/
-                showToast(mContext,"改动较大建议升级");
+                showToast(mContext,"请升级");
             }
 
         });
-//        viewDialog.findViewById(R.id.ok_but).setOnClickListener(v -> {
-//            Intent intent = new Intent();
-//            intent.setData(Uri.parse(AppValue.versionUrl));
-//            intent.setAction(Intent.ACTION_VIEW);
-//            mContext.startActivity(intent);
-//            mDialog.dismiss();});
+        viewDialog.findViewById(R.id.ok_but).setOnClickListener(v -> {
+            Intent intent = new Intent();
+            intent.setData(Uri.parse(AppValue.versionUrl));
+            intent.setAction(Intent.ACTION_VIEW);
+            mContext.startActivity(intent);
+            mDialog.dismiss();});
         return mDialog;
     }
 
