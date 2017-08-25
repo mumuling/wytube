@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.cqxb.yecall.MainTabActivity;
 import com.cqxb.yecall.R;
+import com.cqxb.yecall.Smack;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KListener;
@@ -242,10 +243,10 @@ public class IndexActivity extends FragmentActivity {
                 Toast.makeText(IndexActivity.this, "再按一次结束程序", Toast.LENGTH_SHORT).show();
                 exitTime = System.currentTimeMillis();
             } else {
-                finish();
-                System.exit(0);
-//                sendBroadcast(new Intent(Smack.action).putExtra("backMune",
-//                        "backMune"));
+//                finish();
+//                System.exit(0);
+                sendBroadcast(new Intent(Smack.action).putExtra("backMune",
+                        "backMune"));
             }
             return true;
         }

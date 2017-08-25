@@ -238,12 +238,12 @@
                 android:layout_toRightOf="@+id/textView2"
                 android:layout_toEndOf="@+id/textView2" />
         </RelativeLayout>
-        <ImageView
+        <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/img_v"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:layout_margin="10dp"/>
+            android:layout_height="200dp"
+            android:layout_margin="10dp"
+            android:scaleType="center" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

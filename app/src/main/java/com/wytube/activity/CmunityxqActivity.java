@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.cqxb.yecall.BaseActivity;
 import com.cqxb.yecall.R;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
@@ -22,6 +23,7 @@ import com.wytube.net.NetParmet;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
+import static com.cqxb.yecall.R.id.img_v;
 import static com.cqxb.yecall.R.id.text_add;
 
 
@@ -56,8 +58,8 @@ public class CmunityxqActivity extends BaseActivity {
     private TextView mTextAdd;
     @KBind(R.id.textView2)
     private TextView mTextView2;
-    @KBind(R.id.img_v)
-    private ImageView mImgV;
+    @KBind(img_v)
+    private SimpleDraweeView mImgV;
     @KBind(R.id.text_contentxq)
     private TextView mTextContentxq;
 
@@ -131,7 +133,11 @@ public class CmunityxqActivity extends BaseActivity {
         mTextHdtime.setText(AppValue.listBeseHd.getStarttime() + " 至 " + AppValue.listBeseHd.getEndtime());
         mTextPhone.setText(AppValue.listBeseHd.getPhone());
         mTextAdd.setText(AppValue.listBeseHd.getAddress());
-        Utils.loadImage(mImgV, AppValue.listBeseHd.getImgUrl());
+        if (AppValue.listBeseHd.getImgUrl() != null) {
+            mImgV.setImageURI(AppValue.listBeseHd.getImgUrl());
+        }else {
+            mImgV.setVisibility(View.GONE);
+        }
         if (AppValue.listBeseHd.getContent() == null) {
             mTextContentxq.setText("暂无内容");
         } else {

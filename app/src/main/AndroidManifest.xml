@@ -104,7 +104,10 @@
         android:xlargeScreens="true"/>
 
     <!-- tb144_144 -->
+    /*硬件加速 申请更多内存*/
     <application
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:name=".YETApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon"

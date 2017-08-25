@@ -59,6 +59,7 @@ public class YCdialog {
                 SettingInfo.setParams(PreferenceBean.CHECKLOGIN, "");
                 AppValue.HhGq = 1;
                 mContext.startActivity(new Intent(mContext, LoginAppActivity.class));
+                mDialog.dismiss();
             }else {
                 mDialog.dismiss();
             }

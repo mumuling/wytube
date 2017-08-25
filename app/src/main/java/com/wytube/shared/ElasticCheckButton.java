@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.wytube.dialog;
+package com.wytube.shared;
 
 import android.content.Context;
 import android.content.res.TypedArray;

@@ -20,7 +20,7 @@ import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.OwnerAdapter;
 import com.wytube.beans.BaseWyOK;
 import com.wytube.beans.OwnerBean;
-import com.wytube.dialog.ElasticAction;
+import com.wytube.shared.ElasticAction;
 import com.wytube.dialog.TellDialog;
 import com.wytube.net.Client;
 import com.wytube.net.Json;

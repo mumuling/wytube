@@ -6,15 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cqxb.yecall.R;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.wytube.activity.CmunityxqActivity;
 import com.wytube.beans.BeseHd;
 import com.wytube.utlis.AppValue;
-import com.wytube.utlis.Utils;
 
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class CommunityAdapter extends BaseAdapter{
         if (convertView == null) {
             mholder = new viewHolder();
             convertView= LayoutInflater.from(mContext).inflate(R.layout.activity_activecontent, null);
-            mholder.img_v = (ImageView) convertView.findViewById(R.id.img_v);
+            mholder.img_v = (SimpleDraweeView) convertView.findViewById(R.id.img_v);
             mholder.text_tiele = (TextView) convertView.findViewById(R.id.text_tiele);
             mholder.text_tiele_content = (TextView) convertView.findViewById(R.id.text_tiele_content);
             mholder.text_hdtime = (TextView) convertView.findViewById(R.id.text_hdtime);
@@ -82,7 +81,11 @@ public class CommunityAdapter extends BaseAdapter{
         }else {
             mholder.text_sum.setText(list.get(position).getJoinCount()+"人");
         }
-        Utils.loadImage(mholder.img_v, list.get(position).getImgUrl());
+        if (list.get(position).getImgUrl() != null) {
+            mholder.img_v.setImageURI(list.get(position).getImgUrl());
+        }else {
+            mholder.img_v.setVisibility(View.GONE);
+        }
         mholder.text_xq.setOnClickListener(v -> {
             AppValue.listBeseHd = list.get(position);
             Intent intent = new Intent(mContext,CmunityxqActivity.class);
@@ -95,7 +98,7 @@ public class CommunityAdapter extends BaseAdapter{
         private TextView text_tiele, text_tiele_content;
         private TextView text_hdtime, text_phone,text_add;
         private TextView text_xq,text_sum;
-        private ImageView img_v;
+        private SimpleDraweeView img_v;
         private LinearLayout Linearz;
     }
 }

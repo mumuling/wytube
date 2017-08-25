@@ -9,6 +9,10 @@ import android.view.Window;
 
 import com.cqxb.yecall.LoginAppActivity;
 import com.cqxb.yecall.R;
+import com.cqxb.yecall.until.PreferenceBean;
+import com.cqxb.yecall.until.SettingInfo;
+
+import org.linphone.LinphoneService;
 
 /**
  * 创 建 人: vr 柠檬 .
@@ -39,6 +43,16 @@ public class TipsDialig {
         mDialog.show();
         viewDialog.findViewById(R.id.cancel_but).setOnClickListener(v -> {mDialog.dismiss();});
         viewDialog.findViewById(R.id.ok_but).setOnClickListener(v -> {
+            SettingInfo.setParams(PreferenceBean.LOGINFLAG, "");
+            SettingInfo.setParams(PreferenceBean.CHECKLOGIN, "");
+            if (LinphoneService.instance() != null) LinphoneService.instance().deleteOldAccount();
+            SettingInfo.setParams(PreferenceBean.USERLINPHONEREGISTOK, "");
+            SettingInfo.setParams(PreferenceBean.USERLINPHONEIP, "");
+            SettingInfo.setParams(PreferenceBean.USERLINPHONEPORT, "");
+            SettingInfo.setLinphoneAccount("");
+            SettingInfo.setLinphonePassword("");
+            SettingInfo.setPassword("");
+            SettingInfo.setParams(PreferenceBean.CHECKLOGIN, "");
             mContext.startActivity(new Intent(mContext, LoginAppActivity.class));
             mDialog.dismiss();});
         return mDialog;

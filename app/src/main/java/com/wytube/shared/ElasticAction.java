@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.wytube.dialog;
+package com.wytube.shared;
 
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;

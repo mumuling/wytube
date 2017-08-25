@@ -93,7 +93,7 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.wytube.dialog.ElasticCheckButton
+            <com.wytube.shared.ElasticCheckButton
                 android:id="@+id/tv_agree"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
@@ -106,7 +106,7 @@
                 app:checkbutton_round="0"
                 app:checkbutton_scale="0.9"/>
 
-            <com.wytube.dialog.ElasticCheckButton
+            <com.wytube.shared.ElasticCheckButton
                 android:id="@+id/tv_nook"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
@@ -144,7 +144,7 @@
             android:textSize="16sp"/>
     </RelativeLayout>
 
-        <com.wytube.dialog.ElasticCheckButton
+        <com.wytube.shared.ElasticCheckButton
             android:visibility="visible"
             android:id="@+id/rl_del"
             android:layout_width="match_parent"

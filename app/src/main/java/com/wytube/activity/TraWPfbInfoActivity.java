@@ -103,11 +103,13 @@ public class TraWPfbInfoActivity extends Activity {
         }
         if (requestCode == 2) {
             IsOk=true;
-            Bundle extras = data.getExtras();
-            if (extras != null) {
-                Bitmap photo = extras.getParcelable("data");
-                saveBitmap(photo);
-                mImag_tj.setImageBitmap(photo);
+            if(data!=null){
+                Bundle extras = data.getExtras();
+                if (extras != null) {
+                    Bitmap photo = extras.getParcelable("data");
+                    saveBitmap(photo);
+                    mImag_tj.setImageBitmap(photo);
+                }
             }
         }
     }
