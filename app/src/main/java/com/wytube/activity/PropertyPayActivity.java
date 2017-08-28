@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqxb.yecall.BaseActivity;
@@ -14,8 +16,8 @@ import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
-import com.wytube.beans.BaseOK;
 import com.wytube.adaper.BiilAdapter;
+import com.wytube.beans.BaseOK;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
@@ -53,6 +55,13 @@ public class PropertyPayActivity extends BaseActivity {
     private LinearLayout mlinear_sc_qx;
     @KBind(R.id.text_qx)
     private TextView mtext_qx;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
+
     private BiilAdapter mAdapter;
     int type = 0;
 
@@ -63,15 +72,17 @@ public class PropertyPayActivity extends BaseActivity {
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         findViewById(R.id.menu_text).setOnClickListener(v -> {
-            mAdapter.flage = !mAdapter.flage;
-            if (!mAdapter.flage) {
-                rmenu_text.setText("取消");
-                mlinear_sc_qx.setVisibility(View.VISIBLE);
-            } else {
-                rmenu_text.setText("选择");
-                mlinear_sc_qx.setVisibility(View.GONE);
+            if (mAdapter!=null){
+                mAdapter.flage = !mAdapter.flage;
+                if (!mAdapter.flage) {
+                    rmenu_text.setText("取消");
+                    mlinear_sc_qx.setVisibility(View.VISIBLE);
+                } else {
+                    rmenu_text.setText("选择");
+                    mlinear_sc_qx.setVisibility(View.GONE);
+                }
+                mAdapter.notifyDataSetChanged();
             }
-            mAdapter.notifyDataSetChanged();
         });
         loadList();
         selectLayout = mAllZd;
@@ -84,6 +95,12 @@ public class PropertyPayActivity extends BaseActivity {
             real_data.clear();
             loadList();
         }
+    }
+
+    @KListener(R.id.shaxin)
+    private void shaxinOnClick() {
+        real_data.clear();/*清空之前的数据*/
+        loadList();
     }
 
     /*全选*/
@@ -104,6 +121,7 @@ public class PropertyPayActivity extends BaseActivity {
             mAdapter.notifyDataSetChanged();
         }else {
             AppValue.WYjfId="";
+            real_data.clear();
             for (int i = 0; i < real_data.size(); i++) {
                 real_data.get(i).isCheck = false;
             }
@@ -176,11 +194,17 @@ public class PropertyPayActivity extends BaseActivity {
      */
     BiilBeaan bean;
     private void loadList() {
+        Utils.showLoad(this);
         Client.sendPost(NetParmet.USR_WYFY, "", new Handler(msg -> {
+            Utils.exitLoad();
             String json = msg.getData().getString("post");
             bean = Json.toObject(json, BiilBeaan.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(PropertyPayActivity.this);
+//                Utils.showNetErrorDialog(this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -198,6 +222,11 @@ public class PropertyPayActivity extends BaseActivity {
             for (BiilBeaan.DataBean repairBean : AppValue.wyreal) {
                 if (repairBean.getStateId() == type) {
                     real_data.add(repairBean);
+                }
+                if (real_data.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
                 }
             }
             mAdapter.setData(real_data);
@@ -225,13 +254,20 @@ public class PropertyPayActivity extends BaseActivity {
         mAllZd.getChildAt(1).setVisibility(View.VISIBLE);
         type = 0;
         real_data.clear();
-        for (BiilBeaan.DataBean  BiilBean : AppValue.wyreal) {
-            if (BiilBean.getStateId() == 0) {
-                real_data.add(BiilBean);
+        if (AppValue.wyreal!=null) {
+            for (BiilBeaan.DataBean BiilBean : AppValue.wyreal) {
+                if (BiilBean.getStateId() == 0) {
+                    real_data.add(BiilBean);
+                }
+                if (real_data.size() == 0) {
+                    mshaxin.setVisibility(View.VISIBLE);
+                } else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            mAdapter.setData(real_data);
+            mAdapter.notifyDataSetChanged();
         }
-        mAdapter.setData(real_data);
-        mAdapter.notifyDataSetChanged();
     }
 
 
@@ -244,13 +280,20 @@ public class PropertyPayActivity extends BaseActivity {
         ((TextView) mWjZd.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         mWjZd.getChildAt(1).setVisibility(View.VISIBLE);
         real_data.clear();
-        for (BiilBeaan.DataBean  BiilBean : AppValue.wyreal) {
-            if (BiilBean.getStateId() == 1) {
-                real_data.add(BiilBean);
+        if (AppValue.wyreal!=null) {
+            for (BiilBeaan.DataBean BiilBean : AppValue.wyreal) {
+                if (BiilBean.getStateId() == 1) {
+                    real_data.add(BiilBean);
+                }
+                if (real_data.size() == 0) {
+                    mshaxin.setVisibility(View.VISIBLE);
+                } else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            mAdapter.setData(real_data);
+            mAdapter.notifyDataSetChanged();
         }
-        mAdapter.setData(real_data);
-        mAdapter.notifyDataSetChanged();
     }
 
     @KListener(R.id.sreatch_layout)

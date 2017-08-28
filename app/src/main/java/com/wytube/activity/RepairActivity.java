@@ -3,8 +3,10 @@ package com.wytube.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqxb.yecall.BaseActivity;
@@ -18,6 +20,7 @@ import com.wytube.beans.RepairBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -38,6 +41,13 @@ public class RepairActivity extends BaseActivity {
     private LinearLayout mProcessed;
     @KBind(R.id.repair_list)
     private ListView mRepairList;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
+
     private LinearLayout selectLayout;
     private List<RepairBean.DataBean> tempBeans = new ArrayList<>();
     private RepairAdapters adapter;
@@ -63,6 +73,11 @@ public class RepairActivity extends BaseActivity {
         }
     }
 
+    @KListener(R.id.shaxin)
+    private void shaxinOnClick() {
+        tempBeans.clear();/*清空之前的数据*/
+        loadData();
+    }
 
     @KListener(R.id.not_process)
     private void not_processOnClick() {
@@ -72,13 +87,20 @@ public class RepairActivity extends BaseActivity {
         mNotProcess.getChildAt(1).setVisibility(View.VISIBLE);
         statetype = 0;
         tempBeans.clear();
-        for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
-            if (repairBean.getStateId() == 0) {
-                tempBeans.add(repairBean);
+        if (AppValue.repairBeans!=null) {
+            for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
+                if (repairBean.getStateId() == 0) {
+                    tempBeans.add(repairBean);
+                }
+                if (tempBeans.size() == 0) {
+                    mshaxin.setVisibility(View.VISIBLE);
+                } else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            adapter.setBeans(tempBeans);
+            adapter.notifyDataSetChanged();
         }
-        adapter.setBeans(tempBeans);
-        adapter.notifyDataSetChanged();
     }
 
     @KListener(R.id.process_ing)
@@ -89,13 +111,20 @@ public class RepairActivity extends BaseActivity {
         mProcessIng.getChildAt(1).setVisibility(View.VISIBLE);
         statetype = 1;
         tempBeans.clear();
-        for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
-            if (repairBean.getStateId() == 1) {
-                tempBeans.add(repairBean);
+        if (AppValue.repairBeans!=null) {
+            for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
+                if (repairBean.getStateId() == 1) {
+                    tempBeans.add(repairBean);
+                }
+                if (tempBeans.size() == 0) {
+                    mshaxin.setVisibility(View.VISIBLE);
+                } else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            adapter.setBeans(tempBeans);
+            adapter.notifyDataSetChanged();
         }
-        adapter.setBeans(tempBeans);
-        adapter.notifyDataSetChanged();
     }
 
     @KListener(R.id.processed)
@@ -106,13 +135,20 @@ public class RepairActivity extends BaseActivity {
         mProcessed.getChildAt(1).setVisibility(View.VISIBLE);
         statetype = 2;
         tempBeans.clear();
-        for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
-            if (repairBean.getStateId() == 2) {
-                tempBeans.add(repairBean);
+        if (AppValue.repairBeans!=null){
+            for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
+                if (repairBean.getStateId() == 2) {
+                    tempBeans.add(repairBean);
+                }
+                if (tempBeans.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            adapter.setBeans(tempBeans);
+            adapter.notifyDataSetChanged();
         }
-        adapter.setBeans(tempBeans);
-        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -125,7 +161,11 @@ public class RepairActivity extends BaseActivity {
             String json = msg.getData().getString("post");
             RepairBean bean = Json.toObject(json, RepairBean.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(this);
+//                Utils.showNetErrorDialog(this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -136,10 +176,14 @@ public class RepairActivity extends BaseActivity {
             adapter = new RepairAdapters(this,AppValue.repairBeans);
             mRepairList.setAdapter(this.adapter);
 
-
             for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
                 if (repairBean.getStateId() == statetype) {
                     tempBeans.add(repairBean);
+                }
+                if (tempBeans.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
                 }
             }
             adapter.setBeans(tempBeans);

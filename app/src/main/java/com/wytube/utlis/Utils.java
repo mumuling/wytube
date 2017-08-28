@@ -55,9 +55,6 @@ public class Utils {
      * @param title   显示的提示文字
      */
     public static void showOkDialog(Context context, String title) {
-//        Intent intent = new Intent(context, OKDialog.class);
-//        intent.putExtra("tips", title);
-//        context.startActivity(intent);
         YCdialog.ycdialog = new YCdialog(context);
         YCdialog.ycdialog.loadDialog(title);
     }
@@ -68,11 +65,11 @@ public class Utils {
      * @param context APP参数
      */
     public static void showNetErrorDialog(Context context) {
-//        Intent intent = new Intent(context, OKDialog.class);
-//        intent.putExtra("tips", "服务器异常或网络连接错误!请稍后再试!");
-//        context.startActivity(intent);
         YCdialog.ycdialog = new YCdialog(context);
         YCdialog.ycdialog.loadDialog("服务器异常!请稍后再试!");
+//        Intent intent = new Intent(getContext(),YCdialogYC.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        getContext().startActivity(intent);
     }
 
     /**
@@ -81,7 +78,6 @@ public class Utils {
      * @param context APP参数
      */
     public static void showLoginDialog(Context context) {
-//        context.startActivity(new Intent(context, TipsLoginDialog.class));
         TipsDialig.tipsDialig = new TipsDialig(context);
         TipsDialig.tipsDialig.loadDialog();
     }

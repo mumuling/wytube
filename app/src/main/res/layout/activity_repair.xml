@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <RelativeLayout
         android:id="@+id/rlss"
@@ -45,29 +47,6 @@
             android:background="@color/white"
             android:orientation="horizontal"
             android:paddingTop="12dp">
-
-            <!--<LinearLayout-->
-                <!--android:id="@+id/all_data"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_weight="1"-->
-                <!--android:gravity="center"-->
-                <!--android:orientation="vertical">-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginBottom="9dp"-->
-                    <!--android:gravity="center"-->
-                    <!--android:text="全部"-->
-                    <!--android:textColor="@color/app_main_color_green"-->
-                    <!--android:textSize="18sp" />-->
-
-                <!--<View-->
-                    <!--android:layout_width="60dp"-->
-                    <!--android:layout_height="1dp"-->
-                    <!--android:background="@color/app_main_color_green" />-->
-            <!--</LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/not_process"
@@ -140,7 +119,26 @@
                     android:visibility="invisible" />
             </LinearLayout>
         </LinearLayout>
-
+        <RelativeLayout
+            android:id="@+id/shaxin"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+            <ImageView
+                android:id="@+id/img_404"
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shuju2"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/img_200"
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shuju" />
+        </RelativeLayout>
         <ListView
             android:id="@+id/repair_list"
             android:layout_width="match_parent"
