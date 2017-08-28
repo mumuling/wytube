@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqxb.yecall.R;
@@ -18,6 +20,7 @@ import com.wytube.beans.BaseLbrepair;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -41,6 +44,13 @@ public class ComplaintActivity extends Activity {
     private LinearLayout mProcessed;
     @KBind(R.id.repair_list)
     private ListView mRepairList;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
+
     private LinearLayout selectLayout;
     private List<BaseLbrepair.DataBean> tempBeans = new ArrayList<>();
     private TSRepairAdapters adapter;
@@ -66,6 +76,12 @@ public class ComplaintActivity extends Activity {
         }
     }
 
+    @KListener(R.id.shaxin)
+    private void shaxinOnClick() {
+        tempBeans.clear();/*清空之前的数据*/
+        loadData();
+    }
+
 
     @KListener(R.id.not_process)
     private void not_processOnClick() {
@@ -75,13 +91,20 @@ public class ComplaintActivity extends Activity {
         mNotProcess.getChildAt(1).setVisibility(View.VISIBLE);
         SuitStateIdtype=0;
         tempBeans.clear();
-        for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
-            if (repairBean.getSuitStateId() == 0) {
-                tempBeans.add(repairBean);
+        if (AppValue.lbBeans!=null) {
+            for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
+                if (repairBean.getSuitStateId() == 0) {
+                    tempBeans.add(repairBean);
+                }
+                if (tempBeans.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            adapter.setBeans(tempBeans);
+            adapter.notifyDataSetChanged();
         }
-        adapter.setBeans(tempBeans);
-        adapter.notifyDataSetChanged();
     }
 
     @KListener(R.id.process_ing)
@@ -92,13 +115,20 @@ public class ComplaintActivity extends Activity {
         mProcessIng.getChildAt(1).setVisibility(View.VISIBLE);
         SuitStateIdtype=1;
         tempBeans.clear();
-        for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
-            if (repairBean.getSuitStateId() == 1) {
-                tempBeans.add(repairBean);
+        if (AppValue.lbBeans!=null) {
+            for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
+                if (repairBean.getSuitStateId() == 1) {
+                    tempBeans.add(repairBean);
+                }
+                if (tempBeans.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            adapter.setBeans(tempBeans);
+            adapter.notifyDataSetChanged();
         }
-        adapter.setBeans(tempBeans);
-        adapter.notifyDataSetChanged();
     }
 
     @KListener(R.id.processed)
@@ -109,13 +139,20 @@ public class ComplaintActivity extends Activity {
         mProcessed.getChildAt(1).setVisibility(View.VISIBLE);
         SuitStateIdtype=2;
         tempBeans.clear();
-        for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
-            if (repairBean.getSuitStateId() == 2) {
-                tempBeans.add(repairBean);
+        if (AppValue.lbBeans!=null) {
+            for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
+                if (repairBean.getSuitStateId() == 2) {
+                    tempBeans.add(repairBean);
+                }
+                if (tempBeans.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            adapter.setBeans(tempBeans);
+            adapter.notifyDataSetChanged();
         }
-        adapter.setBeans(tempBeans);
-        adapter.notifyDataSetChanged();
     }
 
     /**
@@ -138,7 +175,11 @@ public class ComplaintActivity extends Activity {
             String json = msg.getData().getString("post");
             BaseLbrepair bean = Json.toObject(json, BaseLbrepair.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(this);
+//                Utils.showNetErrorDialog(this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -151,6 +192,11 @@ public class ComplaintActivity extends Activity {
             for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
                 if (repairBean.getSuitStateId() == SuitStateIdtype) {
                     tempBeans.add(repairBean);
+                }
+                if (tempBeans.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
                 }
             }
             adapter.setBeans(tempBeans);

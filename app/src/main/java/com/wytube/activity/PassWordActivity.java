@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.action.param.NetParam;
@@ -19,6 +21,7 @@ import com.wytube.adaper.YeCallListPasswordAdapters;
 import com.wytube.beans.BaseMmkm;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.Utils;
 
 import java.text.SimpleDateFormat;
@@ -38,6 +41,12 @@ public class PassWordActivity extends Activity{
     private TextView mtext_name;
     @KBind(R.id.yecall_listview_item)
     private ListView itemListView;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
 
     private String phone;// 用户名
     private List<BaseMmkm.DataBean> list;
@@ -74,22 +83,30 @@ public class PassWordActivity extends Activity{
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             BaseMmkm bean = Json.toObject(json, BaseMmkm.class);
+            if (bean == null) {
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
+                return false;
+            }
+            if (!bean.isSuccess()) {
+                Utils.showOkDialog(this, bean.getMessage());
+                return false;
+            }
             list = bean.getData();
             if (!list.equals("[]")){
                 isAnotherDay();
                 YeCallListPasswordAdapters passwordAdapter = new YeCallListPasswordAdapters(PassWordActivity.this, list);
                 itemListView.setAdapter(passwordAdapter);
                 itemListView.setVisibility(View.VISIBLE);
+                if (list.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }else {
                 itemListView.setVisibility(View.GONE);
-            }
-            if (bean == null) {
-                Utils.showNetErrorDialog(this);
-                return false;
-            }
-            if (!bean.isSuccess()) {
-                Utils.showOkDialog(this, bean.getMessage());
-                return false;
             }
             return false;
         }));

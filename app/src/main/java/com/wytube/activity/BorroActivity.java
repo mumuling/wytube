@@ -1,11 +1,14 @@
 package com.wytube.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqxb.yecall.R;
@@ -37,7 +40,12 @@ public class BorroActivity extends Activity {
     private LinearLayout mlinear_sc_qx;
     @KBind(R.id.text_qx)
     private TextView mtext_qx;
-
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
 
     private TradeWPAdapters lifeAdapater;
     private List<BaseWPjy.DataBean> list;
@@ -49,15 +57,17 @@ public class BorroActivity extends Activity {
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         findViewById(R.id.menu_text).setOnClickListener(v -> {
-            lifeAdapater.flage = !lifeAdapater.flage;
-            if (!lifeAdapater.flage) {
-                rmenu_text.setText("取消");
-                mlinear_sc_qx.setVisibility(View.VISIBLE);
-            } else {
-                rmenu_text.setText("选择");
-                mlinear_sc_qx.setVisibility(View.GONE);
+            if (lifeAdapater!=null){
+                lifeAdapater.flage = !lifeAdapater.flage;
+                if (!lifeAdapater.flage) {
+                    rmenu_text.setText("取消");
+                    mlinear_sc_qx.setVisibility(View.VISIBLE);
+                } else {
+                    rmenu_text.setText("选择");
+                    mlinear_sc_qx.setVisibility(View.GONE);
+                }
+                lifeAdapater.notifyDataSetChanged();
             }
-            lifeAdapater.notifyDataSetChanged();
         });
         iniview();
     }
@@ -65,6 +75,11 @@ public class BorroActivity extends Activity {
 
     private void iniview() {
         loadDate();
+    }
+
+    @KListener(R.id.shaxin)
+    private void shaxinOnClick() {
+        startActivity(new Intent(this,TraWPfbInfoActivity.class));
     }
 
     @Override
@@ -162,7 +177,11 @@ public class BorroActivity extends Activity {
             String json = msg.getData().getString("post");
             BaseWPjy bean = Json.toObject(json, BaseWPjy.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(this);
+//                Utils.showNetErrorDialog(this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -172,6 +191,11 @@ public class BorroActivity extends Activity {
             list = bean.getData();
             lifeAdapater = new TradeWPAdapters(this,list);
             mNewsList.setAdapter(lifeAdapater);
+            if (list.size()==0){
+                mshaxin.setVisibility(View.VISIBLE);
+            }else {
+                mshaxin.setVisibility(View.GONE);
+            }
             return false;
         }));
     }

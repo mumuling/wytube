@@ -74,8 +74,7 @@
         android:id="@+id/ll_foot"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:visibility="gone">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_delete"
@@ -111,9 +110,9 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="1"
-                app:checkbutton_backgroundColor="#0066FF"
+                app:checkbutton_backgroundColor="@color/app_def_text_color"
                 app:checkbutton_duration="400"
-                app:checkbutton_labelColor="#ffffff"
+                app:checkbutton_labelColor="@color/main_def_text_color"
                 app:checkbutton_labelSize="16"
                 app:checkbutton_labelText="驳回"
                 app:checkbutton_round="0"

@@ -30,6 +30,27 @@
             android:layout_toEndOf="@+id/back_but" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/shaxin"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlss">
+        <ImageView
+            android:id="@+id/img_404"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shuju2"
+            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/img_200"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shuju" />
+    </RelativeLayout>
+
     <com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout
         android:id="@+id/swipe_container"
         android:layout_below="@+id/rlss"
@@ -38,6 +59,7 @@
         <ListView
             android:id="@+id/visitor_info_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true" />
     </com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout>
 </RelativeLayout>

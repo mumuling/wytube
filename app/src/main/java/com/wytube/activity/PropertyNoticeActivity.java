@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.cqxb.yecall.R;
 import com.skyrain.library.k.BindClass;
@@ -41,6 +43,14 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
     private LinearLayout mRepair_now;
     @KBind(R.id.swipe_container)
     private SwipeRefreshAndMoreLoadLayout mSwipe_container;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
+
+
     private List<PropMsgBean.DataBean> list;
     PropListAdapters adapter;
     int page=1,ISok=0;
@@ -50,6 +60,12 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
         iniview();
+    }
+
+    @KListener(R.id.shaxin)
+    private void shaxinOnClick() {
+        page=1;
+        initData(page,5);
     }
 
     private void iniview() {
@@ -81,7 +97,12 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
             String json = msg.getData().getString("post");
             PropMsgBean bean = Json.toObject(json, PropMsgBean.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(PropertyNoticeActivity.this);
+//                Utils.showNetErrorDialog(PropertyNoticeActivity.this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                mRepair_now.setVisibility(View.GONE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -94,6 +115,12 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
                 list = bean.getData();
                 adapter = new PropListAdapters(this, list);
                 mMsgList.setAdapter(adapter);
+                mshaxin.setVisibility(View.VISIBLE);
+                if (list.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             } else {
                 if (page == 1) {
                     list.clear();

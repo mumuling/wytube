@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.wytube.beans.BeasOpen;
 import com.wytube.beans.YeCallBeans;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.SipCore;
 import com.wytube.utlis.Utils;
 
@@ -47,6 +49,13 @@ public class OneKeyActivity extends Activity {
     private TextView mtext_name;
     @KBind(R.id.yecall_listview_item)
     private ListView itemListView;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
+
 
     private ShakeListener mShaker;
     private PopupWindow popupWindow = new PopupWindow();
@@ -126,11 +135,28 @@ public class OneKeyActivity extends Activity {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             YeCallBeans bean = Json.toObject(json, YeCallBeans.class);
+            if (bean == null) {
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
+                return false;
+            }
+            if (!bean.isSuccess()) {
+                Utils.showOkDialog(this, bean.getMessage());
+                return false;
+            }
+
             lists = bean.getData();
             if (!lists.equals("[]")){
                 YeCallListAdapters yeCallAdapter = new YeCallListAdapters(OneKeyActivity.this, lists);
                 itemListView.setAdapter(yeCallAdapter);
                 itemListView.setVisibility(View.VISIBLE);
+                if (lists.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }else {
                 itemListView.setVisibility(View.GONE);
             }
@@ -141,14 +167,7 @@ public class OneKeyActivity extends Activity {
                 String equipment = lists.get(positionNum).getDoorName();
                 showPopupWindowCount(community, equipment);
             });
-            if (bean == null) {
-                Utils.showNetErrorDialog(this);
-                return false;
-            }
-            if (!bean.isSuccess()) {
-                Utils.showOkDialog(this, bean.getMessage());
-                return false;
-            }
+
             return false;
         }));
     }

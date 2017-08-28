@@ -3,7 +3,10 @@ package com.wytube.activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.cqxb.yecall.BaseActivity;
 import com.cqxb.yecall.R;
@@ -31,6 +34,13 @@ public class VisitorInfoActivity extends BaseActivity implements SwipeRefreshLay
     private ListView mVisitorInfoList;
     @KBind(R.id.swipe_container)
     private SwipeRefreshAndMoreLoadLayout mSwipe_container;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
+
 
     private VisitorAdapters adapter;
     private List<VisitorListBean.DataBean> list;
@@ -58,7 +68,11 @@ public class VisitorInfoActivity extends BaseActivity implements SwipeRefreshLay
             String json = msg.getData().getString("post");
             VisitorListBean bean = Json.toObject(json, VisitorListBean.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(VisitorInfoActivity.this);
+//                Utils.showNetErrorDialog(VisitorInfoActivity.this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -70,6 +84,11 @@ public class VisitorInfoActivity extends BaseActivity implements SwipeRefreshLay
                 list = bean.getData();
                 adapter = new VisitorAdapters(this, list);
                 mVisitorInfoList.setAdapter(adapter);
+                if (list.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             } else {
                 if (page == 1) {
                     list.clear();

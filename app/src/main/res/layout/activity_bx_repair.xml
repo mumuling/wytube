@@ -117,7 +117,26 @@
                     android:visibility="invisible" />
             </LinearLayout>
         </LinearLayout>
-
+        <RelativeLayout
+            android:id="@+id/shaxin"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+            <ImageView
+                android:id="@+id/img_404"
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shuju2"
+                android:visibility="gone"/>
+            <ImageView
+                android:id="@+id/img_200"
+                android:layout_marginTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shuju" />
+        </RelativeLayout>
         <ListView
             android:id="@+id/repair_list"
             android:layout_width="match_parent"

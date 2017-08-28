@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqxb.yecall.BaseActivity;
@@ -20,6 +22,7 @@ import com.wytube.beans.HappyBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -38,8 +41,13 @@ public class HappyActivity extends BaseActivity {
     private LinearLayout ll_oked;
     @KBind(R.id.happy_list)
     private ListView happy_list;
-    @KBind(R.id.tv_nodata)
-    private TextView tv_nodata;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
+
     private HappyAdapter apapter;
     List<HappyBean.DataBean> passData = new ArrayList<>();
     private Context context;
@@ -56,6 +64,12 @@ public class HappyActivity extends BaseActivity {
         }
     }
 
+    @KListener(R.id.shaxin)
+    private void shaxinOnClick() {
+        passData.clear();/*清空之前的数据*/
+        loadData();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +78,6 @@ public class HappyActivity extends BaseActivity {
         loadData();
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
-        happy_list.setEmptyView(tv_nodata);
         selectLayout = ll_reviewed;
     }
 
@@ -79,7 +92,11 @@ public class HappyActivity extends BaseActivity {
             String json = msg.getData().getString("post");
             HappyBean bean = Json.toObject(json, HappyBean.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(this);
+//                Utils.showNetErrorDialog(this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -106,6 +123,11 @@ public class HappyActivity extends BaseActivity {
                         passData.add(repairBean);
                     }
                 }
+                if (passData.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
             apapter.setBeans(passData);
             apapter.notifyDataSetChanged();
@@ -131,13 +153,20 @@ public class HappyActivity extends BaseActivity {
         ll_reviewed.getChildAt(1).setVisibility(View.VISIBLE);
         type = 0;
         passData.clear();
-        for (HappyBean.DataBean happyBean : AppValue.xsBeans) {
-            if (happyBean.getStateId() == 0) {
-                passData.add(happyBean);
+        if (AppValue.xsBeans!=null) {
+            for (HappyBean.DataBean happyBean : AppValue.xsBeans) {
+                if (happyBean.getStateId() == 0) {
+                    passData.add(happyBean);
+                }
+                if (passData.size() == 0) {
+                    mshaxin.setVisibility(View.VISIBLE);
+                } else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            apapter.setData(passData);
+            apapter.notifyDataSetChanged();
         }
-        apapter.setData(passData);
-        apapter.notifyDataSetChanged();
     }
 
     @KListener(R.id.ll_oked)
@@ -148,14 +177,20 @@ public class HappyActivity extends BaseActivity {
         selectLayout = ll_oked;
         ((TextView) ll_oked.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         ll_oked.getChildAt(1).setVisibility(View.VISIBLE);
-        for (HappyBean.DataBean happyBean : AppValue.xsBeans) {
-            if (happyBean.getStateId() == 1|| happyBean.getStateId() == 2) {
-                passData.add(happyBean);
+        if (AppValue.xsBeans!=null) {
+            for (HappyBean.DataBean happyBean : AppValue.xsBeans) {
+                if (happyBean.getStateId() == 1 || happyBean.getStateId() == 2) {
+                    passData.add(happyBean);
+                }
+                if (passData.size() == 0) {
+                    mshaxin.setVisibility(View.VISIBLE);
+                } else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            apapter.setData(passData);
+            apapter.notifyDataSetChanged();
         }
-        apapter.setData(passData);
-        apapter.notifyDataSetChanged();
-
     }
 
 }

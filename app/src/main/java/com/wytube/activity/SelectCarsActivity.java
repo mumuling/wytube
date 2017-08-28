@@ -159,6 +159,15 @@ public class SelectCarsActivity extends BaseActivity {
                 super.onSuccess(statusCode, headers, response);
                 if (statusCode == 200) {
                     try {
+                        if (response.getString("message").equals("此卡类无需计费")){
+                            mTempStop.setVisibility(View.GONE);
+                            Utils.showOkDialog(SelectCarsActivity.this, response.getString("message"));
+                            return;
+                        }else if (response.getString("message").equals("此车尚未入场")){
+                            mTempStop.setVisibility(View.GONE);
+                            Utils.showOkDialog(SelectCarsActivity.this, response.getString("message"));
+                            return;
+                        }
                         AppValue.orderNum = response.getString("order");
                         AppValue.Money = Integer.parseInt(response.getString("money")) + "";
                         mMoneyText.setText(Integer.parseInt(response.getString("money")) / 100+"");

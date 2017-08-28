@@ -29,19 +29,44 @@
             android:layout_toRightOf="@+id/back_but"
             android:layout_toEndOf="@+id/back_but" />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/shaxin"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlss"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/img_404"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shuju2"
+            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/img_200"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shuju" />
+    </RelativeLayout>
+
     <com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout
         android:id="@+id/swipe_container"
         android:layout_below="@+id/rlss"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@+id/repair_now">
     <ListView
-        android:layout_margin="10dp"
         android:id="@+id/msg_list"
         android:divider="@null"
         android:layout_below="@+id/rlss"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/repair_now" />
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" />
     </com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout>
 
 
