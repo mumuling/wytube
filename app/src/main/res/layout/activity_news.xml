@@ -40,11 +40,37 @@
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/shaxin"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlss"
+        android:visibility="gone">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/app_def_text_color" />
+        <ImageView
+            android:id="@+id/img_404"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shuju2"
+            android:visibility="gone"/>
+        <ImageView
+            android:id="@+id/img_200"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shuju" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_below="@+id/rlss"
+        android:layout_below="@+id/shaxin"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
         <View

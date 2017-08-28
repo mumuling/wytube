@@ -4,17 +4,22 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import com.cqxb.yecall.R;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
+import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.NewsAdapters;
 import com.wytube.beans.NewsNrBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -30,6 +35,13 @@ import java.util.List;
 public class NewsNRActivity extends Activity {
     @KBind(R.id.listview_zx)
     private ListView mlistview_zx;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
+
     Intent intent;
     private List<NewsNrBean.DataBean> list;
 
@@ -55,8 +67,13 @@ public class NewsNRActivity extends Activity {
         int id = bundle.getInt("id");
         loadData();
     }
-//
-//
+
+    @KListener(R.id.shaxin)
+    private void shaxinOnClick() {
+        loadData();
+    }
+
+
     /**
      * 加载分类列表
      */
@@ -65,7 +82,10 @@ public class NewsNRActivity extends Activity {
             String json = msg.getData().getString("post");
             NewsNrBean bean = Json.toObject(json, NewsNrBean.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -75,6 +95,11 @@ public class NewsNRActivity extends Activity {
             list = bean.getData();
             NewsAdapters adapter = new NewsAdapters(this,list);
             mlistview_zx.setAdapter(adapter);
+            if (list.size()==0){
+                mshaxin.setVisibility(View.VISIBLE);
+            }else {
+                mshaxin.setVisibility(View.GONE);
+            }
             return false;
         }));
     }

@@ -77,8 +77,8 @@ public class BorroActivity extends Activity {
         loadDate();
     }
 
-    @KListener(R.id.shaxin)
-    private void shaxinOnClick() {
+    @KListener(R.id.img_200)
+    private void img_200OnClick() {
         startActivity(new Intent(this,TraWPfbInfoActivity.class));
     }
 

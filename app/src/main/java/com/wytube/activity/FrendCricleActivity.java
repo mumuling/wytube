@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.CardView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -20,6 +21,7 @@ import com.wytube.beans.DynamicBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -43,6 +45,13 @@ public class FrendCricleActivity extends Activity  {
     private LinearLayout mlinear_sc_qx;
     @KBind(R.id.text_qx)
     private TextView mtext_qx;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
+
 
     public static boolean isReload = false;
     private DynamicAdapters adapter;
@@ -58,19 +67,24 @@ public class FrendCricleActivity extends Activity  {
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         findViewById(R.id.menu_text).setOnClickListener(v -> {
-            adapter.flage = !adapter.flage;
-            if (adapter.flage) {
-                rmenu_text.setText("取消");
-                mlinear_sc_qx.setVisibility(View.VISIBLE);
-            } else {
-                rmenu_text.setText("选择");
-                mlinear_sc_qx.setVisibility(View.GONE);
+            if (adapter!=null){
+                adapter.flage = !adapter.flage;
+                if (adapter.flage) {
+                    rmenu_text.setText("取消");
+                    mlinear_sc_qx.setVisibility(View.VISIBLE);
+                } else {
+                    rmenu_text.setText("选择");
+                    mlinear_sc_qx.setVisibility(View.GONE);
+                }
+                adapter.notifyDataSetChanged();
             }
-            adapter.notifyDataSetChanged();
         });
     }
 
-
+    @KListener(R.id.shaxin)
+    private void shaxinOnClick() {
+        loadData();
+    }
 
     /**
      * 初始化列表
@@ -81,6 +95,11 @@ public class FrendCricleActivity extends Activity  {
         this.adapter = new DynamicAdapters(this,beans);
         mDynamicList.setAdapter(this.adapter);
         list = beans;
+        if (list.size()==0){
+            mshaxin.setVisibility(View.VISIBLE);
+        }else {
+            mshaxin.setVisibility(View.GONE);
+        }
     }
 
 
@@ -137,7 +156,10 @@ public class FrendCricleActivity extends Activity  {
             String json = msg.getData().getString("post");
             DynamicBean bean = Json.toObject(json, DynamicBean.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {

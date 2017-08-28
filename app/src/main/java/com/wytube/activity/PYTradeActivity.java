@@ -91,17 +91,8 @@ public class PYTradeActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
-        initView();
-    }
-
-    /**
-     * 初始化视图
-     */
-    private void initView() {
-        findViewById(R.id.title_text).setOnClickListener(v -> {
-          finish();});
-        findViewById(R.id.back_but).setOnClickListener(v -> {
-          finish();});
+        findViewById(R.id.title_text).setOnClickListener(new View.OnClickListener() { public void onClick(View v) {finish();}});
+        findViewById(R.id.back_but).setOnClickListener(new View.OnClickListener() { public void onClick(View v) {finish();}});
     }
 
     @Override

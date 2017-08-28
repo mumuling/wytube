@@ -1,11 +1,14 @@
 package com.wytube.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +41,12 @@ public class TradeActivity extends Activity {
     private LinearLayout mlinear_sc_qx;
     @KBind(R.id.text_qx)
     private TextView mtext_qx;
-
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
 
     private TradeAdapters lifeAdapater;
     private List<BaseJylb.DataBean> list;
@@ -50,15 +58,17 @@ public class TradeActivity extends Activity {
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         findViewById(R.id.menu_text).setOnClickListener(v -> {
-            lifeAdapater.flage = !lifeAdapater.flage;
-            if (!lifeAdapater.flage) {
-                rmenu_text.setText("取消");
-                mlinear_sc_qx.setVisibility(View.VISIBLE);
-            } else {
-                rmenu_text.setText("选择");
-                mlinear_sc_qx.setVisibility(View.GONE);
+            if (lifeAdapater!=null){
+                lifeAdapater.flage = !lifeAdapater.flage;
+                if (!lifeAdapater.flage) {
+                    rmenu_text.setText("取消");
+                    mlinear_sc_qx.setVisibility(View.VISIBLE);
+                } else {
+                    rmenu_text.setText("选择");
+                    mlinear_sc_qx.setVisibility(View.GONE);
+                }
+                lifeAdapater.notifyDataSetChanged();
             }
-            lifeAdapater.notifyDataSetChanged();
         });
         iniview();
     }
@@ -75,6 +85,11 @@ public class TradeActivity extends Activity {
             loadDate();
             AppValue.fish = -1;
         }
+    }
+
+    @KListener(R.id.img_200)
+    private void img_200OnClick() {
+        startActivity(new Intent(this,PYTradeActivity.class));
     }
 
     /*全选*/
@@ -157,7 +172,10 @@ public class TradeActivity extends Activity {
             String json = msg.getData().getString("post");
             BaseJylb bean = Json.toObject(json, BaseJylb.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -167,6 +185,11 @@ public class TradeActivity extends Activity {
             list = bean.getData();
             lifeAdapater = new TradeAdapters(this,list);
             mNewsList.setAdapter(lifeAdapater);
+            if (list.size()==0){
+                mshaxin.setVisibility(View.VISIBLE);
+            }else {
+                mshaxin.setVisibility(View.GONE);
+            }
             return false;
         }));
     }
