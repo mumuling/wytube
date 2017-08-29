@@ -298,19 +298,4 @@
 
     </android.support.v7.widget.CardView>
 
-    <com.wytube.shared.ElasticCheckButton
-        android:id="@+id/example2_view1"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        app:checkbutton_alpha="0.5"
-        app:checkbutton_backgroundColor="#1381F9"
-        app:checkbutton_duration="400"
-        app:checkbutton_labelColor="#ffffff"
-        app:checkbutton_labelSize="16"
-        app:checkbutton_labelStyle="bold"
-        app:checkbutton_labelText="联系业主"
-        app:checkbutton_round="30"
-        app:checkbutton_scale="0.9"/>
 </LinearLayout>

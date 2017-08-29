@@ -1,9 +1,15 @@
 package com.wytube.utlis;
 
 
+import android.content.Intent;
+
+import com.cqxb.yecall.until.PreferenceBean;
+import com.cqxb.yecall.until.SettingInfo;
 import com.wytube.beans.YeCallBeans;
 import com.wytube.net.NetParmet;
 
+import org.linphone.DialerFragment;
+import org.linphone.InCallActivity;
 import org.linphone.LinphoneManager;
 import org.linphone.core.LinphoneAddress;
 import org.linphone.core.LinphoneAuthInfo;
@@ -11,6 +17,9 @@ import org.linphone.core.LinphoneChatRoom;
 import org.linphone.core.LinphoneCore;
 import org.linphone.core.LinphoneCoreFactory;
 import org.linphone.core.LinphoneProxyConfig;
+import org.linphone.ui.AddressText;
+
+import static com.cqxb.yecall.YETApplication.getContext;
 
 /**
  * 创 建 人: vr 柠檬 .
@@ -104,6 +113,46 @@ public class SipCore {
             room.sendMessage(bean.getSerial().toString());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 调用免费拨打
+     * @param name 电话号码
+     */
+    public static void mCalling(String name) {
+        String number = "";
+
+        if (SettingInfo.getParams(PreferenceBean.LOGINFLAG, "").equals("")) {
+            DialerFragment.instance().justLogin(getContext());
+        } else {
+            SettingInfo.setParams(PreferenceBean.CALLSTATUS, "拨号");
+            // LinphoneActivity.instance().startIncallActivity(null);
+            SettingInfo.setParams(PreferenceBean.CALLNAME, name);
+            SettingInfo.setParams(PreferenceBean.CALLPHONE, name);
+            if (name.length() <= 11) {
+                SettingInfo.setParams(PreferenceBean.CALLPOSITION, "私人号码");
+            } else {
+                SettingInfo.setParams(PreferenceBean.CALLPOSITION, "企业号");
+            }
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Intent intent = new Intent(getContext(),
+                            InCallActivity.class);
+                    intent.putExtra("VideoEnabled", false);
+                    /*不写这句会报错*/
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getContext().startActivity(intent);
+                }
+            }).start();
+
+            LinphoneManager.AddressType address = new AddressText(getContext(), null);
+            address.setDisplayedName(name);
+            address.setText(name);
+//            LinphoneManager.getLc().enableVideo(true, true);
+//            LinphoneManager.getLc().setVideoPolicy(true, true);
+            LinphoneManager.getInstance().newOutgoingCall(address);
         }
     }
 }

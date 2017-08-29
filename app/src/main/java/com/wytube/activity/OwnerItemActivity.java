@@ -20,7 +20,6 @@ import com.skyrain.library.k.api.KListener;
 import com.wytube.adaper.OwnerAdapter;
 import com.wytube.beans.BaseWyOK;
 import com.wytube.beans.OwnerBean;
-import com.wytube.shared.ElasticAction;
 import com.wytube.dialog.TellDialog;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
@@ -156,12 +155,6 @@ public class OwnerItemActivity extends BaseActivity {
             return false;
         }));
     }
-
-    @KListener(R.id.example2_view1)
-    private void example2_view1OnClick(View v) {
-        ElasticAction.doAction(v, 0, 0.75f, 0.75f);
-    }
-
 
    /* *//**
      * 删除业主

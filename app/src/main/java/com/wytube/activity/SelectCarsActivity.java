@@ -97,8 +97,6 @@ public class SelectCarsActivity extends BaseActivity {
     private void initView() {
         mCarNum.addTextChangedListener(textWatcher);
         mLocationText.setText("选择停车场");
-        Intent intent = getIntent();
-//        mCarNum.setText(intent.getStringExtra("chepai"));
     }
 
     private TextWatcher textWatcher = new TextWatcher() {

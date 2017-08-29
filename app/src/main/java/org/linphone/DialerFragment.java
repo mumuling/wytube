@@ -80,7 +80,6 @@ import com.cqxb.yecall.until.NetUtil;
 import com.cqxb.yecall.until.PreferenceBean;
 import com.cqxb.yecall.until.SettingInfo;
 import com.cqxb.yecall.until.T;
-import com.wytube.utlis.AppValue;
 
 import org.linphone.LinphoneManager.AddressType;
 import org.linphone.core.LinphoneCore;
@@ -381,10 +380,10 @@ public class DialerFragment extends BaseFragment implements OnContactsLoad,
                 WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         mAddress.setOnClickListener(this);
-        /*门禁电话*/
-        if (!AppValue.MJphone.equals("")){
-            mAddress.setText(AppValue.MJphone);
-        }
+//        /*门禁电话*/
+//        if (!AppValue.MJphone.equals("")){
+//            mAddress.setText(AppValue.MJphone);
+//        }
 
         // 监听号码输入框的文字改变
         mAddress.addTextChangedListener(new TextWatcher() {

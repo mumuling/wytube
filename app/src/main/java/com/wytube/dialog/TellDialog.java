@@ -15,9 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.cqxb.yecall.MainTabActivity;
 import com.cqxb.yecall.R;
-import com.wytube.utlis.AppValue;
+
+import static com.wytube.utlis.SipCore.mCalling;
 
 
 public class TellDialog {
@@ -54,8 +54,9 @@ public class TellDialog {
         ll_mjtell.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AppValue.MJphone = phoneNumber;
-                mActivity.startActivity(new Intent(mActivity, MainTabActivity.class));
+//                AppValue.MJphone = phoneNumber;
+//                mActivity.startActivity(new Intent(mActivity, MainTabActivity.class));
+                mCalling(phoneNumber);
             }
         });
 
