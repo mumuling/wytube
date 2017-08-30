@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,7 +35,7 @@ import java.util.List;
  * 喜事列表
  */
 @KActivity(R.layout.activity_happy)
-public class HappyActivity extends BaseActivity {
+public class HappyActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAndMoreLoadLayout.OnLoadMoreListener {
     private LinearLayout selectLayout;
     @KBind(R.id.ll_reviewed)
     private LinearLayout ll_reviewed;
@@ -52,6 +53,7 @@ public class HappyActivity extends BaseActivity {
     private SwipeRefreshAndMoreLoadLayout mSwipe_container;
     private HappyAdapter apapter;
     List<HappyBean.DataBean> passData = new ArrayList<>();
+    List<HappyBean.DataBean> list;
     private Context context;
     int type = 0;
     int page=1,ISok=0;
@@ -61,7 +63,7 @@ public class HappyActivity extends BaseActivity {
         super.onResume();
         if (AppValue.fish==1){
             passData.clear();
-            loadData();
+            loadData(page,15);
             AppValue.fish=-1;
         }
     }
@@ -69,7 +71,7 @@ public class HappyActivity extends BaseActivity {
     @KListener(R.id.shaxin)
     private void shaxinOnClick() {
         passData.clear();/*清空之前的数据*/
-        loadData();
+        loadData(page,15);
     }
 
     @Override
@@ -77,7 +79,10 @@ public class HappyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
         context = this;
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         mSwipe_container.setOnRefreshListener(this);
@@ -92,14 +97,13 @@ public class HappyActivity extends BaseActivity {
     /*
     * 喜事列表数据
     * */
-    private void loadData() {
+    private void loadData(int page,int rows) {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.HAPPY, "stateId", new Handler(msg -> {
+        Client.sendPost(NetParmet.HAPPY, "stateId"+"&page="+ page +"&rows="+rows, new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             HappyBean bean = Json.toObject(json, HappyBean.class);
             if (bean == null) {
-//                Utils.showNetErrorDialog(this);
                 mshaxin.setVisibility(View.VISIBLE);
                 mimg_200.setVisibility(View.GONE);
                 mimg_404.setVisibility(View.VISIBLE);
@@ -113,13 +117,20 @@ public class HappyActivity extends BaseActivity {
             AppValue.xsBeans = bean.getData();
             apapter = new HappyAdapter(this, passData);
             happy_list.setAdapter(apapter);
-
             apapter.setOnIteOnItemClickListener(bean1 -> {
                 Intent intent = new Intent(HappyActivity.this, ApplyDetailActivity.class);
                 intent.putExtra("data", bean1);
                 context.startActivity(intent);//传递参数判断是审阅还是通过
             });
-
+            if (ISok==0){
+                apapter=new HappyAdapter(this, passData);
+                happy_list.setAdapter(apapter);
+            }else {
+                mSwipe_container.setLoading(false);
+            }
+            if(page==1){
+                passData.clear();
+            }
             for (HappyBean.DataBean repairBean : AppValue.xsBeans) {
                 if(type==0){
                     if (repairBean.getStateId() == 0) {
@@ -138,6 +149,7 @@ public class HappyActivity extends BaseActivity {
             }
             apapter.setBeans(passData);
             apapter.notifyDataSetChanged();
+            ISok++;
             return false;
         }));
     }
@@ -173,6 +185,7 @@ public class HappyActivity extends BaseActivity {
             }
             apapter.setData(passData);
             apapter.notifyDataSetChanged();
+
         }
     }
 
@@ -199,5 +212,30 @@ public class HappyActivity extends BaseActivity {
             apapter.notifyDataSetChanged();
         }
     }
+    /*下拉刷新*/
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                page = 1;
+                loadData(page,15);
+                mSwipe_container.setRefreshing(false);
+            }
+        }, 3000);
+    }
 
+    /*上拉更多*/
+    @Override
+    public void onLoadMore() {
+        if (AppValue.xsBeans.size()<=0||AppValue.xsBeans==null){
+            ToastUtils.showToast(this,"没有更多数据");
+        }else {
+            mSwipe_container.setLoadingContext("正在加载");
+            new Handler().postDelayed(() -> {
+                page++;
+                loadData(page, 15);
+            }, 2000);
+        }
+    }
 }
