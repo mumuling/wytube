@@ -22,6 +22,7 @@ import com.wytube.beans.HappyBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
 import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
@@ -47,12 +48,13 @@ public class HappyActivity extends BaseActivity {
     private ImageView mimg_404;
     @KBind(R.id.img_200)
     private ImageView mimg_200;
-
+    @KBind(R.id.swipe_container)
+    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
     private HappyAdapter apapter;
     List<HappyBean.DataBean> passData = new ArrayList<>();
     private Context context;
     int type = 0;
-
+    int page=1,ISok=0;
 
     @Override
     protected void onResume() {
@@ -75,9 +77,14 @@ public class HappyActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
         context = this;
-        loadData();
+
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
+        mSwipe_container.setOnRefreshListener(this);
+        mSwipe_container.setOnLoadMoreListener(this);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
+                R.color.app_color_pass_color,R.color.red);
+        loadData(page,15);
         selectLayout = ll_reviewed;
     }
 
@@ -113,27 +120,19 @@ public class HappyActivity extends BaseActivity {
                 context.startActivity(intent);//传递参数判断是审阅还是通过
             });
 
-            if (AppValue.xsBeans.size()!=0) {
-                for (HappyBean.DataBean repairBean : AppValue.xsBeans) {
-                    if (type == 0) {
-                        if (repairBean.getStateId() == 0) {
-                            passData.add(repairBean);
-                        }
-                    } else {
-                        if (repairBean.getStateId() == 1 || repairBean.getStateId() == 2) {
-                            passData.add(repairBean);
-                        }
+            for (HappyBean.DataBean repairBean : AppValue.xsBeans) {
+                if(type==0){
+                    if (repairBean.getStateId() == 0) {
+                        passData.add(repairBean);
                     }
-                    if (passData.size() == 0) {
-                        mshaxin.setVisibility(View.VISIBLE);
-                    } else {
-                        mshaxin.setVisibility(View.GONE);
+                }else {
+                    if(repairBean.getStateId()==1||repairBean.getStateId()==2){
+                        passData.add(repairBean);
                     }
                 }
-            }else {
-                if (passData.size() == 0) {
+                if (passData.size()==0){
                     mshaxin.setVisibility(View.VISIBLE);
-                } else {
+                }else {
                     mshaxin.setVisibility(View.GONE);
                 }
             }
