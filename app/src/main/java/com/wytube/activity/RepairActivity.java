@@ -175,14 +175,21 @@ public class RepairActivity extends BaseActivity {
             AppValue.repairBeans = bean.getData();
             adapter = new RepairAdapters(this,AppValue.repairBeans);
             mRepairList.setAdapter(this.adapter);
-
-            for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
-                if (repairBean.getStateId() == statetype) {
-                    tempBeans.add(repairBean);
+            if (AppValue.repairBeans.size()!=0) {
+                for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
+                    if (repairBean.getStateId() == statetype) {
+                        tempBeans.add(repairBean);
+                    }
+                    if (tempBeans.size() == 0) {
+                        mshaxin.setVisibility(View.VISIBLE);
+                    } else {
+                        mshaxin.setVisibility(View.GONE);
+                    }
                 }
-                if (tempBeans.size()==0){
+            }else {
+                if (tempBeans.size() == 0) {
                     mshaxin.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     mshaxin.setVisibility(View.GONE);
                 }
             }

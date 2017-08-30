@@ -189,13 +189,21 @@ public class ComplaintActivity extends Activity {
             AppValue.lbBeans = bean.getData();
             adapter = new TSRepairAdapters(this,AppValue.lbBeans);
             mRepairList.setAdapter(this.adapter);
-            for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
-                if (repairBean.getSuitStateId() == SuitStateIdtype) {
-                    tempBeans.add(repairBean);
+            if (AppValue.lbBeans.size()!=0) {
+                for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
+                    if (repairBean.getSuitStateId() == SuitStateIdtype) {
+                        tempBeans.add(repairBean);
+                    }
+                    if (tempBeans.size() == 0) {
+                        mshaxin.setVisibility(View.VISIBLE);
+                    } else {
+                        mshaxin.setVisibility(View.GONE);
+                    }
                 }
-                if (tempBeans.size()==0){
+            }else {
+                if (tempBeans.size() == 0) {
                     mshaxin.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     mshaxin.setVisibility(View.GONE);
                 }
             }

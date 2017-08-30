@@ -84,11 +84,6 @@ public class VisitorInfoActivity extends BaseActivity implements SwipeRefreshLay
                 list = bean.getData();
                 adapter = new VisitorAdapters(this, list);
                 mVisitorInfoList.setAdapter(adapter);
-                if (list.size()==0){
-                    mshaxin.setVisibility(View.VISIBLE);
-                }else {
-                    mshaxin.setVisibility(View.GONE);
-                }
             } else {
                 if (page == 1) {
                     list.clear();
@@ -99,6 +94,11 @@ public class VisitorInfoActivity extends BaseActivity implements SwipeRefreshLay
                 mSwipe_container.setLoading(false);
             }
             ISok++;
+            if (list.size()==0){
+                mshaxin.setVisibility(View.VISIBLE);
+            }else {
+                mshaxin.setVisibility(View.GONE);
+            }
             return false;
         }));
     }

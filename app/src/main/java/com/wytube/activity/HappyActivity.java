@@ -113,19 +113,27 @@ public class HappyActivity extends BaseActivity {
                 context.startActivity(intent);//传递参数判断是审阅还是通过
             });
 
-            for (HappyBean.DataBean repairBean : AppValue.xsBeans) {
-                if(type==0){
-                    if (repairBean.getStateId() == 0) {
-                        passData.add(repairBean);
+            if (AppValue.xsBeans.size()!=0) {
+                for (HappyBean.DataBean repairBean : AppValue.xsBeans) {
+                    if (type == 0) {
+                        if (repairBean.getStateId() == 0) {
+                            passData.add(repairBean);
+                        }
+                    } else {
+                        if (repairBean.getStateId() == 1 || repairBean.getStateId() == 2) {
+                            passData.add(repairBean);
+                        }
                     }
-                }else {
-                    if(repairBean.getStateId()==1||repairBean.getStateId()==2){
-                        passData.add(repairBean);
+                    if (passData.size() == 0) {
+                        mshaxin.setVisibility(View.VISIBLE);
+                    } else {
+                        mshaxin.setVisibility(View.GONE);
                     }
                 }
-                if (passData.size()==0){
+            }else {
+                if (passData.size() == 0) {
                     mshaxin.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     mshaxin.setVisibility(View.GONE);
                 }
             }

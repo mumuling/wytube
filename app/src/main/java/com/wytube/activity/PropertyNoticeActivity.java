@@ -85,7 +85,7 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
         if (AppValue.fish==1){
             page=1;
             initData(page,5);
-            AppValue.fish=1;
+            AppValue.fish=-1;
         }
     }
 
@@ -116,11 +116,6 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
                 adapter = new PropListAdapters(this, list);
                 mMsgList.setAdapter(adapter);
                 mshaxin.setVisibility(View.VISIBLE);
-                if (list.size()==0){
-                    mshaxin.setVisibility(View.VISIBLE);
-                }else {
-                    mshaxin.setVisibility(View.GONE);
-                }
             } else {
                 if (page == 1) {
                     list.clear();
@@ -130,6 +125,11 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
                 mSwipe_container.setLoading(false);/*结束更多加载*/
             }
             ISok++;
+            if (list.size()==0){
+                mshaxin.setVisibility(View.VISIBLE);
+            }else {
+                mshaxin.setVisibility(View.GONE);
+            }
             return false;
         }));
     }
