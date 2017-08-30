@@ -55,7 +55,7 @@ public class OwnerActivity extends BaseActivity implements SwipeRefreshLayout.On
         mSwipe_container.setOnLoadMoreListener(this);
         mSwipe_container.setColorSchemeResources(R.color.colorAccent,
                 R.color.app_color_pass_color,R.color.red);
-        loadData(page,20);
+        loadData(page,15);
         yzgl_list.setOnItemClickListener((adapterView, view, i, l) -> {
             OwnerBean.DataBean bean =(OwnerBean.DataBean )yzgl_list.getItemAtPosition(i);
             Intent intent = new Intent(OwnerActivity.this,OwnerItemActivity.class);
@@ -106,7 +106,7 @@ public class OwnerActivity extends BaseActivity implements SwipeRefreshLayout.On
             @Override
             public void run() {
                 page = 1;
-                loadData(page,20);
+                loadData(page,15);
                 mSwipe_container.setRefreshing(false);
             }
         }, 3000);
@@ -121,7 +121,7 @@ public class OwnerActivity extends BaseActivity implements SwipeRefreshLayout.On
             mSwipe_container.setLoadingContext("正在加载");
             new Handler().postDelayed(() -> {
                 page++;
-                loadData(page, 20);
+                loadData(page, 15);
             }, 2000);
         }
     }

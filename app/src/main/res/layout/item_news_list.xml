@@ -22,8 +22,16 @@
             android:layout_height="wrap_content"
             android:src="@drawable/shuju" />
     </RelativeLayout>
+
+
+    <com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout
+        android:id="@+id/swipe_container"
+        android:layout_below="@+id/rlss"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ListView
         android:id="@+id/listview_zx"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    </com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout>
 </LinearLayout>

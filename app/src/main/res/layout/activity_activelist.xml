@@ -1,116 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#E8E8E8">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#E8E8E8">
+
+    <!--标题栏-->
     <RelativeLayout
         android:id="@+id/rlss"
         android:layout_width="match_parent"
-        android:background="@color/white"
-        android:layout_height="48dp">
+        android:layout_height="48dp"
+        android:background="@color/white">
+
         <ImageView
             android:id="@+id/back_but"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ty_fh"
             android:layout_centerVertical="true"
             android:layout_marginLeft="14dp"
-            android:layout_marginStart="14dp" />
+            android:layout_marginStart="14dp"
+            android:src="@drawable/ty_fh"/>
 
         <TextView
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/back_but"
+            android:layout_toEndOf="@+id/back_but"
+            android:layout_toRightOf="@+id/back_but"
             android:paddingLeft="10dp"
             android:text="社区活动管理"
-            android:textSize="16sp"
             android:textColor="@color/main_def_text_color"
-            android:layout_alignTop="@+id/back_but"
-            android:layout_toRightOf="@+id/back_but"
-            android:layout_toEndOf="@+id/back_but" />
+            android:textSize="16sp"/>
+
         <TextView
             android:id="@+id/text_fb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
-            android:text="发布"
-            android:textSize="14sp"
-            android:layout_marginEnd="12dp"
-            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_centerVertical="true"
+            android:layout_marginRight="12dp"
+            android:text="发布"
+            android:textColor="@color/colorAccent"
+            android:textSize="14sp"/>
     </RelativeLayout>
+
     <View
         android:id="@+id/sss"
-        android:layout_below="@+id/rlss"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/e8e8e8" />
+        android:layout_below="@+id/rlss"
+        android:background="@color/e8e8e8"/>
 
     <RelativeLayout
         android:id="@+id/shaxin"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/sss"
-        android:visibility="gone">
+        android:background="@color/white"
+        android:visibility="visible">
+
         <ImageView
             android:id="@+id/img_404"
-            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:src="@drawable/shuju2"
             android:visibility="gone"/>
+
         <ImageView
             android:id="@+id/img_200"
-            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/shuju" />
+            android:layout_marginTop="50dp"
+            android:src="@drawable/shuju"/>
     </RelativeLayout>
 
-    <ScrollView
-        android:layout_below="@+id/shaxin"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-    <RelativeLayout
-        android:id="@+id/ad_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/ad_img"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/banner" />
-
-        <ImageView
-            android:id="@+id/close_but"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/cancel_nor_w" />
-
-    </RelativeLayout>
-
-    <com.wytube.shared.ListViewForScrollView
-        android:id="@+id/list_hd"
-        android:layout_below="@+id/ad_layout"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-    </com.wytube.shared.ListViewForScrollView>
+        android:layout_below="@+id/rlss"
+        android:orientation="vertical">
+
+        <com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout
+        android:id="@+id/swipe_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+            <com.wytube.shared.ListViewForScrollView
+            android:id="@+id/list_hd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/ad_layout">
+        </com.wytube.shared.ListViewForScrollView>
+    </com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout>
 </LinearLayout>
-    </ScrollView>
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/shaxin">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:orientation="vertical">-->
+            <!--&lt;!&ndash;广告控件&ndash;&gt;-->
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/ad_layout"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content">-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/ad_img"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="80dp"-->
+                    <!--android:scaleType="fitXY"-->
+                    <!--android:src="@drawable/banner"/>-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/close_but"-->
+                    <!--android:layout_width="20dp"-->
+                    <!--android:layout_height="20dp"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentTop="true"-->
+                    <!--android:layout_marginRight="5dp"-->
+                    <!--android:layout_marginTop="5dp"-->
+                    <!--android:src="@drawable/cancel_nor_w"/>-->
+
+            <!--</RelativeLayout>-->
+
+            <!---->
+    <!--</ScrollView>-->
 </RelativeLayout>

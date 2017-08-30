@@ -3,9 +3,9 @@ package com.wytube.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -21,6 +21,7 @@ import com.wytube.beans.DynamicBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
 import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
@@ -29,7 +30,7 @@ import java.util.List;
 
 
 @KActivity(R.layout.activity_frend_cricle)
-public class FrendCricleActivity extends Activity  {
+public class FrendCricleActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAndMoreLoadLayout.OnLoadMoreListener {
 
     @KBind(R.id.dynamic_list)
     private ListView mDynamicList;
@@ -45,46 +46,42 @@ public class FrendCricleActivity extends Activity  {
     private LinearLayout mlinear_sc_qx;
     @KBind(R.id.text_qx)
     private TextView mtext_qx;
-    @KBind(R.id.shaxin)
-    private RelativeLayout mshaxin;
-    @KBind(R.id.img_404)
-    private ImageView mimg_404;
-    @KBind(R.id.img_200)
-    private ImageView mimg_200;
-
-
+    @KBind(R.id.swipe_container)
+    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
     public static boolean isReload = false;
     private DynamicAdapters adapter;
     private List<DynamicBean.DataBean.TracksBean> list;
-
+    int page = 1, ISok = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
-        loadData();
-        AppValue.TrackId="";
-        findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
-        findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
+        loadData(page, 10);
+        AppValue.TrackId = "";
+        findViewById(R.id.back_but).setOnClickListener(v -> {
+            finish();
+        });
+        findViewById(R.id.title_text).setOnClickListener(v -> {
+            finish();
+        });
+        mSwipe_container.setOnRefreshListener(this);
+        mSwipe_container.setOnLoadMoreListener(this);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
+                R.color.app_color_pass_color, R.color.red);
         findViewById(R.id.menu_text).setOnClickListener(v -> {
-            if (adapter!=null){
-                adapter.flage = !adapter.flage;
-                if (adapter.flage) {
-                    rmenu_text.setText("取消");
-                    mlinear_sc_qx.setVisibility(View.VISIBLE);
-                } else {
-                    rmenu_text.setText("选择");
-                    mlinear_sc_qx.setVisibility(View.GONE);
-                }
-                adapter.notifyDataSetChanged();
+            adapter.flage = !adapter.flage;
+            if (adapter.flage) {
+                rmenu_text.setText("取消");
+                mlinear_sc_qx.setVisibility(View.VISIBLE);
+            } else {
+                rmenu_text.setText("选择");
+                mlinear_sc_qx.setVisibility(View.GONE);
             }
+            adapter.notifyDataSetChanged();
         });
     }
 
-    @KListener(R.id.shaxin)
-    private void shaxinOnClick() {
-        loadData();
-    }
 
     /**
      * 初始化列表
@@ -92,14 +89,9 @@ public class FrendCricleActivity extends Activity  {
      * @param beans 数据对象集合
      */
     private void initList(List<DynamicBean.DataBean.TracksBean> beans) {
-        this.adapter = new DynamicAdapters(this,beans);
+        this.adapter = new DynamicAdapters(this, beans);
         mDynamicList.setAdapter(this.adapter);
         list = beans;
-        if (list.size()==0){
-            mshaxin.setVisibility(View.VISIBLE);
-        }else {
-            mshaxin.setVisibility(View.GONE);
-        }
     }
 
 
@@ -108,7 +100,7 @@ public class FrendCricleActivity extends Activity  {
         super.onResume();
         if (isReload) {
             isReload = false;
-            loadData();
+            loadData(page, 10);
         }
     }
 
@@ -118,22 +110,21 @@ public class FrendCricleActivity extends Activity  {
         if (adapter.flages) {
             for (int i = 0; i < list.size(); i++) {
                 /*全选*/
-                if (AppValue.TrackId != null && !AppValue.TrackId.equals(""))
-                {
+                if (AppValue.TrackId != null && !AppValue.TrackId.equals("")) {
                     AppValue.TrackId += ",";
                 }
                 AppValue.TrackId += list.get(i).getTrackId();
                 list.get(i).isCheck = true;
             }
-            adapter.flages=!adapter.flages;
+            adapter.flages = !adapter.flages;
             mtext_qx.setText("全不选");
             adapter.notifyDataSetChanged();
         } else {
-            AppValue.TrackId="";
+            AppValue.TrackId = "";
             for (int i = 0; i < list.size(); i++) {
                 list.get(i).isCheck = false;
             }
-            adapter.flages=!adapter.flages;
+            adapter.flages = !adapter.flages;
             adapter.notifyDataSetChanged();
             mtext_qx.setText("全选");
         }
@@ -149,17 +140,14 @@ public class FrendCricleActivity extends Activity  {
     /**
      * 加载数据
      */
-    private void loadData() {
+    private void loadData(int page, int rows) {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.GET_DYNAMIC, "rows=15", new Handler(msg -> {
+        Client.sendPost(NetParmet.GET_DYNAMIC,"page="+ page +"&rows="+rows, new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             DynamicBean bean = Json.toObject(json, DynamicBean.class);
             if (bean == null) {
-                mshaxin.setVisibility(View.VISIBLE);
-                mimg_200.setVisibility(View.GONE);
-                mimg_404.setVisibility(View.VISIBLE);
-                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
+                Utils.showNetErrorDialog(this);
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -167,6 +155,18 @@ public class FrendCricleActivity extends Activity  {
                 return false;
             }
             initList(bean.getData().getTracks());
+            if (ISok == 0) {
+                list = bean.getData().getTracks();
+                adapter = new DynamicAdapters(this, list);
+                mDynamicList.setAdapter(adapter);
+            } else {
+                if (page == 1) {
+                    list.clear();
+                }
+                list.addAll(list = bean.getData().getTracks());
+                adapter.notifyDataSetChanged();
+                mSwipe_container.setLoading(false);
+            }
             return false;
         }));
     }
@@ -180,16 +180,14 @@ public class FrendCricleActivity extends Activity  {
      */
     private void loadDataPB() {
         Utils.showLoad(this);
-        if(AppValue.TrackId != null && !AppValue.TrackId.equals("")) {
+        if (AppValue.TrackId != null && !AppValue.TrackId.equals("")) {
             String idsVal = "";
             String[] idsArray = AppValue.TrackId.split(",");
-            for (int i = 0; i< idsArray.length;i++)
-            {
-                if(!idsVal.equals(""))
-                {
+            for (int i = 0; i < idsArray.length; i++) {
+                if (!idsVal.equals("")) {
                     idsVal += "&";
                 }
-                idsVal += "ids=" + idsArray[i]+"&type="+ list.get(i).getType()+"&status="+list.get(i).getStatus();
+                idsVal += "ids=" + idsArray[i] + "&type=" + list.get(i).getType() + "&status=" + list.get(i).getStatus();
             }
             Client.sendPost(NetParmet.GET_DYNAPB, idsVal, new Handler(msg -> {
                 Utils.exitLoad();
@@ -200,4 +198,29 @@ public class FrendCricleActivity extends Activity  {
     }
 
 
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                page = 1;
+                loadData(page, 10);
+                mSwipe_container.setRefreshing(false);
+            }
+        }, 3000);
+    }
+
+    @Override
+    public void onLoadMore() {
+        if (AppValue.dynamicBeans == null || AppValue.dynamicBeans.size() <= 0) {
+            ToastUtils.showToast(this, "没有更多数据");
+            return;
+        } else {
+            mSwipe_container.setLoadingContext("正在加载");
+            new Handler().postDelayed(() -> {
+                page++;
+                loadData(page, 10);
+            }, 2000);
+        }
+    }
 }

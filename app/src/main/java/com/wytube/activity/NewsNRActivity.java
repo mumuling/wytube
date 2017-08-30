@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -19,6 +20,7 @@ import com.wytube.beans.NewsNrBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
+import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
 import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
@@ -32,7 +34,9 @@ import java.util.List;
  */
 
 @KActivity(R.layout.item_news_list)
-public class NewsNRActivity extends Activity {
+
+// 这个类里面放刷新的逻辑
+public class NewsNRActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAndMoreLoadLayout.OnLoadMoreListener {
     @KBind(R.id.listview_zx)
     private ListView mlistview_zx;
     @KBind(R.id.shaxin)
@@ -41,6 +45,10 @@ public class NewsNRActivity extends Activity {
     private ImageView mimg_404;
     @KBind(R.id.img_200)
     private ImageView mimg_200;
+    @KBind(R.id.swipe_container)
+    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
+    NewsAdapters adapter;
+    int page = 1, ISok = 0;
 
     Intent intent;
     private List<NewsNrBean.DataBean> list;
@@ -55,9 +63,9 @@ public class NewsNRActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (AppValue.fish==1){
+        if (AppValue.fish == 1) {
             iniview();
-            AppValue.fish=-1;
+            AppValue.fish = -1;
         }
     }
 
@@ -65,43 +73,89 @@ public class NewsNRActivity extends Activity {
         intent = getIntent();
         Bundle bundle = intent.getExtras();
         int id = bundle.getInt("id");
-        loadData();
+
+        mSwipe_container.setOnRefreshListener(this);
+        mSwipe_container.setOnLoadMoreListener(this);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
+                R.color.app_color_pass_color, R.color.red);
+        loadData(page, 10);
     }
 
     @KListener(R.id.shaxin)
     private void shaxinOnClick() {
-        loadData();
+        loadData(page, 10);
     }
 
 
     /**
      * 加载分类列表
      */
-    private void loadData() {
-        Client.sendPost(NetParmet.GET_ALL_INFO_TYPES, "type="+intent.getStringExtra("tyId"), new Handler(msg -> {
+    private void loadData(int page, int rows) {
+        Client.sendPost(NetParmet.GET_ALL_INFO_TYPES, "type=" + intent.getStringExtra("tyId") + "&page=" + page + "&rows=" + rows, new Handler(msg -> {
             String json = msg.getData().getString("post");
             NewsNrBean bean = Json.toObject(json, NewsNrBean.class);
             if (bean == null) {
                 mshaxin.setVisibility(View.VISIBLE);
                 mimg_200.setVisibility(View.GONE);
                 mimg_404.setVisibility(View.VISIBLE);
-                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
+                ToastUtils.showToast(this, "服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
                 Utils.showOkDialog(this, bean.getMessage());
                 return false;
             }
-            list = bean.getData();
+
+            AppValue.typeBean = bean.getData();
+            if (ISok == 0) {
+                list = bean.getData();
+                adapter = new NewsAdapters(this, list);
+                mlistview_zx.setAdapter(adapter);
+            } else {
+                if (page == 1) {
+                    list.clear();
+                }
+                list.addAll(bean.getData());
+                adapter.notifyDataSetChanged();
+                mSwipe_container.setLoading(false);
+            }
+            ISok++;
+            /*list = bean.getData();
             NewsAdapters adapter = new NewsAdapters(this,list);
-            mlistview_zx.setAdapter(adapter);
-            if (list.size()==0){
+            mlistview_zx.setAdapter(adapter);*/
+
+            if (list.size() == 0) {
                 mshaxin.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 mshaxin.setVisibility(View.GONE);
             }
             return false;
         }));
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                page = 1;
+                loadData(page, 10);
+                mSwipe_container.setRefreshing(false);
+            }
+        }, 3000);
+    }
+
+    @Override
+    public void onLoadMore() {
+        if (AppValue.typeBean.size() <= 0 || AppValue.typeBean == null) {
+            ToastUtils.showToast(this, "没有更多数据");
+        } else {
+            mSwipe_container.setLoadingContext("正在加载");
+            new Handler().postDelayed(() -> {
+                page++;
+                loadData(page, 10);
+            }, 2000);
+        }
     }
 
 }

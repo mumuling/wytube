@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqxb.yecall.BaseActivity;
@@ -30,7 +29,7 @@ import com.wytube.beans.NewsTypeBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
-import com.wytube.shared.ToastUtils;
+import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
 
@@ -43,14 +42,6 @@ import java.util.Map;
 
 @KActivity(R.layout.activity_news)
 public class NewsActivity extends BaseActivity {
-    @KBind(R.id.shaxin)
-    private RelativeLayout mshaxin;
-    @KBind(R.id.img_404)
-    private ImageView mimg_404;
-    @KBind(R.id.img_200)
-    private ImageView mimg_200;
-    @KBind(R.id.text_fb)
-    private TextView mtext_fb;
 
     private ImageView mImageView;
     private float mCurrentCheckedRadioLeft;//当前被选中的RadioButton距离左侧的距离
@@ -65,10 +56,12 @@ public class NewsActivity extends BaseActivity {
     private List<NewsTypeBean.DataBean> typeBeans;
     private List<Map<String, Object>> titleList = new ArrayList<Map<String,Object>>();
     private Map<String, Object> map = new HashMap<String, Object>();
+    private MyPagerAdapter mAdapter;
     private Bundle savedInst;
     private int radioButtonId;
-
-
+    @KBind(R.id.swipe_container)
+    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
+    int page=1,ISok=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +72,9 @@ public class NewsActivity extends BaseActivity {
         findViewById(R.id.text_fb).setOnClickListener(v -> {
             startActivity(new Intent(this, NewFBzxActivity.class));
         });
+
         loadData();
+
         manager = new LocalActivityManager(this, true);
         manager.dispatchCreate(savedInstanceState);
     }
@@ -102,18 +97,13 @@ public class NewsActivity extends BaseActivity {
             String json = msg.getData().getString("post");
             NewsTypeBean bean = Json.toObject(json, NewsTypeBean.class);
             if (bean == null) {
-                mshaxin.setVisibility(View.VISIBLE);
-                mimg_200.setVisibility(View.GONE);
-                mimg_404.setVisibility(View.VISIBLE);
-                mtext_fb.setVisibility(View.GONE);
-                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
+                Utils.showNetErrorDialog(this);
                 return false;
             }
             if (!bean.isSuccess()) {
                 Utils.showOkDialog(this, bean.getMessage());
                 return false;
             }
-            mtext_fb.setVisibility(View.VISIBLE);
             if (AppValue.fish==1){
                 titleList.clear();
                 map.clear();
@@ -135,6 +125,7 @@ public class NewsActivity extends BaseActivity {
                 iniVariable();
                 mViewPager.setCurrentItem(0);
             }
+
             return false;
         }));
     }

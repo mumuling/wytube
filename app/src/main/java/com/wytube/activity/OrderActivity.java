@@ -514,8 +514,8 @@ public class OrderActivity extends ActivityGroup {
 	 * @param bean
 	 */
 	private void versionEquse(VersionBean.DataBean bean) {
-		AppValue.localVersion = Integer.parseInt(Utils.clearString(AppValue.appVersion.replace("V","").replace(".","")));
-		AppValue.serverVersion = Integer.parseInt(Utils.clearString(bean.getVersion().replace("V","").replace(".","")));
+		AppValue.localVersion = Integer.parseInt(Utils.clearString(AppValue.appVersion.replace("V","").replace(".","")).trim());
+		AppValue.serverVersion = Integer.parseInt(Utils.clearString(bean.getVersion().replace("V","").replace(".","")).trim());
 		if (AppValue.serverVersion > AppValue.localVersion) {
 			AppValue.versionUrl = bean.getPath();
 			VersionActivity.Version = new VersionActivity(this);

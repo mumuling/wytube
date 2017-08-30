@@ -8,6 +8,7 @@ import com.wytube.beans.BaseLbrepair;
 import com.wytube.beans.BaseWPjy;
 import com.wytube.beans.BeseHd;
 import com.wytube.beans.CarsBean;
+import com.wytube.beans.DynamicBean;
 import com.wytube.beans.HappyBean;
 import com.wytube.beans.NewsNrBean;
 import com.wytube.beans.OwnerBean;
@@ -128,6 +129,12 @@ public class AppValue {
     public static List<BiilBeaan.DataBean> wyreal;
     /*业主列表*/
     public static List<OwnerBean.DataBean> ownerBeans;
+    /*朋友圈列表*/
+    public static List<DynamicBean.DataBean.TracksBean> dynamicBeans;
+    /*资讯列表*/
+    public static List<NewsNrBean.DataBean> typeBean;
+    /**/
+
 
 
     //    /*投诉列表的Item*/
@@ -199,6 +206,7 @@ public class AppValue {
     public static NewsNrBean.DataBean infoBean;
     /*活动记录*/
     public static BeseHd.DataBean listBeseHd;
+    public static List<BeseHd.DataBean> beseBean;
     //    /*星级*/
 //    public static String skexj;
 //    /*车牌信息*/
