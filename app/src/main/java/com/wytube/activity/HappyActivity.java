@@ -79,10 +79,6 @@ public class HappyActivity extends BaseActivity implements SwipeRefreshLayout.On
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
         context = this;
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         mSwipe_container.setOnRefreshListener(this);

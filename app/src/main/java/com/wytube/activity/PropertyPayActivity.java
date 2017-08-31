@@ -2,10 +2,13 @@ package com.wytube.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cqxb.yecall.BaseActivity;
@@ -14,12 +17,13 @@ import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
 import com.skyrain.library.k.api.KListener;
-import com.wytube.beans.BaseOK;
 import com.wytube.adaper.BiilAdapter;
+import com.wytube.beans.BaseOK;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
 import com.wytube.shared.Ftime.BiilBeaan;
+import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
 import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
@@ -32,7 +36,7 @@ import java.util.List;
  * 物业缴费
  */
 @KActivity(R.layout.activity_wyjfs)
-public class PropertyPayActivity extends BaseActivity {
+public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAndMoreLoadLayout.OnLoadMoreListener {
     List<BiilBeaan.DataBean> real_data = new ArrayList<>();
     private LinearLayout selectLayout;
     @KBind(R.id.all_zd)
@@ -51,8 +55,17 @@ public class PropertyPayActivity extends BaseActivity {
     private LinearLayout mlinear_sc_qx;
     @KBind(R.id.text_qx)
     private TextView mtext_qx;
+    @KBind(R.id.shaxin)
+    private RelativeLayout mshaxin;
+    @KBind(R.id.img_404)
+    private ImageView mimg_404;
+    @KBind(R.id.img_200)
+    private ImageView mimg_200;
+    @KBind(R.id.swipe_container)
+    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
     private BiilAdapter mAdapter;
     int type = 0;
+    int page=1,more=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +88,11 @@ public class PropertyPayActivity extends BaseActivity {
             }
             mAdapter.notifyDataSetChanged();
         });
-        loadList();
+        mSwipe_container.setOnRefreshListener(this);
+        mSwipe_container.setOnLoadMoreListener(this);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
+                R.color.app_color_pass_color,R.color.red);
+        loadList(page,15);
         selectLayout = mAllZd;
     }
 
@@ -84,7 +101,7 @@ public class PropertyPayActivity extends BaseActivity {
         super.onResume();
         if (AppValue.fish == 1) {
             real_data.clear();
-            loadList();
+            loadList(page,15);
         }
     }
 
@@ -135,7 +152,6 @@ public class PropertyPayActivity extends BaseActivity {
      * stateId
      */
     boolean ISok = false;
-
     private void loaddelete(String billId) {
         String Kvs = "billId=" + billId;
         Client.sendPost(NetParmet.USR_WYFY_DELE, Kvs, new Handler(msg -> {
@@ -162,7 +178,7 @@ public class PropertyPayActivity extends BaseActivity {
                 AppValue.WYjfId = "";
                 real_data.clear();
                 if (!ISok) {
-                    loadList();
+                    loadList(page,15);
                     mAdapter.flage = false;
                     ISok = true;
                 }
@@ -176,13 +192,16 @@ public class PropertyPayActivity extends BaseActivity {
      * 加载账单
      */
     BiilBeaan bean;
-
-    private void loadList() {
-        Client.sendPost(NetParmet.USR_WYFY, "", new Handler(msg -> {
+    private void loadList(int page,int rows) {
+        Client.sendPost(NetParmet.USR_WYFY, "page"+page+"&rows"+rows, new Handler(msg -> {
             String json = msg.getData().getString("post");
             bean = Json.toObject(json, BiilBeaan.class);
             if (bean == null) {
                 Utils.showNetErrorDialog(PropertyPayActivity.this);
+                mshaxin.setVisibility(View.VISIBLE);
+                mimg_200.setVisibility(View.GONE);
+                mimg_404.setVisibility(View.VISIBLE);
+                ToastUtils.showToast(this,"服务器异常!请稍后再试!");
                 return false;
             }
             if (!bean.isSuccess()) {
@@ -197,13 +216,29 @@ public class PropertyPayActivity extends BaseActivity {
             AppValue.wyreal = bean.getData();
             mAdapter = new BiilAdapter(real_data, this);
             mListView.setAdapter(mAdapter);
+
+            if(more==0){
+                mAdapter=new BiilAdapter(real_data,this);
+                mListView.setAdapter(mAdapter);
+            }else {
+                mSwipe_container.setLoading(false);
+            }
+            if(page==1){
+                real_data.clear();
+            }
             for (BiilBeaan.DataBean repairBean : AppValue.wyreal) {
                 if (repairBean.getStateId() == type) {
                     real_data.add(repairBean);
                 }
+                if(real_data.size()==0){
+                    mshaxin.setVisibility(View.VISIBLE);
+                }else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
             mAdapter.setData(real_data);
             mAdapter.notifyDataSetChanged();
+            more++;
             return false;
         }));
     }
@@ -259,5 +294,31 @@ public class PropertyPayActivity extends BaseActivity {
     private void sreatch_layoutOnClick() {
         mSreatchLayout.setVisibility(View.GONE);
         mKeyWords.setVisibility(View.VISIBLE);
+    }
+    /*下拉刷新*/
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                page = 1;
+                loadList(page,15);
+                mSwipe_container.setRefreshing(false);
+            }
+        }, 3000);
+    }
+
+    /*上拉更多*/
+    @Override
+    public void onLoadMore() {
+        if (AppValue.wyreal.size()<=0||AppValue.wyreal==null){
+            ToastUtils.showToast(this,"没有更多数据");
+        }else {
+            mSwipe_container.setLoadingContext("正在加载");
+            new Handler().postDelayed(() -> {
+                page++;
+                loadList(page, 15);
+            }, 2000);
+        }
     }
 }

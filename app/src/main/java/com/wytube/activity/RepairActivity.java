@@ -180,18 +180,6 @@ public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.O
             AppValue.repairBeans = bean.getData();
             adapter = new RepairAdapters(this,AppValue.repairBeans);
             mRepairList.setAdapter(this.adapter);
-<<<<<<< Updated upstream
-            if (AppValue.repairBeans.size()!=0) {
-                for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
-                    if (repairBean.getStateId() == statetype) {
-                        tempBeans.add(repairBean);
-                    }
-                    if (tempBeans.size() == 0) {
-                        mshaxin.setVisibility(View.VISIBLE);
-                    } else {
-                        mshaxin.setVisibility(View.GONE);
-                    }
-=======
             if (ISok==0){
                 adapter=new RepairAdapters(this,AppValue.repairBeans);
                 mRepairList.setAdapter(adapter);
@@ -204,12 +192,10 @@ public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.O
             for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
                 if (repairBean.getStateId() == statetype) {
                     tempBeans.add(repairBean);
->>>>>>> Stashed changes
                 }
-            }else {
-                if (tempBeans.size() == 0) {
+                if (tempBeans.size()==0){
                     mshaxin.setVisibility(View.VISIBLE);
-                } else {
+                }else {
                     mshaxin.setVisibility(View.GONE);
                 }
             }

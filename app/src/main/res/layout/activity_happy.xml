@@ -138,15 +138,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
-                <TextView
-                    android:id="@+id/tv_nodata"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|center_vertical"
-                    android:gravity="center"
-                    android:text="暂无数据"
-                    android:textSize="22sp"
-                    android:visibility="gone"/>
             </com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout>
         </FrameLayout>
 

@@ -120,11 +120,7 @@ public class NewsNRActivity extends Activity implements SwipeRefreshLayout.OnRef
                 mSwipe_container.setLoading(false);
             }
             ISok++;
-            /*list = bean.getData();
-            NewsAdapters adapter = new NewsAdapters(this,list);
-            mlistview_zx.setAdapter(adapter);*/
-
-            if (list.size() == 0) {
+           if (list.size() == 0) {
                 mshaxin.setVisibility(View.VISIBLE);
             } else {
                 mshaxin.setVisibility(View.GONE);

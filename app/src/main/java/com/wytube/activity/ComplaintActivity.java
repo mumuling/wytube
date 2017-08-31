@@ -202,21 +202,6 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
             AppValue.lbBeans = bean.getData();
             adapter = new TSRepairAdapters(this, tempBeans);
             mRepairList.setAdapter(this.adapter);
-<<<<<<< Updated upstream
-            if (AppValue.lbBeans.size()!=0) {
-                for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
-                    if (repairBean.getSuitStateId() == SuitStateIdtype) {
-                        tempBeans.add(repairBean);
-                    }
-                    if (tempBeans.size() == 0) {
-                        mshaxin.setVisibility(View.VISIBLE);
-                    } else {
-                        mshaxin.setVisibility(View.GONE);
-                    }
-                }
-            }else {
-                if (tempBeans.size() == 0) {
-=======
             if (ISok == 0) {
                 adapter = new TSRepairAdapters(this, tempBeans);
                 mRepairList.setAdapter(this.adapter);
@@ -231,7 +216,6 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
                     tempBeans.add(repairBean);
                 }
                 if (tempBeans.size() <= 0) {
->>>>>>> Stashed changes
                     mshaxin.setVisibility(View.VISIBLE);
                 } else {
                     mshaxin.setVisibility(View.GONE);
