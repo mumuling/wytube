@@ -65,7 +65,7 @@ public class BiilAdapter extends BaseAdapter {
         // TODO Auto-generated method stub
         if (convertView == null) {
             mholder = new viewHolder();
-            convertView= LayoutInflater.from(mContext).inflate(R.layout.item_zds, null);
+            convertView= LayoutInflater.from(mContext).inflate(R.layout.item_zds, parent,false);
             mholder.text_xqname = (TextView) convertView.findViewById(R.id.text_xqname);
             mholder.pushMoney = (TextView) convertView.findViewById(R.id.push_money);
             mholder.item_type = (TextView) convertView.findViewById(R.id.item_type);
@@ -79,7 +79,7 @@ public class BiilAdapter extends BaseAdapter {
         }
         BiilBeaan.DataBean bean = list.get(position);
         mholder.item_type.setText(list.get(position).getBillName());
-        mholder.text_timer.setText(list.get(position).getMonth());
+        mholder.text_timer.setText(list.get(position).getBillName());
         mholder.text_xqname.setText(bean.getBuildingName()+bean.getUnitName()+bean.getNumberName());
         mholder.pushMoney.setText(list.get(position).getTotalMoney());
         mholder.linear_wyxq.setOnClickListener(v -> {

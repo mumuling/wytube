@@ -34,10 +34,12 @@ import java.util.List;
 
 /**
  * 物业缴费
- */
+ * */
 @KActivity(R.layout.activity_wyjfs)
 public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAndMoreLoadLayout.OnLoadMoreListener {
+    //    private ArrayList<PinnedSectionBean> real_data;
     List<BiilBeaan.DataBean> real_data = new ArrayList<>();
+    List<BiilBeaan.DataBean> list;
     private LinearLayout selectLayout;
     @KBind(R.id.all_zd)
     private LinearLayout mAllZd;
@@ -66,27 +68,24 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
     private BiilAdapter mAdapter;
     int type = 0;
     int page=1,more=0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
-        findViewById(R.id.back_but).setOnClickListener(v -> {
-            finish();
-        });
-        findViewById(R.id.title_text).setOnClickListener(v -> {
-            finish();
-        });
+        findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
+        findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         findViewById(R.id.menu_text).setOnClickListener(v -> {
-            mAdapter.flage = !mAdapter.flage;
-            if (!mAdapter.flage) {
-                rmenu_text.setText("取消");
-                mlinear_sc_qx.setVisibility(View.VISIBLE);
-            } else {
-                rmenu_text.setText("选择");
-                mlinear_sc_qx.setVisibility(View.GONE);
+            if (mAdapter!=null){
+                mAdapter.flage = !mAdapter.flage;
+                if (!mAdapter.flage) {
+                    rmenu_text.setText("取消");
+                    mlinear_sc_qx.setVisibility(View.VISIBLE);
+                } else {
+                    rmenu_text.setText("选择");
+                    mlinear_sc_qx.setVisibility(View.GONE);
+                }
+                mAdapter.notifyDataSetChanged();
             }
-            mAdapter.notifyDataSetChanged();
         });
         mSwipe_container.setOnRefreshListener(this);
         mSwipe_container.setOnLoadMoreListener(this);
@@ -99,10 +98,16 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
     @Override
     protected void onResume() {
         super.onResume();
-        if (AppValue.fish == 1) {
+        if (AppValue.fish==1){
             real_data.clear();
             loadList(page,15);
         }
+    }
+
+    @KListener(R.id.shaxin)
+    private void shaxinOnClick() {
+        real_data.clear();/*清空之前的数据*/
+        loadList(page,15);
     }
 
     /*全选*/
@@ -111,21 +116,23 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
         if (mAdapter.flages) {
             for (int i = 0; i < real_data.size(); i++) {
                 /*全选*/
-                if (AppValue.WYjfId != null && !AppValue.WYjfId.equals("")) {
+                if (AppValue.WYjfId != null && !AppValue.WYjfId.equals(""))
+                {
                     AppValue.WYjfId += ",";
                 }
                 AppValue.WYjfId += real_data.get(i).getBillId();
                 real_data.get(i).isCheck = true;
             }
-            mAdapter.flages = !mAdapter.flages;
+            mAdapter.flages=!mAdapter.flages;
             mtext_qx.setText("全不选");
             mAdapter.notifyDataSetChanged();
-        } else {
-            AppValue.WYjfId = "";
+        }else {
+            AppValue.WYjfId="";
+            real_data.clear();
             for (int i = 0; i < real_data.size(); i++) {
                 real_data.get(i).isCheck = false;
             }
-            mAdapter.flages = !mAdapter.flages;
+            mAdapter.flages=!mAdapter.flages;
             mAdapter.notifyDataSetChanged();
             mtext_qx.setText("全选");
         }
@@ -137,8 +144,9 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
     private void linear_modifyOnClick() {
         String[] wWYjfId = AppValue.WYjfId.split(",");
         for (int i = 0; i < wWYjfId.length; i++) {
-            if (AppValue.WYjfId != null && !AppValue.WYjfId.equals("")) {
-                AppValue.WYjfId = "";
+            if (AppValue.WYjfId != null && !AppValue.WYjfId.equals(""))
+            {
+                AppValue.WYjfId="";
                 AppValue.WYjfId += "";
             }
             AppValue.WYjfId += real_data.get(i).getBillId();
@@ -153,7 +161,7 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
      */
     boolean ISok = false;
     private void loaddelete(String billId) {
-        String Kvs = "billId=" + billId;
+        String Kvs = "billId="+billId;
         Client.sendPost(NetParmet.USR_WYFY_DELE, Kvs, new Handler(msg -> {
             String json = msg.getData().getString("post");
             BaseOK bean = Json.toObject(json, BaseOK.class);
@@ -165,7 +173,7 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
                 Utils.showOkDialog(this, bean.getMessage());
                 return false;
             } else {
-                ToastUtils.showToast(this, "删除成功");
+                ToastUtils.showToast(this,"删除成功");
                 mAdapter.flage = !mAdapter.flage;
                 if (!mAdapter.flage) {
                     rmenu_text.setText("取消");
@@ -175,12 +183,12 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
                     mlinear_sc_qx.setVisibility(View.GONE);
                 }
                 mAdapter.notifyDataSetChanged();
-                AppValue.WYjfId = "";
+                AppValue.WYjfId="";
                 real_data.clear();
-                if (!ISok) {
+                if (!ISok){
                     loadList(page,15);
                     mAdapter.flage = false;
-                    ISok = true;
+                    ISok=true;
                 }
             }
             return false;
@@ -193,11 +201,13 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
      */
     BiilBeaan bean;
     private void loadList(int page,int rows) {
-        Client.sendPost(NetParmet.USR_WYFY, "page"+page+"&rows"+rows, new Handler(msg -> {
+        Utils.showLoad(this);
+        Client.sendPost(NetParmet.USR_WYFY, "page="+ page +"&rows="+rows, new Handler(msg -> {
+            Utils.exitLoad();
             String json = msg.getData().getString("post");
             bean = Json.toObject(json, BiilBeaan.class);
             if (bean == null) {
-                Utils.showNetErrorDialog(PropertyPayActivity.this);
+//                Utils.showNetErrorDialog(this);
                 mshaxin.setVisibility(View.VISIBLE);
                 mimg_200.setVisibility(View.GONE);
                 mimg_404.setVisibility(View.VISIBLE);
@@ -208,29 +218,28 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
                 Utils.showOkDialog(PropertyPayActivity.this, bean.getMessage());
                 return false;
             }
-            if (AppValue.fish == 1) {
+            if (AppValue.fish==1){
                 /*删除时先清除上一次数据*/
                 AppValue.wyreal.clear();
-                AppValue.fish = -1;
+                AppValue.fish=-1;
             }
             AppValue.wyreal = bean.getData();
             mAdapter = new BiilAdapter(real_data, this);
             mListView.setAdapter(mAdapter);
-
             if(more==0){
-                mAdapter=new BiilAdapter(real_data,this);
+                mAdapter=new BiilAdapter(real_data, this);
                 mListView.setAdapter(mAdapter);
             }else {
                 mSwipe_container.setLoading(false);
             }
-            if(page==1){
+            if (page==1){
                 real_data.clear();
             }
             for (BiilBeaan.DataBean repairBean : AppValue.wyreal) {
                 if (repairBean.getStateId() == type) {
                     real_data.add(repairBean);
                 }
-                if(real_data.size()==0){
+                if (real_data.size()==0){
                     mshaxin.setVisibility(View.VISIBLE);
                 }else {
                     mshaxin.setVisibility(View.GONE);
@@ -262,13 +271,20 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
         mAllZd.getChildAt(1).setVisibility(View.VISIBLE);
         type = 0;
         real_data.clear();
-        for (BiilBeaan.DataBean BiilBean : AppValue.wyreal) {
-            if (BiilBean.getStateId() == 0) {
-                real_data.add(BiilBean);
+        if (AppValue.wyreal!=null) {
+            for (BiilBeaan.DataBean BiilBean : AppValue.wyreal) {
+                if (BiilBean.getStateId() == 0) {
+                    real_data.add(BiilBean);
+                }
+                if (real_data.size() == 0) {
+                    mshaxin.setVisibility(View.VISIBLE);
+                } else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            mAdapter.setData(real_data);
+            mAdapter.notifyDataSetChanged();
         }
-        mAdapter.setData(real_data);
-        mAdapter.notifyDataSetChanged();
     }
 
 
@@ -281,13 +297,20 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
         ((TextView) mWjZd.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         mWjZd.getChildAt(1).setVisibility(View.VISIBLE);
         real_data.clear();
-        for (BiilBeaan.DataBean BiilBean : AppValue.wyreal) {
-            if (BiilBean.getStateId() == 1) {
-                real_data.add(BiilBean);
+        if (AppValue.wyreal!=null) {
+            for (BiilBeaan.DataBean BiilBean : AppValue.wyreal) {
+                if (BiilBean.getStateId() == 1) {
+                    real_data.add(BiilBean);
+                }
+                if (real_data.size() == 0) {
+                    mshaxin.setVisibility(View.VISIBLE);
+                } else {
+                    mshaxin.setVisibility(View.GONE);
+                }
             }
+            mAdapter.setData(real_data);
+            mAdapter.notifyDataSetChanged();
         }
-        mAdapter.setData(real_data);
-        mAdapter.notifyDataSetChanged();
     }
 
     @KListener(R.id.sreatch_layout)

@@ -20,7 +20,6 @@ import java.util.List;
 
 @KActivity(R.layout.fragment_index)
 public class IndexActivity extends FragmentActivity {
-
     private List<ParkBean.DataBean.ParksBean> parksBeanList;
     private CarsBean.DataBean.CarBean carBean;
 
