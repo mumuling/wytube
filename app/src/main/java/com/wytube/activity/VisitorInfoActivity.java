@@ -58,8 +58,7 @@ public class VisitorInfoActivity extends BaseActivity implements SwipeRefreshLay
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         mSwipe_container.setOnRefreshListener(this);
         mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
-                R.color.app_color_pass_color,R.color.red);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent);
         loadData(page,10);
     }
 
@@ -121,6 +120,7 @@ public class VisitorInfoActivity extends BaseActivity implements SwipeRefreshLay
     public void onLoadMore() {
         if (AppValue.VisitorMsgs.size()==0){
             ToastUtils.showToast(this,"没有更多数据");
+            mSwipe_container.setLoading(false);
         }else {
             mSwipe_container.setLoadingContext("正在加载");
             new Handler().postDelayed(() -> {

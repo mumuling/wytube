@@ -187,6 +187,10 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/shuju" />
         </RelativeLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -195,17 +199,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-                    <com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout
-                        android:id="@+id/swipe_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+
                     <com.wytube.shared.ListViewForScrollView
                         android:id="@+id/zd_list"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                    </com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout>
+
                 </LinearLayout>
             </LinearLayout>
+        </ScrollView>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linear_sc_qx"

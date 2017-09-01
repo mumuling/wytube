@@ -67,8 +67,7 @@ public class FrendCricleActivity extends Activity implements SwipeRefreshLayout.
         });
         mSwipe_container.setOnRefreshListener(this);
         mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
-                R.color.app_color_pass_color, R.color.red);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent);
         findViewById(R.id.menu_text).setOnClickListener(v -> {
             adapter.flage = !adapter.flage;
             if (adapter.flage) {
@@ -214,6 +213,7 @@ public class FrendCricleActivity extends Activity implements SwipeRefreshLayout.
     public void onLoadMore() {
         if (AppValue.dynamicBeans == null || AppValue.dynamicBeans.size() <= 0) {
             ToastUtils.showToast(this, "没有更多数据");
+            mSwipe_container.setLoading(false);
             return;
         } else {
             mSwipe_container.setLoadingContext("正在加载");

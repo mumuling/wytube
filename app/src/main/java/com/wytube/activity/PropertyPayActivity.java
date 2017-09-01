@@ -2,7 +2,6 @@ package com.wytube.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,7 +22,6 @@ import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
 import com.wytube.shared.Ftime.BiilBeaan;
-import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
 import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
@@ -36,10 +34,9 @@ import java.util.List;
  * 物业缴费
  * */
 @KActivity(R.layout.activity_wyjfs)
-public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAndMoreLoadLayout.OnLoadMoreListener {
+public class PropertyPayActivity extends BaseActivity {
     //    private ArrayList<PinnedSectionBean> real_data;
     List<BiilBeaan.DataBean> real_data = new ArrayList<>();
-    List<BiilBeaan.DataBean> list;
     private LinearLayout selectLayout;
     @KBind(R.id.all_zd)
     private LinearLayout mAllZd;
@@ -63,11 +60,9 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
     private ImageView mimg_404;
     @KBind(R.id.img_200)
     private ImageView mimg_200;
-    @KBind(R.id.swipe_container)
-    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
     private BiilAdapter mAdapter;
     int type = 0;
-    int page=1,more=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,11 +82,7 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
                 mAdapter.notifyDataSetChanged();
             }
         });
-        mSwipe_container.setOnRefreshListener(this);
-        mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
-                R.color.app_color_pass_color,R.color.red);
-        loadList(page,15);
+        loadList();
         selectLayout = mAllZd;
     }
 
@@ -100,14 +91,14 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
         super.onResume();
         if (AppValue.fish==1){
             real_data.clear();
-            loadList(page,15);
+            loadList();
         }
     }
 
     @KListener(R.id.shaxin)
     private void shaxinOnClick() {
         real_data.clear();/*清空之前的数据*/
-        loadList(page,15);
+        loadList();
     }
 
     /*全选*/
@@ -186,7 +177,7 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
                 AppValue.WYjfId="";
                 real_data.clear();
                 if (!ISok){
-                    loadList(page,15);
+                    loadList();
                     mAdapter.flage = false;
                     ISok=true;
                 }
@@ -200,9 +191,9 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
      * 加载账单
      */
     BiilBeaan bean;
-    private void loadList(int page,int rows) {
+    private void loadList() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.USR_WYFY, "page="+ page +"&rows="+rows, new Handler(msg -> {
+        Client.sendPost(NetParmet.USR_WYFY, "", new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             bean = Json.toObject(json, BiilBeaan.class);
@@ -226,15 +217,6 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
             AppValue.wyreal = bean.getData();
             mAdapter = new BiilAdapter(real_data, this);
             mListView.setAdapter(mAdapter);
-            if(more==0){
-                mAdapter=new BiilAdapter(real_data, this);
-                mListView.setAdapter(mAdapter);
-            }else {
-                mSwipe_container.setLoading(false);
-            }
-            if (page==1){
-                real_data.clear();
-            }
             for (BiilBeaan.DataBean repairBean : AppValue.wyreal) {
                 if (repairBean.getStateId() == type) {
                     real_data.add(repairBean);
@@ -247,7 +229,6 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
             }
             mAdapter.setData(real_data);
             mAdapter.notifyDataSetChanged();
-            more++;
             return false;
         }));
     }
@@ -317,31 +298,5 @@ public class PropertyPayActivity extends BaseActivity implements SwipeRefreshLay
     private void sreatch_layoutOnClick() {
         mSreatchLayout.setVisibility(View.GONE);
         mKeyWords.setVisibility(View.VISIBLE);
-    }
-    /*下拉刷新*/
-    @Override
-    public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                page = 1;
-                loadList(page,15);
-                mSwipe_container.setRefreshing(false);
-            }
-        }, 3000);
-    }
-
-    /*上拉更多*/
-    @Override
-    public void onLoadMore() {
-        if (AppValue.wyreal.size()<=0||AppValue.wyreal==null){
-            ToastUtils.showToast(this,"没有更多数据");
-        }else {
-            mSwipe_container.setLoadingContext("正在加载");
-            new Handler().postDelayed(() -> {
-                page++;
-                loadList(page, 15);
-            }, 2000);
-        }
     }
 }

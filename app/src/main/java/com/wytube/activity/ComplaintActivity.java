@@ -74,8 +74,7 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
         });
         mSwipe_container.setOnRefreshListener(this);
         mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
-                R.color.app_color_pass_color, R.color.red);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent);
         loadData(page, 10);
         selectLayout = mNotProcess;
     }
@@ -244,6 +243,7 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
     public void onLoadMore() {
         if (AppValue.lbBeans.size() <= 0 || AppValue.lbBeans == null) {
             ToastUtils.showToast(this, "没有更多数据");
+            mSwipe_container.setLoading(false);
         } else {
             mSwipe_container.setLoadingContext("正在加载");
             new Handler().postDelayed(() -> {

@@ -73,8 +73,7 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         mSwipe_container.setOnRefreshListener(this);
         mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
-                R.color.app_color_pass_color,R.color.red);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent);
         initData(page,5);
     }
 
@@ -159,6 +158,7 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
         if (AppValue.propMsgs.size()==0){
             mRepair_now.setVisibility(View.VISIBLE);
             ToastUtils.showToast(this,"没有更多数据");
+            mSwipe_container.setLoading(false);
         }else {
             mRepair_now.setVisibility(View.GONE);
             mSwipe_container.setLoadingContext("正在加载");

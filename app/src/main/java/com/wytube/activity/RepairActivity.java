@@ -63,8 +63,7 @@ public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.O
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
         mSwipe_container.setOnRefreshListener(this);
         mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
-                R.color.app_color_pass_color,R.color.red);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent);
         loadData(page,15);
         selectLayout = mNotProcess;/*标头栏*/
     }
@@ -234,6 +233,7 @@ public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.O
     public void onLoadMore() {
         if (AppValue.repairBeans.size()<=0||AppValue.repairBeans==null){
             ToastUtils.showToast(this,"没有更多数据");
+            mSwipe_container.setLoading(false);
         }else {
             mSwipe_container.setLoadingContext("正在加载");
             new Handler().postDelayed(() -> {

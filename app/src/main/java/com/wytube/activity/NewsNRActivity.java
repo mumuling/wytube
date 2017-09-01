@@ -76,8 +76,7 @@ public class NewsNRActivity extends Activity implements SwipeRefreshLayout.OnRef
 
         mSwipe_container.setOnRefreshListener(this);
         mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(R.color.colorAccent,
-                R.color.app_color_pass_color, R.color.red);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent);
         loadData(page, 10);
     }
 
@@ -145,6 +144,7 @@ public class NewsNRActivity extends Activity implements SwipeRefreshLayout.OnRef
     public void onLoadMore() {
         if (AppValue.typeBean.size() <= 0 || AppValue.typeBean == null) {
             ToastUtils.showToast(this, "没有更多数据");
+            mSwipe_container.setLoading(false);
         } else {
             mSwipe_container.setLoadingContext("正在加载");
             new Handler().postDelayed(() -> {
