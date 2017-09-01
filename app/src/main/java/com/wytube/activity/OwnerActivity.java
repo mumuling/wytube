@@ -115,8 +115,10 @@ public class OwnerActivity extends BaseActivity implements SwipeRefreshLayout.On
     @Override
     public void onLoadMore() {
         if (AppValue.ownerBeans.size()==0){
-            ToastUtils.showToast(this,"没有更多数据");
-            mSwipe_container.setLoading(false);
+            new Handler().postDelayed(() -> {
+                ToastUtils.showToast(this, "没有更多数据");
+                mSwipe_container.setLoading(false);
+            }, 2000);
         }else {
             mSwipe_container.setLoadingContext("正在加载");
             new Handler().postDelayed(() -> {

@@ -36,7 +36,6 @@ import java.util.List;
 @KActivity(R.layout.activity_property_notice)
 public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener,
         SwipeRefreshAndMoreLoadLayout.OnLoadMoreListener{
-
     @KBind(R.id.msg_list)
     private ListView mMsgList;
     @KBind(R.id.repair_now)
@@ -49,8 +48,6 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
     private ImageView mimg_404;
     @KBind(R.id.img_200)
     private ImageView mimg_200;
-
-
     private List<PropMsgBean.DataBean> list;
     PropListAdapters adapter;
     int page=1,ISok=0;
@@ -156,9 +153,10 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
     @Override
     public void onLoadMore() {
         if (AppValue.propMsgs.size()==0){
-            mRepair_now.setVisibility(View.VISIBLE);
-            ToastUtils.showToast(this,"没有更多数据");
-            mSwipe_container.setLoading(false);
+            new Handler().postDelayed(() -> {
+                ToastUtils.showToast(this, "没有更多数据");
+                mSwipe_container.setLoading(false);
+            }, 2000);
         }else {
             mRepair_now.setVisibility(View.GONE);
             mSwipe_container.setLoadingContext("正在加载");

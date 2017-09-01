@@ -212,9 +212,10 @@ public class FrendCricleActivity extends Activity implements SwipeRefreshLayout.
     @Override
     public void onLoadMore() {
         if (AppValue.dynamicBeans == null || AppValue.dynamicBeans.size() <= 0) {
-            ToastUtils.showToast(this, "没有更多数据");
-            mSwipe_container.setLoading(false);
-            return;
+            new Handler().postDelayed(() -> {
+                ToastUtils.showToast(this, "没有更多数据");
+                mSwipe_container.setLoading(false);
+            }, 2000);
         } else {
             mSwipe_container.setLoadingContext("正在加载");
             new Handler().postDelayed(() -> {

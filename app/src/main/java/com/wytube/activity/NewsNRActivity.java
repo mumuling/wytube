@@ -143,8 +143,10 @@ public class NewsNRActivity extends Activity implements SwipeRefreshLayout.OnRef
     @Override
     public void onLoadMore() {
         if (AppValue.typeBean.size() <= 0 || AppValue.typeBean == null) {
-            ToastUtils.showToast(this, "没有更多数据");
-            mSwipe_container.setLoading(false);
+            new Handler().postDelayed(() -> {
+                ToastUtils.showToast(this, "没有更多数据");
+                mSwipe_container.setLoading(false);
+            }, 2000);
         } else {
             mSwipe_container.setLoadingContext("正在加载");
             new Handler().postDelayed(() -> {
