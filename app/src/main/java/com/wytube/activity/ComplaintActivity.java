@@ -3,7 +3,6 @@ package com.wytube.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +20,6 @@ import com.wytube.beans.BaseLbrepair;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
-import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
 import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
@@ -36,7 +34,7 @@ import java.util.List;
  */
 
 @KActivity(R.layout.activity_bx_repair)
-public class ComplaintActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAndMoreLoadLayout.OnLoadMoreListener {
+public class ComplaintActivity extends Activity{
 
     @KBind(R.id.not_process)
     private LinearLayout mNotProcess;
@@ -57,10 +55,6 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
     private List<BaseLbrepair.DataBean> tempBeans = new ArrayList<>();
     private TSRepairAdapters adapter;
     private int SuitStateIdtype = 0;
-    @KBind(R.id.swipe_container)
-    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
-    int page = 1, ISok = 0;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,10 +66,7 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
         findViewById(R.id.title_text).setOnClickListener(v -> {
             finish();
         });
-        mSwipe_container.setOnRefreshListener(this);
-        mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(R.color.colorAccent);
-        loadData(page, 10);
+        loadData();
         selectLayout = mNotProcess;
     }
 
@@ -84,7 +75,7 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
         super.onResume();
         if (AppValue.fish == 1) {
             tempBeans.clear();
-            loadData(page, 10);
+            loadData();
             AppValue.fish = -1;
         }
     }
@@ -92,7 +83,7 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
     @KListener(R.id.shaxin)
     private void shaxinOnClick() {
         tempBeans.clear();/*清空之前的数据*/
-        loadData(page, 10);
+        loadData();
     }
 
 
@@ -181,9 +172,9 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
     /**
      * 请求数据
      */
-    private void loadData(int page, int rows) {
+    private void loadData() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.USR_BXTS_LB, "page=" + page + "&rows=" + rows, new Handler(msg -> {
+        Client.sendPost(NetParmet.USR_BXTS_LB,"", new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             BaseLbrepair bean = Json.toObject(json, BaseLbrepair.class);
@@ -201,15 +192,6 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
             AppValue.lbBeans = bean.getData();
             adapter = new TSRepairAdapters(this, tempBeans);
             mRepairList.setAdapter(this.adapter);
-            if (ISok == 0) {
-                adapter = new TSRepairAdapters(this, tempBeans);
-                mRepairList.setAdapter(this.adapter);
-            } else {
-                mSwipe_container.setLoading(false);
-            }
-            if (page == 1) {
-                tempBeans.clear();
-            }
             for (BaseLbrepair.DataBean repairBean : AppValue.lbBeans) {
                 if (repairBean.getSuitStateId() == SuitStateIdtype) {
                     tempBeans.add(repairBean);
@@ -222,35 +204,10 @@ public class ComplaintActivity extends Activity implements SwipeRefreshLayout.On
             }
             adapter.setBeans(tempBeans);
             adapter.notifyDataSetChanged();
-            ISok++;
+
             return false;
         }));
     }
 
-    @Override
-    public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                page = 1;
-                loadData(page, 10);
-                mSwipe_container.setRefreshing(false);
-            }
-        }, 3000);
-    }
-
-    @Override
-    public void onLoadMore() {
-        if (AppValue.lbBeans.size() <= 0 || AppValue.lbBeans == null) {
-            ToastUtils.showToast(this, "没有更多数据");
-            mSwipe_container.setLoading(false);
-        } else {
-            mSwipe_container.setLoadingContext("正在加载");
-            new Handler().postDelayed(() -> {
-                page++;
-                loadData(page, 10);
-            }, 2000);
-        }
-    }
 
 }
