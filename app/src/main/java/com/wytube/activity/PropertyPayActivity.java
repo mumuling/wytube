@@ -38,6 +38,7 @@ public class PropertyPayActivity extends BaseActivity {
     //    private ArrayList<PinnedSectionBean> real_data;
     List<BiilBeaan.DataBean> real_data = new ArrayList<>();
     private LinearLayout selectLayout;
+
     @KBind(R.id.all_zd)
     private LinearLayout mAllZd;
     @KBind(R.id.wj_zd)
@@ -60,6 +61,9 @@ public class PropertyPayActivity extends BaseActivity {
     private ImageView mimg_404;
     @KBind(R.id.img_200)
     private ImageView mimg_200;
+
+
+
     private BiilAdapter mAdapter;
     int type = 0;
 
@@ -75,9 +79,11 @@ public class PropertyPayActivity extends BaseActivity {
                 if (!mAdapter.flage) {
                     rmenu_text.setText("取消");
                     mlinear_sc_qx.setVisibility(View.VISIBLE);
+                    mWjZd.setClickable(false);
                 } else {
                     rmenu_text.setText("选择");
                     mlinear_sc_qx.setVisibility(View.GONE);
+                    mWjZd.setClickable(true);
                 }
                 mAdapter.notifyDataSetChanged();
             }
@@ -150,7 +156,7 @@ public class PropertyPayActivity extends BaseActivity {
      * billId	是	String	物业费Id
      * stateId
      */
-    boolean ISok = false;
+    boolean ISok = true;
     private void loaddelete(String billId) {
         String Kvs = "billId="+billId;
         Client.sendPost(NetParmet.USR_WYFY_DELE, Kvs, new Handler(msg -> {
@@ -165,22 +171,24 @@ public class PropertyPayActivity extends BaseActivity {
                 return false;
             } else {
                 ToastUtils.showToast(this,"删除成功");
+                AppValue.WYjfId="";
+                real_data.clear();
+                if (ISok){
+                    loadList();
+                    mAdapter.flage = false;
+                    ISok=!ISok;
+                }
                 mAdapter.flage = !mAdapter.flage;
                 if (!mAdapter.flage) {
                     rmenu_text.setText("取消");
                     mlinear_sc_qx.setVisibility(View.VISIBLE);
+                    mWjZd.setClickable(false);
                 } else {
                     rmenu_text.setText("选择");
                     mlinear_sc_qx.setVisibility(View.GONE);
+                    mWjZd.setClickable(true);
                 }
                 mAdapter.notifyDataSetChanged();
-                AppValue.WYjfId="";
-                real_data.clear();
-                if (!ISok){
-                    loadList();
-                    mAdapter.flage = false;
-                    ISok=true;
-                }
             }
             return false;
         }));
@@ -251,6 +259,7 @@ public class PropertyPayActivity extends BaseActivity {
         ((TextView) mAllZd.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         mAllZd.getChildAt(1).setVisibility(View.VISIBLE);
         type = 0;
+        rmenu_text.setVisibility(View.VISIBLE);
         real_data.clear();
         if (AppValue.wyreal!=null) {
             for (BiilBeaan.DataBean BiilBean : AppValue.wyreal) {
@@ -275,6 +284,7 @@ public class PropertyPayActivity extends BaseActivity {
         clearStyle(selectLayout);
         selectLayout = mWjZd;
         type = 1;
+        rmenu_text.setVisibility(View.GONE);
         ((TextView) mWjZd.getChildAt(0)).setTextColor(getResources().getColor(R.color.app_main_color_green));
         mWjZd.getChildAt(1).setVisibility(View.VISIBLE);
         real_data.clear();

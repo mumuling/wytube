@@ -109,10 +109,6 @@ public class OrderActivity extends ActivityGroup {
 		mPref = PreferenceManager.getDefaultSharedPreferences(this);
 		String checkLogin = SettingInfo.getParams(PreferenceBean.CHECKLOGIN, "");
 		if ("".equals(checkLogin)) {
-//		progressDlg = ProgressDialog.show(LinphoneActivity.this.getParent(), null, "初始化话机中。。。");
-//		progressDlg.setCanceledOnTouchOutside(true);
-//		progressDlg.show();
-//		deleteOldAccount();
 			new Thread(new Runnable() {
 				@Override
 				public void run() {
@@ -129,7 +125,6 @@ public class OrderActivity extends ActivityGroup {
 		public void run() {
 //			Log.e("Linphone", "account:"+SettingInfo.getLinphoneAccount()+"  pwd:"+SettingInfo.getLinphonePassword()+"   ip:"+SettingInfo.getParams(PreferenceBean.USERLINPHONEIP, "")+"  port:"+SettingInfo.getParams(PreferenceBean.USERLINPHONEPORT,""));
 			logIn(SettingInfo.getLinphoneAccount(), SettingInfo.getLinphonePassword(), SettingInfo.getParams(PreferenceBean.USERLINPHONEIP, "") + ":" + SettingInfo.getParams(PreferenceBean.USERLINPHONEPORT, ""), false);
-			Log.e("Linphone", "Linphone  注册。。。。。。。。");
 			LinphoneManager.getInstance().startLin();
 			String regist = SettingInfo.getParams(PreferenceBean.USERLINPHONEREGISTOK, "");
 			if (!"".equals(regist)) {

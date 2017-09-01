@@ -127,10 +127,10 @@ public class SelectCarsActivity extends BaseActivity {
             Utils.showOkDialog(this, "请选择停车场!");
             return;
         }
-        if (AppValue.carsBeans == null || AppValue.carsBeans.size() <= 0) {
-            Utils.showOkDialog(this, "数据异常!");
-            return;
-        }
+//        if (AppValue.carsBeans == null || AppValue.carsBeans.size() <= 0) {
+//            Utils.showOkDialog(this, "数据异常!");
+//            return;
+//        }
         this.carNum = mCarNum.getText().toString();
         if (this.carNum.length() <= 0) {
             Utils.showOkDialog(this, "请输入需要查询的车牌号!");
