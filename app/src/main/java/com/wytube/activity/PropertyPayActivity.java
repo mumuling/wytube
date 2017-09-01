@@ -125,7 +125,6 @@ public class PropertyPayActivity extends BaseActivity {
             mAdapter.notifyDataSetChanged();
         }else {
             AppValue.WYjfId="";
-            real_data.clear();
             for (int i = 0; i < real_data.size(); i++) {
                 real_data.get(i).isCheck = false;
             }
