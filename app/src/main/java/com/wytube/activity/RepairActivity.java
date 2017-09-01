@@ -2,7 +2,6 @@ package com.wytube.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +20,6 @@ import com.wytube.beans.RepairBean;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.net.NetParmet;
-import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
 import com.wytube.shared.ToastUtils;
 import com.wytube.utlis.AppValue;
 import com.wytube.utlis.Utils;
@@ -33,9 +31,7 @@ import java.util.List;
  * 家政服务
  * */
 @KActivity(R.layout.activity_repair)
-public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAndMoreLoadLayout.OnLoadMoreListener {
-    @KBind(R.id.swipe_container)
-    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
+public class RepairActivity extends BaseActivity {
     @KBind(R.id.not_process)
     private LinearLayout mNotProcess;
     @KBind(R.id.process_ing)
@@ -54,17 +50,14 @@ public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.O
     private List<RepairBean.DataBean> tempBeans = new ArrayList<>();
     private RepairAdapters adapter;
     private int statetype = 0; /*每次点击改变值 默认为0*/
-    int page=1,ISok=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         findViewById(R.id.title_text).setOnClickListener(v -> {finish();});
-        mSwipe_container.setOnRefreshListener(this);
-        mSwipe_container.setOnLoadMoreListener(this);
-        mSwipe_container.setColorSchemeResources(R.color.colorAccent);
-        loadData(page,15);
+        loadData();
         selectLayout = mNotProcess;/*标头栏*/
     }
 
@@ -73,7 +66,7 @@ public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.O
         super.onResume();
         if (AppValue.fish == 1) {
             tempBeans.clear();/*清空之前的数据*/
-            loadData(page,15);
+            loadData();
             AppValue.fish = -1;
         }
     }
@@ -81,7 +74,7 @@ public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.O
     @KListener(R.id.shaxin)
     private void shaxinOnClick() {
         tempBeans.clear();/*清空之前的数据*/
-        loadData(page,15);
+        loadData();
     }
 
     @KListener(R.id.not_process)
@@ -159,9 +152,9 @@ public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.O
     /**
      * 请求数据
      */
-    private void loadData(int page,int rows) {
+    private void loadData() {
         Utils.showLoad(this);
-        Client.sendPost(NetParmet.QUERY_REPAIR_LIST, "page="+ page +"&rows="+rows, new Handler(msg -> {
+        Client.sendPost(NetParmet.QUERY_REPAIR_LIST, "", new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             RepairBean bean = Json.toObject(json, RepairBean.class);
@@ -179,15 +172,6 @@ public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.O
             AppValue.repairBeans = bean.getData();
             adapter = new RepairAdapters(this,AppValue.repairBeans);
             mRepairList.setAdapter(this.adapter);
-            if (ISok==0){
-                adapter=new RepairAdapters(this,AppValue.repairBeans);
-                mRepairList.setAdapter(adapter);
-            }else {
-                mSwipe_container.setLoading(false);
-            }
-            if(page==1){
-                tempBeans.clear();
-            }
             for (RepairBean.DataBean repairBean : AppValue.repairBeans) {
                 if (repairBean.getStateId() == statetype) {
                     tempBeans.add(repairBean);
@@ -215,32 +199,5 @@ public class RepairActivity extends BaseActivity implements SwipeRefreshLayout.O
         layout.getChildAt(1).setVisibility(View.INVISIBLE);
     }
 
-    /*下拉刷新*/
-    @Override
-    public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                page = 1;
-                loadData(page,15);
-                mSwipe_container.setRefreshing(false);
-            }
-        }, 3000);
-    }
-
-    /*上拉更多*/
-    @Override
-    public void onLoadMore() {
-        if (AppValue.repairBeans.size()<=0||AppValue.repairBeans==null){
-            ToastUtils.showToast(this,"没有更多数据");
-            mSwipe_container.setLoading(false);
-        }else {
-            mSwipe_container.setLoadingContext("正在加载");
-            new Handler().postDelayed(() -> {
-                page++;
-                loadData(page, 15);
-            }, 2000);
-        }
-    }
 
 }
