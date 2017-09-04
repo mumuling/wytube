@@ -23,14 +23,8 @@
             android:layout_marginRight="5dp"
             android:layout_gravity="center_vertical"
             android:button="@drawable/checkbox_style"
-            android:visibility="gone"/>
-
-        <TextView
-            android:id="@+id/text_timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="物业费" />
+            android:visibility="gone"
+            android:layout_weight="0.04"/>
 
         <TextView
             android:id="@+id/item_type"
@@ -39,6 +33,15 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
             android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/text_timer"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="物业费"
+            android:textSize="16sp"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
