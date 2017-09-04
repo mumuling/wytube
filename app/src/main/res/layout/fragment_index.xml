@@ -187,13 +187,35 @@
                 android:background="#E8E8E8"/>
 
             <RelativeLayout
-                android:id="@+id/ad_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="visible">
 
                 <ImageView
                     android:id="@+id/ad_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/banner" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/cancel_nor_w" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/ad_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_shuffling"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:scaleType="fitXY"

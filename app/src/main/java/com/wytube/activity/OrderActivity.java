@@ -97,14 +97,14 @@ public class OrderActivity extends ActivityGroup {
 		tabHost = (TabHost) findViewById(R.id.myTabHost);
 		// 初始化
 		YETApplication.getinstant().addActivity(this);
-			addTab();
-			// 美化tabHost背景
-			for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
-				tabHost.getTabWidget().getChildAt(i)
-						.setBackgroundColor(Color.parseColor("#dddddd"));
-			}
-		registerReceiver(broadcastReceiver, new IntentFilter(Smack.action));
+		addTab();
+		// 美化tabHost背景
+		for (int i = 0; i < tabHost.getTabWidget().getChildCount(); i++) {
+			tabHost.getTabWidget().getChildAt(i)
+					.setBackgroundColor(Color.parseColor("#dddddd"));
+		}
 		checkVersion();
+		registerReceiver(broadcastReceiver, new IntentFilter(Smack.action));
 
 		mPref = PreferenceManager.getDefaultSharedPreferences(this);
 		String checkLogin = SettingInfo.getParams(PreferenceBean.CHECKLOGIN, "");
@@ -509,12 +509,17 @@ public class OrderActivity extends ActivityGroup {
 	 * @param bean
 	 */
 	private void versionEquse(VersionBean.DataBean bean) {
-		AppValue.localVersion = Integer.parseInt(Utils.clearString(AppValue.appVersion.replace("V","").replace(".","")).trim());
-		AppValue.serverVersion = Integer.parseInt(Utils.clearString(bean.getVersion().replace("V","").replace(".","")).trim());
-		if (AppValue.serverVersion > AppValue.localVersion) {
-			AppValue.versionUrl = bean.getPath();
-			VersionActivity.Version = new VersionActivity(this);
-			VersionActivity.Version.loadDialog();
+		try {
+			AppValue.localVersion = Integer.parseInt(Utils.clearString(AppValue.appVersion.replace("V","").replace(".","")).trim());
+			AppValue.serverVersion = Integer.parseInt(Utils.clearString(bean.getVersion().replace("V","").replace(".","")).trim());
+			if (AppValue.serverVersion > AppValue.localVersion) {
+				AppValue.versionUrl = bean.getPath();
+				VersionActivity.Version = new VersionActivity(this);
+				VersionActivity.Version.loadDialog();
+			}
+		}catch (NumberFormatException e) {
+			finish();
+			System.exit(0);
 		}
 	}
 

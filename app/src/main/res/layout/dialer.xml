@@ -117,7 +117,7 @@
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_toLeftOf="@+id/Erase"
-                android:layout_toRightOf="@+id/hiddenOrShowNumpad"
+                android:layout_toRightOf="@+id/hiddenOr"
                 android:focusable="false"
                 android:gravity="center" >
 
@@ -129,7 +129,7 @@
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_toLeftOf="@+id/Erase"
-                    android:layout_toRightOf="@+id/hiddenOrShowNumpad"
+                    android:layout_toRightOf="@+id/hiddenOr"
                     android:background="@drawable/address_bg_no_tv"
                     android:focusable="false"
                     android:gravity="center"
@@ -160,15 +160,21 @@
             </FrameLayout>
 
             <!-- android:hint="@string/addressHint" -->
+            <RelativeLayout
+                android:id="@+id/hiddenOr"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:gravity="center">
+                <CheckBox
+                    android:id="@+id/hiddenOrShowNumpad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tab_dialer_ups"
+                    android:button="@null"
+                    android:checked="true"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
 
-            <CheckBox
-                android:id="@+id/hiddenOrShowNumpad"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/tab_dialer_ups"
-                android:button="@null"
-                android:checked="true"
-                android:textColor="@color/white" />
         </RelativeLayout>
 
         <RelativeLayout

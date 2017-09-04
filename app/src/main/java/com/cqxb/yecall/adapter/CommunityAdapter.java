@@ -1,9 +1,5 @@
 package com.cqxb.yecall.adapter;
 
-import java.util.List;
-
-import org.linphone.DialerFragment;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -18,10 +14,13 @@ import android.widget.TextView;
 
 import com.cqxb.yecall.DetailDataActivity;
 import com.cqxb.yecall.R;
-import com.cqxb.yecall.bean.ContactBean;
 import com.cqxb.yecall.t9search.model.Contacts;
 import com.cqxb.yecall.until.PreferenceBean;
 import com.cqxb.yecall.until.SettingInfo;
+
+import org.linphone.DialerFragment;
+
+import java.util.List;
 
 public class CommunityAdapter extends BaseAdapter implements SectionIndexer{
 	
@@ -55,7 +54,7 @@ public class CommunityAdapter extends BaseAdapter implements SectionIndexer{
 		ImageView status;
 		ImageView callImg;
 		TextView context;
-		
+
 		FrameLayout icon;//联系人头像，暂时没用到做隐藏处理
 	}
 	
@@ -72,7 +71,7 @@ public class CommunityAdapter extends BaseAdapter implements SectionIndexer{
 			viewHolder.status = (ImageView) view.findViewById(R.id.itemImgStatus);
 			viewHolder.context = (TextView) view.findViewById(R.id.context);
 			viewHolder.callImg = (ImageView) view.findViewById(R.id.callImg);
-			viewHolder.icon = (FrameLayout) view.findViewById(R.id.fl_contact_icon); 
+			viewHolder.icon = (FrameLayout) view.findViewById(R.id.fl_contact_icon);
 			view.setTag(viewHolder);
 		} else {
 			viewHolder = (ViewHolder) view.getTag();
@@ -118,7 +117,7 @@ public class CommunityAdapter extends BaseAdapter implements SectionIndexer{
 //		viewHolder.callImg.setVisibility(View.GONE);
 		viewHolder.callImg.setBackgroundResource(R.drawable.bianji);
 		viewHolder.callImg.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				if(SettingInfo.getParams(PreferenceBean.LOGINFLAG, "").equals("")){

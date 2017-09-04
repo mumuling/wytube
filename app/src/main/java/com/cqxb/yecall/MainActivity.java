@@ -248,48 +248,18 @@ public class MainActivity extends Activity {
         // 联系人
         List<Contacts> cltList = YETApplication.getinstant().getCltList();
         ContactBase    cb      = new ContactBase(getApplicationContext());
-        // cb.testAddContact(getApplicationContext(), "在仄仄仄仄仄仄仄仄仄仄仄仄",
-        // "1231231231231");
-        // ContactBase.insertCallLog(getApplicationContext(), "zzzzzzzzzz",
-        // "123456465465", 2, 30, System.currentTimeMillis());
         if (cltList.size() <= 0) {
 
             List<Contacts> allcontact = cb.getAllcontact();
             YETApplication.getinstant().setCltList(allcontact);
         }
-//		// 通话记录
-//		List<CallBean> clList = YETApplication.getinstant().getClList();
-//		if (clList.size() <= 0) {
-//			List<CallBean> allcontact = cb.getPhoneCallList();
-//			YETApplication.getinstant().setClList(allcontact);
-//		}
         onServiceReady();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
-//	private Handler handler=new Handler(){
-//
-//		@Override
-//		public void handleMessage(Message msg) {
-//			super.handleMessage(msg);
-//			switch (msg.what) {
-//			case 1:
-//				startActivity(new Intent(MainActivity.this,LoginActivity.class));
-//				finish();
-//				break;
-//
-//			default:
-//				break;
-//			}
-//		}
-//
-//	};
 
     /**
      * 检查服务启动的线程
@@ -306,7 +276,6 @@ public class MainActivity extends Activity {
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-//					onServiceReady();
                     //初始化数据库
                     initSql();
                 }
@@ -381,6 +350,7 @@ public class MainActivity extends Activity {
                         SettingInfo.setLinphonePassword("");
                         SettingInfo.setPassword("");
                         SettingInfo.setParams(PreferenceBean.CHECKLOGIN, "");
+                        AppValue.HhGq=1;
                         startActivity(new Intent(MainActivity.this, LoginAppActivity.class));
                         finish();
                     }

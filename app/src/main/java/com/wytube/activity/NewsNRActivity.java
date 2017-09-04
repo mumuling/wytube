@@ -64,7 +64,8 @@ public class NewsNRActivity extends Activity implements SwipeRefreshLayout.OnRef
     protected void onResume() {
         super.onResume();
         if (AppValue.fish == 1) {
-            iniview();
+            page =1;
+            loadData(page, 5);
             AppValue.fish = -1;
         }
     }
@@ -73,16 +74,15 @@ public class NewsNRActivity extends Activity implements SwipeRefreshLayout.OnRef
         intent = getIntent();
         Bundle bundle = intent.getExtras();
         int id = bundle.getInt("id");
-
         mSwipe_container.setOnRefreshListener(this);
         mSwipe_container.setOnLoadMoreListener(this);
         mSwipe_container.setColorSchemeResources(R.color.colorAccent);
-        loadData(page, 10);
+        loadData(page, 5);
     }
 
     @KListener(R.id.shaxin)
     private void shaxinOnClick() {
-        loadData(page, 10);
+        loadData(page, 5);
     }
 
 
@@ -134,7 +134,7 @@ public class NewsNRActivity extends Activity implements SwipeRefreshLayout.OnRef
             @Override
             public void run() {
                 page = 1;
-                loadData(page, 10);
+                loadData(page, 5);
                 mSwipe_container.setRefreshing(false);
             }
         }, 3000);
@@ -143,13 +143,14 @@ public class NewsNRActivity extends Activity implements SwipeRefreshLayout.OnRef
     @Override
     public void onLoadMore() {
         if (AppValue.typeBean.size() <= 0 || AppValue.typeBean == null) {
-            ToastUtils.showToast(this, "没有更多数据");
-            mSwipe_container.setLoading(false);
+            new Handler().postDelayed(() -> {
+                mSwipe_container.setLoading(false);
+            }, 2000);
         } else {
             mSwipe_container.setLoadingContext("正在加载");
             new Handler().postDelayed(() -> {
                 page++;
-                loadData(page, 10);
+                loadData(page, 5);
             }, 2000);
         }
     }

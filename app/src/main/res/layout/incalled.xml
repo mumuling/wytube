@@ -196,13 +196,13 @@
 
                  <ProgressBar
 	                android:id="@+id/videoInProgress"
-	                style="?android:attr/progressBarStyle" 
+	                style="?android:attr/progressBarStyle"
 	                android:layout_centerHorizontal="true"
 	                android:layout_centerVertical="true"
 	                android:visibility="gone"
 	                android:layout_width="match_parent"
 		            android:layout_height="wrap_content"/>
-                
+
                 <TextView
                     android:id="@+id/video"
                     android:layout_width="match_parent"
@@ -314,7 +314,7 @@
         android:id="@+id/selfSu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" 
+        android:orientation="vertical"
         android:background="@drawable/callbg">
 
         <LinearLayout
@@ -387,11 +387,11 @@
                 android:textSize="22dp"
                 android:visibility="invisible" />
 
-            <RelativeLayout 
+            <RelativeLayout
                 android:id="@+id/dialder"
 			    android:layout_width="match_parent"
 	        	android:layout_height="match_parent"
-	        	android:visibility="gone" 
+	        	android:visibility="gone"
 	        	android:layout_marginTop="10dip"
 			    >
 			    <org.linphone.ui.Numpad
@@ -399,9 +399,9 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:background="@drawable/trans"/>
-			    
+
 			</RelativeLayout>
-            
+
             <RelativeLayout
                 android:id="@+id/oprete"
                 android:layout_width="match_parent"
@@ -421,7 +421,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="11"
-                        android:orientation="horizontal" 
+                        android:orientation="horizontal"
                         android:visibility="gone">
 
                         <TextView
@@ -536,7 +536,7 @@
 <!--                             android:background="@drawable/kb_xml" -->
 <!--                             android:clickable="true" > -->
 <!--                         </TextView> -->
-                        
+
                         <TextView
                             android:id="@+id/bhp"
                             android:layout_width="110dip"
@@ -564,7 +564,7 @@
                 android:layout_marginLeft="40dip"
                 android:layout_marginRight="40dip"
                 android:layout_marginTop="5dip"
-                android:background="@drawable/dial_btn_color" 
+                android:background="@drawable/dial_btn_color"
                 android:clickable="true" >
 
                 <ImageView
@@ -574,8 +574,8 @@
                     android:adjustViewBounds="true"
                     android:background="@drawable/ic_tel"/>
             </RelativeLayout>
-            
-            <RelativeLayout 
+
+            <RelativeLayout
                 android:id="@+id/hideDialder"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -584,7 +584,7 @@
                 android:layout_marginLeft="40dip"
                 android:layout_marginRight="40dip"
                 android:layout_marginTop="5dip"
-                android:background="@drawable/trans" 
+                android:background="@drawable/trans"
                 android:visibility="gone"
                 android:clickable="true" >
 

@@ -1,13 +1,5 @@
 package com.cqxb.yecall;
 
-import org.linphone.DialerFragment;
-import org.linphone.InCallActivity;
-import org.linphone.LinphoneActivity;
-import org.linphone.LinphoneManager;
-import org.linphone.LinphoneManager.AddressType;
-import org.linphone.ui.AddressText;
-import org.xbill.DNS.tests.primary;
-
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -20,19 +12,24 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.android.action.NetAction;
 import com.android.action.NetBase.OnMyResponseListener;
 import com.android.action.param.CommReply;
-import com.cqxb.yecall.t9search.model.Contacts;
 import com.cqxb.yecall.until.BaseUntil;
 import com.cqxb.yecall.until.NetUtil;
 import com.cqxb.yecall.until.PreferenceBean;
 import com.cqxb.yecall.until.SettingInfo;
 import com.cqxb.yecall.until.T;
+
+import org.linphone.DialerFragment;
+import org.linphone.InCallActivity;
+import org.linphone.LinphoneActivity;
+import org.linphone.LinphoneManager;
+import org.linphone.LinphoneManager.AddressType;
+import org.linphone.ui.AddressText;
 
 public class DetailDataActivity extends BaseActivity implements OnClickListener {
 	private String name = "";
@@ -66,7 +63,8 @@ public class DetailDataActivity extends BaseActivity implements OnClickListener 
 		findViewById(R.id.calling).setOnClickListener(this);
 		findViewById(R.id.backCall).setOnClickListener(this);
 		findViewById(R.id.freeCall).setOnClickListener(this);
-		findViewById(R.id.title_custom_left_bg).setOnClickListener(this);
+		findViewById(R.id.back_but).setOnClickListener(new OnClickListener() {public void onClick(View v) {finish();}});
+		findViewById(R.id.title_text).setOnClickListener(new OnClickListener() {public void onClick(View v) {finish();}});
 		dialog = ProgressDialog.show(DetailDataActivity.this, "", "请稍候。。");
 		dialog.show();
 		new NetAction().checkaccount(number, new OnMyResponseListener() {
@@ -226,9 +224,7 @@ public class DetailDataActivity extends BaseActivity implements OnClickListener 
 			SettingInfo.setParams(PreferenceBean.PHONEADDZERO, "addZero");
 			callBack();
 			name = "";
-		} else if (v.getId() == R.id.title_custom_left_bg) {
-			finish();
-		} else if (v.getId() == R.id.freeCall) {
+		}else if (v.getId() == R.id.freeCall) {
 			mCalling(number);
 		}
 	}

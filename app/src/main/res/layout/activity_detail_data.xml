@@ -4,70 +4,31 @@
     android:layout_height="match_parent"
     android:background="#eeeeee"
     android:orientation="vertical" >
-
     <RelativeLayout
-        android:id="@+id/LayoutTitle"
+        android:id="@+id/rlss"
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#54ABEE" >
-
-        <RelativeLayout
-            android:id="@+id/title_custom_left_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:visibility="visible" >
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true" >
-
-                <ImageView
-                    android:id="@+id/title_custom_left_id"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/fanhui" />
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/textView_title"
+        android:layout_height="48dp">
+        <ImageView
+            android:id="@+id/back_but"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginLeft="40dip"
-            android:layout_marginRight="40dip"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="详细资料"
-            android:textColor="#fff"
-            android:textSize="22dp" />
-
-        <RelativeLayout
-            android:id="@+id/title_custom_bg"
-            android:layout_width="30dip"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
+            android:src="@drawable/ty_fh"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:visibility="invisible" >
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true" >
-
-                <ImageView
-                    android:id="@+id/title_custom_id"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:adjustViewBounds="true" />
-            </RelativeLayout>
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:text="详细资料"
+            android:textSize="16sp"
+            android:textColor="@color/main_def_text_color"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/back_but"
+            android:layout_toEndOf="@+id/back_but" />
     </RelativeLayout>
 
     <LinearLayout

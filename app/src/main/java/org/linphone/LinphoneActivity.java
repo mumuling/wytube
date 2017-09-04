@@ -1350,13 +1350,35 @@ public class LinphoneActivity extends FragmentActivity implements
             }
         }
     };
-
-    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finish();
+                if (Config.imgShow) {// 图片显示的时候不退出
+                    OrderActivity.instance.hiddenImg();
+                    return true;
+                } else {
+                    if (currentFragment == FragmentsAvailable.DIALER) {
+                        boolean isBackgroundModeActive = LinphonePreferences.instance().isBackgroundModeEnabled();
+                        if (!isBackgroundModeActive) {
+                            stopService(new Intent(Intent.ACTION_MAIN).setClass(this, LinphoneService.class));
+                            finish();
+                        } else if (LinphoneUtils.onKeyBackGoHome(this, keyCode, event)) {
+                            return true;
+                        }
+                    } else {
+                        if (isTablet()) {
+                            if (currentFragment == FragmentsAvailable.SETTINGS) {
+                                updateAnimationsState();
+                            }
+                        }
+                    }
+                }
+            return true;
+        } else if (keyCode == KeyEvent.KEYCODE_MENU && statusFragment != null) {
+            if (event.getRepeatCount() < 1) {
+                statusFragment.openOrCloseStatusBar(true);
+            }
         }
-        return true;
+        return super.onKeyDown(keyCode, event);
     }
 
     @SuppressLint("ValidFragment")

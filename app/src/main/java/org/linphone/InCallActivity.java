@@ -473,7 +473,7 @@ public class InCallActivity extends FragmentActivity implements
                 if (!isRecord) {
                     String recordFlag = SettingInfo.getParams(
                             PreferenceBean.OUTCALLCHECK, "");
-                    if (recordFlag.equals("true")
+                    if (recordFlag.equals("")
                             && LinphoneManager.getLc().getCurrentCall() != null) {
                         LinphoneManager.getLc().getCurrentCall()
                                 .startRecording();
@@ -490,12 +490,12 @@ public class InCallActivity extends FragmentActivity implements
                         iconVideo.setImageResource(R.drawable.video_off);
 
                         tvVideo.setTextColor(getResources().getColor(R.color.white));
-                        video.setBackgroundColor(getResources().getColor(R.color.mBlue));
+                        video.setBackgroundColor(getResources().getColor(R.color.app_main_color_green));
 
                     } else {
                         iconVideo.setImageResource(R.drawable.video_on);
 
-                        tvVideo.setTextColor(getResources().getColor(R.color.mBlue));
+                        tvVideo.setTextColor(getResources().getColor(R.color.app_main_color_green));
                         video.setBackgroundColor(getResources().getColor(R.color.white));
                     }
                 }
@@ -505,7 +505,7 @@ public class InCallActivity extends FragmentActivity implements
                         iconSpeaker.setImageResource(R.drawable.speaker_off);
 
                         tvSpeaker.setTextColor(getResources().getColor(R.color.white));
-                        speaker.setBackgroundColor(getResources().getColor(R.color.mBlue));
+                        speaker.setBackgroundColor(getResources().getColor(R.color.app_main_color_green));
 
                         routeSpeaker.setBackgroundResource(R.drawable.route_speaker_on);
                         routeReceiver.setBackgroundResource(R.drawable.route_receiver_off);
@@ -513,7 +513,7 @@ public class InCallActivity extends FragmentActivity implements
                     } else {
                         iconSpeaker.setImageResource(R.drawable.speaker_on);
 
-                        tvSpeaker.setTextColor(getResources().getColor(R.color.mBlue));
+                        tvSpeaker.setTextColor(getResources().getColor(R.color.app_main_color_green));
                         speaker.setBackgroundColor(getResources().getColor(R.color.white));
 
                         routeSpeaker.setBackgroundResource(R.drawable.route_speaker_off);
@@ -538,11 +538,11 @@ public class InCallActivity extends FragmentActivity implements
                     iconMicro.setImageResource(R.drawable.micro_off);
 
                     tvMicro.setTextColor(getResources().getColor(R.color.white));
-                    micro.setBackgroundColor(getResources().getColor(R.color.mBlue));
+                    micro.setBackgroundColor(getResources().getColor(R.color.app_main_color_green));
                 } else {
                     iconMicro.setImageResource(R.drawable.micro_on);
 
-                    tvMicro.setTextColor(getResources().getColor(R.color.mBlue));
+                    tvMicro.setTextColor(getResources().getColor(R.color.app_main_color_green));
                     micro.setBackgroundColor(getResources().getColor(R.color.white));
                 }
 
@@ -693,7 +693,8 @@ public class InCallActivity extends FragmentActivity implements
             if (viewpager != null)
                 viewpager.setVisibility(View.VISIBLE);
             if (!isVideoEnabled(LinphoneManager.getLc().getCurrentCall())) {
-                advImage.setVisibility(View.VISIBLE);
+                /*打过去显示广告栏*/
+//                advImage.setVisibility(View.VISIBLE);
             }
         } else if (id == R.id.tv_incall_screemshots || id == R.id.switchCamera) {// 截屏
 
@@ -833,10 +834,10 @@ public class InCallActivity extends FragmentActivity implements
     private void showAudioView() {
         iconVideo.setImageResource(R.drawable.video_on);
 
-        tvVideo.setTextColor(getResources().getColor(R.color.mBlue));
+        tvVideo.setTextColor(getResources().getColor(R.color.app_main_color_green));
         video.setBackgroundColor(getResources().getColor(R.color.white));
 
-        advImage.setVisibility(View.VISIBLE);
+//        advImage.setVisibility(View.VISIBLE);
         LinphoneManager.startProximitySensorForActivity(InCallActivity.this);
         replaceFragmentVideoByAudio();
         setCallControlsVisibleAndRemoveCallbacks();
@@ -850,13 +851,13 @@ public class InCallActivity extends FragmentActivity implements
             iconSpeaker.setImageResource(R.drawable.speaker_off);
 
             tvSpeaker.setTextColor(getResources().getColor(R.color.white));
-            speaker.setBackgroundColor(getResources().getColor(R.color.mBlue));
+            speaker.setBackgroundColor(getResources().getColor(R.color.app_main_color_green));
         }
         advImage.setVisibility(View.GONE);
         iconVideo.setImageResource(R.drawable.video_off);
 
         tvVideo.setTextColor(getResources().getColor(R.color.white));
-        video.setBackgroundColor(getResources().getColor(R.color.mBlue));
+        video.setBackgroundColor(getResources().getColor(R.color.app_main_color_green));
         video.setEnabled(true);
         videoProgress.setVisibility(View.INVISIBLE);
 
@@ -903,12 +904,12 @@ public class InCallActivity extends FragmentActivity implements
             iconMicro.setImageResource(R.drawable.micro_off);
 
             tvMicro.setTextColor(getResources().getColor(R.color.white));
-            micro.setBackgroundColor(getResources().getColor(R.color.mBlue));
+            micro.setBackgroundColor(getResources().getColor(R.color.app_main_color_green));
             // jy.setBackgroundResource(R.drawable.jydj);
         } else {
             iconMicro.setImageResource(R.drawable.micro_on);
 
-            tvMicro.setTextColor(getResources().getColor(R.color.mBlue));
+            tvMicro.setTextColor(getResources().getColor(R.color.app_main_color_green));
             micro.setBackgroundColor(getResources().getColor(R.color.white));
             // jy.setBackgroundResource(R.drawable.jywdj);
         }
@@ -921,7 +922,7 @@ public class InCallActivity extends FragmentActivity implements
             iconSpeaker.setImageResource(R.drawable.speaker_off);
 
             tvSpeaker.setTextColor(getResources().getColor(R.color.white));
-            speaker.setBackgroundColor(getResources().getColor(R.color.mBlue));
+            speaker.setBackgroundColor(getResources().getColor(R.color.app_main_color_green));
 
             LinphoneManager.getLc().enableSpeaker(isSpeakerEnabled);
             // ysq.setBackgroundResource(R.drawable.ysqdj);
@@ -930,7 +931,7 @@ public class InCallActivity extends FragmentActivity implements
             LinphoneManager.getInstance().routeAudioToReceiver();
             iconSpeaker.setImageResource(R.drawable.speaker_on);
 
-            tvSpeaker.setTextColor(getResources().getColor(R.color.mBlue));
+            tvSpeaker.setTextColor(getResources().getColor(R.color.app_main_color_green));
             speaker.setBackgroundColor(getResources().getColor(R.color.white));
             // ysq.setBackgroundResource(R.drawable.ysqwdj);
         }

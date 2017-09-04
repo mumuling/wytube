@@ -96,6 +96,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
  * @author Sylvain Berfini
  */
@@ -120,6 +121,7 @@ public class DialerFragment extends BaseFragment implements OnContactsLoad,
     //	private LinearLayout btnCall, btnHistory;// 拨号、通话记录
 //	private TextView tvCall, tvHistory;
     private CheckBox btnPan;// 控制拨号键盘
+    private RelativeLayout hiddenOr ;
     private Boolean key = true;// 地址有数字时键盘只是退回；
 //	private View vCall, vHistory;
 
@@ -242,7 +244,9 @@ public class DialerFragment extends BaseFragment implements OnContactsLoad,
         view = inflater.inflate(R.layout.dialer, container, false);
 
         btnPan = (CheckBox) view.findViewById(R.id.hiddenOrShowNumpad);
+        hiddenOr = (RelativeLayout) view.findViewById(R.id.hiddenOr);
         btnPan.setOnClickListener(this);
+        hiddenOr.setOnClickListener(this);
 
         // --------------------------------------------------------------------------------
 
@@ -1293,26 +1297,11 @@ public class DialerFragment extends BaseFragment implements OnContactsLoad,
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.hiddenOrShowNumpad:// 键盘的隐藏或收起
-                if (getHideStatus()) {
-                    view.findViewById(R.id.layoutDialer).setVisibility(View.GONE);
-                    btnPan.setChecked(false);
-
-                    cList = new ArrayList<>();
-                    cList = YETApplication.getinstant().getThjl();
-                    cList2.addAll(cList);
-                    cList2.addAll(YETApplication.getinstant().getCltList());
-                    adapter = new DialingAdapter(getActivity(), cList);
-                    listView.setAdapter(adapter);
-                    phoneCallList();
-
-                    showContacts();
-                } else {
-                    view.findViewById(R.id.layoutDialer)
-                            .setVisibility(View.VISIBLE);
-                    btnPan.setChecked(true);
-                    showContacts();
-                }
+            case R.id.hiddenOr:// 键盘的隐藏或收起
+                ycjp();
+                break;
+            case R.id.hiddenOrShowNumpad:
+                ycjp();
                 break;
             case R.id.Address:
                 if (mAddress.getText().toString().length() == 0) {
@@ -1345,6 +1334,28 @@ public class DialerFragment extends BaseFragment implements OnContactsLoad,
                 break;
         }
     }
+
+    public void ycjp(){
+        if (getHideStatus()) {
+            view.findViewById(R.id.layoutDialer).setVisibility(View.GONE);
+            btnPan.setChecked(false);
+
+            cList = new ArrayList<>();
+            cList = YETApplication.getinstant().getThjl();
+            cList2.addAll(cList);
+            cList2.addAll(YETApplication.getinstant().getCltList());
+            adapter = new DialingAdapter(getActivity(), cList);
+            listView.setAdapter(adapter);
+            phoneCallList();
+
+            showContacts();
+        } else {
+            view.findViewById(R.id.layoutDialer)
+                    .setVisibility(View.VISIBLE);
+            btnPan.setChecked(true);
+            showContacts();
+        }
+    };
 
 
     // 呈现联系人

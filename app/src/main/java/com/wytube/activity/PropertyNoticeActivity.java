@@ -157,8 +157,9 @@ public class PropertyNoticeActivity extends Activity implements SwipeRefreshLayo
     public void onLoadMore() {
         if (AppValue.propMsgs.size()==0){
             mRepair_now.setVisibility(View.VISIBLE);
-            ToastUtils.showToast(this,"没有更多数据");
-            mSwipe_container.setLoading(false);
+            new Handler().postDelayed(() -> {
+                mSwipe_container.setLoading(false);
+            }, 2000);
         }else {
             mRepair_now.setVisibility(View.GONE);
             mSwipe_container.setLoadingContext("正在加载");

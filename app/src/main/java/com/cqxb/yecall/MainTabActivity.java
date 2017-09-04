@@ -27,8 +27,13 @@ import com.cqxb.yecall.until.SettingInfo;
 import com.umeng.analytics.MobclickAgent;
 
 import org.linphone.LinphoneActivity;
+import org.linphone.LinphoneManager;
+import org.linphone.LinphoneService;
+import org.linphone.core.OnlineStatus;
 
 import java.util.List;
+
+import static android.content.Intent.ACTION_MAIN;
 
 /**
  * 主页面
@@ -176,27 +181,27 @@ public class MainTabActivity extends ActivityGroup {
         }
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        unregisterReceiver(broadcastReceiver);
-//        SettingInfo.setParams(PreferenceBean.USERLINPHONEREGISTOK, "");
-//        SettingInfo.setParams(PreferenceBean.CHECKLOGIN, "");
-//        super.onDestroy();
-//        if (LinphoneManager.isInstanciated()) {
-//            LinphoneManager.getLcIfManagerNotDestroyedOrNull().setPresenceInfo(
-//                    0, "", OnlineStatus.Offline);
-//        }
-//        stopService(new Intent(ACTION_MAIN).setClass(this,
-//                LinphoneService.class));
-//        finish();
-//    }
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(broadcastReceiver);
+        SettingInfo.setParams(PreferenceBean.USERLINPHONEREGISTOK, "");
+        SettingInfo.setParams(PreferenceBean.CHECKLOGIN, "");
+        super.onDestroy();
+        if (LinphoneManager.isInstanciated()) {
+            LinphoneManager.getLcIfManagerNotDestroyedOrNull().setPresenceInfo(
+                    0, "", OnlineStatus.Offline);
+        }
+        stopService(new Intent(ACTION_MAIN).setClass(this,
+                LinphoneService.class));
+        finish();
+    }
 
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             if ("backMune".equals(intent.getStringExtra("backMune"))) {
-                Intent in = new Intent(Intent.ACTION_MAIN);
+                Intent in = new Intent(ACTION_MAIN);
                 in.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);// 注意
                 in.addCategory(Intent.CATEGORY_HOME);
                 startActivity(in);

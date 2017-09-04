@@ -132,11 +132,13 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
                 case 0:
                     //compalete完成后获取得到的组织架构和配置自己的im以及sip
                     if (AppValue.onec==1 ){
+                        /*引导页进入*/
                         Intent intent = new Intent(LoginAppActivity.this, OrderActivity.class);
                         startActivity(intent);
                         finish();
                         AppValue.onec = -1;
                     }else if (AppValue.HhGq==1){
+                        /*会话过期 toke为空*/
                         Intent intent = new Intent(LoginAppActivity.this, OrderActivity.class);
                         startActivity(intent);
                         finish();
