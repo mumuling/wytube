@@ -101,10 +101,10 @@ public class YeCallBeans {
         private Object startDate;
         private Object endDate;
         private String doorId;
-        private Object serial;
+        private String serial;
         private String communityName;
         private String doorName;
-        private int doorType;
+        private String doorType;
         private Object sourceIp;
         private Object sourcePort;
         private Object destinationIp;
@@ -125,7 +125,7 @@ public class YeCallBeans {
         private String rightLongitude;
         private String rightLatitude;
         private Object program;
-        private Object sip;
+        private String sip;
 
         public Object getCreateDate() {
             return createDate;
@@ -199,11 +199,11 @@ public class YeCallBeans {
             this.doorId = doorId;
         }
 
-        public Object getSerial() {
+        public String getSerial() {
             return serial;
         }
 
-        public void setSerial(Object serial) {
+        public void setSerial(String serial) {
             this.serial = serial;
         }
 
@@ -223,11 +223,11 @@ public class YeCallBeans {
             this.doorName = doorName;
         }
 
-        public int getDoorType() {
+        public String getDoorType() {
             return doorType;
         }
 
-        public void setDoorType(int doorType) {
+        public void setDoorType(String doorType) {
             this.doorType = doorType;
         }
 
@@ -391,11 +391,11 @@ public class YeCallBeans {
             this.program = program;
         }
 
-        public Object getSip() {
+        public String getSip() {
             return sip;
         }
 
-        public void setSip(Object sip) {
+        public void setSip(String sip) {
             this.sip = sip;
         }
     }

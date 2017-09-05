@@ -239,4 +239,7 @@ public class AppValue {
     public static String parkphone="";
     /*门禁电话*/
     public static String MJphone="";
+    /*密码开门数据*/
+    public static String mmkm="";
+
 }

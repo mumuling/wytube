@@ -104,7 +104,7 @@ public class BaseMmkm {
         private String serial;
         private String communityName;
         private String doorName;
-        private int doorType;
+        private String doorType;
         private Object sourceIp;
         private Object sourcePort;
         private Object destinationIp;
@@ -125,7 +125,7 @@ public class BaseMmkm {
         private String rightLongitude;
         private String rightLatitude;
         private Object program;
-        private Object sip;
+        private String sip;
 
         public Object getCreateDate() {
             return createDate;
@@ -223,11 +223,11 @@ public class BaseMmkm {
             this.doorName = doorName;
         }
 
-        public int getDoorType() {
+        public String getDoorType() {
             return doorType;
         }
 
-        public void setDoorType(int doorType) {
+        public void setDoorType(String doorType) {
             this.doorType = doorType;
         }
 
@@ -391,11 +391,11 @@ public class BaseMmkm {
             this.program = program;
         }
 
-        public Object getSip() {
+        public String getSip() {
             return sip;
         }
 
-        public void setSip(Object sip) {
+        public void setSip(String sip) {
             this.sip = sip;
         }
     }

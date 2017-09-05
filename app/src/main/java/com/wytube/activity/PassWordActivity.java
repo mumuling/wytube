@@ -14,19 +14,31 @@ import com.cqxb.until.ACache;
 import com.cqxb.yecall.R;
 import com.cqxb.yecall.until.PreferenceBean;
 import com.cqxb.yecall.until.SettingInfo;
+import com.google.gson.reflect.TypeToken;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
+import com.wytube.adaper.YeCallListPasswordAdapter;
 import com.wytube.adaper.YeCallListPasswordAdapters;
 import com.wytube.beans.BaseMmkm;
+import com.wytube.beans.modle.Remotelys;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.shared.ToastUtils;
+import com.wytube.threads.GsonUtil;
 import com.wytube.utlis.Utils;
 
+import org.json.JSONArray;
+
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.wytube.beans.modle.Remotelys.PERSONSs;
 
 /**
  * 创 建 人: vr 柠檬 .
@@ -50,6 +62,8 @@ public class PassWordActivity extends Activity{
 
     private String phone;// 用户名
     private List<BaseMmkm.DataBean> list;
+    ACache mCache = null;
+    List<Remotelys> remotelys;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,23 +77,43 @@ public class PassWordActivity extends Activity{
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         mtext_name.setOnClickListener(v -> {finish();});
         phone = SettingInfo.getParams(PreferenceBean.USERNAME, "");
-        initPasswordYeCall();/*密码开门*/
+        mCache = ACache.get(this);
+        JSONArray results = mCache.getAsJSONArray(PERSONSs);
+        if (results!=null){
+            /*缓存数据*/
+            Type mType = new TypeToken<List<Remotelys>>(){}.getType();
+            remotelys = GsonUtil.getGson().fromJson(results.toString(), mType);
+            MMlist = getData();
+            YeCallListPasswordAdapter passwordAdapter = new YeCallListPasswordAdapter(PassWordActivity.this, MMlist);
+            itemListView.setAdapter(passwordAdapter);
+        }else {
+            loadAllMm(phone);
+        }
+    }
+
+    List<Map<String, Object>> MMlist;
+    public List<Map<String, Object>> getData(){
+        List<Map<String, Object>> list= new ArrayList<>();
+        for (int i = 0; i < remotelys.size(); i++) {
+            Map<String, Object> map= new HashMap<>();
+            map.put("name", remotelys.get(i).name);
+            map.put("content", remotelys.get(i).content);
+            map.put("doorType", remotelys.get(i).doorType);
+            map.put("doorId", remotelys.get(i).doorId);
+            map.put("sip", remotelys.get(i).sip);
+            map.put("serial", remotelys.get(i).serial);
+            list.add(map);
+        }
+        return list;
     }
 
 
     /**
      * 初始化密码开门
      */
-    private void initPasswordYeCall() {
+    private void loadAllMm(String phone) {
         Utils.showLoad(this);
-        loadAllMm(phone,"2222");
-    }
-
-    /**
-     * 初始化密码开门
-     */
-    private void loadAllMm(String phone,String type) {
-        Client.sendPost(NetParam.USR_DRIVERS, "phone="+phone +"&type="+type, new Handler(msg -> {
+        Client.sendPost(NetParam.USR_DRIVERS, "phone="+phone +"&type=2222", new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             BaseMmkm bean = Json.toObject(json, BaseMmkm.class);
@@ -95,6 +129,20 @@ public class PassWordActivity extends Activity{
                 return false;
             }
             list = bean.getData();
+            /*缓存*/
+            ACache mCache = ACache.get(this);
+            remotelys = new ArrayList<Remotelys>();
+            for (int i = 0; i < list.size() ; i++) {
+                remotelys.add(new Remotelys(list.get(i).getCommunityName()!=null?list.get(i).getCommunityName():"null",
+                        list.get(i).getDoorName()!=null?list.get(i).getDoorName():"null",
+                        list.get(i).getDoorType()!=null?list.get(i).getDoorType():"null",
+                        list.get(i).getDoorId()!=null?list.get(i).getDoorId():"null",
+                        list.get(i).getSip()!=null?list.get(i).getSip():"null",
+                        list.get(i).getSerial()!=null?list.get(i).getSerial():"null"));
+            }
+            String personArray = GsonUtil.getGson().toJson(remotelys);
+            mCache.put(PERSONSs, personArray, 60*60*24*14);
+
             if (!list.equals("[]")){
                 isAnotherDay();
                 YeCallListPasswordAdapters passwordAdapter = new YeCallListPasswordAdapters(PassWordActivity.this, list);

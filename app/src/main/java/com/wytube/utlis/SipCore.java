@@ -102,6 +102,22 @@ public class SipCore {
     }
 
     /**
+     * 本地发送文本消息
+     * @param Sip
+     * @param Serial
+     */
+    public static void BsendMessage(String Sip,String Serial) {
+        LinphoneChatRoom room;
+        try {
+            setIdenty(Sip, NetParmet.YURL,"5070");
+            room = LinphoneManager.getLc().getOrCreateChatRoom(identy);
+            room.sendMessage(Serial);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 发送文本消息
      * @param bean 消息内容
      */
@@ -115,6 +131,7 @@ public class SipCore {
             e.printStackTrace();
         }
     }
+
 
     /**
      * 调用免费拨打

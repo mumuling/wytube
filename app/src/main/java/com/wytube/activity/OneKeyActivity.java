@@ -18,23 +18,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.action.param.NetParam;
+import com.cqxb.until.ACache;
 import com.cqxb.until.ShakeListener;
 import com.cqxb.yecall.R;
 import com.cqxb.yecall.until.PreferenceBean;
 import com.cqxb.yecall.until.SettingInfo;
+import com.google.gson.reflect.TypeToken;
 import com.skyrain.library.k.BindClass;
 import com.skyrain.library.k.api.KActivity;
 import com.skyrain.library.k.api.KBind;
+import com.wytube.adaper.YeCallListAdapter;
 import com.wytube.adaper.YeCallListAdapters;
 import com.wytube.beans.BeasOpen;
+import com.wytube.beans.modle.Remotely;
 import com.wytube.beans.YeCallBeans;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
 import com.wytube.shared.ToastUtils;
+import com.wytube.threads.GsonUtil;
 import com.wytube.utlis.SipCore;
 import com.wytube.utlis.Utils;
 
+import org.json.JSONArray;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.wytube.beans.modle.Remotely.PERSONS;
 
 /**
  * 创 建 人: vr 柠檬 .
@@ -64,24 +77,61 @@ public class OneKeyActivity extends Activity {
     private List<YeCallBeans.DataBean> lists;
     private BeasOpen bean;
     private String phone;// 用户名
+    ACache mCache = null;
+    List<Remotely> remotely;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         BindClass.bind(this);
         iniview();
+
     }
 
     private void iniview() {
-        mtext_name.setText("一键开门");
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         mtext_name.setOnClickListener(v -> {finish();});
+        mtext_name.setText("一键开门");
         phone = SettingInfo.getParams(PreferenceBean.USERNAME, "");
-        yyyOpenDoor();//摇一摇开门
-        initYeCall();//一键开门
+        mCache = ACache.get(this);
+//        mCache.clear();
+        JSONArray result = mCache.getAsJSONArray(PERSONS);
+        if (result!=null){
+            /*缓存数据*/
+            Type mType = new TypeToken<List<Remotely>>(){}.getType();
+            remotely = GsonUtil.getGson().fromJson(result.toString(), mType);
+            YJlist = getData();
+            YeCallListAdapter adapters= new YeCallListAdapter(this,YJlist);
+            itemListView.setAdapter(adapters);
+            itemListView.setOnItemClickListener((parent, view, position, id) -> {
+                isOnclick = true;
+                positionNum=position;
+                showPopupWindowCount(remotely.get(position).name, remotely.get(position).content);
+                yyyOpenDoor();//摇一摇开门
+            });
+        }else {
+            loadAllPark(phone);
+        }
     }
+
+    List<Map<String, Object>> YJlist;
+    public List<Map<String, Object>> getData(){
+        List<Map<String, Object>> list= new ArrayList<>();
+        for (int i = 0; i < remotely.size(); i++) {
+            Map<String, Object> map= new HashMap<>();
+            map.put("name", remotely.get(i).name);
+            map.put("content", remotely.get(i).content);
+            map.put("doorType", remotely.get(i).doorType);
+            map.put("doorId", remotely.get(i).doorId);
+            map.put("sip", remotely.get(i).sip);
+            map.put("serial", remotely.get(i).serial);
+            list.add(map);
+        }
+        return list;
+    }
+
     /**
-     * 摇一摇开门
+     * 本地摇一摇开门
      */
     private void yyyOpenDoor() {
         final Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -89,12 +139,12 @@ public class OneKeyActivity extends Activity {
         mShaker.setOnShakeListener(() -> {
             if (isOnclick) {
                 String phone = SettingInfo.getParams(PreferenceBean.USERNAME, "");
-                if (lists.get(positionNum).getDoorType()==1111){
-                    loadopen(phone,lists.get(positionNum).getDoorId());
+                if (Integer.parseInt(remotely.get(positionNum).doorType)==1111){
+                    loadopen(phone,remotely.get(positionNum).doorId);
                     popupWindow.dismiss();
-                } else if (lists.get(positionNum).getDoorType()==3333){
+                } else if (Integer.parseInt(remotely.get(positionNum).doorType)==3333){
                     /*发送消息内容*/
-                    SipCore.sendMessage(lists.get(positionNum));
+                    SipCore.BsendMessage(remotely.get(positionNum).sip,remotely.get(positionNum).serial);
                     Toast.makeText(OneKeyActivity.this, "开门成功", Toast.LENGTH_SHORT).show();
                     popupWindow.dismiss();
                 }
@@ -109,7 +159,10 @@ public class OneKeyActivity extends Activity {
         Client.sendPost(NetParam.USR_OPEN, "door="+door+"&phone="+phone, new Handler(msg -> {
             String json = msg.getData().getString("post");
             bean = Json.toObject(json, BeasOpen.class);
-            assert bean != null;
+            if (bean == null) {
+                ToastUtils.showToast(this,"网络异常!");
+                return false;
+            }
             if (bean.getCode()==200){
                 Toast.makeText(OneKeyActivity.this, "开门成功", Toast.LENGTH_SHORT).show();
             }else {
@@ -120,18 +173,11 @@ public class OneKeyActivity extends Activity {
     }
 
     /**
-     * 初始化门禁相关
-     */
-    private void initYeCall() {
-        Utils.showLoad(this);
-        loadAllPark(phone,"1111");
-    }
-
-    /**
      * 获取远程开门数据
      */
-    private void loadAllPark(String phone,String type) {
-        Client.sendPost(NetParam.USR_DRIVERS, "phone="+phone +"&type="+type, new Handler(msg -> {
+    private void loadAllPark(String phone) {
+        Utils.showLoad(this);
+        Client.sendPost(NetParam.USR_DRIVERS, "phone="+phone +"&type=1111", new Handler(msg -> {
             Utils.exitLoad();
             String json = msg.getData().getString("post");
             YeCallBeans bean = Json.toObject(json, YeCallBeans.class);
@@ -146,8 +192,21 @@ public class OneKeyActivity extends Activity {
                 Utils.showOkDialog(this, bean.getMessage());
                 return false;
             }
-
             lists = bean.getData();
+            /*缓存*/
+            ACache mCache = ACache.get(this);
+            remotely = new ArrayList<Remotely>();
+            for (int i = 0; i < lists.size() ; i++) {
+                remotely.add(new Remotely(lists.get(i).getCommunityName()!=null?lists.get(i).getCommunityName():"null",
+                        lists.get(i).getDoorName()!=null?lists.get(i).getDoorName():"null",
+                        lists.get(i).getDoorType()!=null?lists.get(i).getDoorType():"null",
+                        lists.get(i).getDoorId()!=null?lists.get(i).getDoorId():"null",
+                        lists.get(i).getSip()!=null?lists.get(i).getSip():"null",
+                        lists.get(i).getSerial()!=null?lists.get(i).getSerial():"null"));
+            }
+            String personArray = GsonUtil.getGson().toJson(remotely);
+            mCache.put(PERSONS, personArray, 60*60*24*14);
+
             if (!lists.equals("[]")){
                 YeCallListAdapters yeCallAdapter = new YeCallListAdapters(OneKeyActivity.this, lists);
                 itemListView.setAdapter(yeCallAdapter);
@@ -160,6 +219,7 @@ public class OneKeyActivity extends Activity {
             }else {
                 itemListView.setVisibility(View.GONE);
             }
+
             itemListView.setOnItemClickListener((parent, view, position, id) -> {
                 isOnclick = true;
                 positionNum = position;

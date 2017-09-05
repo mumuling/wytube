@@ -163,20 +163,12 @@ public class IndexActivity extends FragmentActivity {
     /*一键开门*/
     @KListener(R.id.linea_yjkm)
     private void linea_yjkmOnClick() {
-        if (!AppValue.online) {
-            Utils.showLoginDialog(this);
-            return;
-        }
         startActivity(new Intent(this, OneKeyActivity.class));
     }
 
     /*密码开门*/
     @KListener(R.id.linea_mmkm)
     private void linea_mmkmOnClick() {
-        if (!AppValue.online) {
-            Utils.showLoginDialog(this);
-            return;
-        }
         startActivity(new Intent(this, PassWordActivity.class));
     }
 
