@@ -89,6 +89,12 @@
             android:src="@drawable/shuju" />
     </RelativeLayout>
 
+    <com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout
+        android:id="@+id/swipe_container"
+        android:layout_below="@+id/rlss"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/repair_now">
     <ListView
         android:id="@+id/yecall_listview_item"
         android:layout_width="match_parent"
@@ -96,6 +102,7 @@
         android:layout_marginBottom="1dp"
         android:layout_weight="1"
         android:background="@color/white" />
+    </com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout>
 
     <ImageView
         android:id="@+id/no_net_retry"

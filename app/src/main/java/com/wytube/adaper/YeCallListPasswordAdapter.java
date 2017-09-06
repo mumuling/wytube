@@ -188,9 +188,9 @@ public class YeCallListPasswordAdapter extends BaseAdapter {
                 mCache = ACache.get(mContext);
                 remotelys = new ArrayList<RemoMM>();
                 for (int i = 0; i < list.size() ; i++) {
-                    remotelys.add(new RemoMM(bean.getData()));
+                    remotelys.add(new RemoMM(bean.getData(),equipmentId));
                     String personArray = GsonUtil.getGson().toJson(remotelys);
-                    mCache.put(PERSONSmm, personArray, 60*60*24*14);
+                    mCache.put(PERSONSmm, personArray, (int) 24*60*60);
                 }
                 password.setText(bean.getData());
             }else {
@@ -199,4 +199,6 @@ public class YeCallListPasswordAdapter extends BaseAdapter {
             return false;
         }));
     }
+
+
 }

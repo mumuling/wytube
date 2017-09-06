@@ -3,6 +3,7 @@ package com.wytube.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,6 +25,7 @@ import com.wytube.beans.BaseMmkm;
 import com.wytube.beans.modle.Remotelys;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
+import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
 import com.wytube.shared.ToastUtils;
 import com.wytube.threads.GsonUtil;
 import com.wytube.utlis.Utils;
@@ -47,12 +49,14 @@ import static com.wytube.beans.modle.Remotelys.PERSONSs;
  */
 
 @KActivity(R.layout.activity_onekey)
-public class PassWordActivity extends Activity{
+public class PassWordActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener{
 
     @KBind(R.id.text_name)
     private TextView mtext_name;
     @KBind(R.id.yecall_listview_item)
     private ListView itemListView;
+    @KBind(R.id.swipe_container)
+    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
     @KBind(R.id.shaxin)
     private RelativeLayout mshaxin;
     @KBind(R.id.img_404)
@@ -76,6 +80,9 @@ public class PassWordActivity extends Activity{
         mtext_name.setText("密码开门");
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         mtext_name.setOnClickListener(v -> {finish();});
+        mSwipe_container.setOnRefreshListener(this);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent);
+
         phone = SettingInfo.getParams(PreferenceBean.USERNAME, "");
         mCache = ACache.get(this);
         JSONArray results = mCache.getAsJSONArray(PERSONSs);
@@ -86,6 +93,11 @@ public class PassWordActivity extends Activity{
             MMlist = getData();
             YeCallListPasswordAdapter passwordAdapter = new YeCallListPasswordAdapter(PassWordActivity.this, MMlist);
             itemListView.setAdapter(passwordAdapter);
+            if (remotelys.size()==0){
+                mshaxin.setVisibility(View.VISIBLE);
+            }else {
+                mshaxin.setVisibility(View.GONE);
+            }
         }else {
             loadAllMm(phone);
         }
@@ -176,6 +188,17 @@ public class PassWordActivity extends Activity{
                 aCache.put("@password" + phone + i, "");
             }
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadAllMm(phone);
+                mSwipe_container.setRefreshing(false);
+            }
+        }, 2000);
     }
 }
 

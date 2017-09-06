@@ -9,8 +9,11 @@ package com.wytube.beans.modle;
 public class RemoMM {
     public static final String PERSONSmm = "MUCH_PERSON2";
     public String remotelys;
+    public String equipmentId;
 
-    public RemoMM(String remotelys){
+
+    public RemoMM(String remotelys,String equipmentId){
         this.remotelys = remotelys;
+        this.equipmentId = equipmentId;
     }
 }

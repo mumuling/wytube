@@ -254,15 +254,23 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
             }
             if (!bean.isSuccess()) {
                 Utils.showOkDialog(this, bean.getMessage());
-            } else {
-                AppValue.TextName = bean.getData().getUserDTO().getUserName();
-                ACache mCache = ACache.get(LoginAppActivity.this);
-                mCache.put("password", edipwd.getText().toString(), 60*60*24*6);
-                mCache.put("token", AppValue.token, 60*60*24*6);
-                ShareOption.writerString("LOGIN_STATE", usr + ":" + pwd, LoginAppActivity.this);
             }
 //            dataBean = bean.getData();
             if (bean.getCode()==200) {
+                /*自动登录*/
+                ACache mCache = ACache.get(this);
+                String phone = mCache.getAsString("phone");
+                if (phone!=null){
+                    if (!phone.equals(usr)){
+                        /*登录成功清除缓存*/
+                        mCache.clear();
+                    }
+                }
+                AppValue.TextName = bean.getData().getUserDTO().getUserName();
+                mCache.put("password", edipwd.getText().toString(), 60*60*24*6);
+                mCache.put("token", AppValue.token, 60*60*24*6);
+                ShareOption.writerString("LOGIN_STATE", usr + ":" + pwd, LoginAppActivity.this);
+
                 saveData(bean);
                 SettingInfo.setParams(PreferenceBean.LOGINFLAG, "true");
                 //sip 登录信息
@@ -287,11 +295,9 @@ public class LoginAppActivity extends BaseTitleActivity implements OnClickListen
     */
     private void saveData(BaseLogin bean) {
         if (bean!=null){
+            ACache mCache = ACache.get(this);
+            mCache.put("phone",ediphonenum.getText().toString(), 60*60*24*6);
             AppValue.token = bean.getData().getToken();
-//            AppValue.sipName = bean.getData().getSipaccount();
-//            AppValue.sipPass = bean.getData().getSippassword();
-//            AppValue.sipAddr = bean.getData().getIpaddr();
-//            AppValue.sipProt = bean.getData().getPort();
             AppValue.sipName = bean.getData().getSip();
             AppValue.sipPass = bean.getData().getSipPass();
             AppValue.sipAddr = "pro1.123667.com";

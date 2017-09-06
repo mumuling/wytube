@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,10 +31,11 @@ import com.skyrain.library.k.api.KBind;
 import com.wytube.adaper.YeCallListAdapter;
 import com.wytube.adaper.YeCallListAdapters;
 import com.wytube.beans.BeasOpen;
-import com.wytube.beans.modle.Remotely;
 import com.wytube.beans.YeCallBeans;
+import com.wytube.beans.modle.Remotely;
 import com.wytube.net.Client;
 import com.wytube.net.Json;
+import com.wytube.shared.Ftime.SwipeRefreshAndMoreLoadLayout;
 import com.wytube.shared.ToastUtils;
 import com.wytube.threads.GsonUtil;
 import com.wytube.utlis.SipCore;
@@ -56,12 +58,14 @@ import static com.wytube.beans.modle.Remotely.PERSONS;
  */
 
 @KActivity(R.layout.activity_onekey)
-public class OneKeyActivity extends Activity {
+public class OneKeyActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener{
 
     @KBind(R.id.text_name)
     private TextView mtext_name;
     @KBind(R.id.yecall_listview_item)
     private ListView itemListView;
+    @KBind(R.id.swipe_container)
+    private SwipeRefreshAndMoreLoadLayout mSwipe_container;
     @KBind(R.id.shaxin)
     private RelativeLayout mshaxin;
     @KBind(R.id.img_404)
@@ -92,6 +96,9 @@ public class OneKeyActivity extends Activity {
         findViewById(R.id.back_but).setOnClickListener(v -> {finish();});
         mtext_name.setOnClickListener(v -> {finish();});
         mtext_name.setText("一键开门");
+        mSwipe_container.setOnRefreshListener(this);
+        mSwipe_container.setColorSchemeResources(R.color.colorAccent);
+
         phone = SettingInfo.getParams(PreferenceBean.USERNAME, "");
         mCache = ACache.get(this);
 //        mCache.clear();
@@ -109,6 +116,11 @@ public class OneKeyActivity extends Activity {
                 showPopupWindowCount(remotely.get(position).name, remotely.get(position).content);
                 yyyOpenDoor();//摇一摇开门
             });
+            if (remotely.size()==0){
+                mshaxin.setVisibility(View.VISIBLE);
+            }else {
+                mshaxin.setVisibility(View.GONE);
+            }
         }else {
             loadAllPark(phone);
         }
@@ -269,4 +281,14 @@ public class OneKeyActivity extends Activity {
         });
     }
 
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadAllPark(phone);
+                mSwipe_container.setRefreshing(false);
+            }
+        }, 2000);
+    }
 }
